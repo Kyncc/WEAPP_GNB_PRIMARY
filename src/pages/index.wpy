@@ -14,7 +14,7 @@
   .userinfo-nickname {
     color: #aaa;
   }
-</style>
+</style>3.7
 <template>
   <view class="container">
     <view class="userinfo" @tap="handleViewTap">
@@ -127,6 +127,7 @@
             }
           ]
         },
+        
         {
           id: 2,
           name: '点击改变',
