@@ -1,5 +1,14 @@
 const path = require('path');
 var prod = process.env.NODE_ENV === 'production'
+module.exports.plugins = module.exports.plugins || {}
+
+module.exports.plugins.replace = {
+  filter: /rxjs[\\\/]util[\\\/].*\.js$/,
+  config: {
+    find: 'require(\'./root.js\')',
+    replace: '{root:require(\'./../../wepy-async-function/global.js\')}'
+  }
+}
 
 module.exports = {
   wpyExt: '.wpy',
@@ -22,9 +31,9 @@ module.exports = {
     less: {
       compress: true
     },
-    /*sass: {
-      outputStyle: 'compressed'
-    },*/
+    // sass: {
+    //   outputStyle: 'compressed'
+    // },
     babel: {
       sourceMap: true,
       presets: [
@@ -46,8 +55,7 @@ module.exports = {
 }
 
 if (prod) {
-
-  delete module.exports.compilers.babel.sourcesMap;
+  delete module.exports.compilers.babel.sourcesMap
   // 压缩sass
   // module.exports.compilers['sass'] = {outputStyle: 'compressed'}
 
