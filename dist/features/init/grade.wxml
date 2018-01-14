@@ -1,0 +1,12 @@
+
+  <view class="container _1a8eec6">
+    <view class="zan-row title _1a8eec6">
+      <text class="zan-col zan-col-24 title _1a8eec6">选择年级</text>
+      <text class="zan-col zan-col-24 info _1a8eec6">数学 新人教版</text>
+    </view>
+    <view class="zan-row _1a8eec6">
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn _1a8eec6">三年级</button>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn _1a8eec6">四年级</button>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn _1a8eec6">五年级</button>
+    </view>
+  </view>

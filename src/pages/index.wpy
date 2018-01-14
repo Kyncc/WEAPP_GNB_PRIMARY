@@ -14,9 +14,12 @@
   .userinfo-nickname {
     color: #aaa;
   }
-</style>3.7
+</style>
 <template>
   <view class="container">
+    <navigator url="/features/init/grade">
+      <button class="zan-btn zan-btn--warn">init</button>
+    </navigator>
     <view class="userinfo" @tap="handleViewTap">
       <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
       <view class="userinfo-nickname">{{ userInfo.nickName }}</view>

@@ -1,5 +1,8 @@
 
   <view class="container">
+    <navigator url="/features/init/grade">
+      <button class="zan-btn zan-btn--warn">init</button>
+    </navigator>
     <view class="userinfo" bindtap="handleViewTap">
       <image class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"/>
       <view class="userinfo-nickname">{{ userInfo.nickName }}</view>
