@@ -17,6 +17,9 @@
   background-color: #e2e2e2;
   z-index: 5;
 }
+.zan-btn--primary{
+  background-color: #3fc6c6;
+}
 </style>
 
 <script>
@@ -27,7 +30,8 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/index',
-      'features/init/grade'
+      'features/init/grade',
+      'features/init/workbook'
     ],
     window: {
       backgroundTextStyle: 'light',

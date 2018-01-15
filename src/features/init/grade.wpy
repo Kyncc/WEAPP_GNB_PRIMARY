@@ -31,9 +31,9 @@
       <text class="zan-col zan-col-24 info">数学 新人教版</text>
     </view>
     <view class="zan-row">
-      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn">三年级</button>
-      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn">四年级</button>
-      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn">五年级</button>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn" @tap='_intoWorkbook(3)'>三年级</button>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn" @tap='_intoWorkbook(4)'>四年级</button>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn" @tap='_intoWorkbook(5)'>五年级</button>
     </view>
   </view>
 </template>
@@ -43,7 +43,7 @@
 
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: 'test'
+      navigationBarTitleText: '错题归纳本'
     }
     components = {
 
@@ -61,7 +61,11 @@
     //   super()
     // }
     methods = {
-
+      _intoWorkbook (val) {
+        wx.navigateTo({
+          url: `/features/init/workbook?grade=${val}`
+        })
+      }
     }
 
     events = {

@@ -1,0 +1,83 @@
+<style lang="less" scoped>
+.zan-row {
+  button{
+    border-radius: 10px;
+  }
+  .button-hover{
+    background-color: #3fc6c6;
+    color:#fff;
+  }
+  .zan-col{
+    margin-bottom:15px;
+  }
+}
+.title{
+  color:#37464B;
+  text-align: center;
+  font-size: 20px;
+  margin: 15px 0;
+}
+.info{
+  color: #859B9F;
+  text-align: center;
+  font-size: 14px;
+}
+</style>
+
+<template>
+  <view class="container">
+    <view class="zan-row title">
+      <text class="zan-col zan-col-24 title">选择你正在使用的习题册</text>
+    </view>
+    <scroll-view class="workbook" scroll-y style="height: 500xpr">
+      <text class="zan-col zan-col-24 title">选择你正在使用的习题册</text>
+      <text class="zan-col zan-col-24 title">选择你正在使用的习题册</text>
+      <text class="zan-col zan-col-24 title">选择你正在使用的习题册</text>
+      <text class="zan-col zan-col-24 title">选择你正在使用的习题册</text>
+      <text class="zan-col zan-col-24 title">选择你正在使用的习题册</text>
+      <text class="zan-col zan-col-24 title">选择你正在使用的习题册</text>
+      <text class="zan-col zan-col-24 title">选择你正在使用的习题册</text>
+    </scroll-view>
+    <view class="zan-row">
+      <text class="zan-col zan-col-24 info">没有找到想要的习题册？
+        <navigator url="/features/init/grade">告诉我们</navigator>
+      </text>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary"> 选好了开始记错 </button>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '错题归纳本'
+    }
+    components = {
+
+    }
+
+    data = {
+
+    }
+
+    computed = {
+
+    }
+
+    // constructor () {
+    //   super()
+    // }
+    methods = {
+
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+    }
+  }
+</script>
