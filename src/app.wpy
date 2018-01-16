@@ -20,6 +20,10 @@
 .zan-btn--primary{
   background-color: #3fc6c6;
 }
+.zan-card{
+  background-color: #fff;
+
+}
 </style>
 
 <script>

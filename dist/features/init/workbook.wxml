@@ -1,18 +1,94 @@
 
   <view class="container _202c150">
-    <view class="zan-row title _202c150">
+    <view class="zan-row header _202c150">
       <text class="zan-col zan-col-24 title _202c150">选择你正在使用的习题册</text>
+      <text class="zan-col zan-col-24 info _202c150">数学 · 新人教版 · 三年级下册</text>
     </view>
-    <scroll-view class="workbook _202c150" scroll-y style="height: 500xpr">
-      <text class="zan-col zan-col-24 title _202c150">选择你正在使用的习题册</text>
-      <text class="zan-col zan-col-24 title _202c150">选择你正在使用的习题册</text>
-      <text class="zan-col zan-col-24 title _202c150">选择你正在使用的习题册</text>
-      <text class="zan-col zan-col-24 title _202c150">选择你正在使用的习题册</text>
-      <text class="zan-col zan-col-24 title _202c150">选择你正在使用的习题册</text>
-      <text class="zan-col zan-col-24 title _202c150">选择你正在使用的习题册</text>
-      <text class="zan-col zan-col-24 title _202c150">选择你正在使用的习题册</text>
+    <scroll-view scroll-y style="height: 700rpx;" scroll-top="0" class="_202c150">
+      <checkbox-group bindchange="checkboxChange" class="_202c150">
+        <view class="zan-card _202c150">
+          <view class="zan-card__thumb _202c150">
+            <image class="zan-card__img _202c150" src="https://img.yzcdn.cn/upload_files/2016/11/25/FpqPXlrMRjKwJs8VdTu3ZDJCj4j5.jpeg?imageView2/2/w/200/h/200/q/90/format/jpeg" mode="aspectFit" lazy-load="true"/>
+          </view>
+          <label class="checkbox _202c150">
+            <view class="zan-card__detail _202c150">
+              <view class="zan-card__detail-row _202c150">
+                <view class="zan-card__left-col zan-ellipsis--l2 _202c150">
+                  红烧牛肉【虚拟商品】【有库存】【有sku】
+                </view>
+              </view>
+              <view class="zan-card__detail-row zan-c-gray-darker _202c150">
+                <view class="zan-card__right-col _202c150">
+                  <checkbox value="2333" checked="true" class="_202c150"/>
+                </view>
+                <view class="zan-card__left-col _202c150">3000克 50%</view>
+              </view>
+            </view>
+          </label>
+        </view>
+        <view class="zan-card _202c150">
+          <view class="zan-card__thumb _202c150">
+            <image class="zan-card__img _202c150" src="https://img.yzcdn.cn/upload_files/2016/11/25/FpqPXlrMRjKwJs8VdTu3ZDJCj4j5.jpeg?imageView2/2/w/200/h/200/q/90/format/jpeg" mode="aspectFit" lazy-load="true"/>
+          </view>
+          <label class="checkbox _202c150">
+            <view class="zan-card__detail _202c150">
+              <view class="zan-card__detail-row _202c150">
+                <view class="zan-card__left-col zan-ellipsis--l2 _202c150">
+                  红烧牛肉【虚拟商品】【有库存】【有sku】
+                </view>
+              </view>
+              <view class="zan-card__detail-row zan-c-gray-darker _202c150">
+                <view class="zan-card__right-col _202c150">
+                  <checkbox value="2333" checked="true" class="_202c150"/>
+                </view>
+                <view class="zan-card__left-col _202c150">3000克 50%</view>
+              </view>
+            </view>
+          </label>
+        </view>
+        <view class="zan-card _202c150">
+          <view class="zan-card__thumb _202c150">
+            <image class="zan-card__img _202c150" src="https://img.yzcdn.cn/upload_files/2016/11/25/FpqPXlrMRjKwJs8VdTu3ZDJCj4j5.jpeg?imageView2/2/w/200/h/200/q/90/format/jpeg" mode="aspectFit" lazy-load="true"/>
+          </view>
+          <label class="checkbox _202c150">
+            <view class="zan-card__detail _202c150">
+              <view class="zan-card__detail-row _202c150">
+                <view class="zan-card__left-col zan-ellipsis--l2 _202c150">
+                  红烧牛肉【虚拟商品】【有库存】【有sku】
+                </view>
+              </view>
+              <view class="zan-card__detail-row zan-c-gray-darker _202c150">
+                <view class="zan-card__right-col _202c150">
+                  <checkbox value="2333" checked="true" class="_202c150"/>
+                </view>
+                <view class="zan-card__left-col _202c150">3000克 50%</view>
+              </view>
+            </view>
+          </label>
+        </view>
+        <view class="zan-card _202c150">
+          <view class="zan-card__thumb _202c150">
+            <image class="zan-card__img _202c150" src="https://img.yzcdn.cn/upload_files/2016/11/25/FpqPXlrMRjKwJs8VdTu3ZDJCj4j5.jpeg?imageView2/2/w/200/h/200/q/90/format/jpeg" mode="aspectFit" lazy-load="true"/>
+          </view>
+          <label class="checkbox _202c150">
+            <view class="zan-card__detail _202c150">
+              <view class="zan-card__detail-row _202c150">
+                <view class="zan-card__left-col zan-ellipsis--l2 _202c150">
+                  红烧牛肉【虚拟商品】【有库存】【有sku】
+                </view>
+              </view>
+              <view class="zan-card__detail-row zan-c-gray-darker _202c150">
+                <view class="zan-card__right-col _202c150">
+                  <checkbox value="2333" checked="true" class="_202c150"/>
+                </view>
+                <view class="zan-card__left-col _202c150">3000克 50%</view>
+              </view>
+            </view>
+          </label>
+        </view>
+      </checkbox-group>
     </scroll-view>
-    <view class="zan-row _202c150">
+    <view class="zan-row footer _202c150">
       <text class="zan-col zan-col-24 info _202c150">没有找到想要的习题册？
         <navigator url="/features/init/grade" class="_202c150">告诉我们</navigator>
       </text>
