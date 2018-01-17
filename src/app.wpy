@@ -1,5 +1,5 @@
 <style lang="less">
-@import './libs/zanui/index.wxss';
+@import './common/libs/zanui/index.wxss';
 .container {
   background: #F9F9F9;
   overflow: hidden;
@@ -35,12 +35,36 @@ export default class extends wepy.app {
     pages: [
       'pages/index',
       'features/init/grade',
-      'features/init/workbook'
+      'features/init/workbook',
+
+      'workbook/want'
     ],
+    // tabBar: {
+    //   color: "#7A7E83",
+    //   selectedColor: "#3cc51f",
+    //   borderStyle: "black",
+    //   backgroundColor: "#ffffff",
+    //   list: [{
+    //     pagePath: "page/component/index",
+    //     iconPath: "./common/resources/workbook.png",
+    //     selectedIconPath: "./common/resources/workbook_select.png",
+    //     text: "记错题"
+    //   }, {
+    //     pagePath: "page/API/index",
+    //     iconPath: "./common/resources/statistics.png",
+    //     selectedIconPath: "./common/resources/statistics_select.png",
+    //     text: "错题本"
+    //   }, {
+    //     pagePath: "page/API/index",
+    //     iconPath: "./common/resources/user.png",
+    //     selectedIconPath: "./common/resources/user_select.png",
+    //     text: "我的"
+    //   }]
+    // },
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
+      navigationBarBackgroundColor: '#FBFBFB',
+      navigationBarTitleText: '错题归纳本小学数学',
       navigationBarTextStyle: 'black'
     }
   }
