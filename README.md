@@ -20,7 +20,7 @@
     ├── init          # 进入前的配置页面
     ├── workbook      # 练习册
     ├── error         # 记错题
-    ├── user          # 个人中心
+    ├── my          # 个人中心
 ```
 
 ## Install
