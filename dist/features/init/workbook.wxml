@@ -90,8 +90,10 @@
     </scroll-view>
     <view class="zan-row footer _202c150">
       <text class="zan-col zan-col-24 info _202c150">没有找到想要的习题册？
-        <navigator url="/features/init/grade" class="_202c150">告诉我们</navigator>
+        <navigator url="/features/workbook/grade" class="_202c150">告诉我们</navigator>
       </text>
-      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary _202c150"> 选好了开始记错 </button>
+      <navigator url="/features/workbook/index" class="_202c150">
+        <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary _202c150">选好了开始记错</button>
+      </navigator>
     </view>
   </view>

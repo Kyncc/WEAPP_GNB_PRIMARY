@@ -1,0 +1,24 @@
+
+  <view class="container _f3f21b4">
+    <view class="zan-panel _f3f21b4">
+    </view>
+    <view class="zan-panel _f3f21b4">
+      <view class="zan-cell _f3f21b4">
+        <navigator url="/features/my/info" class="_f3f21b4">
+          <view class="zan-cell__bd _f3f21b4">个人资料</view>
+        </navigator>
+      </view>
+      <view class="zan-cell _f3f21b4">
+        <view class="zan-cell__bd _f3f21b4">我的会员</view>
+      </view>
+      <view class="zan-cell _f3f21b4">
+        <view class="zan-cell__bd _f3f21b4">消息通知</view>
+      </view>
+      <view class="zan-cell _f3f21b4">
+        <view class="zan-cell__bd _f3f21b4">参与活动</view>
+      </view>
+      <view class="zan-cell _f3f21b4">
+        <view class="zan-cell__bd _f3f21b4">我要退款</view>
+      </view>
+    </view>
+  </view>

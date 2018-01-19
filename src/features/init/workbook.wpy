@@ -124,9 +124,11 @@
     </scroll-view>
     <view class="zan-row footer">
       <text class="zan-col zan-col-24 info">没有找到想要的习题册？
-        <navigator url="/features/init/grade">告诉我们</navigator>
+        <navigator url="/features/workbook/grade">告诉我们</navigator>
       </text>
-      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary"> 选好了开始记错 </button>
+      <navigator url="/features/workbook/index">
+        <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary">选好了开始记错</button>
+      </navigator>
     </view>
   </view>
 </template>
