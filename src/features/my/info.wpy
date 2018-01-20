@@ -5,7 +5,6 @@
     <view class="zan-panel">
     </view>
     <view class="zan-panel">
-      <template is="zan-field" data="{{ title: '收货人', type: 'input', placeholder: '名字', value }}"></template>
       <view class="zan-cell">
         <view class="zan-cell__bd">姓名</view>
       </view>
@@ -27,7 +26,6 @@
 
 <script>
   import wepy from 'wepy'
-  import { Field } from '@/common/libs/zanui/index'
 
   // @Field
   export default class MyInfo extends wepy.page {
@@ -37,7 +35,6 @@
     components = {
 
     }
-    mixins = [Field]
     data = {
 
     }

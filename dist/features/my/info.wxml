@@ -3,7 +3,6 @@
     <view class="zan-panel _5e05570">
     </view>
     <view class="zan-panel _5e05570">
-      <template is="zan-field" data="{{ title: '收货人', type: 'input', placeholder: '名字', value }}" class="_5e05570"/>
       <view class="zan-cell _5e05570">
         <view class="zan-cell__bd _5e05570">姓名</view>
       </view>

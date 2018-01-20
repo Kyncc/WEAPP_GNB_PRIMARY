@@ -1,0 +1,23 @@
+
+  <view class="container _b285233">
+    <view class="zan-panel _b285233">
+    </view>
+    <view class="zan-panel _b285233">
+      <template is="zan-field" data="{{ title: '收货人', type: 'input', placeholder: '名字', value }}" class="_b285233"/>
+      <view class="zan-cell _b285233">
+        <view class="zan-cell__bd _b285233">姓名</view>
+      </view>
+      <view class="zan-cell _b285233">
+        <view class="zan-cell__bd _b285233">性别</view>
+      </view>
+      <view class="zan-cell _b285233">
+        <view class="zan-cell__bd _b285233">年级</view>
+      </view>
+      <view class="zan-cell _b285233">
+        <view class="zan-cell__bd _b285233">版本</view>
+      </view>
+      <view class="zan-cell _b285233">
+        <view class="zan-cell__bd _b285233">学校</view>
+      </view>
+    </view>
+  </view>

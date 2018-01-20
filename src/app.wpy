@@ -38,6 +38,7 @@ export default class extends wepy.app {
       'features/init/workbook',
       'features/my/index',
       'features/my/info',
+      'features/my/pay',
       'features/statistics/index',
       'features/workbook/want'
     ],

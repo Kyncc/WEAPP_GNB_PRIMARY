@@ -11,7 +11,9 @@
         </navigator>
       </view>
       <view class="zan-cell">
-        <view class="zan-cell__bd">我的会员</view>
+        <navigator url="/features/my/pay">
+          <view class="zan-cell__bd">我的会员</view>
+        </navigator>
       </view>
       <view class="zan-cell">
         <view class="zan-cell__bd">消息通知</view>
