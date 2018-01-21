@@ -31,6 +31,10 @@ module.exports = {
     less: {
       compress: true
     },
+    stylus: {
+      compress: true
+    },
+    pug: {},
     // sass: {
     //   outputStyle: 'compressed'
     // },
