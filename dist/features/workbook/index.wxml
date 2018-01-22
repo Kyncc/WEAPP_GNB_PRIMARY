@@ -1,9 +1,0 @@
-
-  <view class="container _584e7fc">
-    <view class="zan-row title _584e7fc">
-      <text class="zan-col zan-col-24 title _584e7fc">请按示例上传习题册封面和版印次，<br class="_584e7fc"/>我们将尽快上架该习题册，请注意查看消息通知~</text>
-    </view>
-    <view class="zan-row _584e7fc">
-      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn _584e7fc" bindtap="_upLoad" data-wpy_upload-a="">上传</button>
-    </view>
-  </view>

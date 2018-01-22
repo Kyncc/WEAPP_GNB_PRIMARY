@@ -8,10 +8,9 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.7.3",
-	"appid": "wx4e089964d6aefc57",
-	"projectname": "%E5%BD%92%E7%BA%B3%E6%9C%AC%E5%B0%8F%E5%AD%A6%E6%95%B0%E5%AD%A6",
-	"isGameTourist": false,
+	"libVersion": "1.9.1",
+	"appid": "touristappid",
+	"projectname": "GNB_PAIMARY_MATH",
 	"condition": {
 		"search": {
 			"current": -1,

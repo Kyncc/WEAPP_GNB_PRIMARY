@@ -1,0 +1,64 @@
+<style lang="stylus">
+  .userinfo
+    display flex
+    flex-direction column
+    align-items center
+
+  .userinfo-avatar
+    width 160rpx
+    height 160rpx
+    border-radius 50%
+
+  .userinfo-nickname
+    color #aaa
+    display block
+    text-align center
+</style>
+<template lang="pug">
+  view.container
+    view.userinfo
+      navigator(url='/my/info')
+        image.userinfo-avatar(src='{{userInfo.avatarUrl}}', background-size='cover')
+        text.userinfo-nickname {{userInfo.nickName}}
+    view.zan-panel
+      view.zan-cell
+        navigator(url='/my/info')
+          view.zan-cell__bd 个人资料
+      view.zan-cell
+        navigator(url='/my/pay')
+          view.zan-cell__bd 我的会员
+      view.zan-cell
+        view.zan-cell__bd 参与活动
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '我的'
+    }
+
+    data = {
+      userInfo: {
+        nickName: '加载中...'
+      }
+    }
+
+    methods = {}
+
+    onLoad() {
+      let self = this
+      this.$parent.getUserInfo((userInfo) => {
+        if (userInfo) {
+          self.userInfo = userInfo
+        }
+      })
+      wepy.login({
+        success (res) {
+          console.log(res)
+        }
+      })
+    }
+  }
+</script>

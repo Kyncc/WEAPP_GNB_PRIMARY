@@ -1,0 +1,21 @@
+<style lang="stylus">
+</style>
+<template lang="pug">
+  text 练习册
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'test'
+    }
+
+    data = {
+
+    }
+
+    methods = {}
+  }
+</script>
