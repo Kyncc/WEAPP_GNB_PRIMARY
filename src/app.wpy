@@ -4,7 +4,6 @@
   overflow hidden
   min-height 100vh
   box-sizing border-box
-  padding 15px 0
   &::before
     position fixed
     top 0
@@ -24,6 +23,8 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/my/index',
+      'pages/my/info',
+      'pages/my/pay',
       'pages/workbook/index',
       'pages/statistics/index'
     ],
@@ -70,17 +71,17 @@ export default class extends wepy.app {
     this.use('requestfix')
   }
 
-  getUserInfo(cb) {
-    const that = this
-    if (this.globalData.userInfo) {
-      return this.globalData.userInfo
-    }
-    wepy.getUserInfo({
-      success (res) {
-        that.globalData.userInfo = res.userInfo
-        cb && cb(res.userInfo)
-      }
-    })
-  }
+  // getUserInfo(cb) {
+  //   const that = this
+  //   if (this.globalData.userInfo) {
+  //     return this.globalData.userInfo
+  //   }
+  //   wepy.getUserInfo({
+  //     success (res) {
+  //       that.globalData.userInfo = res.userInfo
+  //       cb && cb(res.userInfo)
+  //     }
+  //   })
+  // }
 }
 </script>

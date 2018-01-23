@@ -1,2 +1,29 @@
 
-<text>练习册</text>
+  <view class="container _bcdb78e">
+    <view class="section _bcdb78e">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{objectArray}}" range-key="name" class="_bcdb78e">
+        <view class="picker _bcdb78e">
+          当前选择：{{book}}
+        </view>
+      </picker>
+    </view>
+    <view class="zan-panel _bcdb78e">
+      <view class="zan-row _bcdb78e">
+        <view class="zan-col zan-col-6 zan-col-offset-6 _bcdb78e">记错数</view>
+        <view class="zan-col zan-col-6 _bcdb78e">错题数</view>
+        <view class="zan-col zan-col-6 _bcdb78e">正确数</view>
+      </view>
+      <view class="zan-row _bcdb78e">
+        <view class="zan-col zan-col-6 _bcdb78e">第一章</view>
+        <view class="zan-col zan-col-6 _bcdb78e">100</view>
+        <view class="zan-col zan-col-6 _bcdb78e">0</view>
+        <view class="zan-col zan-col-6 _bcdb78e">30.5%</view>
+      </view>
+      <view class="zan-row _bcdb78e">
+        <view class="zan-col zan-col-6 _bcdb78e">第二章</view>
+        <view class="zan-col zan-col-6 _bcdb78e">100</view>
+        <view class="zan-col zan-col-6 _bcdb78e">0</view>
+        <view class="zan-col zan-col-6 _bcdb78e">30.5%</view>
+      </view>
+    </view>
+  </view>

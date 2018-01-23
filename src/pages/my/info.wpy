@@ -1,0 +1,50 @@
+<style lang="stylus" scoped>
+.tr .zan-field__input
+  text-align right
+</style>
+<template>
+  <view class="container">
+     <view class="zan-panel" style="margin: 0;">
+       <view class="zan-cell">
+          <view class="zan-cell__bd">姓名</view>
+       </view>
+        <view class="zan-cell">
+          <view class="zan-cell__bd">性别</view>
+          <view class="zan-cell__ft">详细信息</view>
+       </view>
+       <view class="zan-cell">
+          <view class="zan-cell__bd">年级</view>
+          <view class="zan-cell__ft">详细信息</view>
+       </view>
+       <view class="zan-cell">
+          <view class="zan-cell__bd">版本</view>
+          <view class="zan-cell__ft">详细信息</view>
+       </view>
+       <zanField1 :options="base_school" :value="school" componentId="zanField1" class='tr'></zanField1>
+     </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import zanField from '@/components/zan-field'
+
+  export default class MyInfo extends wepy.page {
+    config = {
+      navigationBarTitleText: '个人资料'
+    }
+
+    data = {
+      base_school: {
+        title: '学校',
+        placeholder: '请输入学校名称'
+      }
+    }
+
+    components = {
+      zanField1: zanField
+    }
+
+    methods = {}
+  }
+</script>

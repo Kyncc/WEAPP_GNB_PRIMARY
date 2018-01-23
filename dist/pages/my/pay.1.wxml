@@ -1,0 +1,30 @@
+
+  <view class="container _b1b0378">
+    
+  <view class="zan-noticebar _b1b0378">
+    <view id="{{ $zanNoticebar1$componentId }}__content-wrap" style="height: 18px; overflow: hidden; position: relative;">
+      <view animation="{{ $zanNoticebar1$animationData }}" id="{{ $zanNoticebar1$componentId }}__content" style="position: absolute; white-space: nowrap;">
+        {{ $zanNoticebar1$text }}
+      </view>
+    </view>
+  </view>
+
+    <view class="zan-panel-title _b1b0378">选择购买内容(会员可无限次下载所有错题)</view>
+    <view class="zan-panel _b1b0378">
+      
+<block class=" _b1b0378">
+  <radio-group class="zan-select__list" name="{{ $zanSelect1$name || $zanSelect1$componentId || '' }}" bindchange="$zanSelect1$handleZanSelectChange" data-component-id="{{ $zanSelect1$componentId }}">
+    <label  wx:for="{{ $zanSelect1$items }}" wx:key="value">
+      <view class="zan-cell">
+        <radio class="zan-select__radio" value="{{ item.value }}" checked="{{ item.value === $zanSelect1$checkedValue }}"/>
+        <view class="zan-cell__bd" style="{{ 'padding-left: ' + item.padding * 10 + 'px;' + ' color: ' + $zanSelect1$activeColor }}">{{ item.name }}</view>
+        <view wx:if="{{ item.value === $zanSelect1$checkedValue }}" class="zan-cell__ft">
+          <icon type="success_no_circle" color="{{ $zanSelect1$activeColor }}" size="14"/>
+        </view>
+      </view>
+    </label>
+  </radio-group>
+</block>
+
+    </view>
+  </view>

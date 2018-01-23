@@ -17,18 +17,16 @@
 <template lang="pug">
   view.container
     view.userinfo
-      navigator(url='/my/info')
+      navigator(url='/pages/my/info')
         image.userinfo-avatar(src='{{userInfo.avatarUrl}}', background-size='cover')
         text.userinfo-nickname {{userInfo.nickName}}
     view.zan-panel
-      view.zan-cell
-        navigator(url='/my/info')
+      navigator(url='/pages/my/info')
+        view.zan-cell
           view.zan-cell__bd 个人资料
-      view.zan-cell
-        navigator(url='/my/pay')
+      navigator(url='/pages/my/pay')
+        view.zan-cell
           view.zan-cell__bd 我的会员
-      view.zan-cell
-        view.zan-cell__bd 参与活动
 </template>
 
 <script>
@@ -45,13 +43,21 @@
       }
     }
 
+    components = {
+    }
+
     methods = {}
 
     onLoad() {
-      let self = this
-      this.$parent.getUserInfo((userInfo) => {
-        if (userInfo) {
-          self.userInfo = userInfo
+      // let self = this
+      // this.$parent.getUserInfo((userInfo) => {
+      //   if (userInfo) {
+      //     self.userInfo = userInfo
+      //   }
+      // })
+      wepy.getUserInfo({
+        success (res) {
+          console.log(res)
         }
       })
       wepy.login({

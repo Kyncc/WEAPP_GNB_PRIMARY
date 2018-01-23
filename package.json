@@ -1,5 +1,5 @@
 {
-  "name": "myproject",
+  "name": "gnb_primary_math",
   "version": "1.2.8",
   "description": "",
   "main": "dist/app.js",
@@ -8,7 +8,7 @@
     "build": "cross-env NODE_ENV=production wepy build --no-cache",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Hope",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.17.1",

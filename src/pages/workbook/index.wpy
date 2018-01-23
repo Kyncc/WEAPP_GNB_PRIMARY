@@ -1,21 +1,73 @@
-<style lang="stylus">
+<style lang="less" scoped>
+
 </style>
-<template lang="pug">
-  text 练习册
+
+<template>
+  <view class="container">
+    <view class="section">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{objectArray}}" range-key="name">
+        <view class="picker">
+          当前选择：{{book}}
+        </view>
+      </picker>
+    </view>
+    <view class="zan-panel">
+      <view class="zan-row">
+        <view class="zan-col zan-col-6 zan-col-offset-6">记错数</view>
+        <view class="zan-col zan-col-6">错题数</view>
+        <view class="zan-col zan-col-6">正确数</view>
+      </view>
+      <view class="zan-row">
+        <view class="zan-col zan-col-6">第一章</view>
+        <view class="zan-col zan-col-6">100</view>
+        <view class="zan-col zan-col-6">0</view>
+        <view class="zan-col zan-col-6">30.5%</view>
+      </view>
+      <view class="zan-row">
+        <view class="zan-col zan-col-6">第二章</view>
+        <view class="zan-col zan-col-6">100</view>
+        <view class="zan-col zan-col-6">0</view>
+        <view class="zan-col zan-col-6">30.5%</view>
+      </view>
+    </view>
+  </view>
 </template>
 
 <script>
   import wepy from 'wepy'
-
-  export default class Index extends wepy.page {
+  export default class Statistics extends wepy.page {
     config = {
-      navigationBarTitleText: 'test'
+      navigationBarTitleText: '错题本'
     }
-
+    components = {}
     data = {
-
+      book: '',
+      objectArray: [
+        {
+          id: 0,
+          name: '三年级上'
+        },
+        {
+          id: 1,
+          name: '四年级上'
+        },
+        {
+          id: 2,
+          name: '五年级上'
+        },
+        {
+          id: 3,
+          name: '六年级上'
+        }
+      ]
     }
-
-    methods = {}
+    computed = {}
+    bindPickerChange(e) {
+      let self = this
+      console.log('picker发送选择改变，携带值为', self.objectArray[Number(e.detail.value)]['name'])
+      this.setData({
+        book: self.objectArray[Number(e.detail.value)]['name']
+      })
+    }
   }
 </script>

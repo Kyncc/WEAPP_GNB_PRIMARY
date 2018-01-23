@@ -1,20 +1,34 @@
 <style lang="stylus">
 </style>
-<template lang="pug">
-  text 错题统计
+<template>
+  <view class="zan-panel">
+    <zanNoticebar1 :text="longText" componentId="static1" ></zanNoticebar1>
+  </view>
 </template>
 
 <script>
-  import wepy from 'wepy'
+import wepy from 'wepy'
+import zanNoticebar from '@/components/zan-noticebar'
 
-  export default class Index extends wepy.page {
-    config = {
-      navigationBarTitleText: 'test'
-    }
-
-    data = {
-    }
-
-    methods = {}
+export default class Statistics extends wepy.page {
+  config = {
+    navigationBarTitleText: 'test'
   }
+
+  components = {
+    zanNoticebar1: zanNoticebar
+  }
+
+  data = {
+    longText: '足协杯战线连续第2年上演广州德比战，上赛季半决赛上恒大以两回合5-3的总比分淘汰富力。'
+  }
+
+  methods = {
+
+  }
+
+  onReady() {
+    this.$invoke('zanNoticebar1', 'initZanNoticeBarScroll')
+  }
+}
 </script>

@@ -1,0 +1,59 @@
+<template>
+  <view class="container">
+    <zanNoticebar1 :text="longText" componentId="static1" ></zanNoticebar1>
+    <view class="zan-panel-title">选择购买内容(会员可无限次下载所有错题)</view>
+    <view class="zan-panel">
+      <view>
+        <zanSelect1 :items="items" :checkedValue.sync="checked_color" componentId="color"></zanSelect1>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import zanNoticebar from '@/components/zan-noticebar'
+import zanSelect from '@/components/zan-select'
+
+export default class MyPay extends wepy.page {
+  config = {
+    navigationBarTitleText: '我的会员'
+  }
+  components = {
+    zanNoticebar1: zanNoticebar,
+    zanSelect1: zanSelect
+  }
+  data = {
+    longText: '首次支付30天内可无条件申请全额退款',
+    items: [
+      {
+        padding: 0,
+        value: '￥29/月',
+        name: '选项一'
+      },
+      {
+        padding: 0,
+        value: '￥149/半年',
+        name: '选项二'
+      },
+      {
+        padding: 0,
+        value: '￥199/年',
+        name: '选项二'
+      }
+    ],
+    checked_color: -1,
+    activeColor: '#4b0'
+  }
+  events = {
+    zanSelectChange(value, event) {
+      let { componentId } = event.source
+      this[`checked_${componentId}`] = value
+      this.$apply()
+    }
+  }
+  methods = {
+  }
+  onLoad() {}
+}
+</script>
