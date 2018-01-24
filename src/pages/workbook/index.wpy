@@ -1,73 +1,36 @@
-<style lang="less" scoped>
+<style lang="less">
 
 </style>
-
 <template>
-  <view class="container">
-    <view class="section">
-      <picker bindchange="bindPickerChange" value="{{index}}" range="{{objectArray}}" range-key="name">
-        <view class="picker">
-          当前选择：{{book}}
-        </view>
-      </picker>
-    </view>
-    <view class="zan-panel">
-      <view class="zan-row">
-        <view class="zan-col zan-col-6 zan-col-offset-6">记错数</view>
-        <view class="zan-col zan-col-6">错题数</view>
-        <view class="zan-col zan-col-6">正确数</view>
-      </view>
-      <view class="zan-row">
-        <view class="zan-col zan-col-6">第一章</view>
-        <view class="zan-col zan-col-6">100</view>
-        <view class="zan-col zan-col-6">0</view>
-        <view class="zan-col zan-col-6">30.5%</view>
-      </view>
-      <view class="zan-row">
-        <view class="zan-col zan-col-6">第二章</view>
-        <view class="zan-col zan-col-6">100</view>
-        <view class="zan-col zan-col-6">0</view>
-        <view class="zan-col zan-col-6">30.5%</view>
-      </view>
-    </view>
+  <view class="zan-panel">
+    <navigator url='/pages/workbook/want'>想要练习册</navigator>
+    <zanNoticebar1 :text="longText" componentId="static1"></zanNoticebar1>
   </view>
 </template>
 
 <script>
-  import wepy from 'wepy'
-  export default class Statistics extends wepy.page {
-    config = {
-      navigationBarTitleText: '错题本'
-    }
-    components = {}
-    data = {
-      book: '',
-      objectArray: [
-        {
-          id: 0,
-          name: '三年级上'
-        },
-        {
-          id: 1,
-          name: '四年级上'
-        },
-        {
-          id: 2,
-          name: '五年级上'
-        },
-        {
-          id: 3,
-          name: '六年级上'
-        }
-      ]
-    }
-    computed = {}
-    bindPickerChange(e) {
-      let self = this
-      console.log('picker发送选择改变，携带值为', self.objectArray[Number(e.detail.value)]['name'])
-      this.setData({
-        book: self.objectArray[Number(e.detail.value)]['name']
-      })
-    }
+import wepy from 'wepy'
+import zanNoticebar from '@/components/zan-noticebar'
+
+export default class Statistics extends wepy.page {
+  config = {
+    navigationBarTitleText: 'test'
   }
+
+  components = {
+    zanNoticebar1: zanNoticebar
+  }
+
+  data = {
+    longText: '足协杯战线连续第2年上演广州德比战，上赛季半决赛上恒大以两回合5-3的总比分淘汰富力。'
+  }
+
+  methods = {
+
+  }
+
+  onReady() {
+    this.$invoke('zanNoticebar1', 'initZanNoticeBarScroll')
+  }
+}
 </script>

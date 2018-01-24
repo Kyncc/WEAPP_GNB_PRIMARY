@@ -1,34 +1,81 @@
-<style lang="stylus">
+<style lang="less" scoped>
+.numberColor{
+  color: #FDCA3A;
+  text-align:center;
+}
+.zan-panel .zan-row:nth-child(even){
+  background-color: #EDF9F8;
+}
 </style>
+
 <template>
-  <view class="zan-panel">
-    <zanNoticebar1 :text="longText" componentId="static1" ></zanNoticebar1>
+  <view class="container">
+    <!-- <view class="section">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{objectArray}}" range-key="name">
+        <view class="picker">
+          当前选择：{{book}}
+        </view>
+      </picker>
+    </view> -->
+    <view class="zan-panel">
+      <view class="zan-row zan-cell">
+        <view class="zan-col zan-col-6 zan-col-offset-6 zan-center">记错数</view>
+        <view class="zan-col zan-col-6 zan-center">错题数</view>
+        <view class="zan-col zan-col-6 zan-center">正确数</view>
+      </view>
+      <view class="zan-row zan-cell" @tap='_intoList(第二章)'>
+        <view class="zan-col zan-col-6">第一章</view>
+        <view class="zan-col zan-col-6 numberColor">100</view>
+        <view class="zan-col zan-col-6 numberColor">0</view>
+        <view class="zan-col zan-col-6 numberColor">30.5%</view>
+      </view>
+      <view class="zan-row zan-cell">
+        <view class="zan-col zan-col-6">第二章</view>
+        <view class="zan-col zan-col-6 numberColor">100</view>
+        <view class="zan-col zan-col-6 numberColor">0</view>
+        <view class="zan-col zan-col-6 numberColor">30.5%</view>
+      </view>
+    </view>
   </view>
 </template>
 
 <script>
-import wepy from 'wepy'
-import zanNoticebar from '@/components/zan-noticebar'
+  import wepy from 'wepy'
 
-export default class Statistics extends wepy.page {
-  config = {
-    navigationBarTitleText: 'test'
+  export default class Statistics extends wepy.page {
+    config = {
+      navigationBarTitleText: '错题本'
+    }
+    components = {
+    }
+    data = {
+      book: '',
+      objectArray: [
+        {
+          id: 0,
+          name: '三年级上'
+        },
+        {
+          id: 1,
+          name: '四年级上'
+        },
+        {
+          id: 2,
+          name: '五年级上'
+        },
+        {
+          id: 3,
+          name: '六年级上'
+        }
+      ]
+    }
+    computed = {}
+    methods = {
+      _intoList (val) {
+        wx.navigateTo({
+          url: `/pages/statistics/list?name=${val}`
+        })
+      }
+    }
   }
-
-  components = {
-    zanNoticebar1: zanNoticebar
-  }
-
-  data = {
-    longText: '足协杯战线连续第2年上演广州德比战，上赛季半决赛上恒大以两回合5-3的总比分淘汰富力。'
-  }
-
-  methods = {
-
-  }
-
-  onReady() {
-    this.$invoke('zanNoticebar1', 'initZanNoticeBarScroll')
-  }
-}
 </script>

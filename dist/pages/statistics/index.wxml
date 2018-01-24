@@ -1,12 +1,29 @@
 
-  <view class="zan-panel">
-    
-  <view class="zan-noticebar">
-    <view id="{{ $zanNoticebar1$componentId }}__content-wrap" style="height: 18px; overflow: hidden; position: relative;">
-      <view animation="{{ $zanNoticebar1$animationData }}" id="{{ $zanNoticebar1$componentId }}__content" style="position: absolute; white-space: nowrap;">
-        {{ $zanNoticebar1$text }}
+  <view class="container _edf42e2">
+    <!-- <view class="section">
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{objectArray}}" range-key="name">
+        <view class="picker">
+          当前选择：{{book}}
+        </view>
+      </picker>
+    </view> -->
+    <view class="zan-panel _edf42e2">
+      <view class="zan-row zan-cell _edf42e2">
+        <view class="zan-col zan-col-6 zan-col-offset-6 zan-center _edf42e2">记错数</view>
+        <view class="zan-col zan-col-6 zan-center _edf42e2">错题数</view>
+        <view class="zan-col zan-col-6 zan-center _edf42e2">正确数</view>
+      </view>
+      <view class="zan-row zan-cell _edf42e2" bindtap="_intoList" data-wpy_intolist-a="第二章">
+        <view class="zan-col zan-col-6 _edf42e2">第一章</view>
+        <view class="zan-col zan-col-6 numberColor _edf42e2">100</view>
+        <view class="zan-col zan-col-6 numberColor _edf42e2">0</view>
+        <view class="zan-col zan-col-6 numberColor _edf42e2">30.5%</view>
+      </view>
+      <view class="zan-row zan-cell _edf42e2">
+        <view class="zan-col zan-col-6 _edf42e2">第二章</view>
+        <view class="zan-col zan-col-6 numberColor _edf42e2">100</view>
+        <view class="zan-col zan-col-6 numberColor _edf42e2">0</view>
+        <view class="zan-col zan-col-6 numberColor _edf42e2">30.5%</view>
       </view>
     </view>
-  </view>
-
   </view>

@@ -1,1 +1,1 @@
-@import "./../../components/zan-noticebar.wxss";
+.numberColor._edf42e2{color:#FDCA3A;text-align:center}.zan-panel .zan-row._edf42e2:nth-child(even){background-color:#EDF9F8}

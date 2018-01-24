@@ -1,0 +1,78 @@
+<style lang="less" scoped>
+.zan-row {
+  button{
+    border-radius: 10px;
+  }
+  .button-hover{
+    background-color: #3fc6c6;
+    color:#fff;
+  }
+  .zan-col{
+    margin-bottom:25px;
+  }
+}
+.title{
+  color:#37464B;
+  text-align: center;
+  font-size: 36px;
+  margin: 25px 0;
+}
+.info{
+  color: #859B9F;
+  text-align: center;
+  font-size: 14px;
+}
+</style>
+
+<template>
+  <view class="container">
+    <view class="zan-row title">
+      <text class="zan-col zan-col-24 zan-font-16 zan-c-black">选择年级</text>
+      <text class="zan-col zan-col-24 zan-font-12 zan-c-gray-darker">数学 新人教版</text>
+    </view>
+    <view class="zan-row">
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn" @tap='_intoWorkbook(3)'>三年级</button>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn" @tap='_intoWorkbook(4)'>四年级</button>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn" @tap='_intoWorkbook(5)'>五年级</button>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '错题归纳本'
+    }
+    components = {
+
+    }
+
+    data = {
+
+    }
+
+    computed = {
+
+    }
+
+    // constructor () {
+    //   super()
+    // }
+    methods = {
+      _intoWorkbook (val) {
+        wx.navigateTo({
+          url: `/pages/init/workbook?grade=${val}`
+        })
+      }
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+    }
+  }
+</script>

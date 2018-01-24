@@ -1,0 +1,41 @@
+
+  <view class="container _8b61aad">
+    
+  <view class="zan-noticebar _8b61aad">
+    <view id="{{ $zanNoticebar1$componentId }}__content-wrap" style="height: 18px; overflow: hidden; position: relative;">
+      <view animation="{{ $zanNoticebar1$animationData }}" id="{{ $zanNoticebar1$componentId }}__content" style="position: absolute; white-space: nowrap;">
+        {{ $zanNoticebar1$text }}
+      </view>
+    </view>
+  </view>
+
+    <view class="zan-panel _8b61aad" style="padding:15px;margin-top:0;">
+      <view class="zan-row _8b61aad" style="padding:10px 0;">
+        <view class="zan-col zan-col-6 zan-col-offset-3 zan-center _8b61aad">
+          <image style="width:100%;height:120px;" mode="scaleToFill" src="http://img.guinaben.com/want2.png?imageView2/2/w/270/h/480/format/jpg/q/75" class="_8b61aad"/>
+        </view>
+        <view class="zan-col zan-col-2 zan-col-offset-2 _8b61aad">
+          <image style="height:30px;width:100%;margin-top:45px;" src="../../common/resources/arrow.png" class="_8b61aad"/>
+        </view>
+        <view class="zan-col zan-col-6 zan-col-offset-2 _8b61aad">
+        </view>
+      </view>
+      <view class="zan-row _8b61aad" style="padding:10px 0">
+        <view class="zan-col zan-col-6 zan-col-offset-3 zan-center _8b61aad">
+          <image style="width:100%;height:120px;" mode="scaleToFill" src="http://img.guinaben.com/want1.jpg?imageView2/2/w/270/h/480/format/jpg/q/75" class="_8b61aad"/>
+        </view>
+        <view class="zan-col zan-col-2 zan-col-offset-2 _8b61aad">
+          <image style="height:30px;width:100%;margin-top:45px;" src="../../common/resources/arrow.png" class="_8b61aad"/>
+        </view>
+        <view class="zan-col zan-col-6 zan-col-offset-2 _8b61aad">
+        </view>
+      </view>
+    </view>
+
+    <view class="zan-row _8b61aad" style="padding:20px 0">
+      <view class="zan-col zan-col-20 zan-col-offset-2 zan-center _8b61aad">
+        <button class="zan-btn zan-btn--primary _8b61aad">上传</button>
+      </view>
+    </view>
+
+  </view>

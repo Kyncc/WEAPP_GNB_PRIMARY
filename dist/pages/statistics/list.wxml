@@ -1,0 +1,19 @@
+
+  <view class="container">
+    <view class="zan-panel">
+      <view class="zan-cell" style="padding:0">
+        <image style="width:100%;height:115px;" src="https://aecpm.alicdn.com/simba/img/TB1L6BXngDD8KJjy0FdSuwjvXXa.jpg_q50.jpg"/>
+      </view>
+      <view class="zan-cell">
+        <view class="zan-cell__bd">五年高考三年模拟</view>
+      </view>
+    </view>
+    <view class="zan-panel">
+      <view class="zan-cell" style="padding: 0">
+        <image style="width:100%;height:115px;" src="https://aecpm.alicdn.com/simba/img/TB1L6BXngDD8KJjy0FdSuwjvXXa.jpg_q50.jpg"/>
+      </view>
+      <view class="zan-cell">
+        <view class="zan-cell__bd">五年高考三年模拟</view>
+      </view>
+    </view>
+  </view>

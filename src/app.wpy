@@ -1,20 +1,28 @@
-<style lang="stylus">
-.container
-  background #F9F9F9
-  overflow hidden
-  min-height 100vh
-  box-sizing border-box
-  &::before
-    position fixed
-    top 0
-    left 0
-    content ' '
-    width 100%
-    height 1rpx
-    background-color #e2e2e2
-    z-index 5
-</style>
 <style lang='less' src='common/libs/zanui/index.wxss'></style>
+<style lang="less">
+.container{
+  background: #F9F9F9;
+  overflow: hidden;
+  min-height: 100vh;
+  box-sizing: border-box;
+  &::before{
+    position: fixed;
+    top: 0;
+    left: 0;
+    content: ' ';
+    width: 100%;
+    height: 1rpx;
+    background-color: #e2e2e2;
+    z-index: 5;
+  }
+}
+.zan-btn--primary{
+  background-color: #3fc6c6;
+  &::after {
+    border-color:#3fc6c6;
+  }
+}
+</style>
 <script>
 import wepy from 'wepy'
 import 'wepy-async-function'
@@ -26,7 +34,9 @@ export default class extends wepy.app {
       'pages/my/info',
       'pages/my/pay',
       'pages/workbook/index',
-      'pages/statistics/index'
+      'pages/workbook/want',
+      'pages/statistics/index',
+      'pages/statistics/list'
     ],
     tabBar: {
       color: '#aaa',
@@ -34,12 +44,12 @@ export default class extends wepy.app {
       borderStyle: 'black',
       backgroundColor: '#ffffff',
       list: [{
-        pagePath: 'pages/statistics/index',
+        pagePath: 'pages/workbook/index',
         iconPath: 'common/resources/statistics.png',
         selectedIconPath: 'common/resources/statistics_select.png',
         text: '错题本'
       }, {
-        pagePath: 'pages/workbook/index',
+        pagePath: 'pages/statistics/index',
         iconPath: 'common/resources/workbook.png',
         selectedIconPath: 'common/resources/workbook_select.png',
         text: '记错题'
@@ -69,6 +79,11 @@ export default class extends wepy.app {
   constructor () {
     super()
     this.use('requestfix')
+    wx.onNetworkStatusChange((res) => {
+      if (!res.isConnected) {
+        alert('当前无网络')
+      }
+    })
   }
 
   // getUserInfo(cb) {

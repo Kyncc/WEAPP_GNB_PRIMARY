@@ -1,0 +1,76 @@
+<style lang="less" scoped>
+</style>
+
+<template>
+  <view class="container">
+    <zanNoticebar1 :text="longText" componentId="static1"/>
+    <view class="zan-panel" style="padding:15px;margin-top:0;">
+      <view class="zan-row" style="padding:10px 0;">
+        <view class="zan-col zan-col-6 zan-col-offset-3 zan-center">
+          <image style="width:100%;height:120px;" mode="scaleToFill" src="http://img.guinaben.com/want2.png?imageView2/2/w/270/h/480/format/jpg/q/75"></image>
+        </view>
+        <view class="zan-col zan-col-2 zan-col-offset-2">
+          <image style="height:30px;width:100%;margin-top:45px;" src="../../common/resources/arrow.png"/>
+        </view>
+        <view class="zan-col zan-col-6 zan-col-offset-2">
+        </view>
+      </view>
+      <view class="zan-row" style="padding:10px 0">
+        <view class="zan-col zan-col-6 zan-col-offset-3 zan-center">
+          <image style="width:100%;height:120px;" mode="scaleToFill" src="http://img.guinaben.com/want1.jpg?imageView2/2/w/270/h/480/format/jpg/q/75"></image>
+        </view>
+        <view class="zan-col zan-col-2 zan-col-offset-2">
+          <image style="height:30px;width:100%;margin-top:45px;" src="../../common/resources/arrow.png"/>
+        </view>
+        <view class="zan-col zan-col-6 zan-col-offset-2">
+        </view>
+      </view>
+    </view>
+
+    <view class="zan-row" style="padding:20px 0">
+      <view class="zan-col zan-col-20 zan-col-offset-2 zan-center">
+        <button class="zan-btn zan-btn--primary">上传</button>
+      </view>
+    </view>
+
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import zanNoticebar from '@/components/zan-noticebar'
+
+  export default class WorkbookWant extends wepy.page {
+    config = {
+      navigationBarTitleText: '上传习题册'
+    }
+
+    components = {
+      zanNoticebar1: zanNoticebar
+    }
+
+    data = {
+      longText: '请按示例上传习题册封面和版印次，我们将尽快上架该习题册，请注意查看消息通知~'
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+
+    }
+
+    events = {
+
+    }
+
+    onReady() {
+      this.$invoke('zanNoticebar1', 'initZanNoticeBarScroll')
+    }
+
+    onLoad() {
+
+    }
+  }
+</script>

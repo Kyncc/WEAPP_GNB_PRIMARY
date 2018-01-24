@@ -1,6 +1,5 @@
 
   <view class="zan-panel">
-    <navigator url="/pages/workbook/want">想要练习册</navigator>
     
   <view class="zan-noticebar">
     <view id="{{ $zanNoticebar1$componentId }}__content-wrap" style="height: 18px; overflow: hidden; position: relative;">
