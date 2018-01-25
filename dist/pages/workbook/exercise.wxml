@@ -1,0 +1,6 @@
+
+  <view class="container _db208f5">
+    <zanNoticebar1  v-bind:text.once="longText" componentId="static1" class="_db208f5"/>
+    <view class="zan-panel _db208f5">
+    </view>
+  </view>

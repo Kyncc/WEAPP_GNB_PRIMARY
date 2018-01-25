@@ -1,0 +1,65 @@
+<style lang="less" scoped>
+</style>
+
+<template>
+  <view class="container">
+    <scroll-view scroll-y="true" style="height: 100%" scroll-into-view="{{toView}}" scroll-with-animation="true" enable-back-to-top="true">
+      <view class="zan-panel">
+        <view class="zan-panel-title zan-font-bold zan-c-black">第二章</view>
+        <view class="zan-cell"><view class="zan-cell__bd">第一页</view></view>
+        <view class="zan-cell"><view class="zan-cell__bd">第二页</view></view>
+        <view class="zan-cell"><view class="zan-cell__bd">第三页</view></view>
+        <view class="zan-cell" id="id2"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
+        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
+        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
+        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
+        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
+      </view>
+      <view class="zan-panel">
+        <view class="zan-panel-title zan-font-bold zan-c-black">第二章</view>
+        <view class="zan-cell"><view class="zan-cell__bd">第一页</view></view>
+        <view class="zan-cell"><view class="zan-cell__bd">第二页</view></view>
+        <view class="zan-cell"><view class="zan-cell__bd">第三页</view></view>
+        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
+        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
+        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
+        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
+        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
+      </view>
+    </scroll-view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class WorkbookChapter extends wepy.page {
+    components = {
+
+    }
+
+    data = {
+      toView: 'id2'
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+
+    }
+
+    onLoad(options) {
+      wx.setNavigationBarTitle({title: options.name})
+    }
+
+    events = {
+
+    }
+
+    onReady() {
+
+    }
+  }
+</script>

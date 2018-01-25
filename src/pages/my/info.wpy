@@ -8,7 +8,7 @@
        <view class="zan-cell">
           <view class="zan-cell__bd">姓名</view>
        </view>
-        <view class="zan-cell">
+       <view class="zan-cell">
           <view class="zan-cell__bd">性别</view>
           <view class="zan-cell__ft">详细信息</view>
        </view>

@@ -1,0 +1,45 @@
+<style lang="less" scoped>
+</style>
+
+<template>
+  <view class="container">
+    <zanNoticebar1 :text="longText" componentId="static1"></zanNoticebar1>
+    <view class="zan-panel">
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import zanNoticebar from '@/components/zan-noticebar'
+
+  export default class WorkbookExercise extends wepy.page {
+    components = {
+
+    }
+
+    components = {
+      zanNoticebar1: zanNoticebar
+    }
+
+    data = {
+      longText: '点错题题号完成记错，提交作业查看我的错题'
+    }
+
+    methods = {
+
+    }
+
+    onLoad(options) {
+      wx.setNavigationBarTitle({title: options.name})
+    }
+
+    events = {
+
+    }
+
+    onReady() {
+
+    }
+  }
+</script>

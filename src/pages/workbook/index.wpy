@@ -4,21 +4,26 @@
 <template>
   <view class="zan-panel">
     <navigator url='/pages/workbook/want'>想要练习册</navigator>
-    <zanNoticebar1 :text="longText" componentId="static1"></zanNoticebar1>
+    <navigator url='/pages/workbook/chapter?name=第二页'>章节列表</navigator>
+    <navigator url='/pages/workbook/add'>添加习题册</navigator>
+    <navigator url='/pages/workbook/error'>已错题目</navigator>
+    <navigator url='/pages/workbook/exercise'>记错</navigator>
+    <navigator url='/pages/workbook/noError'>无记错</navigator>
+    <!-- <zanNoticebar1 :text="longText" componentId="static1"></zanNoticebar1> -->
   </view>
 </template>
 
 <script>
 import wepy from 'wepy'
-import zanNoticebar from '@/components/zan-noticebar'
+// import zanNoticebar from '@/components/zan-noticebar'
 
 export default class Statistics extends wepy.page {
   config = {
-    navigationBarTitleText: 'test'
+    navigationBarTitleText: '错题归纳本小学数学'
   }
 
   components = {
-    zanNoticebar1: zanNoticebar
+    // zanNoticebar1: zanNoticebar
   }
 
   data = {
@@ -30,7 +35,7 @@ export default class Statistics extends wepy.page {
   }
 
   onReady() {
-    this.$invoke('zanNoticebar1', 'initZanNoticeBarScroll')
+    // this.$invoke('zanNoticebar1', 'initZanNoticeBarScroll')
   }
 }
 </script>

@@ -4,7 +4,7 @@
        <view class="zan-cell _13d05ce">
           <view class="zan-cell__bd _13d05ce">姓名</view>
        </view>
-        <view class="zan-cell _13d05ce">
+       <view class="zan-cell _13d05ce">
           <view class="zan-cell__bd _13d05ce">性别</view>
           <view class="zan-cell__ft _13d05ce">详细信息</view>
        </view>

@@ -1,0 +1,47 @@
+<style lang="less" scoped>
+</style>
+
+<template>
+  <view class="container">
+    <scroll-view scroll-y="true" style="height: 100%" scroll-with-animation="true" enable-back-to-top="true">
+      <view class="zan-panel">
+        <view class="zan-cell"></view>
+        <view class="zan-cell"></view>
+      </view>
+    </scroll-view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class WorkbookError extends wepy.page {
+    components = {
+
+    }
+
+    data = {
+      toView: ''
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+
+    }
+
+    onLoad(options) {
+      wx.setNavigationBarTitle({title: options.name})
+    }
+
+    events = {
+
+    }
+
+    onReady() {
+
+    }
+  }
+</script>

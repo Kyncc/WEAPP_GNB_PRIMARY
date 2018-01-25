@@ -35,6 +35,8 @@ export default class extends wepy.app {
       'pages/my/pay',
       'pages/workbook/index',
       'pages/workbook/want',
+      'pages/workbook/error',
+      'pages/workbook/chapter',
       'pages/statistics/index',
       'pages/statistics/list'
     ],
@@ -85,18 +87,5 @@ export default class extends wepy.app {
       }
     })
   }
-
-  // getUserInfo(cb) {
-  //   const that = this
-  //   if (this.globalData.userInfo) {
-  //     return this.globalData.userInfo
-  //   }
-  //   wepy.getUserInfo({
-  //     success (res) {
-  //       that.globalData.userInfo = res.userInfo
-  //       cb && cb(res.userInfo)
-  //     }
-  //   })
-  // }
 }
 </script>

@@ -1,0 +1,9 @@
+
+  <view class="container _055ee58">
+    <scroll-view scroll-y="true" style="height: 100%" scroll-with-animation="true" enable-back-to-top="true" class="_055ee58">
+      <view class="zan-panel _055ee58">
+        <view class="zan-cell _055ee58"/>
+        <view class="zan-cell _055ee58"/>
+      </view>
+    </scroll-view>
+  </view>

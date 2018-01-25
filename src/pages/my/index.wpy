@@ -48,19 +48,13 @@
 
     methods = {}
 
-    onLoad() {
-      // let self = this
-      // this.$parent.getUserInfo((userInfo) => {
-      //   if (userInfo) {
-      //     self.userInfo = userInfo
-      //   }
-      // })
-      wepy.getUserInfo({
+    async onLoad() {
+      await wepy.login({
         success (res) {
           console.log(res)
         }
       })
-      wepy.login({
+      await wepy.getUserInfo({
         success (res) {
           console.log(res)
         }
