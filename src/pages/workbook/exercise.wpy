@@ -3,7 +3,7 @@
 
 <template>
   <view class="container">
-    <zanNoticebar1 :text="longText" componentId="static1"></zanNoticebar1>
+    <!-- <zanNoticebar1 :text="longText" componentId="static1"></zanNoticebar1> -->
     <view class="zan-panel">
     </view>
   </view>
@@ -11,7 +11,7 @@
 
 <script>
   import wepy from 'wepy'
-  import zanNoticebar from '@/components/zan-noticebar'
+  // import zanNoticebar from '@/components/zan-noticebar'
 
   export default class WorkbookExercise extends wepy.page {
     components = {
@@ -19,7 +19,7 @@
     }
 
     components = {
-      zanNoticebar1: zanNoticebar
+      // zanNoticebar1: zanNoticebar
     }
 
     data = {
