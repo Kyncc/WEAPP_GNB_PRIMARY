@@ -1,0 +1,2 @@
+@import "./../../components/zan-noticebar.wxss";
+.service_selection._db208f5{display:flex;flex-wrap:wrap}.service_selection label._db208f5{background:#EDF9F8;color:#3fc6c6;height:85rpx;width:85rpx;text-align:center;line-height:80rpx;display:inline-block;border-radius:50%;margin:15rpx 15rpx 15rpx 0}.service_selection .is_checked._db208f5{color:#fff;background:#FF7043}

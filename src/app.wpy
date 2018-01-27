@@ -37,6 +37,7 @@ export default class extends wepy.app {
       'pages/workbook/want',
       'pages/workbook/error',
       'pages/workbook/chapter',
+      'pages/workbook/exercise',
       'pages/statistics/index',
       'pages/statistics/list'
     ],
@@ -81,6 +82,7 @@ export default class extends wepy.app {
   constructor () {
     super()
     this.use('requestfix')
+    // this.use('promisify')
     wx.onNetworkStatusChange((res) => {
       if (!res.isConnected) {
         alert('当前无网络')

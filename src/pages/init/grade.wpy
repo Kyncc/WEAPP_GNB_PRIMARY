@@ -57,9 +57,6 @@
 
     }
 
-    // constructor () {
-    //   super()
-    // }
     methods = {
       _intoWorkbook (val) {
         wx.navigateTo({

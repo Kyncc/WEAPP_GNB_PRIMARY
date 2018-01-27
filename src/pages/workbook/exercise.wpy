@@ -1,45 +1,101 @@
 <style lang="less" scoped>
+.service_selection {
+  display: flex;
+  flex-wrap: wrap;
+}
+.service_selection label {
+  background: #EDF9F8;
+  color: #3fc6c6;
+  height: 85rpx;
+  width: 85rpx;
+  text-align: center;
+  line-height: 80rpx;
+  display: inline-block;
+  border-radius: 50%;
+  margin:15rpx 15rpx 15rpx 0;
+}
+.service_selection .is_checked {
+  color: #fff;
+  background: #FF7043;
+}
 </style>
 
 <template>
   <view class="container">
-    <!-- <zanNoticebar1 :text="longText" componentId="static1"></zanNoticebar1> -->
-    <view class="zan-panel">
-    </view>
+     <zanNoticebar1 :text="longText" componentId="static1" ></zanNoticebar1>
+     <view class="zan-panel">
+        <view class="zan-panel-title zan-font-bold zan-c-black">基础巩固训练</view>
+        <view class="zan-cell">
+          <checkbox-group bindchange="serviceValChange">
+            <view class="service_selection">
+              <block wx:for="{{allGoodsFilte}}" wx:key="{{item.value}}">
+                <view class="item">
+                  <label class="checkbox {{item.checked? 'is_checked' : ''}} zan-font-16 ">
+                    <checkbox value="{{item.value}}" checked="{{item.checked}}" hidden="false" />{{item.name}}
+                  </label>
+                </view>
+              </block>
+            </view>
+          </checkbox-group>
+        </view>
+      </view>
   </view>
 </template>
 
 <script>
-  import wepy from 'wepy'
-  // import zanNoticebar from '@/components/zan-noticebar'
+import wepy from 'wepy'
+import zanNoticebar from '@/components/zan-noticebar'
 
-  export default class WorkbookExercise extends wepy.page {
-    components = {
-
-    }
-
-    components = {
-      // zanNoticebar1: zanNoticebar
-    }
-
-    data = {
-      longText: '点错题题号完成记错，提交作业查看我的错题'
-    }
-
-    methods = {
-
-    }
-
-    onLoad(options) {
-      wx.setNavigationBarTitle({title: options.name})
-    }
-
-    events = {
-
-    }
-
-    onReady() {
-
-    }
+export default class WorkbookExercise extends wepy.page {
+  components = {
+    zanNoticebar1: zanNoticebar
   }
+
+  data = {
+    longText: '点错题题号完成记错，提交作业查看我的错题',
+    allGoodsFilte: [
+      { name: '1', value: '0', checked: true },
+      { name: '2', value: '1', checked: false },
+      { name: '3', value: '2', checked: false },
+      { name: '4', value: '3', checked: false },
+      { name: '5', value: '4', checked: false },
+      { name: '6', value: '5', checked: true },
+      { name: '7', value: '6', checked: false },
+      { name: '8', value: '7', checked: false },
+      { name: '9', value: '8', checked: false },
+      { name: '10', value: '9', checked: false },
+      { name: '11', value: '10', checked: true },
+      { name: '12', value: '11', checked: false },
+      { name: '13', value: '12', checked: false },
+      { name: '14', value: '13', checked: false },
+      { name: '15', value: '14', checked: false }
+    ]
+  }
+
+  methods = {}
+
+  onLoad(options) {
+    wx.setNavigationBarTitle({ title: options.name })
+  }
+
+  events = {}
+
+  serviceValChange(e) {
+    var allGoodsFilte = this.data.allGoodsFilte
+    var checkArr = e.detail.value
+    for (var i = 0; i < allGoodsFilte.length; i++) {
+      if (checkArr.indexOf(i + '') !== -1) {
+        allGoodsFilte[i].checked = true
+      } else {
+        allGoodsFilte[i].checked = false
+      }
+    }
+    this.setData({
+      allGoodsFilte: allGoodsFilte
+    })
+    console.log(allGoodsFilte)
+  }
+
+  onReady() {}
+}
 </script>

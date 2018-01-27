@@ -7,7 +7,7 @@
     <navigator url='/pages/workbook/chapter?name=第二页'>章节列表</navigator>
     <navigator url='/pages/workbook/add'>添加习题册</navigator>
     <navigator url='/pages/workbook/error'>已错题目</navigator>
-    <navigator url='/pages/workbook/exercise'>记错</navigator>
+    <navigator url='/pages/workbook/exercise?name=第二章'>记错</navigator>
     <navigator url='/pages/workbook/noError'>无记错</navigator>
     <!-- <zanNoticebar1 :text="longText" componentId="static1"></zanNoticebar1> -->
   </view>

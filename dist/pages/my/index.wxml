@@ -1,21 +1,21 @@
 
-<view class="container">
-  <view class="userinfo">
-    <navigator url="/pages/my/info">
-      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"/>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </navigator>
+  <view class="container">
+    <view class="userinfo">
+      <navigator url="/pages/my/info">
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"/>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </navigator>
+    </view>
+    <view class="zan-panel">
+      <navigator url="/pages/my/info">
+        <view class="zan-cell">
+          <view class="zan-cell__bd">个人资料</view>
+        </view>
+      </navigator>
+      <navigator url="/pages/my/pay">
+        <view class="zan-cell">
+          <view class="zan-cell__bd">我的会员</view>
+        </view>
+      </navigator>
+    </view>
   </view>
-  <view class="zan-panel">
-    <navigator url="/pages/my/info">
-      <view class="zan-cell">
-        <view class="zan-cell__bd">个人资料</view>
-      </view>
-    </navigator>
-    <navigator url="/pages/my/pay">
-      <view class="zan-cell">
-        <view class="zan-cell__bd">我的会员</view>
-      </view>
-    </navigator>
-  </view>
-</view>

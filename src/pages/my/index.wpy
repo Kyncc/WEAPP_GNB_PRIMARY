@@ -1,32 +1,42 @@
-<style lang="stylus">
-  .userinfo
-    display flex
-    flex-direction column
-    align-items center
-
-  .userinfo-avatar
-    width 160rpx
-    height 160rpx
-    border-radius 50%
-
-  .userinfo-nickname
-    color #aaa
-    display block
-    text-align center
+<style lang="less">
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userinfo-avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+}
+.userinfo-nickname{
+  color: #aaa;
+  display: block;
+  text-align: center;
+}
 </style>
-<template lang="pug">
-  view.container
-    view.userinfo
-      navigator(url='/pages/my/info')
-        image.userinfo-avatar(src='{{userInfo.avatarUrl}}', background-size='cover')
-        text.userinfo-nickname {{userInfo.nickName}}
-    view.zan-panel
-      navigator(url='/pages/my/info')
-        view.zan-cell
-          view.zan-cell__bd 个人资料
-      navigator(url='/pages/my/pay')
-        view.zan-cell
-          view.zan-cell__bd 我的会员
+
+<template>
+  <view class="container">
+    <view class="userinfo">
+      <navigator url='/pages/my/info'>
+        <image class="userinfo-avatar" src='{{userInfo.avatarUrl}}' background-size='cover'></image>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </navigator>
+    </view>
+    <view class="zan-panel">
+      <navigator url='/pages/my/info'>
+        <view class="zan-cell">
+          <view class="zan-cell__bd">个人资料</view>
+        </view>
+      </navigator>
+      <navigator url='/pages/my/pay'>
+        <view class="zan-cell">
+          <view class="zan-cell__bd">我的会员</view>
+        </view>
+      </navigator>
+    </view>
+  </view>
 </template>
 
 <script>
@@ -43,22 +53,64 @@
       }
     }
 
-    components = {
-    }
+    components = {}
 
     methods = {}
+    /** 微信服务器获取CODE */
+    _login () {
+      return new Promise((resolve, reject) => {
+        wepy.login({
+          success (res) {
+            resolve(res.code)
+          }
+        })
+      })
+    }
+    /** 通过code获取OPENID */
+    _getOpenId (code) {
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://wechat.guinaben.com/pay/openId',
+          data: {
+            code: code
+          },
+          success (res) {
+            wepy.setStorageSync('openId', res.openId)
+            wepy.setStorageSync('session_key', res.session_key)
+            resolve(res)
+          },
+          fail (err) {
+            reject(err)
+          }
+        })
+      })
+    }
+    /** 获取用户信息 */
+    _getUserInfo () {
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://primary.guinaben.com/info',
+          data: {
+            openId: wepy.getStorageSync('openId')
+          },
+          success (res) {
+            resolve(res)
+          },
+          fail (err) {
+            reject(err)
+          }
+        })
+      })
+    }
 
     async onLoad() {
-      await wepy.login({
-        success (res) {
-          console.log(res)
-        }
-      })
-      await wepy.getUserInfo({
-        success (res) {
-          console.log(res)
-        }
-      })
+      try {
+        let code = await this._login()
+        await this._getOpenId(code)
+        await this._getUserInfo()
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 </script>

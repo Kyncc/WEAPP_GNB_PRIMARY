@@ -113,13 +113,6 @@ aws4@^1.2.1:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
 
-axios@^0.17.1:
-  version "0.17.1"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.17.1.tgz#2d8e3e5d0bdbd7327f91bc814f5c57660f81824d"
-  dependencies:
-    follow-redirects "^1.2.5"
-    is-buffer "^1.1.5"
-
 babel-code-frame@^6.16.0, babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.26.0.tgz#63fd43f7dc1e3bb7ce35947db8fe369a3f58c74b"
@@ -826,7 +819,7 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-debug@*, debug@^3.1.0:
+debug@*:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   dependencies:
@@ -1139,12 +1132,6 @@ flat-cache@^1.2.1:
     del "^2.0.2"
     graceful-fs "^4.1.2"
     write "^0.2.1"
-
-follow-redirects@^1.2.5:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.4.0.tgz#a146a3a5d402201c7a3e6128643f0e336d212b10"
-  dependencies:
-    debug "^3.1.0"
 
 forever-agent@~0.6.1:
   version "0.6.1"
@@ -2242,10 +2229,6 @@ wepy-eslint@^1.5.3:
 wepy-img-loader@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/wepy-img-loader/-/wepy-img-loader-1.0.1.tgz#8557be791ae16163a26e920ea6de146b8fc145e1"
-
-wepy-plugin-axios@^0.1.7:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/wepy-plugin-axios/-/wepy-plugin-axios-0.1.7.tgz#efc6ae5c7cbb52b004e850af7a9ea1c5954aecb8"
 
 wepy-redux@^1.5.3:
   version "1.5.3"
