@@ -25,10 +25,6 @@
 import wepy from 'wepy'
 
 export default class StatisticsList extends wepy.page {
-  config = {
-    navigationBarTitleText: 'test'
-  }
-
   components = {
 
   }
@@ -44,6 +40,10 @@ export default class StatisticsList extends wepy.page {
       //   urls: this.data.files // 需要预览的图片http链接列表
       // })
     }
+  }
+
+  onLoad(options) {
+    wx.setNavigationBarTitle({title: options.name})
   }
 
   onReady() {

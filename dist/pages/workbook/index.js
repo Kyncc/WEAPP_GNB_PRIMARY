@@ -19,8 +19,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// import zanNoticebar from '@/components/zan-noticebar'
-
 var Statistics = function (_wepy$page) {
   _inherits(Statistics, _wepy$page);
 
@@ -37,18 +35,32 @@ var Statistics = function (_wepy$page) {
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Statistics.__proto__ || Object.getPrototypeOf(Statistics)).call.apply(_ref, [this].concat(args))), _this), _this.config = {
       navigationBarTitleText: '错题归纳本小学数学'
-    }, _this.components = {
-      // zanNoticebar1: zanNoticebar
-    }, _this.data = {
-      longText: '足协杯战线连续第2年上演广州德比战，上赛季半决赛上恒大以两回合5-3的总比分淘汰富力。'
-    }, _this.methods = {}, _temp), _possibleConstructorReturn(_this, _ret);
+    }, _this.components = {}, _this.data = {
+      index: 0,
+      objectArray: [{
+        id: 3,
+        name: '三年级上'
+      }, {
+        id: 4,
+        name: '四年级上'
+      }, {
+        id: 5,
+        name: '五年级上'
+      }, {
+        id: 6,
+        name: '六年级上'
+      }]
+    }, _this.methods = {
+      bindPickerChange: function bindPickerChange(e) {
+        console.log('picker发送选择改变，携带值为', this.objectArray[Number(e.detail.value)]);
+        this.index = e.detail.value;
+      }
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(Statistics, [{
     key: 'onReady',
-    value: function onReady() {
-      // this.$invoke('zanNoticebar1', 'initZanNoticeBarScroll')
-    }
+    value: function onReady() {}
   }]);
 
   return Statistics;
@@ -57,4 +69,4 @@ var Statistics = function (_wepy$page) {
 
 Page(require('./../../npm/wepy/lib/wepy.js').default.$createPage(Statistics , 'pages/workbook/index'));
 
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4LmpzIl0sIm5hbWVzIjpbIlN0YXRpc3RpY3MiLCJjb25maWciLCJuYXZpZ2F0aW9uQmFyVGl0bGVUZXh0IiwiY29tcG9uZW50cyIsImRhdGEiLCJsb25nVGV4dCIsIm1ldGhvZHMiLCJwYWdlIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFDQTs7Ozs7Ozs7Ozs7O0FBQ0E7O0lBRXFCQSxVOzs7Ozs7Ozs7Ozs7Ozs4TEFDbkJDLE0sR0FBUztBQUNQQyw4QkFBd0I7QUFEakIsSyxRQUlUQyxVLEdBQWE7QUFDWDtBQURXLEssUUFJYkMsSSxHQUFPO0FBQ0xDLGdCQUFVO0FBREwsSyxRQUlQQyxPLEdBQVUsRTs7Ozs7OEJBSUE7QUFDUjtBQUNEOzs7O0VBbkJxQyxlQUFLQyxJOztrQkFBeEJQLFUiLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VzQ29udGVudCI6WyJcbmltcG9ydCB3ZXB5IGZyb20gJ3dlcHknXG4vLyBpbXBvcnQgemFuTm90aWNlYmFyIGZyb20gJ0AvY29tcG9uZW50cy96YW4tbm90aWNlYmFyJ1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBTdGF0aXN0aWNzIGV4dGVuZHMgd2VweS5wYWdlIHtcbiAgY29uZmlnID0ge1xuICAgIG5hdmlnYXRpb25CYXJUaXRsZVRleHQ6ICfplJnpopjlvZLnurPmnKzlsI/lrabmlbDlraYnXG4gIH1cblxuICBjb21wb25lbnRzID0ge1xuICAgIC8vIHphbk5vdGljZWJhcjE6IHphbk5vdGljZWJhclxuICB9XG5cbiAgZGF0YSA9IHtcbiAgICBsb25nVGV4dDogJ+i2s+WNj+adr+aImOe6v+i/nue7reesrDLlubTkuIrmvJTlub/lt57lvrfmr5TmiJjvvIzkuIrotZvlraPljYrlhrPotZvkuIrmgZLlpKfku6XkuKTlm57lkIg1LTPnmoTmgLvmr5TliIbmt5jmsbDlr4zlipvjgIInXG4gIH1cblxuICBtZXRob2RzID0ge1xuXG4gIH1cblxuICBvblJlYWR5KCkge1xuICAgIC8vIHRoaXMuJGludm9rZSgnemFuTm90aWNlYmFyMScsICdpbml0WmFuTm90aWNlQmFyU2Nyb2xsJylcbiAgfVxufVxuIl19
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4LmpzIl0sIm5hbWVzIjpbIlN0YXRpc3RpY3MiLCJjb25maWciLCJuYXZpZ2F0aW9uQmFyVGl0bGVUZXh0IiwiY29tcG9uZW50cyIsImRhdGEiLCJpbmRleCIsIm9iamVjdEFycmF5IiwiaWQiLCJuYW1lIiwibWV0aG9kcyIsImJpbmRQaWNrZXJDaGFuZ2UiLCJlIiwiY29uc29sZSIsImxvZyIsIk51bWJlciIsImRldGFpbCIsInZhbHVlIiwicGFnZSJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQ0E7Ozs7Ozs7Ozs7OztJQUVxQkEsVTs7Ozs7Ozs7Ozs7Ozs7OExBQ25CQyxNLEdBQVM7QUFDUEMsOEJBQXdCO0FBRGpCLEssUUFJVEMsVSxHQUFhLEUsUUFHYkMsSSxHQUFPO0FBQ0xDLGFBQU8sQ0FERjtBQUVMQyxtQkFBYSxDQUNYO0FBQ0VDLFlBQUksQ0FETjtBQUVFQyxjQUFNO0FBRlIsT0FEVyxFQUtYO0FBQ0VELFlBQUksQ0FETjtBQUVFQyxjQUFNO0FBRlIsT0FMVyxFQVNYO0FBQ0VELFlBQUksQ0FETjtBQUVFQyxjQUFNO0FBRlIsT0FUVyxFQWFYO0FBQ0VELFlBQUksQ0FETjtBQUVFQyxjQUFNO0FBRlIsT0FiVztBQUZSLEssUUFzQlBDLE8sR0FBVTtBQUNSQyxzQkFEUSw0QkFDVUMsQ0FEVixFQUNhO0FBQ25CQyxnQkFBUUMsR0FBUixDQUFZLG1CQUFaLEVBQWlDLEtBQUtQLFdBQUwsQ0FBaUJRLE9BQU9ILEVBQUVJLE1BQUYsQ0FBU0MsS0FBaEIsQ0FBakIsQ0FBakM7QUFDQSxhQUFLWCxLQUFMLEdBQWFNLEVBQUVJLE1BQUYsQ0FBU0MsS0FBdEI7QUFDRDtBQUpPLEs7Ozs7OzhCQU9BLENBRVQ7Ozs7RUF2Q3FDLGVBQUtDLEk7O2tCQUF4QmpCLFUiLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VzQ29udGVudCI6WyJcbmltcG9ydCB3ZXB5IGZyb20gJ3dlcHknXG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIFN0YXRpc3RpY3MgZXh0ZW5kcyB3ZXB5LnBhZ2Uge1xuICBjb25maWcgPSB7XG4gICAgbmF2aWdhdGlvbkJhclRpdGxlVGV4dDogJ+mUmemimOW9kue6s+acrOWwj+WtpuaVsOWtpidcbiAgfVxuXG4gIGNvbXBvbmVudHMgPSB7XG4gIH1cblxuICBkYXRhID0ge1xuICAgIGluZGV4OiAwLFxuICAgIG9iamVjdEFycmF5OiBbXG4gICAgICB7XG4gICAgICAgIGlkOiAzLFxuICAgICAgICBuYW1lOiAn5LiJ5bm057qn5LiKJ1xuICAgICAgfSxcbiAgICAgIHtcbiAgICAgICAgaWQ6IDQsXG4gICAgICAgIG5hbWU6ICflm5vlubTnuqfkuIonXG4gICAgICB9LFxuICAgICAge1xuICAgICAgICBpZDogNSxcbiAgICAgICAgbmFtZTogJ+S6lOW5tOe6p+S4iidcbiAgICAgIH0sXG4gICAgICB7XG4gICAgICAgIGlkOiA2LFxuICAgICAgICBuYW1lOiAn5YWt5bm057qn5LiKJ1xuICAgICAgfVxuICAgIF1cbiAgfVxuXG4gIG1ldGhvZHMgPSB7XG4gICAgYmluZFBpY2tlckNoYW5nZSAoZSkge1xuICAgICAgY29uc29sZS5sb2coJ3BpY2tlcuWPkemAgemAieaLqeaUueWPmO+8jOaQuuW4puWAvOS4uicsIHRoaXMub2JqZWN0QXJyYXlbTnVtYmVyKGUuZGV0YWlsLnZhbHVlKV0pXG4gICAgICB0aGlzLmluZGV4ID0gZS5kZXRhaWwudmFsdWVcbiAgICB9XG4gIH1cblxuICBvblJlYWR5KCkge1xuXG4gIH1cbn1cbiJdfQ==

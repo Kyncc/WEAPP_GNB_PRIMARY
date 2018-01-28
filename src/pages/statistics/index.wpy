@@ -10,13 +10,12 @@
 
 <template>
   <view class="container">
-    <!-- <view class="section">
-      <picker bindchange="bindPickerChange" value="{{index}}" range="{{objectArray}}" range-key="name">
-        <view class="picker">
-          当前选择：{{book}}
-        </view>
-      </picker>
-    </view> -->
+    <picker style="margin-top: 0" class="zan-panel" @change="bindPickerChange" value="{{index}}" range="{{objectArray}}" range-key="name">
+      <view class="picker zan-cell">
+        当前选择：{{objectArray[index].name}}
+        <view class="zan-arrow"></view>
+      </view>
+    </picker>
     <view class="zan-panel">
       <view class="zan-row zan-cell">
         <view class="zan-col zan-col-6 zan-col-offset-6 zan-center">记错数</view>
@@ -49,22 +48,22 @@
     components = {
     }
     data = {
-      book: '',
+      index: 0,
       objectArray: [
         {
-          id: 0,
+          id: 3,
           name: '三年级上'
         },
         {
-          id: 1,
+          id: 4,
           name: '四年级上'
         },
         {
-          id: 2,
+          id: 5,
           name: '五年级上'
         },
         {
-          id: 3,
+          id: 6,
           name: '六年级上'
         }
       ]
@@ -75,6 +74,10 @@
         wx.navigateTo({
           url: `/pages/statistics/list?name=${val}`
         })
+      },
+      bindPickerChange (e) {
+        console.log('picker发送选择改变，携带值为', this.objectArray[Number(e.detail.value)])
+        this.index = e.detail.value
       }
     }
   }

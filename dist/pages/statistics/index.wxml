@@ -1,12 +1,11 @@
 
   <view class="container _edf42e2">
-    <!-- <view class="section">
-      <picker bindchange="bindPickerChange" value="{{index}}" range="{{objectArray}}" range-key="name">
-        <view class="picker">
-          当前选择：{{book}}
-        </view>
-      </picker>
-    </view> -->
+    <picker style="margin-top: 0" class="zan-panel _edf42e2" bindchange="bindPickerChange" value="{{index}}" range="{{objectArray}}" range-key="name">
+      <view class="picker zan-cell _edf42e2">
+        当前选择：{{objectArray[index].name}}
+        <view class="zan-arrow _edf42e2"/>
+      </view>
+    </picker>
     <view class="zan-panel _edf42e2">
       <view class="zan-row zan-cell _edf42e2">
         <view class="zan-col zan-col-6 zan-col-offset-6 zan-center _edf42e2">记错数</view>
