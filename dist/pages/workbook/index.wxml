@@ -6,8 +6,8 @@
         <view class="zan-arrow"/>
       </view>
     </picker>
-    <scroll-view scroll-y style="height: 700rpx;" scroll-top="0">
-      <view class="zan-panel-title zan-font-bold zan-c-black">我的练习册</view>
+    <view>
+      <view class="zan-panel-title zan-font-bold zan-c-black" style="padding: 10px 15px 0 15px;">我的练习册</view>
       <view class="zan-panel">
         <view class="zan-card">
           <view class="zan-card__thumb">
@@ -30,7 +30,12 @@
           </view>
         </view>
       </view>
-    </scroll-view>
+    </view>
+    <navigator url="/pages/workbook/add">
+      <view class="zan-font-14 zan-center" style="padding:10px 0;">
+        <text class="zan-c-gray-darker">+添加习题册</text>
+      </view>
+    </navigator>
     <view class="zan-panel">
       <navigator url="/pages/workbook/want">想要练习册</navigator>
       <navigator url="/pages/workbook/chapter?name=第二页">章节列表</navigator>

@@ -1,6 +1,7 @@
-<style lang="stylus" scoped>
-.tr .zan-field__input
-  text-align right
+<style lang="less" scoped>
+.tr .zan-field__input{
+  text-align: right
+}
 </style>
 <template>
   <view class="container">

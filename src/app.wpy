@@ -33,6 +33,7 @@ export default class extends wepy.app {
       'pages/my/index',
       'pages/my/info',
       'pages/my/pay',
+      'pages/workbook/add',
       'pages/workbook/index',
       'pages/workbook/want',
       'pages/workbook/error',
