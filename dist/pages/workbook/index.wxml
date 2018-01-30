@@ -1,11 +1,13 @@
 
   <view class="container">
-    <picker style="margin-top: 0" class="zan-panel" bindchange="bindPickerChange" value="{{index}}" range="{{objectArray}}" range-key="name">
-      <view class="picker zan-cell">
-        当前选择：{{objectArray[index].name}}
-        <view class="zan-arrow"/>
-      </view>
-    </picker>
+    
+  <picker style="margin-top: 0" class="zan-panel" bindchange="$gnbTextbookSelect$bindPickerChange" range="{{ $gnbTextbookSelect$textbookArray }}" value="{{ $gnbTextbookSelect$value }}" range-key="name">
+    <view class="picker zan-cell">
+      当前选择：{{$gnbTextbookSelect$textbookArray[$gnbTextbookSelect$value].name}}
+      <view class="zan-arrow"/>
+    </view>
+  </picker>
+
     <view>
       <view class="zan-panel-title zan-font-bold zan-c-black" style="padding: 10px 15px 0 15px;">我的练习册</view>
       <view class="zan-panel">

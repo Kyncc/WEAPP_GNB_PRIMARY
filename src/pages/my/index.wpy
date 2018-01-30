@@ -75,7 +75,7 @@
             code: code
           },
           success (res) {
-            wepy.setStorageSync('openId', res.openId)
+            wepy.setStorageSync('openId', res.openid)
             wepy.setStorageSync('session_key', res.session_key)
             resolve(res)
           },
@@ -105,8 +105,10 @@
 
     async onLoad() {
       try {
-        let code = await this._login()
-        await this._getOpenId(code)
+        if (wepy.getStorageSync('openId').length === 0) {
+          let code = await this._login()
+          await this._getOpenId(code)
+        }
         await this._getUserInfo()
       } catch (err) {
         console.log(err)

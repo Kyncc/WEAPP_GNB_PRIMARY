@@ -3,21 +3,14 @@
 </style>
 <template>
   <view class="container">
-    <picker style="margin-top: 0" class="zan-panel" @change="bindPickerChange" value="{{index}}" range="{{objectArray}}" range-key="name">
-      <view class="picker zan-cell">
-        当前选择：{{objectArray[index].name}}
-        <view class="zan-arrow"></view>
-      </view>
-    </picker>
+    <gnbTextbookSelect :value.sync="current"></gnbTextbookSelect>
     <view>
       <view class="zan-panel-title zan-font-bold zan-c-black" style="padding: 10px 15px 0 15px;">我的练习册</view>
       <view class="zan-panel">
         <view class="zan-card">
           <view class="zan-card__thumb">
             <image class="zan-card__img"
-              src="http://img.guinaben.com/want1.jpg?imageView2/2/w/270/h/480/format/jpg/q/75"
-              mode="aspectFit"
-              lazy-load='true'>
+              src="http://img.guinaben.com/want1.jpg?imageView2/2/w/270/h/480/format/jpg/q/75" mode="aspectFit" lazy-load='true'>
             </image>
           </view>
           <view class="zan-card__detail">
@@ -55,6 +48,7 @@
 
 <script>
 import wepy from 'wepy'
+import gnbTextbookSelect from '@/components/gnb-textbookSelect'
 
 export default class Statistics extends wepy.page {
   config = {
@@ -62,35 +56,15 @@ export default class Statistics extends wepy.page {
   }
 
   components = {
+    gnbTextbookSelect: gnbTextbookSelect
   }
 
   data = {
-    index: 0,
-    objectArray: [
-      {
-        id: 3,
-        name: '三年级上'
-      },
-      {
-        id: 4,
-        name: '四年级上'
-      },
-      {
-        id: 5,
-        name: '五年级上'
-      },
-      {
-        id: 6,
-        name: '六年级上'
-      }
-    ]
+    current: 3
   }
 
   methods = {
-    bindPickerChange (e) {
-      console.log('picker发送选择改变，携带值为', this.objectArray[Number(e.detail.value)])
-      this.index = e.detail.value
-    }
+
   }
 
   onReady() {

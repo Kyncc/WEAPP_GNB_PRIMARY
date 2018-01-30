@@ -124,7 +124,7 @@ export default class WorkbookAdd extends wepy.page {
       this.inputVal = ''
     },
     inputTyping (e) {
-      this.inputVal = e.detail.value;
+      this.inputVal = e.detail.value
     }
   }
 }
