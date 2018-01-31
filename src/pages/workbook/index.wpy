@@ -1,9 +1,6 @@
-<style lang="less">
-
-</style>
 <template>
   <view class="container">
-    <gnbTextbookSelect :value.sync="current"></gnbTextbookSelect>
+    <gnbTextbookSelect :value.sync="current" @event.user="textbookChange"/>
     <view>
       <view class="zan-panel-title zan-font-bold zan-c-black" style="padding: 10px 15px 0 15px;">我的练习册</view>
       <view class="zan-panel">
@@ -64,7 +61,9 @@ export default class Statistics extends wepy.page {
   }
 
   methods = {
-
+    textbookChange (id) {
+      console.log(id)
+    }
   }
 
   onReady() {

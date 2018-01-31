@@ -17,10 +17,10 @@
           <view class="zan-cell__bd">年级</view>
           <view class="zan-cell__ft">详细信息</view>
        </view>
-       <view class="zan-cell">
+       <!-- <view class="zan-cell">
           <view class="zan-cell__bd">版本</view>
-          <view class="zan-cell__ft">详细信息</view>
-       </view>
+          <view class="zan-cell__ft"></view>
+       </view> -->
        <zanField1 :options="base_school" :value="school" componentId="zanField1" class='tr'></zanField1>
      </view>
   </view>
@@ -39,6 +39,12 @@
       base_school: {
         title: '学校',
         placeholder: '请输入学校名称'
+      },
+      userInfo: {
+        name: '',
+        sex: '',
+        school: '',
+        grade: ''
       }
     }
 
@@ -48,6 +54,9 @@
 
     methods = {}
 
-    onLoad() {}
+    onLoad() {
+      this.userInfo.name = wepy.getStorageSync('User').name
+      this.userInfo.headImg = wepy.getStorageSync('User').headImg
+    }
   }
 </script>

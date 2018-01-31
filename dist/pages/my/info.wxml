@@ -12,10 +12,10 @@
           <view class="zan-cell__bd _13d05ce">年级</view>
           <view class="zan-cell__ft _13d05ce">详细信息</view>
        </view>
-       <view class="zan-cell _13d05ce">
-          <view class="zan-cell__bd _13d05ce">版本</view>
-          <view class="zan-cell__ft _13d05ce">详细信息</view>
-       </view>
+       <!-- <view class="zan-cell">
+          <view class="zan-cell__bd">版本</view>
+          <view class="zan-cell__ft"></view>
+       </view> -->
        
   <view class="zan-cell zan-field {{ $zanField1$options.error ? 'zan-field--error' : '' }} {{ $zanField1$options.mode === 'wrapped' ? 'zan-field--wrapped' : '' }} tr _13d05ce">
     <view  wx:if="{{ $zanField1$options.title }}" class="zan-cell__hd zan-field__title">{{ $zanField1$options.title }}</view>

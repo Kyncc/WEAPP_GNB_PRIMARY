@@ -2,35 +2,22 @@
 .zan-row {
   button{
     border-radius: 10px;
+    margin-top: 30rpx;
   }
   .button-hover{
     background-color: #3fc6c6;
     color:#fff;
   }
-  .zan-col{
-    margin-bottom:25px;
-  }
-}
-.title{
-  color:#37464B;
-  text-align: center;
-  font-size: 36px;
-  margin: 25px 0;
-}
-.info{
-  color: #859B9F;
-  text-align: center;
-  font-size: 14px;
 }
 </style>
 
 <template>
   <view class="container">
-    <view class="zan-row title">
-      <text class="zan-col zan-col-24 zan-font-16 zan-c-black">选择年级</text>
-      <text class="zan-col zan-col-24 zan-font-12 zan-c-gray-darker">数学 新人教版</text>
+    <view class="zan-row zan-center" style="margin-top: 180rpx;">
+      <text class="zan-col zan-col-24 zan-font-30 zan-c-black zan-center">选择年级</text>
+      <text class="zan-col zan-col-24 zan-font-14 zan-c-gray-darker zan-center" style="margin-top: 60rpx;">数学 新人教版</text>
     </view>
-    <view class="zan-row">
+    <view class="zan-row" style="margin-top: 30px;">
       <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn" @tap='_intoWorkbook(3)'>三年级</button>
       <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn" @tap='_intoWorkbook(4)'>四年级</button>
       <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn" @tap='_intoWorkbook(5)'>五年级</button>
@@ -41,35 +28,50 @@
 <script>
   import wepy from 'wepy'
 
-  export default class Index extends wepy.page {
+  export default class InitGrade extends wepy.page {
     config = {
-      navigationBarTitleText: '错题归纳本'
-    }
-    components = {
-
+      navigationBarTitleText: '错题归纳本小学数学'
     }
 
-    data = {
-
-    }
-
-    computed = {
-
+    /** 设置用户信息 */
+    _setUserInfo (grade) {
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://wechat.guinaben.com/primary/member/infoEdit',
+          method: 'POST',
+          data: {
+            grade: grade,
+            school: '',
+            name: wepy.getStorageSync('User').nickName,
+            openId: wepy.getStorageSync('openId'),
+            headImg: wepy.getStorageSync('User').avatarUrl,
+            sex: wepy.getStorageSync('User').gender
+          },
+          success (res) {
+            resolve(res)
+          },
+          fail (err) {
+            reject(err)
+          }
+        })
+      })
     }
 
     methods = {
-      _intoWorkbook (val) {
-        wx.navigateTo({
-          url: `/pages/init/workbook?grade=${val}`
-        })
+      async _intoWorkbook (val) {
+        await this._setUserInfo(val)
+        // wx.navigateTo({
+        //   url: `/pages/init/workbook?grade=${val}`
+        // })
       }
     }
 
-    events = {
-
-    }
-
     onLoad() {
+      wepy.getUserInfo({
+        success (res) {
+          wepy.setStorageSync('User', res.userInfo)
+        }
+      })
     }
   }
 </script>

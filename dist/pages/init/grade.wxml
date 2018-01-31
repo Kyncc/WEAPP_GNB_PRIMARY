@@ -1,10 +1,10 @@
 
   <view class="container _c11d454">
-    <view class="zan-row title _c11d454">
-      <text class="zan-col zan-col-24 zan-font-16 zan-c-black _c11d454">选择年级</text>
-      <text class="zan-col zan-col-24 zan-font-12 zan-c-gray-darker _c11d454">数学 新人教版</text>
+    <view class="zan-row zan-center _c11d454" style="margin-top: 180rpx;">
+      <text class="zan-col zan-col-24 zan-font-30 zan-c-black zan-center _c11d454">选择年级</text>
+      <text class="zan-col zan-col-24 zan-font-14 zan-c-gray-darker zan-center _c11d454" style="margin-top: 60rpx;">数学 新人教版</text>
     </view>
-    <view class="zan-row _c11d454">
+    <view class="zan-row _c11d454" style="margin-top: 30px;">
       <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn _c11d454" bindtap="_intoWorkbook" data-wpy_intoworkbook-a="3">三年级</button>
       <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn _c11d454" bindtap="_intoWorkbook" data-wpy_intoworkbook-a="4">四年级</button>
       <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn _c11d454" bindtap="_intoWorkbook" data-wpy_intoworkbook-a="5">五年级</button>

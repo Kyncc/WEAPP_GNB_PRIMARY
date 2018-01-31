@@ -1,9 +1,9 @@
 
   <view class="container">
-    <view class="userinfo">
+    <view class="zan-row zan-center" style="padding-top:60rpx;">
       <navigator url="/pages/my/info">
-        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"/>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        <image class="userinfo-avatar" src="{{userInfo.headImg}}" background-size="cover"/>
+        <text class="zan-col zan-col-24">{{userInfo.name}}</text>
       </navigator>
     </view>
     <view class="zan-panel">

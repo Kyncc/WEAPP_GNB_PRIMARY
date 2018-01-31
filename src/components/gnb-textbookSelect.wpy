@@ -42,6 +42,7 @@ export default class gnbWookbook extends wepy.component {
   methods = {
     bindPickerChange (e) {
       this.value = e.detail.value
+      this.$emit('event', Number(this.value) + 3)
     }
   }
 }
