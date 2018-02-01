@@ -43,9 +43,9 @@ export default class zanField extends wepy.component {
         value: '',
         type: 'textarea',
         mode: 'wrapped',
-        title: '消费总额',
+        title: '',
         inputType: 'number',
-        placeholder: '询问收银员后输入'
+        placeholder: ''
       }
     },
     componentId: String

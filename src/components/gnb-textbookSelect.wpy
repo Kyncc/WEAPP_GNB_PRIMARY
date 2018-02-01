@@ -1,7 +1,7 @@
 <template>
   <picker style="margin-top: 0" class="zan-panel" @change="bindPickerChange" range="{{ textbookArray }}" value="{{ value }}" range-key="name">
     <view class="picker zan-cell">
-      当前选择：{{textbookArray[value].name}}
+      {{title}}:　{{textbookArray[value].name}}
       <view class="zan-arrow"></view>
     </view>
   </picker>
@@ -15,6 +15,10 @@ export default class gnbWookbook extends wepy.component {
     value: {
       type: Number,
       twoWay: true
+    },
+    title: {
+      type: String,
+      default: '当前选择'
     }
   }
 

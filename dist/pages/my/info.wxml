@@ -1,26 +1,33 @@
 
   <view class="container _13d05ce">
      <view class="zan-panel _13d05ce" style="margin: 0;">
-       <view class="zan-cell _13d05ce">
-          <view class="zan-cell__bd _13d05ce">姓名</view>
-       </view>
-       <view class="zan-cell _13d05ce">
-          <view class="zan-cell__bd _13d05ce">性别</view>
-          <view class="zan-cell__ft _13d05ce">详细信息</view>
-       </view>
-       <view class="zan-cell _13d05ce">
-          <view class="zan-cell__bd _13d05ce">年级</view>
-          <view class="zan-cell__ft _13d05ce">详细信息</view>
-       </view>
-       <!-- <view class="zan-cell">
-          <view class="zan-cell__bd">版本</view>
-          <view class="zan-cell__ft"></view>
-       </view> -->
        
-  <view class="zan-cell zan-field {{ $zanField1$options.error ? 'zan-field--error' : '' }} {{ $zanField1$options.mode === 'wrapped' ? 'zan-field--wrapped' : '' }} tr _13d05ce">
+  <view class="zan-cell zan-field {{ $zanField1$options.error ? 'zan-field--error' : '' }} {{ $zanField1$options.mode === 'wrapped' ? 'zan-field--wrapped' : '' }} _13d05ce">
     <view  wx:if="{{ $zanField1$options.title }}" class="zan-cell__hd zan-field__title">{{ $zanField1$options.title }}</view>
     <textarea  wx:if="{{ $zanField1$options.type === 'textarea' }}" auto-height name="{{ $zanField1$options.name || $zanField1$componentId || '' }}" value="{{ $zanField1$options.value }}" placeholder="{{ $zanField1$options.placeholder }}" class="zan-field__input zan-cell__bd {{ $zanField1$options.right ? 'zan-field__input--right' : '' }}" placeholder-class="zan-field__placeholder" bindinput="$zanField1$handleZanFieldChange" bindfocus="$zanField1$handleZanFieldFocus" bindblur="$zanField1$handleZanFieldBlur" data-component-id="{{ $zanField1$componentId || '' }}"/>
     <input wx:else type="{{ $zanField1$options.inputType || 'text' }}" name="{{ $zanField1$options.name || $zanField1$componentId || '' }}" value="{{ $zanField1$options.value }}" placeholder="{{ $zanField1$options.placeholder }}" class="zan-field__input zan-cell__bd {{ $zanField1$options.right ? 'zan-field__input--right' : '' }}" placeholder-class="zan-field__placeholder" bindinput="$zanField1$handleZanFieldChange" bindfocus="$zanField1$handleZanFieldFocus" bindblur="$zanField1$handleZanFieldBlur" data-component-id="{{ $zanField1$componentId || '' }}"/>
+  </view>
+
+       
+  <view class="zan-cell zan-field {{ $zanField2$options.error ? 'zan-field--error' : '' }} {{ $zanField2$options.mode === 'wrapped' ? 'zan-field--wrapped' : '' }} _13d05ce">
+    <view  wx:if="{{ $zanField2$options.title }}" class="zan-cell__hd zan-field__title">{{ $zanField2$options.title }}</view>
+    <textarea  wx:if="{{ $zanField2$options.type === 'textarea' }}" auto-height name="{{ $zanField2$options.name || $zanField2$componentId || '' }}" value="{{ $zanField2$options.value }}" placeholder="{{ $zanField2$options.placeholder }}" class="zan-field__input zan-cell__bd {{ $zanField2$options.right ? 'zan-field__input--right' : '' }}" placeholder-class="zan-field__placeholder" bindinput="$zanField2$handleZanFieldChange" bindfocus="$zanField2$handleZanFieldFocus" bindblur="$zanField2$handleZanFieldBlur" data-component-id="{{ $zanField2$componentId || '' }}"/>
+    <input wx:else type="{{ $zanField2$options.inputType || 'text' }}" name="{{ $zanField2$options.name || $zanField2$componentId || '' }}" value="{{ $zanField2$options.value }}" placeholder="{{ $zanField2$options.placeholder }}" class="zan-field__input zan-cell__bd {{ $zanField2$options.right ? 'zan-field__input--right' : '' }}" placeholder-class="zan-field__placeholder" bindinput="$zanField2$handleZanFieldChange" bindfocus="$zanField2$handleZanFieldFocus" bindblur="$zanField2$handleZanFieldBlur" data-component-id="{{ $zanField2$componentId || '' }}"/>
+  </view>
+
+       
+  <picker style="margin-top: 0" class="zan-panel _13d05ce" bindchange="$gnbTextbookSelect$bindPickerChange" range="{{ $gnbTextbookSelect$textbookArray }}" value="{{ $gnbTextbookSelect$value }}" range-key="name">
+    <view class="picker zan-cell">
+      {{$gnbTextbookSelect$title}}:　{{$gnbTextbookSelect$textbookArray[$gnbTextbookSelect$value].name}}
+      <view class="zan-arrow"/>
+    </view>
+  </picker>
+
+       
+  <view class="zan-cell zan-field {{ $zanField3$options.error ? 'zan-field--error' : '' }} {{ $zanField3$options.mode === 'wrapped' ? 'zan-field--wrapped' : '' }} _13d05ce">
+    <view  wx:if="{{ $zanField3$options.title }}" class="zan-cell__hd zan-field__title">{{ $zanField3$options.title }}</view>
+    <textarea  wx:if="{{ $zanField3$options.type === 'textarea' }}" auto-height name="{{ $zanField3$options.name || $zanField3$componentId || '' }}" value="{{ $zanField3$options.value }}" placeholder="{{ $zanField3$options.placeholder }}" class="zan-field__input zan-cell__bd {{ $zanField3$options.right ? 'zan-field__input--right' : '' }}" placeholder-class="zan-field__placeholder" bindinput="$zanField3$handleZanFieldChange" bindfocus="$zanField3$handleZanFieldFocus" bindblur="$zanField3$handleZanFieldBlur" data-component-id="{{ $zanField3$componentId || '' }}"/>
+    <input wx:else type="{{ $zanField3$options.inputType || 'text' }}" name="{{ $zanField3$options.name || $zanField3$componentId || '' }}" value="{{ $zanField3$options.value }}" placeholder="{{ $zanField3$options.placeholder }}" class="zan-field__input zan-cell__bd {{ $zanField3$options.right ? 'zan-field__input--right' : '' }}" placeholder-class="zan-field__placeholder" bindinput="$zanField3$handleZanFieldChange" bindfocus="$zanField3$handleZanFieldFocus" bindblur="$zanField3$handleZanFieldBlur" data-component-id="{{ $zanField3$componentId || '' }}"/>
   </view>
 
      </view>

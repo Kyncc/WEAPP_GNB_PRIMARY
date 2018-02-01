@@ -1,27 +1,12 @@
 <style lang="less" scoped>
-.tr .zan-field__input{
-  text-align: right
-}
 </style>
 <template>
   <view class="container">
      <view class="zan-panel" style="margin: 0;">
-       <view class="zan-cell">
-          <view class="zan-cell__bd">姓名</view>
-       </view>
-       <view class="zan-cell">
-          <view class="zan-cell__bd">性别</view>
-          <view class="zan-cell__ft">详细信息</view>
-       </view>
-       <view class="zan-cell">
-          <view class="zan-cell__bd">年级</view>
-          <view class="zan-cell__ft">详细信息</view>
-       </view>
-       <!-- <view class="zan-cell">
-          <view class="zan-cell__bd">版本</view>
-          <view class="zan-cell__ft"></view>
-       </view> -->
-       <zanField1 :options="base_school" :value="school" componentId="zanField1" class='tr'></zanField1>
+       <zanField1 :options="base_name"  componentId="zanField1"></zanField1>
+       <zanField2 :options="base_sex"  componentId="zanField2"></zanField2>
+       <gnbTextbookSelect :value.sync="grade" @event.user="textbookChange"/>
+       <zanField3 :options="base_school" componentId="zanField3"></zanField3>
      </view>
   </view>
 </template>
@@ -29,34 +14,50 @@
 <script>
   import wepy from 'wepy'
   import zanField from '@/components/zan-field'
+  import gnbTextbookSelect from '@/components/gnb-textbookSelect'
 
   export default class MyInfo extends wepy.page {
     config = {
       navigationBarTitleText: '个人资料'
     }
 
+    components = {
+      gnbTextbookSelect: gnbTextbookSelect,
+      zanField1: zanField,
+      zanField2: zanField,
+      zanField3: zanField
+    }
+
     data = {
+      grade: '',
       base_school: {
         title: '学校',
+        value: '',
         placeholder: '请输入学校名称'
       },
-      userInfo: {
-        name: '',
-        sex: '',
-        school: '',
-        grade: ''
+      base_name: {
+        title: '姓名',
+        value: '',
+        placeholder: ''
+      },
+      base_sex: {
+        title: '性别',
+        value: ''
       }
     }
 
-    components = {
-      zanField1: zanField
+    methods = {
+      textbookChange (id) {
+        console.log(id)
+      }
     }
 
-    methods = {}
-
     onLoad() {
-      this.userInfo.name = wepy.getStorageSync('User').name
-      this.userInfo.headImg = wepy.getStorageSync('User').headImg
+      this.base_name.value = wepy.getStorageSync('User').name
+      this.base_school.value = wepy.getStorageSync('User').school
+      this.grade = wepy.getStorageSync('User').grade - 3
+      this.base_sex.value = (wepy.getStorageSync('User').sex === 1 ? '男' : '女')
+      this.$apply()
     }
   }
 </script>

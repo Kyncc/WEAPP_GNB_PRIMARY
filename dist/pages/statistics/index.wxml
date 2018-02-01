@@ -3,7 +3,7 @@
     
   <picker style="margin-top: 0" class="zan-panel _edf42e2" bindchange="$gnbTextbookSelect$bindPickerChange" range="{{ $gnbTextbookSelect$textbookArray }}" value="{{ $gnbTextbookSelect$value }}" range-key="name">
     <view class="picker zan-cell">
-      当前选择：{{$gnbTextbookSelect$textbookArray[$gnbTextbookSelect$value].name}}
+      {{$gnbTextbookSelect$title}}:　{{$gnbTextbookSelect$textbookArray[$gnbTextbookSelect$value].name}}
       <view class="zan-arrow"/>
     </view>
   </picker>
@@ -14,17 +14,13 @@
         <view class="zan-col zan-col-6 zan-center _edf42e2">错题数</view>
         <view class="zan-col zan-col-6 zan-center _edf42e2">正确数</view>
       </view>
-      <view class="zan-row zan-cell _edf42e2" bindtap="_intoList" data-wpy_intolist-a="第二章">
-        <view class="zan-col zan-col-6 _edf42e2">第一章</view>
-        <view class="zan-col zan-col-6 numberColor _edf42e2">100</view>
-        <view class="zan-col zan-col-6 numberColor _edf42e2">0</view>
-        <view class="zan-col zan-col-6 numberColor _edf42e2">30.5%</view>
-      </view>
-      <view class="zan-row zan-cell _edf42e2">
-        <view class="zan-col zan-col-6 _edf42e2">第二章</view>
-        <view class="zan-col zan-col-6 numberColor _edf42e2">100</view>
-        <view class="zan-col zan-col-6 numberColor _edf42e2">0</view>
-        <view class="zan-col zan-col-6 numberColor _edf42e2">30.5%</view>
-      </view>
+      <block class="_edf42e2" wx:for="{{statistics}}" wx:for-index="index" wx:for-item="item" wx:key="index">
+        <view class="zan-row zan-cell _edf42e2" bindtap="_intoList" data-wpy_intolist-a="">
+          <view class="zan-col zan-col-6 _edf42e2">{{item.name}}</view>
+          <view class="zan-col zan-col-6 numberColor _edf42e2">{{item.record}}</view>
+          <view class="zan-col zan-col-6 numberColor _edf42e2">{{item.error}}</view>
+          <view class="zan-col zan-col-6 numberColor _edf42e2">{{item.correct}}</view>
+        </view>
+      </block>
     </view>
   </view>

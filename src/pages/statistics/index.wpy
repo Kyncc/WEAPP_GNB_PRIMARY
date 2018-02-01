@@ -10,25 +10,21 @@
 
 <template>
   <view class="container">
-    <gnbTextbookSelect :value.sync="current"></gnbTextbookSelect>
+    <gnbTextbookSelect :value.sync="gradeId" @event.user="textbookChange"></gnbTextbookSelect>
     <view class="zan-panel">
       <view class="zan-row zan-cell">
         <view class="zan-col zan-col-6 zan-col-offset-6 zan-center">记错数</view>
         <view class="zan-col zan-col-6 zan-center">错题数</view>
         <view class="zan-col zan-col-6 zan-center">正确数</view>
       </view>
-      <view class="zan-row zan-cell" @tap='_intoList(第二章)'>
-        <view class="zan-col zan-col-6">第一章</view>
-        <view class="zan-col zan-col-6 numberColor">100</view>
-        <view class="zan-col zan-col-6 numberColor">0</view>
-        <view class="zan-col zan-col-6 numberColor">30.5%</view>
-      </view>
-      <view class="zan-row zan-cell">
-        <view class="zan-col zan-col-6">第二章</view>
-        <view class="zan-col zan-col-6 numberColor">100</view>
-        <view class="zan-col zan-col-6 numberColor">0</view>
-        <view class="zan-col zan-col-6 numberColor">30.5%</view>
-      </view>
+      <repeat for="{{statistics}}" key="index" index="index" item="item">
+        <view class="zan-row zan-cell" @tap='_intoList()'>
+          <view class="zan-col zan-col-6">{{item.name}}</view>
+          <view class="zan-col zan-col-6 numberColor">{{item.record}}</view>
+          <view class="zan-col zan-col-6 numberColor">{{item.error}}</view>
+          <view class="zan-col zan-col-6 numberColor">{{item.correct}}</view>
+        </view>
+      </repeat>
     </view>
   </view>
 </template>
@@ -45,15 +41,36 @@
       gnbTextbookSelect: gnbTextbookSelect
     }
     data = {
-      current: 3
+      gradeId: '',
+      statistics: []
     }
-    computed = {}
     methods = {
       _intoList (val) {
         wx.navigateTo({
           url: `/pages/statistics/list?name=${val}`
         })
+      },
+      textbookChange (id) {
+        console.log(id)
       }
+    }
+    _getStatistics () {
+      let self = this
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://primary.guinaben.com/workbook/statistics',
+          data: {
+            grade: self.gradeId
+          },
+          success (res) { resolve(res) },
+          fail (err) { reject(err) }
+        })
+      })
+    }
+    async onLoad() {
+      this.gradeId = wepy.getStorageSync('User').grade - 3
+      this.statistics = await this._getStatistics()
+      this.$apply()
     }
   }
 </script>

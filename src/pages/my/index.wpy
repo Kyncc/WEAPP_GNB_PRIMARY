@@ -39,8 +39,8 @@
 
     data = {
       userInfo: {
-        name: '加载中...',
-        headImg: ''
+        name: '',
+        headImg: 'https://temp.im/160x160'
       }
     }
 
