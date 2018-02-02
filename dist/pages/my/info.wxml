@@ -16,9 +16,9 @@
   </view>
 
        
-  <picker style="margin-top: 0" class="zan-panel _13d05ce" bindchange="$gnbTextbookSelect$bindPickerChange" range="{{ $gnbTextbookSelect$textbookArray }}" value="{{ $gnbTextbookSelect$value }}" range-key="name">
+  <picker style="margin-top: 0" class="zan-panel _13d05ce" bindchange="$gnbTextbookSelect$bindPickerChange" range="{{ $gnbTextbookSelect$textbook }}" value="{{ $gnbTextbookSelect$value }}" range-key="name">
     <view class="picker zan-cell">
-      {{$gnbTextbookSelect$title}}:　{{$gnbTextbookSelect$textbookArray[$gnbTextbookSelect$value].name}}
+      {{$gnbTextbookSelect$title}}:　{{$gnbTextbookSelect$textbook[$gnbTextbookSelect$value].name}}
       <view class="zan-arrow"/>
     </view>
   </picker>

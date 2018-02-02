@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-    <gnbTextbookSelect :value.sync="current" @event.user="textbookChange"/>
+    <gnbTextbookSelect :value.sync="grade" :key.sync="textbook" @event.user="textbookChange" :textbook="textBookList"/>
     <view>
       <view class="zan-panel-title zan-font-bold zan-c-black" style="padding: 10px 15px 0 15px;">我的练习册</view>
       <view class="zan-panel">
@@ -27,15 +27,14 @@
         </view>
       </view>
     </view>
-    <navigator url='/pages/workbook/add'>
-      <view class="zan-font-14 zan-center" style='padding:10px 0;'>
-        <text class="zan-c-gray-darker">+添加习题册</text>
-      </view>
-    </navigator>
+    <!-- <navigator> -->
+    <view class="zan-font-14 zan-center" style='padding:10px 0;' @tap="_initAdd">
+      <text class="zan-c-gray-darker">+添加习题册</text>
+    </view>
+    <!-- </navigator> -->
     <view class="zan-panel">
       <navigator url='/pages/workbook/want'>想要练习册</navigator>
       <navigator url='/pages/workbook/chapter?name=第二页'>章节列表</navigator>
-      <navigator url='/pages/workbook/add'>添加习题册</navigator>
       <navigator url='/pages/workbook/error'>已错题目</navigator>
       <navigator url='/pages/workbook/exercise?name=第二章'>记错</navigator>
       <navigator url='/pages/workbook/noError'>无记错</navigator>
@@ -57,17 +56,47 @@ export default class Statistics extends wepy.page {
   }
 
   data = {
-    current: 3
+    textBookList: wepy.getStorageSync('User').textbook,
+    textbook: '',
+    grade: '',
+    workbookList: []
   }
 
   methods = {
+    /** 教材切换 */
     textbookChange (id) {
       console.log(id)
+    },
+    /** 增加习题册 */
+    _initAdd () {
+      wepy.navigateTo({
+        url: `/pages/workbook/add?id=${this.textbook}`
+      })
     }
   }
+  // 获取我的练习册
+  _getMyWorkbook (id) {
+    return new Promise((resolve, reject) => {
+      wepy.request({
+        url: 'https://wechat.guinaben.com/primary/workbook',
+        data: {
+          textbookId: id
+        },
+        success (res) {
+          resolve(res)
+        },
+        fail (err) {
+          reject(err)
+        }
+      })
+    })
+  }
 
-  onReady() {
-
+  async onLoad() {
+    this.grade = wepy.getStorageSync('User').grade - 3
+    this.textbook = this.textBookList[Number(this.grade)].id
+    this.workbookList = await this._getMyWorkbook(this.textbook)
+    this.$apply()
   }
 }
 </script>
