@@ -10,7 +10,7 @@
 
 <template>
   <view class="container">
-    <gnbTextbookSelect :value.sync="gradeId" @event.user="textbookChange"></gnbTextbookSelect>
+    <gnbTextbookSelect :value.sync="grade" :key.sync="textbook" @event.user="textbookChange" :textbook="textBookList"/>
     <view class="zan-panel">
       <view class="zan-row zan-cell">
         <view class="zan-col zan-col-6 zan-col-offset-6 zan-center">记错数</view>
@@ -41,7 +41,9 @@
       gnbTextbookSelect: gnbTextbookSelect
     }
     data = {
-      gradeId: '',
+      textBookList: wepy.getStorageSync('User').textbook,
+      textbook: '',
+      grade: '',
       statistics: []
     }
     methods = {
@@ -51,16 +53,15 @@
         })
       },
       textbookChange (id) {
-        console.log(id)
+        this._getStatistics(id)
       }
     }
-    _getStatistics () {
-      let self = this
+    _getStatistics (id) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://primary.guinaben.com/workbook/statistics',
+          url: 'https://wechat.guinaben.com/primary/workbook/statistics',
           data: {
-            grade: self.gradeId
+            textbookId: id
           },
           success (res) { resolve(res) },
           fail (err) { reject(err) }
@@ -68,8 +69,9 @@
       })
     }
     async onLoad() {
-      this.gradeId = wepy.getStorageSync('User').grade - 3
-      this.statistics = await this._getStatistics()
+      this.grade = wepy.getStorageSync('User').grade - 3
+      this.textbook = this.textBookList[Number(this.grade)].id
+      this.statistics = await this._getStatistics(this.textbook)
       this.$apply()
     }
   }

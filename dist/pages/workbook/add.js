@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _wepy = require('./../../npm/wepy/lib/wepy.js');
 
 var _wepy2 = _interopRequireDefault(_wepy);
@@ -32,8 +34,11 @@ var WorkbookAdd = function (_wepy$page) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WorkbookAdd.__proto__ || Object.getPrototypeOf(WorkbookAdd)).call.apply(_ref, [this].concat(args))), _this), _this.data = {
+      workbookList: [],
       inputShowed: false,
       inputVal: ''
+
+      // 获取我的练习册
     }, _this.methods = {
       showInput: function showInput() {
         this.inputShowed = true;
@@ -51,10 +56,32 @@ var WorkbookAdd = function (_wepy$page) {
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
+  _createClass(WorkbookAdd, [{
+    key: '_getMyWorkbook',
+    value: function _getMyWorkbook() {
+      var self = this;
+      return new Promise(function (resolve, reject) {
+        _wepy2.default.request({
+          url: 'https://wechat.guinaben.com/primary/workbook/all',
+          data: {
+            name: self.name,
+            textbookId: self.textbookId
+          },
+          success: function success(res) {
+            resolve(res);
+          },
+          fail: function fail(err) {
+            reject(err);
+          }
+        });
+      });
+    }
+  }]);
+
   return WorkbookAdd;
 }(_wepy2.default.page);
 
 
 Page(require('./../../npm/wepy/lib/wepy.js').default.$createPage(WorkbookAdd , 'pages/workbook/add'));
 
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFkZC5qcyJdLCJuYW1lcyI6WyJXb3JrYm9va0FkZCIsImRhdGEiLCJpbnB1dFNob3dlZCIsImlucHV0VmFsIiwibWV0aG9kcyIsInNob3dJbnB1dCIsImhpZGVJbnB1dCIsImNsZWFySW5wdXQiLCJpbnB1dFR5cGluZyIsImUiLCJkZXRhaWwiLCJ2YWx1ZSIsInBhZ2UiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFDQTs7Ozs7Ozs7Ozs7O0lBRXFCQSxXOzs7Ozs7Ozs7Ozs7OztnTUFDbkJDLEksR0FBTztBQUNMQyxtQkFBYSxLQURSO0FBRUxDLGdCQUFVO0FBRkwsSyxRQUtQQyxPLEdBQVU7QUFDUkMsZUFEUSx1QkFDSztBQUNYLGFBQUtILFdBQUwsR0FBbUIsSUFBbkI7QUFDRCxPQUhPO0FBSVJJLGVBSlEsdUJBSUs7QUFDWCxhQUFLSCxRQUFMLEdBQWdCLEVBQWhCO0FBQ0EsYUFBS0QsV0FBTCxHQUFtQixLQUFuQjtBQUNELE9BUE87QUFRUkssZ0JBUlEsd0JBUU07QUFDWixhQUFLSixRQUFMLEdBQWdCLEVBQWhCO0FBQ0QsT0FWTztBQVdSSyxpQkFYUSx1QkFXS0MsQ0FYTCxFQVdRO0FBQ2QsYUFBS04sUUFBTCxHQUFnQk0sRUFBRUMsTUFBRixDQUFTQyxLQUF6QjtBQUNEO0FBYk8sSzs7OztFQU42QixlQUFLQyxJOztrQkFBekJaLFciLCJmaWxlIjoiYWRkLmpzIiwic291cmNlc0NvbnRlbnQiOlsiXG5pbXBvcnQgd2VweSBmcm9tICd3ZXB5J1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBXb3JrYm9va0FkZCBleHRlbmRzIHdlcHkucGFnZSB7XG4gIGRhdGEgPSB7XG4gICAgaW5wdXRTaG93ZWQ6IGZhbHNlLFxuICAgIGlucHV0VmFsOiAnJ1xuICB9XG5cbiAgbWV0aG9kcyA9IHtcbiAgICBzaG93SW5wdXQgKCkge1xuICAgICAgdGhpcy5pbnB1dFNob3dlZCA9IHRydWVcbiAgICB9LFxuICAgIGhpZGVJbnB1dCAoKSB7XG4gICAgICB0aGlzLmlucHV0VmFsID0gJydcbiAgICAgIHRoaXMuaW5wdXRTaG93ZWQgPSBmYWxzZVxuICAgIH0sXG4gICAgY2xlYXJJbnB1dCAoKSB7XG4gICAgICB0aGlzLmlucHV0VmFsID0gJydcbiAgICB9LFxuICAgIGlucHV0VHlwaW5nIChlKSB7XG4gICAgICB0aGlzLmlucHV0VmFsID0gZS5kZXRhaWwudmFsdWVcbiAgICB9XG4gIH1cbn1cbiJdfQ==
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFkZC5qcyJdLCJuYW1lcyI6WyJXb3JrYm9va0FkZCIsImRhdGEiLCJ3b3JrYm9va0xpc3QiLCJpbnB1dFNob3dlZCIsImlucHV0VmFsIiwibWV0aG9kcyIsInNob3dJbnB1dCIsImhpZGVJbnB1dCIsImNsZWFySW5wdXQiLCJpbnB1dFR5cGluZyIsImUiLCJkZXRhaWwiLCJ2YWx1ZSIsInNlbGYiLCJQcm9taXNlIiwicmVzb2x2ZSIsInJlamVjdCIsInJlcXVlc3QiLCJ1cmwiLCJuYW1lIiwidGV4dGJvb2tJZCIsInN1Y2Nlc3MiLCJyZXMiLCJmYWlsIiwiZXJyIiwicGFnZSJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQ0E7Ozs7Ozs7Ozs7OztJQUVxQkEsVzs7Ozs7Ozs7Ozs7Ozs7Z01BQ25CQyxJLEdBQU87QUFDTEMsb0JBQWMsRUFEVDtBQUVMQyxtQkFBYSxLQUZSO0FBR0xDLGdCQUFVOztBQUdaO0FBTk8sSyxRQTBCUEMsTyxHQUFVO0FBQ1JDLGVBRFEsdUJBQ0s7QUFDWCxhQUFLSCxXQUFMLEdBQW1CLElBQW5CO0FBQ0QsT0FITztBQUlSSSxlQUpRLHVCQUlLO0FBQ1gsYUFBS0gsUUFBTCxHQUFnQixFQUFoQjtBQUNBLGFBQUtELFdBQUwsR0FBbUIsS0FBbkI7QUFDRCxPQVBPO0FBUVJLLGdCQVJRLHdCQVFNO0FBQ1osYUFBS0osUUFBTCxHQUFnQixFQUFoQjtBQUNELE9BVk87QUFXUkssaUJBWFEsdUJBV0tDLENBWEwsRUFXUTtBQUNkLGFBQUtOLFFBQUwsR0FBZ0JNLEVBQUVDLE1BQUYsQ0FBU0MsS0FBekI7QUFDRDtBQWJPLEs7Ozs7O3FDQW5CUTtBQUNoQixVQUFJQyxPQUFPLElBQVg7QUFDQSxhQUFPLElBQUlDLE9BQUosQ0FBWSxVQUFDQyxPQUFELEVBQVVDLE1BQVYsRUFBcUI7QUFDdEMsdUJBQUtDLE9BQUwsQ0FBYTtBQUNYQyxlQUFLLGtEQURNO0FBRVhqQixnQkFBTTtBQUNKa0Isa0JBQU1OLEtBQUtNLElBRFA7QUFFSkMsd0JBQVlQLEtBQUtPO0FBRmIsV0FGSztBQU1YQyxpQkFOVyxtQkFNRkMsR0FORSxFQU1HO0FBQ1pQLG9CQUFRTyxHQUFSO0FBQ0QsV0FSVTtBQVNYQyxjQVRXLGdCQVNMQyxHQVRLLEVBU0E7QUFDVFIsbUJBQU9RLEdBQVA7QUFDRDtBQVhVLFNBQWI7QUFhRCxPQWRNLENBQVA7QUFlRDs7OztFQXpCc0MsZUFBS0MsSTs7a0JBQXpCekIsVyIsImZpbGUiOiJhZGQuanMiLCJzb3VyY2VzQ29udGVudCI6WyJcbmltcG9ydCB3ZXB5IGZyb20gJ3dlcHknXG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIFdvcmtib29rQWRkIGV4dGVuZHMgd2VweS5wYWdlIHtcbiAgZGF0YSA9IHtcbiAgICB3b3JrYm9va0xpc3Q6IFtdLFxuICAgIGlucHV0U2hvd2VkOiBmYWxzZSxcbiAgICBpbnB1dFZhbDogJydcbiAgfVxuXG4gIC8vIOiOt+WPluaIkeeahOe7g+S5oOWGjFxuICBfZ2V0TXlXb3JrYm9vayAoKSB7XG4gICAgbGV0IHNlbGYgPSB0aGlzXG4gICAgcmV0dXJuIG5ldyBQcm9taXNlKChyZXNvbHZlLCByZWplY3QpID0+IHtcbiAgICAgIHdlcHkucmVxdWVzdCh7XG4gICAgICAgIHVybDogJ2h0dHBzOi8vd2VjaGF0Lmd1aW5hYmVuLmNvbS9wcmltYXJ5L3dvcmtib29rL2FsbCcsXG4gICAgICAgIGRhdGE6IHtcbiAgICAgICAgICBuYW1lOiBzZWxmLm5hbWUsXG4gICAgICAgICAgdGV4dGJvb2tJZDogc2VsZi50ZXh0Ym9va0lkXG4gICAgICAgIH0sXG4gICAgICAgIHN1Y2Nlc3MgKHJlcykge1xuICAgICAgICAgIHJlc29sdmUocmVzKVxuICAgICAgICB9LFxuICAgICAgICBmYWlsIChlcnIpIHtcbiAgICAgICAgICByZWplY3QoZXJyKVxuICAgICAgICB9XG4gICAgICB9KVxuICAgIH0pXG4gIH1cblxuICBtZXRob2RzID0ge1xuICAgIHNob3dJbnB1dCAoKSB7XG4gICAgICB0aGlzLmlucHV0U2hvd2VkID0gdHJ1ZVxuICAgIH0sXG4gICAgaGlkZUlucHV0ICgpIHtcbiAgICAgIHRoaXMuaW5wdXRWYWwgPSAnJ1xuICAgICAgdGhpcy5pbnB1dFNob3dlZCA9IGZhbHNlXG4gICAgfSxcbiAgICBjbGVhcklucHV0ICgpIHtcbiAgICAgIHRoaXMuaW5wdXRWYWwgPSAnJ1xuICAgIH0sXG4gICAgaW5wdXRUeXBpbmcgKGUpIHtcbiAgICAgIHRoaXMuaW5wdXRWYWwgPSBlLmRldGFpbC52YWx1ZVxuICAgIH1cbiAgfVxufVxuIl19

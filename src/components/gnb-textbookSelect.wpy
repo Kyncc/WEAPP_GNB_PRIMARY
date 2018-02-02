@@ -33,7 +33,7 @@ export default class gnbWookbookSelect extends wepy.component {
     bindPickerChange (e) {
       this.value = e.detail.value
       this.key = this.textbook[e.detail.value].id
-      this.$emit('event', this.id)
+      this.$emit('event', this.key)
       this.$apply()
     }
   }

@@ -1,28 +1,28 @@
 <style>
 .searchbar-result{
-    margin-top: 0;
-    font-size: 14px;
+  margin-top: 0;
+  font-size: 14px;
 }
 .searchbar-result:before{
-    display: none;
+  display: none;
 }
 .weui-search-bar {
-    position: relative;
-    padding: 8px 10px;
-    display: flex;
-    box-sizing: border-box;
-    background-color: #EFEFF4;
-    border-top: 1rpx solid #D7D6DC;
-    border-bottom: 1rpx solid #D7D6DC;
+  position: relative;
+  padding: 8px 10px;
+  display: flex;
+  box-sizing: border-box;
+  background-color: #EFEFF4;
+  border-top: 1rpx solid #D7D6DC;
+  border-bottom: 1rpx solid #D7D6DC;
 }
 .weui-icon-search {
-    margin-right: 8px;
-    font-size:inherit;
+  margin-right: 8px;
+  font-size:inherit;
 }
 .weui-icon-search_in-box {
-    position: absolute;
-    left: 10px;
-    top: 7px;
+  position: absolute;
+  left: 10px;
+  top: 7px;
 }
 .weui-search-bar__text{
     display: inline-block;
@@ -108,8 +108,29 @@ import wepy from 'wepy'
 
 export default class WorkbookAdd extends wepy.page {
   data = {
+    workbookList: [],
     inputShowed: false,
     inputVal: ''
+  }
+
+  // 获取我的练习册
+  _getMyWorkbook () {
+    let self = this
+    return new Promise((resolve, reject) => {
+      wepy.request({
+        url: 'https://wechat.guinaben.com/primary/workbook/all',
+        data: {
+          name: self.name,
+          textbookId: self.textbookId
+        },
+        success (res) {
+          resolve(res)
+        },
+        fail (err) {
+          reject(err)
+        }
+      })
+    })
   }
 
   methods = {
