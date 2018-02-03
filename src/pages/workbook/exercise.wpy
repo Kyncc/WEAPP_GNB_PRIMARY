@@ -1,9 +1,9 @@
 <style lang="less" scoped>
-.service_selection {
+.flex {
   display: flex;
   flex-wrap: wrap;
 }
-.service_selection label {
+.btn_exercise{
   background: #EDF9F8;
   color: #3fc6c6;
   height: 90rpx;
@@ -12,9 +12,10 @@
   line-height: 90rpx;
   display: inline-block;
   border-radius: 50%;
+  border: none;
   margin:15rpx 0 15rpx 20rpx;
 }
-.service_selection .is_checked {
+.is_checked {
   color: #fff;
   background: #FF7043;
 }
@@ -27,28 +28,20 @@
 
 <template>
   <view class="container">
-     <zanNoticebar1 :text="longText" componentId="static1" ></zanNoticebar1>
-     <view class="zan-panel" style='margin-top: 5rpx;'>
-        <block>
-          <view class="zan-panel-title zan-font-bold zan-c-black">基础巩固训练</view>
-          <view class="zan-cell">
-            <checkbox-group bindchange="serviceValChange()">
-              <view class="service_selection">
-                <block wx:for="{{allGoodsFilte}}" wx:key="{{item.value}}">
-                  <view class="item">
-                    <label class="checkbox {{item.checked? 'is_checked' : ''}} zan-font-16 ">
-                      <checkbox value="{{item.value}}" checked="{{item.checked}}" hidden="false" />{{item.name}}
-                    </label>
-                  </view>
-                </block>
-              </view>
-            </checkbox-group>
-          </view>
-        </block>
-      </view>
-      <view class="zan-row footer">
-        <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" @tap='_upload'>记完了</button>
-      </view>
+    <zanNoticebar1 :text="longText" componentId="static1" ></zanNoticebar1>
+    <view class="zan-panel" style='margin-top: 5rpx;'>
+      <repeat for="{{ exercise.nodes }}" key="pindex" index="pindex" item="nodes">
+        <view class="zan-panel-title zan-font-bold zan-c-black">{{ nodes.name }}</view>
+        <view class="zan-cell flex">
+          <repeat for="{{ nodes.questions }}" key="index" index="index" item="questions">
+            <button class="zan-btn btn_exercise {{questions.answer ? '' : 'is_checked'}}" @tap="_change({{pindex}}, {{index}})">{{ questions.name }}</button>
+          </repeat>
+        </view>
+      </repeat>
+    </view>
+    <view class="zan-row footer">
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" @tap='_upload'>记完了</button>
+    </view>
   </view>
 </template>
 
@@ -63,48 +56,43 @@ export default class WorkbookExercise extends wepy.page {
 
   data = {
     longText: '点错题题号完成记错，提交作业查看我的错题',
-    allGoodsFilte: [
-      { name: '1', value: '0', checked: true },
-      { name: '2', value: '1', checked: false },
-      { name: '3', value: '2', checked: false },
-      { name: '4', value: '3', checked: false },
-      { name: '5', value: '4', checked: false },
-      { name: '6', value: '5', checked: true },
-      { name: '7', value: '6', checked: false },
-      { name: '8', value: '7', checked: false },
-      { name: '9', value: '8', checked: false },
-      { name: '10', value: '9', checked: false },
-      { name: '11', value: '10', checked: true },
-      { name: '12', value: '11', checked: false },
-      { name: '13', value: '12', checked: false },
-      { name: '14', value: '13', checked: false },
-      { name: '15', value: '14', checked: false }
-    ]
+    exercise: []
   }
 
   methods = {
     _upload () {
       console.log(2)
+    },
+    /** 记错的切换 */
+    _change (pindex, index) {
+      let answer = this.exercise.nodes[pindex]['questions'][index]['answer']
+      this.exercise.nodes[pindex]['questions'][index]['answer'] = !answer
+      this.$apply()
     }
-  }
-  onLoad(options) {
-    wx.setNavigationBarTitle({ title: options.name })
   }
 
-  serviceValChange(e) {
-    var allGoodsFilte = this.data.allGoodsFilte
-    var checkArr = e.detail.name
-    for (var i = 0; i < allGoodsFilte.length; i++) {
-      if (checkArr.indexOf(i + '') !== -1) {
-        allGoodsFilte[i].checked = true
-      } else {
-        allGoodsFilte[i].checked = false
-      }
-    }
-    this.setData({
-      allGoodsFilte: allGoodsFilte
+  // 获取章节习题
+  _getExercise (id) {
+    return new Promise((resolve, reject) => {
+      wepy.request({
+        url: 'https://wechat.guinaben.com/primary/workbook/chapter/exercise',
+        data: {
+          chapterId: id
+        },
+        success (res) {
+          resolve(res)
+        },
+        fail (err) {
+          reject(err)
+        }
+      })
     })
-    console.log(allGoodsFilte)
+  }
+
+  async onLoad(options) {
+    wx.setNavigationBarTitle({ title: options.name })
+    this.exercise = await this._getExercise(options.id)
+    this.$apply()
   }
 
   onReady() {

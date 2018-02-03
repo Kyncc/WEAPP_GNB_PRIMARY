@@ -1,6 +1,6 @@
 
   <view class="container _db208f5">
-     
+    
   <view class="zan-noticebar _db208f5">
     <view id="{{ $zanNoticebar1$componentId }}__content-wrap" style="height: 18px; overflow: hidden; position: relative;">
       <view animation="{{ $zanNoticebar1$animationData }}" id="{{ $zanNoticebar1$componentId }}__content" style="position: absolute; white-space: nowrap;">
@@ -9,25 +9,17 @@
     </view>
   </view>
 
-     <view class="zan-panel _db208f5" style="margin-top: 5rpx;">
-        <block class="_db208f5">
-          <view class="zan-panel-title zan-font-bold zan-c-black _db208f5">基础巩固训练</view>
-          <view class="zan-cell _db208f5">
-            <checkbox-group bindchange="serviceValChange" class="_db208f5" data-wpyservicevalchange-a="">
-              <view class="service_selection _db208f5">
-                <block  wx:for="{{allGoodsFilte}}" wx:key="{{item.value}}" class="_db208f5">
-                  <view class="item _db208f5">
-                    <label class="checkbox {{item.checked? 'is_checked' : ''}} zan-font-16  _db208f5">
-                      <checkbox value="{{item.value}}" checked="{{item.checked}}" hidden="false" class="_db208f5"/>{{item.name}}
-                    </label>
-                  </view>
-                </block>
-              </view>
-            </checkbox-group>
-          </view>
-        </block>
-      </view>
-      <view class="zan-row footer _db208f5">
-        <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary _db208f5" bindtap="_upload">记完了</button>
-      </view>
+    <view class="zan-panel _db208f5" style="margin-top: 5rpx;">
+      <block class="_db208f5" wx:for="{{ exercise.nodes }}" wx:for-index="pindex" wx:for-item="nodes" wx:key="pindex">
+        <view class="zan-panel-title zan-font-bold zan-c-black _db208f5">{{ nodes.name }}</view>
+        <view class="zan-cell flex _db208f5">
+          <block class="_db208f5" wx:for="{{ nodes.questions }}" wx:for-index="index" wx:for-item="questions" wx:key="index">
+            <button class="zan-btn btn_exercise {{questions.answer ? '' : 'is_checked'}} _db208f5" bindtap="_change" data-wpy_change-a="{{pindex}}" data-wpy_change-b="{{index}}">{{ questions.name }}</button>
+          </block>
+        </view>
+      </block>
+    </view>
+    <view class="zan-row footer _db208f5">
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary _db208f5" bindtap="_upload">记完了</button>
+    </view>
   </view>

@@ -1,0 +1,5 @@
+
+  <view class="container _2e472de">
+    <image src="../../common/resources/chapterExerciseCorrect.jpg" mode="aspectFit" class="_2e472de"/>
+    {{content}}
+  </view>

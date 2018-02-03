@@ -27,7 +27,6 @@
 
   export default class WorkbookChapter extends wepy.page {
     data = {
-      toView: 'id2',
       chapter: []
     }
 
@@ -56,7 +55,7 @@
             workbookId: id
           },
           success (res) {
-            resolve(res[0].a)
+            resolve(res.a)
           },
           fail (err) {
             reject(err)

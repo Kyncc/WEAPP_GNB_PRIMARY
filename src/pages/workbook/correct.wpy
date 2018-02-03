@@ -1,0 +1,27 @@
+<style lang="less" scoped>
+</style>
+
+<template>
+  <view class="container">
+    <image src="../../common/resources/chapterExerciseCorrect.jpg" mode="aspectFit" ></image>
+    {{content}}
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class WorkbookCorrect extends wepy.page {
+    config = {
+      navigationBarTitleText: ''
+    }
+
+    data = {
+      content: '111'
+    }
+
+    onLoad(options) {
+      wx.setNavigationBarTitle({title: options.name})
+    }
+  }
+</script>
