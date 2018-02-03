@@ -16,9 +16,40 @@
       </view>
       <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
     </view>
-    <view class="weui-cells searchbar-result"  wx:if="{{inputVal.length > 0}}">
+    <!-- <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
       <view class="weui-cell__bd">
         <view>实时搜索文本</view>
       </view>
+    </view> -->
+    <!--练习册列表 -->
+    <view class="zan-panel">
+      <block wx:for="{{ workbookList }}" wx:for-index="index" wx:for-item="item" wx:key="index">
+        <view class="zan-card">
+          <view class="zan-card__thumb">
+            <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/225/h/360/format/jpg/q/75" mode="aspectFit" lazy-load="true">
+            </image>
+          </view>
+          <view class="zan-card__detail">
+            <view class="zan-row">
+              <view class="zan-col-18" style="display: inline-block;float: left">
+                <view class="zan-card__detail-row">
+                  <view class="zan-card__left-col zan-c-gray-darker">{{item.year}}版</view>
+                </view>
+                <view class="zan-card__detail-row zan-c-black zan-font-20">
+                  <view class="zan-card__left-col" style="margin-bottom: 5px;">{{item.name}}</view>
+                </view>
+                <block wx:for="{{item.version}}" wx:for-index="index" wx:for-item="version" wx:key="index">
+                  <view class="zan-card__detail-row zan-c-gray zan-font-12">
+                    <view class="zan-card__left-col">{{version}}</view>
+                  </view>
+                </block>
+              </view>
+              <view class="zan-col-6" style="display: inline-block;float: left">
+                <button class="zan-btn" bindtap="_addWorkbook" data-wpy_addworkbook-a="{{item.id}}">添加</button>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
     </view>
-    </view>
+  </view>

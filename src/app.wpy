@@ -22,6 +22,14 @@
     border-color:#3fc6c6;
   }
 }
+.zan-card__thumb {
+	width: 75px;
+  height: 120px;
+}
+.zan-card__detail {
+	margin-left: 90px;
+  margin-top: 15px;
+}
 </style>
 <script>
 import wepy from 'wepy'

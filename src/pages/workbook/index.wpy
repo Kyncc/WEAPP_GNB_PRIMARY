@@ -28,14 +28,14 @@
       </view>
     </view>
     <!-- <navigator> -->
-    <view class="zan-font-14 zan-center" style='padding:10px 0;' @tap="_initAdd">
+    <view class="zan-font-14 zan-center" style='padding:10px 0;' @tap="_initAdd()">
       <text class="zan-c-gray-darker">+添加习题册</text>
     </view>
     <!-- </navigator> -->
     <view class="zan-panel">
       <navigator url='/pages/workbook/want'>想要练习册</navigator>
-      <navigator url='/pages/workbook/chapter?name=第二页'>章节列表</navigator>
-      <navigator url='/pages/workbook/error'>已错题目</navigator>
+      <navigator url='/pages/workbook/chapter?name=第二页&id=1025'>章节列表</navigator>
+      <navigator url='/pages/workbook/error?name=第二页&id=9abbc1e5b11949c2a025f4cb852705c0'>已错题目</navigator>
       <navigator url='/pages/workbook/exercise?name=第二章'>记错</navigator>
       <navigator url='/pages/workbook/noError'>无记错</navigator>
     </view>

@@ -1,27 +1,22 @@
 
-  <view class="container _5ee1e18">
-    <scroll-view scroll-y="true" style="height: 100%" scroll-into-view="{{toView}}" scroll-with-animation="true" enable-back-to-top="true" class="_5ee1e18">
-      <view class="zan-panel _5ee1e18">
-        <view class="zan-panel-title zan-font-bold zan-c-black _5ee1e18">第二章</view>
-        <view class="zan-cell _5ee1e18"><view class="zan-cell__bd _5ee1e18">第一页</view></view>
-        <view class="zan-cell _5ee1e18"><view class="zan-cell__bd _5ee1e18">第二页</view></view>
-        <view class="zan-cell _5ee1e18"><view class="zan-cell__bd _5ee1e18">第三页</view></view>
-        <view class="zan-cell _5ee1e18" id="id2"><view class="zan-cell__bd zan-c-gray-dark _5ee1e18">第三页</view></view>
-        <view class="zan-cell _5ee1e18"><view class="zan-cell__bd zan-c-gray-dark _5ee1e18">第三页</view></view>
-        <view class="zan-cell _5ee1e18"><view class="zan-cell__bd zan-c-gray-dark _5ee1e18">第三页</view></view>
-        <view class="zan-cell _5ee1e18"><view class="zan-cell__bd zan-c-gray-dark _5ee1e18">第三页</view></view>
-        <view class="zan-cell _5ee1e18"><view class="zan-cell__bd zan-c-gray-dark _5ee1e18">第三页</view></view>
-      </view>
-      <view class="zan-panel _5ee1e18">
-        <view class="zan-panel-title zan-font-bold zan-c-black _5ee1e18">第二章</view>
-        <view class="zan-cell _5ee1e18"><view class="zan-cell__bd _5ee1e18">第一页</view></view>
-        <view class="zan-cell _5ee1e18"><view class="zan-cell__bd _5ee1e18">第二页</view></view>
-        <view class="zan-cell _5ee1e18"><view class="zan-cell__bd _5ee1e18">第三页</view></view>
-        <view class="zan-cell _5ee1e18"><view class="zan-cell__bd zan-c-gray-dark _5ee1e18">第三页</view></view>
-        <view class="zan-cell _5ee1e18"><view class="zan-cell__bd zan-c-gray-dark _5ee1e18">第三页</view></view>
-        <view class="zan-cell _5ee1e18"><view class="zan-cell__bd zan-c-gray-dark _5ee1e18">第三页</view></view>
-        <view class="zan-cell _5ee1e18"><view class="zan-cell__bd zan-c-gray-dark _5ee1e18">第三页</view></view>
-        <view class="zan-cell _5ee1e18"><view class="zan-cell__bd zan-c-gray-dark _5ee1e18">第三页</view></view>
-      </view>
+  <view class="container">
+    <scroll-view scroll-y="true" style="height: 100%" scroll-with-animation="true" enable-back-to-top="true">
+      <block wx:for="{{ chapter }}" wx:for-index="index" wx:for-item="item" wx:key="index">
+        <view class="zan-panel">
+          <block  wx:if="{{ !item.isLink }}">
+            <view class="zan-panel-title zan-font-bold zan-c-black">{{ item.name }}</view>
+          </block>
+          <block  wx:else>
+            <view class="zan-cell {{ item.used ? 'zan-c-black' : 'zan-c-gray-dark' }}" bindtap="_intoExercise" data-wpy_intoexercise-a="{{ item }}">
+              <view class="zan-cell__bd">{{item.name}}</view>
+            </view>
+          </block>
+          <block wx:for="{{ item.b }}" wx:for-index="index" wx:for-item="itemB" wx:key="index">
+            <view class="zan-cell {{ itemB.used ? 'zan-c-black' : 'zan-c-gray-dark' }}" bindtap="_intoExercise" data-wpy_intoexercise-a="{{itemB}}">
+              <view class="zan-cell__bd">{{itemB.name}}</view>
+            </view>
+          </block>
+        </view>
+      </block>
     </scroll-view>
   </view>

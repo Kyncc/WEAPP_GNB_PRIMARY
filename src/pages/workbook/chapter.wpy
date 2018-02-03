@@ -1,31 +1,23 @@
-<style lang="less" scoped>
-</style>
-
 <template>
   <view class="container">
-    <scroll-view scroll-y="true" style="height: 100%" scroll-into-view="{{toView}}" scroll-with-animation="true" enable-back-to-top="true">
-      <view class="zan-panel">
-        <view class="zan-panel-title zan-font-bold zan-c-black">第二章</view>
-        <view class="zan-cell"><view class="zan-cell__bd">第一页</view></view>
-        <view class="zan-cell"><view class="zan-cell__bd">第二页</view></view>
-        <view class="zan-cell"><view class="zan-cell__bd">第三页</view></view>
-        <view class="zan-cell" id="id2"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
-        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
-        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
-        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
-        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
-      </view>
-      <view class="zan-panel">
-        <view class="zan-panel-title zan-font-bold zan-c-black">第二章</view>
-        <view class="zan-cell"><view class="zan-cell__bd">第一页</view></view>
-        <view class="zan-cell"><view class="zan-cell__bd">第二页</view></view>
-        <view class="zan-cell"><view class="zan-cell__bd">第三页</view></view>
-        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
-        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
-        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
-        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
-        <view class="zan-cell"><view class="zan-cell__bd zan-c-gray-dark">第三页</view></view>
-      </view>
+    <scroll-view scroll-y="true" style="height: 100%" scroll-with-animation="true" enable-back-to-top="true">
+      <repeat for="{{ chapter }}" key="index" index="index" item="item">
+        <view class="zan-panel">
+          <block wx:if= "{{ !item.isLink }}">
+            <view class="zan-panel-title zan-font-bold zan-c-black">{{ item.name }}</view>
+          </block>
+          <block wx:else>
+            <view class="zan-cell {{ item.used ? 'zan-c-black' : 'zan-c-gray-dark' }}" @tap="_intoExercise({{ item }})">
+              <view class="zan-cell__bd">{{item.name}}</view>
+            </view>
+          </block>
+          <repeat for="{{ item.b }}" key="index" index="index" item="itemB">
+            <view class="zan-cell {{ itemB.used ? 'zan-c-black' : 'zan-c-gray-dark' }}" @tap="_intoExercise({{itemB}})">
+              <view class="zan-cell__bd">{{itemB.name}}</view>
+            </view>
+          </repeat>
+        </view>
+      </repeat>
     </scroll-view>
   </view>
 </template>
@@ -34,32 +26,49 @@
   import wepy from 'wepy'
 
   export default class WorkbookChapter extends wepy.page {
-    components = {
-
-    }
-
     data = {
-      toView: 'id2'
-    }
-
-    computed = {
-
+      toView: 'id2',
+      chapter: []
     }
 
     methods = {
-
+      /**
+       * 1. isUsed 为false 未记错进入章节记错页面
+       * 2. isUsed 为true  isAllCorrect 进入全对页面 否则 进入记错题页面
+       */
+      _intoExercise(item) {
+        if (item.isUsed) {
+          item.isAllCorrect
+            ? wepy.navigateTo({url: `/pages/workbook/correct?id=${item.id}&name=${item.name}`})
+            : wepy.navigateTo({url: `/pages/workbook/error?id=${item.id}&name=${item.name}`})
+        } else {
+          wepy.navigateTo({url: `/pages/workbook/exercise?id=${item.id}&name=${item.name}`})
+        }
+      }
     }
 
-    onLoad(options) {
+    // 获取章节数据
+    _getChapter (id) {
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://wechat.guinaben.com/primary/workbook/chapter',
+          data: {
+            workbookId: id
+          },
+          success (res) {
+            resolve(res[0].a)
+          },
+          fail (err) {
+            reject(err)
+          }
+        })
+      })
+    }
+
+    async onLoad(options) {
       wx.setNavigationBarTitle({title: options.name})
-    }
-
-    events = {
-
-    }
-
-    onReady() {
-
+      this.chapter = await this._getChapter(options.id)
+      this.$apply()
     }
   }
 </script>

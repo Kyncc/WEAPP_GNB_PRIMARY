@@ -94,11 +94,42 @@
       </view>
       <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
     </view>
-    <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+    <!-- <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
       <view class="weui-cell__bd">
         <view>实时搜索文本</view>
       </view>
-    </view>
+    </view> -->
+    <!--练习册列表 -->
+    <view class="zan-panel">
+      <repeat for="{{ workbookList }}" key="index" index="index" item="item">
+        <view class="zan-card">
+          <view class="zan-card__thumb">
+            <image class="zan-card__img"
+              src="{{ item.img.url }}?imageView2/2/w/225/h/360/format/jpg/q/75" mode="aspectFit" lazy-load='true'>
+            </image>
+          </view>
+          <view class="zan-card__detail">
+            <view class="zan-row">
+              <view class="zan-col-18" style="display: inline-block;float: left">
+                <view class="zan-card__detail-row">
+                  <view class="zan-card__left-col zan-c-gray-darker">{{item.year}}版</view>
+                </view>
+                <view class="zan-card__detail-row zan-c-black zan-font-20">
+                  <view class="zan-card__left-col" style="margin-bottom: 5px;">{{item.name}}</view>
+                </view>
+                <repeat for="{{item.version}}" key="index" index="index" item="version">
+                  <view class="zan-card__detail-row zan-c-gray zan-font-12">
+                    <view class="zan-card__left-col">{{version}}</view>
+                  </view>
+                </repeat>
+              </view>
+              <view class="zan-col-6" style="display: inline-block;float: left">
+                <button class="zan-btn" @tap="_addWorkbook({{item.id}})">添加</button>
+              </view>
+            </view>
+          </view>
+        </view>
+      </repeat>
     </view>
   </view>
 </template>
@@ -110,18 +141,19 @@ export default class WorkbookAdd extends wepy.page {
   data = {
     workbookList: [],
     inputShowed: false,
-    inputVal: ''
+    inputVal: '',
+    textbookId: ''
   }
 
-  // 获取我的练习册
-  _getMyWorkbook () {
+  // 添加我的练习册
+  _getAllWorkbook (id) {
     let self = this
     return new Promise((resolve, reject) => {
       wepy.request({
         url: 'https://wechat.guinaben.com/primary/workbook/all',
         data: {
-          name: self.name,
-          textbookId: self.textbookId
+          name: self.inputVal,
+          textbookId: id
         },
         success (res) {
           resolve(res)
@@ -144,9 +176,17 @@ export default class WorkbookAdd extends wepy.page {
     clearInput () {
       this.inputVal = ''
     },
-    inputTyping (e) {
+    async inputTyping (e) {
       this.inputVal = e.detail.value
+      this.workbookList = await this._getAllWorkbook(this.textbookId)
+      // this.$apply()
     }
+  }
+
+  async onLoad (options) {
+    this.textbookId = options.id
+    this.workbookList = await this._getAllWorkbook(this.textbookId)
+    this.$apply()
   }
 }
 </script>

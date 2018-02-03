@@ -15,7 +15,7 @@
         <view class="zan-col zan-col-6 zan-center _edf42e2">正确数</view>
       </view>
       <block class="_edf42e2" wx:for="{{statistics}}" wx:for-index="index" wx:for-item="item" wx:key="index">
-        <view class="zan-row zan-cell _edf42e2" bindtap="_intoList" data-wpy_intolist-a="">
+        <view class="zan-row zan-cell _edf42e2" bindtap="_intoList" data-wpy_intolist-a="{{item}}">
           <view class="zan-col zan-col-6 _edf42e2">{{item.name}}</view>
           <view class="zan-col zan-col-6 numberColor _edf42e2">{{item.record}}</view>
           <view class="zan-col zan-col-6 numberColor _edf42e2">{{item.error}}</view>

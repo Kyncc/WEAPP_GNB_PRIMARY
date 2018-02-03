@@ -45,9 +45,5 @@ export default class StatisticsList extends wepy.page {
   onLoad(options) {
     wx.setNavigationBarTitle({title: options.name})
   }
-
-  onReady() {
-
-  }
 }
 </script>
