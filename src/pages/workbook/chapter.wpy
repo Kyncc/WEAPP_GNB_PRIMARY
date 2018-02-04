@@ -33,6 +33,7 @@
 
     methods = {
       /**
+       * 进入章节页
        * 1. isUsed 为false 未记错进入章节记错页面
        * 2. isUsed 为true  isAllCorrect 进入全对页面 否则 进入记错题页面
        */

@@ -103,6 +103,7 @@ export default class extends wepy.app {
         return params
       },
       success(res) {
+        console.log(res)
         let statusCode = res.statusCode.toString()
         if (statusCode === '200') {
           return res.data.data
@@ -126,7 +127,7 @@ export default class extends wepy.app {
     wx.onNetworkStatusChange((res) => {
       if (!res.isConnected) {
         wepy.showToast({
-          title: '网络错误',
+          title: '请检查网络连接',
           icon: 'none'
         })
       }

@@ -13,8 +13,7 @@
       <view class="zan-panel">
         <view class="zan-card">
           <view class="zan-card__thumb">
-            <image class="zan-card__img" src="http://img.guinaben.com/want1.jpg?imageView2/2/w/270/h/480/format/jpg/q/75" mode="aspectFit" lazy-load="true">
-            </image>
+            <image class="zan-card__img" src="http://img.guinaben.com/want1.jpg?imageView2/2/w/270/h/480/format/jpg/q/75" mode="aspectFit" lazy-load="true"/>
           </view>
           <view class="zan-card__detail">
             <view class="zan-card__detail-row">
@@ -41,6 +40,5 @@
     <view class="zan-panel">
       <navigator url="/pages/workbook/want">想要练习册</navigator>
       <navigator url="/pages/workbook/chapter?name=第二页&id=1025">章节列表</navigator>
-      <navigator url="/pages/workbook/error?name=第二页&id=9abbc1e5b11949c2a025f4cb852705c0">已错题目</navigator>
     </view>
   </view>

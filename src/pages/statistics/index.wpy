@@ -69,9 +69,14 @@
         })
       })
     }
-    async onLoad() {
+
+    onLoad() {
       this.grade = wepy.getStorageSync('User').grade - 3
       this.textbook = this.textBookList[Number(this.grade)].id
+      this.$apply()
+    }
+
+    async onShow() {
       this.statistics = await this._getStatistics(this.textbook)
       this.$apply()
     }
