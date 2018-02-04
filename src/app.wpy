@@ -115,7 +115,7 @@ export default class extends wepy.app {
       fail(error) {
         wepy.showToast({
           title: '网络错误',
-          image: 'http://img.guinaben.com/xcx_error.png'
+          icon: 'none'
         })
         return Promise.reject(error)
       },
@@ -127,7 +127,7 @@ export default class extends wepy.app {
       if (!res.isConnected) {
         wepy.showToast({
           title: '网络错误',
-          image: 'http://img.guinaben.com/xcx_error.png'
+          icon: 'none'
         })
       }
     })

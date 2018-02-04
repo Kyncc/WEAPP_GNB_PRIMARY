@@ -7,12 +7,12 @@
             <view class="zan-panel-title zan-font-bold zan-c-black">{{ item.name }}</view>
           </block>
           <block wx:else>
-            <view class="zan-cell {{ item.used ? 'zan-c-black' : 'zan-c-gray-dark' }}" @tap="_intoExercise({{ item }})">
+            <view class="zan-cell {{ item.isUsed ? 'zan-c-black' : 'zan-c-gray-dark' }}" @tap="_intoExercise({{ item }})">
               <view class="zan-cell__bd">{{item.name}}</view>
             </view>
           </block>
           <repeat for="{{ item.b }}" key="index" index="index" item="itemB">
-            <view class="zan-cell {{ itemB.used ? 'zan-c-black' : 'zan-c-gray-dark' }}" @tap="_intoExercise({{itemB}})">
+            <view class="zan-cell {{ itemB.isUsed ? 'zan-c-black' : 'zan-c-gray-dark' }}" @tap="_intoExercise({{itemB}})">
               <view class="zan-cell__bd">{{itemB.name}}</view>
             </view>
           </repeat>
@@ -27,7 +27,8 @@
 
   export default class WorkbookChapter extends wepy.page {
     data = {
-      chapter: []
+      chapter: [],
+      id: ''
     }
 
     methods = {
@@ -50,7 +51,7 @@
     _getChapter (id) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://wechat.guinaben.com/primary/workbook/chapter',
+          url: 'https://primary.guinaben.com/workbook/chapter',
           data: {
             workbookId: id
           },
@@ -66,7 +67,12 @@
 
     async onLoad(options) {
       wx.setNavigationBarTitle({title: options.name})
-      this.chapter = await this._getChapter(options.id)
+      this.id = options.id
+      this.$apply()
+    }
+
+    async onShow () {
+      this.chapter = await this._getChapter(this.id)
       this.$apply()
     }
   }

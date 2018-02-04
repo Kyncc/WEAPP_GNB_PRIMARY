@@ -28,6 +28,7 @@
 
 <template>
   <view class="container">
+    <toast id="toast"></toast>
     <zanNoticebar1 :text="longText" componentId="static1" ></zanNoticebar1>
     <view class="zan-panel" style='margin-top: 5rpx;'>
       <repeat for="{{ exercise.nodes }}" key="pindex" index="pindex" item="nodes">
@@ -47,21 +48,33 @@
 
 <script>
 import wepy from 'wepy'
+import Toast from 'wepy-com-toast'
 import zanNoticebar from '@/components/zan-noticebar'
 
 export default class WorkbookExercise extends wepy.page {
   components = {
-    zanNoticebar1: zanNoticebar
+    zanNoticebar1: zanNoticebar,
+    toast: Toast
   }
 
   data = {
     longText: '点错题题号完成记错，提交作业查看我的错题',
+    charpterId: '',
     exercise: []
   }
 
   methods = {
+    /** 上传错题 */
     _upload () {
-      console.log(2)
+      let answerId = []
+      let answer = []
+      for (let nodes of this.exercise.nodes) {
+        for (let questions of nodes.questions) {
+          answerId.push(questions.id)
+          answer.push(questions.answer)
+        }
+      }
+      this._setExerciseResult(answerId, answer, this.charpterId)
     },
     /** 记错的切换 */
     _change (pindex, index) {
@@ -75,7 +88,7 @@ export default class WorkbookExercise extends wepy.page {
   _getExercise (id) {
     return new Promise((resolve, reject) => {
       wepy.request({
-        url: 'https://wechat.guinaben.com/primary/workbook/chapter/exercise',
+        url: 'https://primary.guinaben.com/workbook/chapter/exercise',
         data: {
           chapterId: id
         },
@@ -89,8 +102,35 @@ export default class WorkbookExercise extends wepy.page {
     })
   }
 
+  // 获取章节习题
+  _setExerciseResult (ids, answers, chapterId) {
+    wepy.showLoading()
+    return new Promise((resolve, reject) => {
+      wepy.request({
+        url: 'https://primary.guinaben.com/workbook/chapter/setExercise',
+        method: 'POST',
+        data: {
+          chapterId: chapterId,
+          answer: answers,
+          answerId: ids
+        },
+        success (res) {
+          wepy.navigateBack()
+          resolve(res)
+        },
+        fail (err) {
+          reject(err)
+        },
+        complete () {
+          wepy.hideLoading()
+        }
+      })
+    })
+  }
+
   async onLoad(options) {
     wx.setNavigationBarTitle({ title: options.name })
+    this.charpterId = options.id
     this.exercise = await this._getExercise(options.id)
     this.$apply()
   }

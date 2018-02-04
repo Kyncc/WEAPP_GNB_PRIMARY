@@ -81,7 +81,7 @@
     _getUserInfo () {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://wechat.guinaben.com/primary/member/info',
+          url: 'https://primary.guinaben.com/member/info',
           success (res) {
             wepy.setStorageSync('User', res)
             resolve(res)

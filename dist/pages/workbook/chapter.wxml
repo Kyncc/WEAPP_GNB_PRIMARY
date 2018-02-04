@@ -7,12 +7,12 @@
             <view class="zan-panel-title zan-font-bold zan-c-black">{{ item.name }}</view>
           </block>
           <block  wx:else>
-            <view class="zan-cell {{ item.used ? 'zan-c-black' : 'zan-c-gray-dark' }}" bindtap="_intoExercise" data-wpy_intoexercise-a="{{ item }}">
+            <view class="zan-cell {{ item.isUsed ? 'zan-c-black' : 'zan-c-gray-dark' }}" bindtap="_intoExercise" data-wpy_intoexercise-a="{{ item }}">
               <view class="zan-cell__bd">{{item.name}}</view>
             </view>
           </block>
           <block wx:for="{{ item.b }}" wx:for-index="index" wx:for-item="itemB" wx:key="index">
-            <view class="zan-cell {{ itemB.used ? 'zan-c-black' : 'zan-c-gray-dark' }}" bindtap="_intoExercise" data-wpy_intoexercise-a="{{itemB}}">
+            <view class="zan-cell {{ itemB.isUsed ? 'zan-c-black' : 'zan-c-gray-dark' }}" bindtap="_intoExercise" data-wpy_intoexercise-a="{{itemB}}">
               <view class="zan-cell__bd">{{itemB.name}}</view>
             </view>
           </block>
