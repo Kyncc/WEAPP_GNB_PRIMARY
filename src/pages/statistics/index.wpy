@@ -35,28 +35,40 @@
 
   export default class Statistics extends wepy.page {
     config = {
-      navigationBarTitleText: '错题本'
+      navigationBarTitleText: '记错题'
     }
+
     components = {
       gnbTextbookSelect: gnbTextbookSelect
     }
+
     data = {
       textBookList: wepy.getStorageSync('User').textbook,
       textbook: '',
       grade: '',
       statistics: []
     }
+
     methods = {
       _intoList (item) {
-        wx.navigateTo({
-          url: `/pages/statistics/list?name=${item.name}&id=${item.chapterId}`
-        })
+        if (item.correct === 0) {
+          return
+        } else if (item.error === 0) {
+          wepy.navigateTo({
+            url: `/pages/statistics/correct?name=${item.name}&id=${item.chapterId}`
+          })
+        } else {
+          wepy.navigateTo({
+            url: `/pages/statistics/error?name=${item.name}&id=${item.chapterId}`
+          })
+        }
       },
-      textbookChange (id) {
-        this.statistics = this._getStatistics(id)
+      async textbookChange (id) {
+        this.statistics = await this._getStatistics(id)
         this.$apply()
       }
     }
+
     _getStatistics (id) {
       return new Promise((resolve, reject) => {
         wepy.request({

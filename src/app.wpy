@@ -50,7 +50,8 @@ export default class extends wepy.app {
       'pages/workbook/chapter',
       'pages/workbook/exercise',
       'pages/statistics/index',
-      'pages/statistics/list'
+      'pages/statistics/error',
+      'pages/statistics/correct'
     ],
     tabBar: {
       color: '#aaa',

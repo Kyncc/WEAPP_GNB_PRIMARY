@@ -3,7 +3,7 @@
     <scroll-view scroll-y="true" style="height: 100%" scroll-with-animation="true" enable-back-to-top="true">
       <repeat for="{{error}}" key="index" index="index" item="item">
         <view class="zan-panel">
-          <view class="zan-cell">
+          <view class="zan-cell zan-font-12" style="padding: 7px 15px">
             <view class="zan-cell__bd">{{item.name}}</view>
           </view>
           <view class="zan-cell" style="padding: 5px 0" @tap='_preview({{item.errorImg.url}})'>
@@ -27,7 +27,7 @@
     methods = {
       /** 查看大图 */
       _preview (url) {
-        wepy.previewImage({current: url, urls: this.imgs})
+        wepy.previewImage({current: `${url}-primaryError`, urls: this.imgs})
       }
     }
 
@@ -36,7 +36,7 @@
       imgs () {
         let urls = []
         for (let img of this.error) {
-          urls.push(img.errorImg.url)
+          urls.push(`${img.errorImg.url}-primaryError`)
         }
         return urls
       }
