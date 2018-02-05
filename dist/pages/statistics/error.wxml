@@ -1,6 +1,8 @@
 
   <view class="container">
-    <scroll-view scroll-y="true" style="height: 100%" scroll-with-animation="true" enable-back-to-top="true">
+    
+  <scroll-view scroll-y enable-back-to-topx="enable-back-to-topx" style="height: {{$InfiniteScroll$height}}" lower-threshold="{{$InfiniteScroll$scrollDistance}}" bindscrolltolower="$InfiniteScroll$scrolltoupper">
+    
       <block wx:for="{{error}}" wx:for-index="index" wx:for-item="item" wx:key="index">
         <view class="zan-panel">
           <view class="zan-cell" style="padding: 5px 0" bindtap="_preview" data-wpy_preview-a="{{item.errorImg.url}}">
@@ -11,5 +13,15 @@
           </view>
         </view>
       </block>
-    </scroll-view>
+    
+    <view class="loading_cell mb30"  wx:if="{{!$InfiniteScroll$isOnPullDownRefresh && $InfiniteScroll$scrollDisabled && !$InfiniteScroll$isNothing}}">
+      <view class="lds-rolling"/>
+    </view>
+    <view class="nothing"  wx:if="{{$InfiniteScroll$scrollDisabled && $InfiniteScroll$isNothing}}">
+      <view class="line"/>
+      <text>到底了</text>
+      <view class="line"/>
+    </view>
+  </scroll-view>
+
   </view>

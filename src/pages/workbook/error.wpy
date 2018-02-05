@@ -1,6 +1,20 @@
+<style lang="less" scoped>
+.footer{
+  position:fixed;
+  bottom: 0px;
+  left:0;
+  width:100%;
+  padding: 15px 0;
+  background: #F9F9F9;
+  .zan-btn--primary{
+    border-radius: 30px;
+  }
+}
+</style>
+
 <template>
   <view class="container">
-    <scroll-view scroll-y="true" style="height: 100%" scroll-with-animation="true" enable-back-to-top="true">
+    <scroll-view scroll-y="true" style="height: 100%;padding-bottom:70px;" scroll-with-animation="true" enable-back-to-top="true">
       <repeat for="{{error}}" key="index" index="index" item="item">
         <view class="zan-panel">
           <view class="zan-cell zan-font-12" style="padding: 7px 15px">
@@ -12,6 +26,11 @@
         </view>
       </repeat>
     </scroll-view>
+    <view class="footer">
+      <view class="zan-row">
+        <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--primary" @tap='_download'>下载{{error.length}}道错题</button>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -21,6 +40,7 @@
   export default class WorkbookError extends wepy.page {
     data = {
       error: [],
+      downloadUrl: '',
       id: ''
     }
 
@@ -28,6 +48,26 @@
       /** 查看大图 */
       _preview (url) {
         wepy.previewImage({current: `${url}-primaryError`, urls: this.imgs})
+      },
+      async _download () {
+        this.downloadUrl = await this._getDownloadUrl(this.id)
+        wepy.showLoading({title: '下载中'})
+        wepy.downloadFile({
+          url: this.downloadUrl,
+          success: function (res) {
+            var filePath = res.tempFilePath
+            wepy.openDocument({
+              filePath: filePath,
+              fileType: 'doc',
+              success: function (res) {
+                console.log('打开文档成功')
+              },
+              complete: function () {
+                wepy.hideLoading()
+              }
+            })
+          }
+        })
       }
     }
 
@@ -55,6 +95,28 @@
           },
           fail (err) {
             reject(err)
+          }
+        })
+      })
+    }
+
+    /** 获取错题数据 */
+    _getDownloadUrl (id) {
+      wepy.showLoading({title: '请稍候'})
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://primary.guinaben.com/workbook/chapter/errorDownload',
+          data: {
+            chapterId: id
+          },
+          success (res) {
+            resolve(res.url)
+          },
+          fail (err) {
+            reject(err)
+          },
+          complete () {
+            wepy.hideLoading()
           }
         })
       })

@@ -10,7 +10,7 @@
 
 <template>
   <view class="container">
-    <gnbTextbookSelect :value.sync="grade" :key.sync="textbook" @event.user="textbookChange" :textbook="textBookList"/>
+    <gnbTextbookSelect :value.sync="grade" :key.sync="textbook" @event.user="textbookChange" :textbook.sync="textBookList"/>
     <view class="zan-panel">
       <view class="zan-row zan-cell">
         <view class="zan-col zan-col-6 zan-col-offset-6 zan-center">记错数</view>
@@ -43,7 +43,7 @@
     }
 
     data = {
-      textBookList: wepy.getStorageSync('User').textbook,
+      textBookList: [],
       textbook: '',
       grade: '',
       statistics: []
@@ -84,6 +84,7 @@
 
     onLoad() {
       this.grade = wepy.getStorageSync('User').grade - 3
+      this.textBookList = wepy.getStorageSync('User').textbook
       this.textbook = this.textBookList[Number(this.grade)].id
       this.$apply()
     }

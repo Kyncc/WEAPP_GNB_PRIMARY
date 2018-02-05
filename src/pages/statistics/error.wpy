@@ -1,6 +1,6 @@
 <template>
   <view class="container">
-    <scroll-view scroll-y="true" style="height: 100%" scroll-with-animation="true" enable-back-to-top="true">
+    <InfiniteScroll @loadMore.user="loadMore" scrollDisabled.sync="{{ scrollDisabled }}" isNothing.sync="{{ isNothing }}">
       <repeat for="{{error}}" key="index" index="index" item="item">
         <view class="zan-panel">
           <view class="zan-cell" style="padding: 5px 0" @tap='_preview({{item.errorImg.url}})'>
@@ -11,26 +11,35 @@
           </view>
         </view>
       </repeat>
-    </scroll-view>
+    </InfiniteScroll>
   </view>
 </template>
 
 <script>
 import wepy from 'wepy'
+import InfiniteScroll from '@/components/gnb-infiniteScroll'
 
 export default class StatisticsError extends wepy.page {
   data = {
     offset: '',
-    error: []
+    error: [],
+    id: '',
+    scrollDisabled: false,
+    isNothing: false
   }
-
+  components = {
+    InfiniteScroll: InfiniteScroll
+  }
   methods = {
     /** 查看大图 */
     _preview (url) {
       wepy.previewImage({current: `${url}-primaryError`, urls: this.imgs})
+    },
+    loadMore() {
+      this.scrollDisabled = true
+      this._getErrorList(this.id, this.offset)
     }
   }
-
   computed = {
     /** 图片集 */
     imgs () {
@@ -64,6 +73,7 @@ export default class StatisticsError extends wepy.page {
   async onLoad(options) {
     wx.setNavigationBarTitle({title: options.name})
     let result = await this._getErrorList(options.id, this.offset)
+    this.id = options.id
     this.error = result.errorList
     this.offset = result.offset
     this.$apply()

@@ -100,7 +100,7 @@
          * 2 获取openId
          * 3 在通过openId获得用户信息
          */
-        wepy.showLoading()
+        wepy.showLoading({title: '加载中'})
         if (wepy.getStorageSync('openId').length === 0) {
           let code = await this._login()
           await this._getOpenId(code)
