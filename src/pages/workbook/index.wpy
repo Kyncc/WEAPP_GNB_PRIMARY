@@ -1,29 +1,28 @@
 <template>
   <view class="container">
-    <gnbTextbookSelect :value.sync="grade" :key.sync="textbook" @event.user="textbookChange" :textbook="textBookList"/>
+    <gnbTextbookSelect :value.sync="grade" :key.sync="textbook" @event.user="textbookChange" :textbook.sync="textBookList"/>
     <view>
       <view class="zan-panel-title zan-font-bold zan-c-black" style="padding: 10px 15px 0 15px;">我的练习册</view>
-      <view class="zan-panel">
+      <repeat for="{{ workbookList }}" key="index" index="index" item="item">
         <view class="zan-card">
           <view class="zan-card__thumb">
-            <image class="zan-card__img" src="http://img.guinaben.com/want1.jpg?imageView2/2/w/270/h/480/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
+            <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/225/h/360/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
           </view>
           <view class="zan-card__detail">
             <view class="zan-card__detail-row">
-              <view class="zan-card__left-col zan-c-gray-darker">2018版</view>
+              <view class="zan-card__left-col zan-c-gray-darker">{{item.year}}版</view>
             </view>
-            <view class="zan-card__detail-row zan-c-black zan-font-20" style="margin: 10px 0">
-              <view class="zan-card__left-col">轻巧夺冠</view>
+            <view class="zan-card__detail-row zan-c-black zan-font-20">
+              <view class="zan-card__left-col" style="margin-bottom: 5px;">{{item.name}}</view>
             </view>
-            <view class="zan-card__detail-row zan-c-gray zan-font-12">
-              <view class="zan-card__left-col">2012.3 北京第二版</view>
-            </view>
-            <view class="zan-card__detail-row zan-c-gray zan-font-12">
-              <view class="zan-card__left-col">2012.3 北京第二版</view>
-            </view>
+            <repeat for="{{item.version}}" key="index" index="index" item="version">
+              <view class="zan-card__detail-row zan-c-gray zan-font-12">
+                <view class="zan-card__left-col">{{version}}</view>
+              </view>
+            </repeat>
           </view>
         </view>
-      </view>
+      </repeat>
     </view>
     <!-- <navigator> -->
     <view class="zan-font-14 zan-center" style='padding:10px 0;' @tap="_initAdd()">
@@ -51,7 +50,7 @@ export default class Statistics extends wepy.page {
   }
 
   data = {
-    textBookList: wepy.getStorageSync('User').textbook,
+    textBookList: [],
     textbook: '',
     grade: '',
     workbookList: []
@@ -59,8 +58,9 @@ export default class Statistics extends wepy.page {
 
   methods = {
     /** 教材切换 */
-    textbookChange (id) {
-      console.log(id)
+    async textbookChange (id) {
+      this.workbookList = await this._getMyWorkbook(id)
+      this.$apply()
     },
     /** 增加习题册 */
     _initAdd () {
@@ -89,6 +89,7 @@ export default class Statistics extends wepy.page {
 
   onLoad() {
     this.grade = wepy.getStorageSync('User').grade - 3
+    this.textBookList = wepy.getStorageSync('User').textbook
     this.textbook = this.textBookList[Number(this.grade)].id
     this.$apply()
   }

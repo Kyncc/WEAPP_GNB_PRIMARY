@@ -52,7 +52,7 @@
     methods = {
       _intoList (item) {
         if (item.correct === 0) {
-          return
+          return ''
         } else if (item.error === 0) {
           wepy.navigateTo({
             url: `/pages/statistics/correct?name=${item.name}&id=${item.chapterId}`

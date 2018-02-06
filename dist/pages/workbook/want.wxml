@@ -13,32 +13,32 @@
       <!--封面 -->
       <view class="zan-row" style="padding:10px 0;">
         <view class="zan-col zan-col-6 zan-col-offset-3 zan-center">
-          <image style="width:100%;height:120px;" mode="scaleToFill" src="http://img.guinaben.com/want2.png?imageView2/2/w/270/h/480/format/jpg/q/75"/>
+          <image style="width:100%;height:120px;" mode="scaleToFill" src="{{imgs[0]}}?imageView2/2/w/270/h/480/format/jpg/q/75"/>
         </view>
         <view class="zan-col zan-col-2 zan-col-offset-2">
           <image style="height:30px;width:100%;margin-top:45px;" src="../../common/resources/arrow.png"/>
         </view>
         <view class="zan-col zan-col-6 zan-col-offset-2">
-          <image style="width:100%;height:120px;" src="../../common/resources/workbookBorder.png"/>
+          <image style="width:100%;height:120px;" src="{{first[0] ? first[0] : '../../common/resources/workbookBorder.png'}}" bindtap="_chooseImage" data-wpy_chooseimage-a="first"/>
         </view>
       </view>
       <!--封底-->
       <view class="zan-row" style="padding:10px 0">
         <view class="zan-col zan-col-6 zan-col-offset-3 zan-center">
-          <image style="width:100%;height:120px;" mode="scaleToFill" src="http://img.guinaben.com/want1.jpg?imageView2/2/w/270/h/480/format/jpg/q/75"/>
+          <image style="width:100%;height:120px;" mode="scaleToFill" src="{{imgs[1]}}?imageView2/2/w/270/h/480/format/jpg/q/75"/>
         </view>
         <view class="zan-col zan-col-2 zan-col-offset-2">
-          <image style="height:30px;width:100%;margin-top:45px;" src="../../common/resources/arrow.png" bindtap="_chooseImage" data-wpy_chooseimage-a="first"/>
+          <image style="height:30px;width:100%;margin-top:45px;" src="../../common/resources/arrow.png"/>
         </view>
         <view class="zan-col zan-col-6 zan-col-offset-2">
-          <image style="width:100%;height:120px;" src="../../common/resources/workbookBorder.png" bindtap="_chooseImage" data-wpy_chooseimage-a="last"/>
+          <image style="width:100%;height:120px;" src="{{last[0] ? last[0] : '../../common/resources/workbookBorder.png'}}" bindtap="_chooseImage" data-wpy_chooseimage-a="last"/>
         </view>
       </view>
     </view>
 
     <view class="zan-row" style="padding:20px 0">
       <view class="zan-col zan-col-20 zan-col-offset-2 zan-center">
-        <button class="zan-btn zan-btn--primary" bindtap="upload">上传</button>
+        <button class="zan-btn zan-btn--primary" bindtap="_upload">上传</button>
       </view>
     </view>
 
