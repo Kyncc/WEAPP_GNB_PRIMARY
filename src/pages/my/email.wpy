@@ -1,0 +1,109 @@
+<style lang="less" scoped>
+.zan-arrow{
+  transform:rotate(135deg);
+  border-color:black;
+  margin-top:-5px;
+}
+</style>
+
+<template>
+  <view class="container">
+    <view class="zan-panel-title zan-font-bold zan-c-black" style="margin-top:30px;">题目发送到邮箱，直接打印回家做</view>
+    <view class="zan-panel" style="margin: 20px 0;">
+      <view class="zan-cell" style="padding:5px 15px;">
+        <input class="zan-field__input" placeholder="QQ/163/Gmail/企业邮箱等" bindinput="{{bindEmailInput}}" focus="true" value="{{email}}"/>
+        <picker @change="bindEmailCodeChange" value="{{emailCodeIndex}}" range="{{emailCodes}}">
+          <view style="width:100px;height:35px;line-height:35px;">{{emailCodes[emailCodeIndex]}}
+            <text class="zan-arrow"></text>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="zan-row">
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" @tap='_send'>发送</button>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class MyEmail extends wepy.page {
+    config = {
+      navigationBarTitleText: '下载'
+    }
+
+    data = {
+      email: '',
+      emailType: '@qq.com',
+      id: '',
+      emailCodes: ['@qq.com', '@163.com', '@gmail.com'],
+      emailCodeIndex: 0
+    }
+
+    methods = {
+      bindEmailCodeChange (e) {
+        this.emailCodeIndex = e.detail.value
+        this.emailType = this.emailCodes[this.emailCodeIndex]
+      },
+      bindEmailInput (e) {
+        this.email = e.detail.value
+        console.log(e.detail.value)
+        console.log(this.email)
+        this.$apply()
+      }
+    }
+
+    /** 获取用户信息 */
+    _setUserEmail (email) {
+      wepy.showLoading({title: '提交中'})
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://primary.guinaben.com/member/infoEdit',
+          method: 'POST',
+          data: {
+            email: email
+          },
+          success (res) {
+            wepy.setStorageSync('email', email)
+            resolve(res)
+          },
+          fail (err) {
+            reject(err)
+          },
+          complete () {
+            wepy.hideLoading()
+          }
+        })
+      })
+    }
+
+    /** 获取错题数据 */
+    _sendEmail (id) {
+      wepy.showLoading({title: '请稍候'})
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://primary.guinaben.com/workbook/chapter/errorDownload',
+          data: {
+            chapterId: id
+          },
+          success (res) {
+            resolve(res.url)
+          },
+          fail (err) {
+            reject(err)
+          },
+          complete () {
+            wepy.hideLoading()
+          }
+        })
+      })
+    }
+
+    onLoad(options) {
+      this.id = options.id
+      this.email = wepy.getStorageSync('User').email
+      this.$apply()
+    }
+  }
+</script>

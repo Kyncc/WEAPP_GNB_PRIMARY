@@ -1,0 +1,17 @@
+
+  <view class="container _730c616">
+    <view class="zan-panel-title zan-font-bold zan-c-black _730c616" style="margin-top:30px;">题目发送到邮箱，直接打印回家做</view>
+    <view class="zan-panel _730c616" style="margin: 20px 0;">
+      <view class="zan-cell _730c616" style="padding:5px 15px;">
+        <input class="zan-field__input _730c616" placeholder="QQ/163/Gmail/企业邮箱等" bindinput="{{bindEmailInput}}" focus="true" value="{{email}}"/>
+        <picker bindchange="bindEmailCodeChange" value="{{emailCodeIndex}}" range="{{emailCodes}}" class="_730c616">
+          <view style="width:100px;height:35px;line-height:35px;" class="_730c616">{{emailCodes[emailCodeIndex]}}
+            <text class="zan-arrow _730c616"/>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="zan-row _730c616">
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary _730c616" bindtap="_send">发送</button>
+    </view>
+  </view>
