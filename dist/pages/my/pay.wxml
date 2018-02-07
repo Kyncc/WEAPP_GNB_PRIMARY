@@ -1,32 +1,20 @@
 
   <view class="container">
-    
-  <view class="zan-noticebar">
-    <view id="{{ $zanNoticebar1$componentId }}__content-wrap" style="height: 18px; overflow: hidden; position: relative;">
-      <view animation="{{ $zanNoticebar1$animationData }}" id="{{ $zanNoticebar1$componentId }}__content" style="position: absolute; white-space: nowrap;">
-        {{ $zanNoticebar1$text }}
+    <view class="zan-center" style="padding:30px 0;">
+      <view class="zan-center">
+        <image style="height:75px;width:90px;" src="../../common/resources/huangguan.png"/>
       </view>
+      <text class="zan-c-gray-dark zan-font-14">开通VIP即可无限次下载所有错题</text>
     </view>
-  </view>
-
-    <view class="zan-panel-title">选择购买内容(会员可无限次下载所有错题)</view>
     <view class="zan-panel">
-      <view>
-        
-<block>
-  <radio-group class="zan-select__list" name="{{ $zanSelect1$name || $zanSelect1$componentId || '' }}" bindchange="$zanSelect1$handleZanSelectChange" data-component-id="{{ $zanSelect1$componentId }}">
-    <label  wx:for="{{ $zanSelect1$items }}" wx:key="value">
-      <view class="zan-cell">
-        <radio class="zan-select__radio" value="{{ item.value }}" checked="{{ item.value === $zanSelect1$checkedValue }}"/>
-        <view class="zan-cell__bd" style="{{ 'padding-left: ' + item.padding * 10 + 'px;' }}">{{ item.name }}</view>
-        <view wx:if="{{ item.value === $zanSelect1$checkedValue }}" class="zan-cell__ft">
-          <icon type="success_no_circle" color="{{ $zanSelect1$activeColor }}" size="14"/>
-        </view>
+      <view class="zan-cell" bindtap="_buy" data-wpy_buy-a="1">
+        <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥29 </text>/月</view>
       </view>
-    </label>
-  </radio-group>
-</block>
-
+      <view class="zan-cell" bindtap="_buy" data-wpy_buy-a="2">
+        <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥149 </text>/半年</view>
+      </view>
+      <view class="zan-cell" bindtap="_buy" data-wpy_buy-a="3">
+        <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥199 </text>/年</view>
       </view>
     </view>
   </view>

@@ -15,16 +15,12 @@
       </navigator>
     </view>
     <view class="zan-panel">
-      <navigator url='/pages/my/info'>
-        <view class="zan-cell">
-          <view class="zan-cell__bd">个人资料</view>
-        </view>
-      </navigator>
-      <navigator url='/pages/my/pay'>
-        <view class="zan-cell">
-          <view class="zan-cell__bd">我的会员</view>
-        </view>
-      </navigator>
+      <view class="zan-cell" @tap="_into('/pages/my/pay')">
+        <view class="zan-cell__bd">我的会员</view>
+      </view>
+      <view wx:if="userInfo.refund" class="zan-cell" @tap="_refund">
+        <view class="zan-cell__bd">申请退款</view>
+      </view>
     </view>
   </view>
 </template>
@@ -40,13 +36,59 @@
     data = {
       userInfo: {
         name: '',
-        headImg: ''
+        headImg: '',
+        refund: false
       }
     }
 
-    components = {}
+    methods = {
+      _into (url) {
+        wx.navigateTo({
+          url: url
+        })
+      },
+      // 发起退款
+      async _refund () {
+        try {
+          wepy.showLoading({title: '请稍候'})
+          // 发起退款接口
+          await this._setRefund()
+          // 重新获得用户信息
+          await this._getUserInfo()
+          wepy.hideLoading()
+          wepy.showModal({
+            title: '申请成功',
+            content: '我们将在24小时内完成退款',
+            confirmText: '知道了',
+            showCancel: false
+          })
+        } catch (err) {
+          console.log(err)
+          wepy.hideLoading()
+          wepy.showToast({
+            title: '出错了请稍后重试',
+            icon: 'none'
+          })
+        }
+      }
+    }
 
-    methods = {}
+    /** 发起退款 */
+    _setRefund () {
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://wechat.guinaben.com/mini-program/refund',
+          method: 'POST',
+          success (res) {
+            resolve(res)
+          },
+          fail (err) {
+            reject(err)
+          }
+        })
+      })
+    }
+
     /** 微信服务器获取CODE */
     _login () {
       return new Promise((resolve, reject) => {
@@ -57,6 +99,7 @@
         })
       })
     }
+
     /** 通过code获取OPENID */
     _getOpenId (code) {
       return new Promise((resolve, reject) => {
@@ -100,7 +143,7 @@
          * 2 获取openId
          * 3 在通过openId获得用户信息
          */
-        wepy.showLoading({title: '加载中'})
+        wepy.showLoading({title: '请稍候'})
         if (wepy.getStorageSync('openId').length === 0) {
           let code = await this._login()
           await this._getOpenId(code)
@@ -108,6 +151,7 @@
         await this._getUserInfo()
         this.userInfo.name = wepy.getStorageSync('User').name
         this.userInfo.headImg = wepy.getStorageSync('User').headImg
+        this.userInfo.refund = wepy.getStorageSync('User').refund
         wepy.hideLoading()
         this.$apply()
       } catch (err) {

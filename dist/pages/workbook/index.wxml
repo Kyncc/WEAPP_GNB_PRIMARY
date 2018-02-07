@@ -31,13 +31,7 @@
         </view>
       </block>
     </view>
-    <!-- <navigator> -->
     <view class="zan-font-14 zan-center" style="padding:10px 0;" bindtap="_initAdd" data-wpy_initadd-a="">
       <text class="zan-c-gray-darker">+添加习题册</text>
-    </view>
-    <!-- </navigator> -->
-    <view class="zan-panel">
-      <navigator url="/pages/workbook/want">想要练习册</navigator>
-      <navigator url="/pages/workbook/chapter?name=第二页&id=1025">章节列表</navigator>
     </view>
   </view>

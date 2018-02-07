@@ -3,10 +3,9 @@
 <template>
   <view class="container">
      <view class="zan-panel" style="margin: 0;">
-       <zanField1 :options="base_name"  componentId="zanField1"></zanField1>
-       <zanField2 :options="base_sex"  componentId="zanField2"></zanField2>
-       <gnbTextbookSelect :value.sync="grade" @event.user="textbookChange"/>
-       <zanField3 :options="base_school" componentId="zanField3"></zanField3>
+       <zanField1 :options="base_name" componentId="zanField1"/>
+       <zanField2 :options="base_sex"  componentId="zanField2"/>
+       <zanField3 :options="base_school" componentId="zanField3"/>
      </view>
   </view>
 </template>
@@ -14,7 +13,6 @@
 <script>
   import wepy from 'wepy'
   import zanField from '@/components/zan-field'
-  import gnbTextbookSelect from '@/components/gnb-textbookSelect'
 
   export default class MyInfo extends wepy.page {
     config = {
@@ -22,7 +20,6 @@
     }
 
     components = {
-      gnbTextbookSelect: gnbTextbookSelect,
       zanField1: zanField,
       zanField2: zanField,
       zanField3: zanField

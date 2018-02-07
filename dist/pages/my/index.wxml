@@ -7,15 +7,11 @@
       </navigator>
     </view>
     <view class="zan-panel">
-      <navigator url="/pages/my/info">
-        <view class="zan-cell">
-          <view class="zan-cell__bd">个人资料</view>
-        </view>
-      </navigator>
-      <navigator url="/pages/my/pay">
-        <view class="zan-cell">
-          <view class="zan-cell__bd">我的会员</view>
-        </view>
-      </navigator>
+      <view class="zan-cell" bindtap="_into" data-wpy_into-a="/pages/my/pay">
+        <view class="zan-cell__bd">我的会员</view>
+      </view>
+      <view  wx:if="userInfo.refund" class="zan-cell" bindtap="_refund">
+        <view class="zan-cell__bd">申请退款</view>
+      </view>
     </view>
   </view>

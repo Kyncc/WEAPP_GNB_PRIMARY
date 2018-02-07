@@ -1,10 +1,20 @@
 <template>
   <view class="container">
-    <zanNoticebar1 :text="longText" componentId="static1" ></zanNoticebar1>
-    <view class="zan-panel-title">选择购买内容(会员可无限次下载所有错题)</view>
+    <view class="zan-center" style="padding:30px 0;">
+      <view class="zan-center">
+        <image style="height:75px;width:90px;" src="../../common/resources/huangguan.png"/>
+      </view>
+      <text class="zan-c-gray-dark zan-font-14">开通VIP即可无限次下载所有错题</text>
+    </view>
     <view class="zan-panel">
-      <view>
-        <zanSelect1 :items="items" :checkedValue.sync="checked_color" componentId="color"></zanSelect1>
+      <view class="zan-cell" @tap="_buy(1)">
+        <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥29 </text>/月</view>
+      </view>
+      <view class="zan-cell" @tap="_buy(2)">
+        <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥149 </text>/半年</view>
+      </view>
+      <view class="zan-cell" @tap="_buy(3)">
+        <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥199 </text>/年</view>
       </view>
     </view>
   </view>
@@ -12,48 +22,44 @@
 
 <script>
 import wepy from 'wepy'
-import zanNoticebar from '@/components/zan-noticebar'
-import zanSelect from '@/components/zan-select'
 
 export default class MyPay extends wepy.page {
   config = {
-    navigationBarTitleText: '我的会员'
+    navigationBarTitleText: '开通VIP'
   }
-  components = {
-    zanNoticebar1: zanNoticebar,
-    zanSelect1: zanSelect
-  }
+  components = {}
   data = {
-    longText: '首次支付30天内可无条件申请全额退款',
-    items: [
-      {
-        padding: 0,
-        value: '￥29/月',
-        name: '选项一'
-      },
-      {
-        padding: 0,
-        value: '￥149/半年',
-        name: '选项二'
-      },
-      {
-        padding: 0,
-        value: '￥199/年',
-        name: '选项二'
-      }
-    ],
-    checked_color: -1,
-    activeColor: '#4b0'
-  }
-  events = {
-    zanSelectChange(value, event) {
-      let { componentId } = event.source
-      this[`checked_${componentId}`] = value
-      this.$apply()
-    }
+    longText: '首次支付30天内可无条件申请全额退款'
   }
   methods = {
   }
-  onLoad() {}
+
+  /** 购买VIP */
+  _orderVip (id) {
+    wepy.showLoading({title: '请稍候'})
+    return new Promise((resolve, reject) => {
+      wepy.request({
+        url: 'https://wechat.guinaben.com/mini-program/pay',
+        data: {
+          body: id,
+          total_fee: '',
+          detail: ''
+        },
+        success (res) {
+          resolve(res.url)
+        },
+        fail (err) {
+          reject(err)
+        },
+        complete () {
+          wepy.hideLoading()
+        }
+      })
+    })
+  }
+
+  onLoad() {
+
+  }
 }
 </script>

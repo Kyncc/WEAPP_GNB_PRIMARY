@@ -16,14 +16,6 @@
   </view>
 
        
-  <picker style="margin-top: 0" class="zan-panel _13d05ce" bindchange="$gnbTextbookSelect$bindPickerChange" range="{{ $gnbTextbookSelect$textbook }}" value="{{ $gnbTextbookSelect$value }}" range-key="name">
-    <view class="picker zan-cell">
-      {{$gnbTextbookSelect$title}}:　{{$gnbTextbookSelect$textbook[$gnbTextbookSelect$value].name}}
-      <view class="zan-arrow"/>
-    </view>
-  </picker>
-
-       
   <view class="zan-cell zan-field {{ $zanField3$options.error ? 'zan-field--error' : '' }} {{ $zanField3$options.mode === 'wrapped' ? 'zan-field--wrapped' : '' }} _13d05ce">
     <view  wx:if="{{ $zanField3$options.title }}" class="zan-cell__hd zan-field__title">{{ $zanField3$options.title }}</view>
     <textarea  wx:if="{{ $zanField3$options.type === 'textarea' }}" auto-height name="{{ $zanField3$options.name || $zanField3$componentId || '' }}" value="{{ $zanField3$options.value }}" placeholder="{{ $zanField3$options.placeholder }}" class="zan-field__input zan-cell__bd {{ $zanField3$options.right ? 'zan-field__input--right' : '' }}" placeholder-class="zan-field__placeholder" bindinput="$zanField3$handleZanFieldChange" bindfocus="$zanField3$handleZanFieldFocus" bindblur="$zanField3$handleZanFieldBlur" data-component-id="{{ $zanField3$componentId || '' }}"/>

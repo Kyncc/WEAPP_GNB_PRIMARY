@@ -32,6 +32,8 @@
   import wepy from 'wepy'
   import zanField from '@/components/zan-field'
 
+  // 可使用得Email邮箱列表
+  const emailList = ['@qq.com', '@126.com', '@139.com', '@163.com', '@189.com', '@sohu.com', '@sina.com', '@gmail.com']
   export default class MyEmail extends wepy.page {
     config = {
       navigationBarTitleText: '下载'
@@ -43,7 +45,7 @@
 
     data = {
       id: '',
-      emailCodes: ['@qq.com', '@163.com', '@gmail.com'],
+      emailCodes: emailList,
       emailCodeIndex: 0,
       form_email: {
         title: '',
@@ -123,7 +125,18 @@
 
     onLoad(options) {
       this.id = options.id
-      this.form_email.value = wepy.getStorageSync('User').email
+      let email = wepy.getStorageSync('User').email
+      // 邮箱不为空获取邮箱和邮箱类型
+      if (email.length) {
+        this.form_email.value = email.split('@')[0]
+        let type = `@${email.split('@')[1]}`
+        for (let i = 0; i < emailList.length; i++) {
+          if (type === `@${email.split('@')[1]}`) {
+            this.emailCodeIndex = i
+            break
+          }
+        }
+      }
       this.$apply()
     }
   }
