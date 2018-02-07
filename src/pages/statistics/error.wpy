@@ -35,9 +35,10 @@ export default class StatisticsError extends wepy.page {
     _preview (url) {
       wepy.previewImage({current: `${url}-primaryError`, urls: this.imgs})
     },
-    loadMore() {
+    async loadMore() {
       this.scrollDisabled = true
-      this._getErrorList(this.id, this.offset)
+      let result = await this._getErrorList(this.id, this.offset)
+      // this.error.push(result)
     }
   }
   computed = {

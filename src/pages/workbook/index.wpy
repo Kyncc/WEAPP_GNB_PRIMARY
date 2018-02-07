@@ -27,6 +27,9 @@
     <view class="zan-font-14 zan-center" style='padding:10px 0;' @tap="_initAdd()">
       <text class="zan-c-gray-darker">+添加习题册</text>
     </view>
+    <view class="zan-font-14 zan-center" style='padding:10px 0;' @tap="_initWant()">
+      <text class="zan-c-gray-darker">+想要习题册</text>
+    </view>
   </view>
 </template>
 
@@ -60,6 +63,11 @@ export default class Statistics extends wepy.page {
     _initAdd () {
       wepy.navigateTo({
         url: `/pages/workbook/add?id=${this.textbook}`
+      })
+    },
+    _initWant() {
+      wepy.navigateTo({
+        url: `/pages/workbook/want`
       })
     }
   }

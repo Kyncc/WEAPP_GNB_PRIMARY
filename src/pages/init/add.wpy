@@ -1,0 +1,53 @@
+<style lang="less" scoped>
+</style>
+
+<template>
+  <view class="container">
+    <view class="zan-row zan-center" style="margin-top: 80rpx;">
+      <text class="zan-col zan-col-24 zan-font-22 zan-c-black">选择你正在使用的习题册</text>
+      <text class="zan-col zan-col-24 zan-font-14 zan-c-gray-darker" style="margin-top: 30rpx;">数学 新人教版 {{gradeName}}</text>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class InitAddWorkbook extends wepy.page {
+    config = {
+      navigationBarTitleText: '错题归纳本小学数学'
+    }
+
+    data = {
+      gradeName: '',
+      id: ''
+    }
+
+    methods = {
+    }
+
+    // 添加我的练习册
+    _getAllWorkbook (id) {
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://primary.guinaben.com/workbook/all',
+          data: {
+            textbookId: id
+          },
+          success (res) {
+            resolve(res)
+          },
+          fail (err) {
+            reject(err)
+          }
+        })
+      })
+    }
+
+    async onLoad(options) {
+      this.gradeName = options.name
+      this.grade = options.grade
+      this.$apply()
+    }
+  }
+</script>

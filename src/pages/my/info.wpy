@@ -49,7 +49,7 @@
       },
       base_sex: {
         title: '性别',
-        value: (wepy.getStorageSync('User').sex === '1' ? '男' : '女'),
+        value: (Number(wepy.getStorageSync('User').sex) === 1 ? '男' : '女'),
         disabled: true
       }
     }
@@ -72,7 +72,7 @@
       },
       async _save () {
         let user = {
-          grade: this.gradeIndex + 3,
+          grade: Number(this.gradeIndex) + 3,
           name: this.base_name.value,
           school: this.base_school.value
         }
@@ -82,7 +82,9 @@
           icon: 'success',
           duration: 2000,
           success () {
-            wepy.navigateBack()
+            wepy.reLaunch({
+              url: '/pages/my/index'
+            })
           }
         })
       }

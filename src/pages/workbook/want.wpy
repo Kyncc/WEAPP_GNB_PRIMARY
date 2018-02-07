@@ -114,7 +114,7 @@
             'openId': wepy.getStorageSync('openId')
           },
           formData: {
-            'type': 'workbook'
+            'type': 'wantworkbook'
           },
           success (res) {
             console.log(res.data)

@@ -1,0 +1,7 @@
+
+  <view class="container _89da6de">
+    <view class="zan-row zan-center _89da6de" style="margin-top: 80rpx;">
+      <text class="zan-col zan-col-24 zan-font-22 zan-c-black _89da6de">选择你正在使用的习题册</text>
+      <text class="zan-col zan-col-24 zan-font-14 zan-c-gray-darker _89da6de" style="margin-top: 30rpx;">数学 新人教版 {{gradeName}}</text>
+    </view>
+  </view>

@@ -34,4 +34,7 @@
     <view class="zan-font-14 zan-center" style="padding:10px 0;" bindtap="_initAdd" data-wpy_initadd-a="">
       <text class="zan-c-gray-darker">+添加习题册</text>
     </view>
+    <view class="zan-font-14 zan-center" style="padding:10px 0;" bindtap="_initWant" data-wpy_initwant-a="">
+      <text class="zan-c-gray-darker">+想要习题册</text>
+    </view>
   </view>

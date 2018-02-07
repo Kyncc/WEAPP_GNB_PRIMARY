@@ -39,10 +39,11 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/my/index',
+      'pages/init/grade',
+      'pages/init/add',
       'pages/my/info',
       'pages/my/pay',
       'pages/my/email',
-      'pages/init/grade',
       'pages/workbook/add',
       'pages/workbook/index',
       'pages/workbook/want',
