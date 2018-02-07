@@ -1,9 +1,11 @@
 
   <view class="container">
-    <view class="zan-row zan-center" style="padding-top:60rpx;">
-      <navigator url="/pages/my/info">
+    <view class="zan-row zan-center" style="padding-top:60rpx;position: relative">
+      <navigator url="/pages/my/info" hover-class="none">
         <image class="userinfo-avatar" src="{{userInfo.headImg}}" background-size="cover"/>
-        <text class="zan-col zan-col-24">{{userInfo.name}}</text>
+        <image  wx:if="{{ userInfo.vip != 0 }}" class="userinfo-vip" src="../../common/resources/vip.png" background-size="cover"/>
+        <text class="zan-col zan-col-24 zan-font-22">{{userInfo.name}}</text>
+        <text class="zan-arrow"/>
       </navigator>
     </view>
     <view class="zan-panel">

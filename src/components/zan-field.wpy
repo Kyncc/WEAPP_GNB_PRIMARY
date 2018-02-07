@@ -17,6 +17,7 @@
       data-component-id="{{ componentId || '' }}"></textarea>
     <input
       wx:else
+      disabled="{{ options.disabled }}"
       type="{{ options.inputType || 'text' }}"
       name="{{ options.name || componentId || '' }}"
       value="{{ options.value }}"
@@ -40,6 +41,7 @@ export default class zanField extends wepy.component {
         right: true,
         error: true,
         name: '',
+        disabled: false,
         value: '',
         type: 'textarea',
         mode: 'wrapped',

@@ -1,11 +1,18 @@
-<style lang="less" scoped>
-</style>
 <template>
   <view class="container">
      <view class="zan-panel" style="margin: 0;">
-       <zanField1 :options="base_name" componentId="zanField1"/>
-       <zanField2 :options="base_sex"  componentId="zanField2"/>
-       <zanField3 :options="base_school" componentId="zanField3"/>
+       <nameField :options="base_name" componentId="nameField"/>
+       <sexField :options="base_sex"  componentId="sexField"/>
+       <view class="zan-cell">
+        <view class="zan-cell__hd zan-field__title">年级</view>
+        <picker class="zan-cell__bd" @change="bindGradeChange" value="{{gradeIndex}}" range="{{gradeList}}">
+          {{gradeList[gradeIndex]}}<text class="zan-arrow"></text>
+        </picker>
+       </view>
+       <schoolField :options="base_school" componentId="schoolField"/>
+     </view>
+     <view class="zan-row" style="margin-top:20px;">
+        <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" @tap='_save'>保存</button>
      </view>
   </view>
 </template>
@@ -14,47 +21,96 @@
   import wepy from 'wepy'
   import zanField from '@/components/zan-field'
 
+  const gradeList = ['三年级', '四年级', '五年级', '六年级']
+
   export default class MyInfo extends wepy.page {
     config = {
       navigationBarTitleText: '个人资料'
     }
 
     components = {
-      zanField1: zanField,
-      zanField2: zanField,
-      zanField3: zanField
+      nameField: zanField,
+      sexField: zanField,
+      schoolField: zanField
     }
 
     data = {
-      grade: '',
+      gradeIndex: Number(wepy.getStorageSync('User').grade) - 3,
+      gradeList: gradeList,
       base_school: {
         title: '学校',
-        value: '',
-        placeholder: '请输入学校名称'
+        value: wepy.getStorageSync('User').school,
+        placeholder: '请输入您的学校名称'
       },
       base_name: {
         title: '姓名',
-        value: '',
-        placeholder: ''
+        value: wepy.getStorageSync('User').name,
+        placeholder: '请输入您的姓名'
       },
       base_sex: {
         title: '性别',
-        value: ''
+        value: (wepy.getStorageSync('User').sex === '1' ? '男' : '女'),
+        disabled: true
+      }
+    }
+
+    events = {
+      zanFieldChange(e) {
+        let { componentId, detail } = e
+        if (componentId === 'nameField') {
+          this.base_name.value = detail.value
+        } else if (componentId === 'schoolField') {
+          this.base_school.value = detail.value
+        }
+        this.$apply()
       }
     }
 
     methods = {
-      textbookChange (id) {
-        console.log(id)
+      bindGradeChange (e) {
+        this.gradeIndex = e.detail.value
+      },
+      async _save () {
+        let user = {
+          grade: this.gradeIndex + 3,
+          name: this.base_name.value,
+          school: this.base_school.value
+        }
+        await this._setUserInfo(user)
+        wepy.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 2000,
+          success () {
+            wepy.navigateBack()
+          }
+        })
       }
     }
 
-    onLoad() {
-      this.base_name.value = wepy.getStorageSync('User').name
-      this.base_school.value = wepy.getStorageSync('User').school
-      this.grade = wepy.getStorageSync('User').grade - 3
-      this.base_sex.value = (wepy.getStorageSync('User').sex === 1 ? '男' : '女')
-      this.$apply()
+    /** 设置用户信息 */
+    _setUserInfo (user) {
+      wepy.showLoading({title: '请稍候'})
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://primary.guinaben.com/member/infoEdit',
+          method: 'POST',
+          data: {
+            grade: user.grade,
+            name: user.name,
+            school: user.school
+          },
+          success (res) {
+            wepy.hideLoading()
+            wepy.setStorageSync('User', res)
+            resolve(res)
+          },
+          fail (err) {
+            wepy.hideLoading()
+            reject(err)
+          }
+        })
+      })
     }
   }
 </script>

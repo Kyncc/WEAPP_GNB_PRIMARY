@@ -4,14 +4,23 @@
   height: 160rpx;
   border-radius: 50%;
 }
+.userinfo-vip{
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  top: 160rpx;
+  left: 415rpx;
+}
 </style>
 
 <template>
   <view class="container">
-    <view class="zan-row zan-center" style="padding-top:60rpx;">
-      <navigator url='/pages/my/info'>
-        <image class="zan-col zan-col-24" class="userinfo-avatar" src='{{userInfo.headImg}}' background-size='cover'></image>
-        <text class="zan-col zan-col-24">{{userInfo.name}}</text>
+    <view class="zan-row zan-center" style="padding-top:60rpx;position: relative" >
+      <navigator url='/pages/my/info' hover-class="none">
+        <image class="zan-col zan-col-24" class="userinfo-avatar" src='{{userInfo.headImg}}' background-size='cover'/>
+        <image wx:if="{{ userInfo.vip != 0 }}" class="userinfo-vip" src='../../common/resources/vip.png' background-size='cover'/>
+        <text class="zan-col zan-col-24 zan-font-22">{{userInfo.name}}</text>
+        <text class="zan-arrow"></text>
       </navigator>
     </view>
     <view class="zan-panel">
@@ -37,6 +46,7 @@
       userInfo: {
         name: '',
         headImg: '',
+        vip: '',
         refund: false
       }
     }
@@ -152,6 +162,7 @@
         this.userInfo.name = wepy.getStorageSync('User').name
         this.userInfo.headImg = wepy.getStorageSync('User').headImg
         this.userInfo.refund = wepy.getStorageSync('User').refund
+        this.userInfo.vip = wepy.getStorageSync('User').vip
         wepy.hideLoading()
         this.$apply()
       } catch (err) {
