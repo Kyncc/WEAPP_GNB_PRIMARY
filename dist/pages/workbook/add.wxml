@@ -31,9 +31,11 @@
     </view>
     <!--习题册区间End-->
     <!--进入想要习题册-->
-    <view class="zan-row zan-center" style="padding:30rpx 0;">
-      <view class="zan-col zan-col-24 zan-font-16 zan-c-gray">没有找到想要的习题册？
-        <text style="color:#FF7043;text-decoration:underline;">告诉我们</text>
+    <navigator open-type="navigate" url="/pages/workbook/want" hover-class="none">
+      <view class="zan-row zan-center" style="padding:30rpx 0;">
+        <view class="zan-col zan-col-24 zan-font-16 zan-c-gray">没有找到想要的习题册？
+          <text style="color:#FF7043;text-decoration:underline;">告诉我们</text>
+        </view>
       </view>
-    </view>
+    </navigator>
   </view>

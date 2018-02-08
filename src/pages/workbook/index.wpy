@@ -5,7 +5,7 @@
       <view class="zan-panel-title zan-font-bold zan-c-black" style="padding: 10px 15px 0 15px;">我的练习册</view>
       <!--习题册区间-->
       <view class="zan-panel">
-        <scroll-view scroll-y="true" style="height: 700rpx;background:#fff;" scroll-with-animation="true" enable-back-to-top="true">
+        <scroll-view scroll-y="true" style="height: 800rpx;background:#fff;" scroll-with-animation="true" enable-back-to-top="true">
           <repeat for="{{ workbookList }}" key="pindex" index="pindex" item="item">
             <view class="zan-card"  @tap="_intoChapter({{item}})">
               <!--习题册图片-->

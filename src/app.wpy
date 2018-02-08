@@ -37,9 +37,9 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
+      'pages/my/index',
       'pages/init/grade',
       'pages/init/add',
-      'pages/my/index',
       'pages/my/info',
       'pages/my/pay',
       'pages/my/email',
@@ -88,13 +88,11 @@ export default class extends wepy.app {
     }
   }
 
-  globalData = {
-    userInfo: null
-  }
-
   constructor () {
     super()
+    // 修复并发
     this.use('requestfix')
+    // request全局配置
     this.intercept('request', {
       config(params) {
         let openId = {
@@ -107,12 +105,21 @@ export default class extends wepy.app {
       success(res) {
         console.log(res)
         let statusCode = res.statusCode.toString()
-        if (statusCode === '200') {
-          return res.data.data
-        } else if (statusCode === '401') {
+        let dataCode = res.data.code.toString()
+        if (statusCode === '401') {
           wepy.redirectTo({
             url: '/pages/init/grade'
           })
+        } else if (statusCode === '200') {
+          if (dataCode === '200') {
+            return res.data.data
+          } else {
+            wepy.showToast({
+              title: res.data.msg,
+              icon: 'none'
+            })
+            return Promise.reject(new Error('错误的code'))
+          }
         }
       },
       fail(error) {
@@ -126,6 +133,7 @@ export default class extends wepy.app {
         wepy.hideNavigationBarLoading()
       }
     })
+    // 掉网的提示
     wx.onNetworkStatusChange((res) => {
       if (!res.isConnected) {
         wepy.showToast({

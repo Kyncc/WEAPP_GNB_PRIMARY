@@ -104,6 +104,7 @@
       return new Promise((resolve, reject) => {
         wepy.login({
           success (res) {
+            console.log(res.code)
             resolve(res.code)
           }
         })
@@ -121,6 +122,7 @@
           success (res) {
             wepy.setStorageSync('openId', res.openid)
             wepy.setStorageSync('session_key', res.session_key)
+            wepy.setStorageSync('unionid', res.unionid)
             resolve(res)
           },
           fail (err) {
@@ -164,6 +166,7 @@
         this.userInfo.refund = wepy.getStorageSync('User').refund
         this.userInfo.vip = wepy.getStorageSync('User').vip
         wepy.hideLoading()
+        wepy.switchTab({ url: `/pages/workbook/index` })
         this.$apply()
       } catch (err) {
         wepy.hideLoading()
@@ -176,6 +179,7 @@
       this.userInfo.headImg = wepy.getStorageSync('User').headImg
       this.userInfo.refund = wepy.getStorageSync('User').refund
       this.userInfo.vip = wepy.getStorageSync('User').vip
+      this.$apply()
     }
   }
 </script>
