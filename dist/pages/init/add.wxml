@@ -1,7 +1,47 @@
 
   <view class="container _89da6de">
-    <view class="zan-row zan-center _89da6de" style="margin-top: 80rpx;">
+    <!--标题-->
+    <view class="zan-row zan-center _89da6de" style="margin: 60rpx 0;">
       <text class="zan-col zan-col-24 zan-font-22 zan-c-black _89da6de">选择你正在使用的习题册</text>
       <text class="zan-col zan-col-24 zan-font-14 zan-c-gray-darker _89da6de" style="margin-top: 30rpx;">数学 新人教版 {{gradeName}}</text>
+    </view>
+    <!--习题册区间-->
+    <view class="zan-panel _89da6de">
+      <scroll-view scroll-y="true" style="height: 70%;background:#fff;" scroll-with-animation="true" enable-back-to-top="true" class="_89da6de">
+        <block class="_89da6de" wx:for="{{ workbookList }}" wx:for-index="pindex" wx:for-item="item" wx:key="pindex">
+          <view class="zan-card _89da6de">
+            <!--习题册图片-->
+            <view class="zan-card__thumb _89da6de" bindtap="_preview" data-wpy_preview-a="{{ item.img.url }}">
+              <image class="zan-card__img _89da6de" src="{{ item.img.url }}?imageView2/2/w/225/h/360/format/jpg/q/75" mode="aspectFit" lazy-load="true"/>
+            </view>
+            <!--习题册详情-->
+            <view class="zan-card__detail _89da6de" bindtap="_edit" data-wpy_edit-a="{{ pindex}}" data-wpy_edit-b="{{item.id}}">
+              <view class="zan-card__detail-row _89da6de">
+                <view class="zan-card__left-col zan-font-14 _89da6de" style="color:#3FC6C6">{{item.year}}版</view>
+              </view>
+              <view class="zan-card__detail-row zan-c-gray-darker _89da6de">
+                <view class="zan-card__right-col _89da6de">
+                  <button  wx:if="{{ item.status }}" class="zan-btn zan-btn--small zan-btn--plain zan-btn--warn _89da6de">删除</button>
+                  <button  wx:else class="zan-btn zan-btn--small zan-btn--plain zan-btn--primary {{ item.status ? '123':'213' }} _89da6de">添加</button>
+                </view>
+                <view class="zan-card__left-col zan-font-18 _89da6de" style="margin-bottom: 6px;">{{item.name}}</view>
+                <block class="_89da6de" wx:for="{{item.version}}" wx:for-index="index" wx:for-item="version" wx:key="index">
+                  <view class="zan-card__left-col zan-c-gray zan-font-14 _89da6de" style="margin-bottom: 5px;">{{version}}</view>
+                </block>
+              </view>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+    <!--进入想要习题册-->
+    <view class="zan-row zan-center _89da6de" style="padding:30rpx 0;">
+      <view class="zan-col zan-col-24 zan-font-16 zan-c-gray _89da6de">没有找到想要的习题册？
+        <text style="color:#FF7043;text-decoration:underline;" class="_89da6de">告诉我们</text>
+      </view>
+    </view>
+    <!--进入我的-->
+    <view class="zan-row _89da6de">
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary _89da6de" bindtap="_begin">选好了，开始记错</button>
     </view>
   </view>

@@ -35,17 +35,21 @@
             </view>
             <view class="zan-card__detail-row zan-c-black zan-font-20">
               <view class="zan-card__left-col" style="margin-bottom: 5px;">{{item.name}}</view>
+              <block wx:for="{{item.version}}" wx:for-index="index" wx:for-item="version" wx:key="index">
+                <view class="zan-card__left-col zan-c-gray zan-font-12" style="margin-bottom: 5px;">{{version}}</view>
+              </block>
             </view>
-            <block wx:for="{{item.version}}" wx:for-index="index" wx:for-item="version" wx:key="index">
-              <view class="zan-card__detail-row zan-c-gray zan-font-12">
-                <view class="zan-card__left-col">{{version}}</view>
-              </view>
-            </block>
             <!-- <view class="zan-col-6" style="display: inline-block;float: left">
               <button class="zan-btn" bindtap="_addWorkbook({{item.id}})">添加</button>
             </view> -->
           </view>
         </view>
       </block>
+    </view>
+    <!--进入想要习题册-->
+    <view class="zan-row zan-center" style="padding:30rpx 0;">
+      <view class="zan-col zan-col-24 zan-font-16 zan-c-gray">没有找到想要的习题册？
+        <text style="color:#FF7043;text-decoration:underline;">告诉我们</text>
+      </view>
     </view>
   </view>

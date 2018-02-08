@@ -3,32 +3,34 @@
     <gnbTextbookSelect :value.sync="grade" :key.sync="textbook" @event.user="textbookChange" :textbook.sync="textBookList"/>
     <view>
       <view class="zan-panel-title zan-font-bold zan-c-black" style="padding: 10px 15px 0 15px;">我的练习册</view>
-      <repeat for="{{ workbookList }}" key="index" index="index" item="item">
-        <view class="zan-card">
-          <view class="zan-card__thumb">
-            <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/225/h/360/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
-          </view>
-          <view class="zan-card__detail">
-            <view class="zan-card__detail-row">
-              <view class="zan-card__left-col zan-c-gray-darker">{{item.year}}版</view>
-            </view>
-            <view class="zan-card__detail-row zan-c-black zan-font-20">
-              <view class="zan-card__left-col" style="margin-bottom: 5px;">{{item.name}}</view>
-            </view>
-            <repeat for="{{item.version}}" key="index" index="index" item="version">
-              <view class="zan-card__detail-row zan-c-gray zan-font-12">
-                <view class="zan-card__left-col">{{version}}</view>
+      <!--习题册区间-->
+      <view class="zan-panel">
+        <scroll-view scroll-y="true" style="height: 70%;background:#fff;" scroll-with-animation="true" enable-back-to-top="true">
+          <repeat for="{{ workbookList }}" key="pindex" index="pindex" item="item">
+            <view class="zan-card">
+              <!--习题册图片-->
+              <view class="zan-card__thumb">
+                <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/225/h/360/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
               </view>
-            </repeat>
-          </view>
-        </view>
-      </repeat>
+              <!--习题册详情-->
+              <view class="zan-card__detail" @tap="_intoChapter({{item}})">
+                <view class="zan-card__detail-row">
+                  <view class="zan-card__left-col zan-font-14" style="color:#3FC6C6">{{item.year}}版</view>
+                </view>
+                <view class="zan-card__detail-row zan-c-gray-darker">
+                  <view class="zan-card__left-col zan-font-18" style="margin-bottom: 6px;">{{item.name}}</view>
+                  <repeat for="{{item.version}}" key="index" index="index" item="version">
+                    <view class="zan-card__left-col zan-c-gray zan-font-14" style="margin-bottom: 5px;">{{version}}</view>
+                  </repeat>
+                </view>
+              </view>
+            </view>
+          </repeat>
+        </scroll-view>
+      </view>
     </view>
-    <view class="zan-font-14 zan-center" style='padding:10px 0;' @tap="_initAdd()">
+    <view class="zan-font-14 zan-center" style='padding:30rpx 0;' @tap="_initAdd()">
       <text class="zan-c-gray-darker">+添加习题册</text>
-    </view>
-    <view class="zan-font-14 zan-center" style='padding:10px 0;' @tap="_initWant()">
-      <text class="zan-c-gray-darker">+想要习题册</text>
     </view>
   </view>
 </template>
@@ -59,15 +61,16 @@ export default class Statistics extends wepy.page {
       this.workbookList = await this._getMyWorkbook(id)
       this.$apply()
     },
+    /** 进入章节 */
+    _intoChapter (item) {
+      wepy.navigateTo({
+        url: `/pages/workbook/chapter?name=${item.name}&id=${item.id}`
+      })
+    },
     /** 增加习题册 */
     _initAdd () {
       wepy.navigateTo({
         url: `/pages/workbook/add?id=${this.textbook}`
-      })
-    },
-    _initWant() {
-      wepy.navigateTo({
-        url: `/pages/workbook/want`
       })
     }
   }

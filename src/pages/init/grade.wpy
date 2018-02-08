@@ -77,14 +77,15 @@
           sex: this.sex
         })
         let name = ''
-        // let textbookId = ''
         switch (grade) {
           case '3': { name = '三年级下册'; break }
           case '4': { name = '四年级下册'; break }
           case '5': { name = '五年级下册'; break }
           case '6': { name = '六年级下册'; break }
         }
-        wepy.navigateTo({ url: `/pages/init/add?grade=${grade}&name=${name}` })
+        // 获取当前年级的教材
+        let textbookId = (wepy.getStorageSync('User').textbook)[Number(grade) - 3].id
+        wepy.navigateTo({ url: `/pages/init/add?grade=${grade}&name=${name}&textbookId=${textbookId}` })
       }
     }
 

@@ -37,7 +37,7 @@ export default class StatisticsError extends wepy.page {
     },
     async loadMore() {
       this.scrollDisabled = true
-      let result = await this._getErrorList(this.id, this.offset)
+      // let result = await this._getErrorList(this.id, this.offset)
       // this.error.push(result)
     }
   }

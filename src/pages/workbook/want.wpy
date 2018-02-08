@@ -111,6 +111,7 @@
           filePath: file,
           name: 'file',
           header: {
+            'Content-Type': 'multipart/form-data',
             'openId': wepy.getStorageSync('openId')
           },
           formData: {
