@@ -76,20 +76,23 @@
           success (res) {
             if (type === 'first') {
               self._uploadFile(res.tempFilePaths[0]).then((res) => {
+                console.log(res)
                 self.first[0] = res
+                self.$apply()
               })
             } else {
               self._uploadFile(res.tempFilePaths[0]).then((res) => {
+                console.log(res)
                 self.last[0] = res
+                self.$apply()
               })
             }
-            self.$apply()
           }
         })
       },
       // 上传按钮的事件
       _upload () {
-        if (!this.first.length && !this.last.length) {
+        if (this.first.length === 0 || this.last.length === 0) {
           wepy.showModal({
             title: '提示',
             content: '请上传正确的封面',
@@ -97,7 +100,7 @@
             confirmText: '确定'
           })
         } else {
-          this._setWant(this.first[0], this.last[0])
+          // this._setWant(this.first[0], this.last[0])
         }
       }
     }
@@ -119,7 +122,7 @@
           },
           success (res) {
             console.log(res.data)
-            resolve(res.url)
+            resolve(res.data.url)
           },
           fail (err) {
             console.log(err)

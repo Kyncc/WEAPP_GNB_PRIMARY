@@ -1,130 +1,35 @@
-<style>
-.searchbar-result{
-  margin-top: 0;
-  font-size: 14px;
-}
-.searchbar-result:before{
-  display: none;
-}
-.weui-search-bar {
-  position: relative;
-  padding: 8px 10px;
-  display: flex;
-  box-sizing: border-box;
-  background-color: #EFEFF4;
-  border-top: 1rpx solid #D7D6DC;
-  border-bottom: 1rpx solid #D7D6DC;
-}
-.weui-icon-search {
-  margin-right: 8px;
-  font-size:inherit;
-}
-.weui-icon-search_in-box {
-  position: absolute;
-  left: 10px;
-  top: 7px;
-}
-.weui-search-bar__text{
-    display: inline-block;
-    font-size: 14px;
-    vertical-align: middle;
-}
-.weui-search-bar__form {
-    position: relative;
-    flex: auto;
-    border-radius: 5px;
-    background: #FFFFFF;
-    border: 1rpx solid #E6E6EA;
-}
-.weui-search-bar__box {
-    position: relative;
-    padding-left: 30px;
-    padding-right: 30px;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 1;
-}
-.weui-search-bar__input {
-    height: 28px;
-    line-height: 28px;
-    font-size: 14px;
-}
-.weui-icon-clear {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 7px 8px;
-    font-size: 0;
-}
-.weui-search-bar__label {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 2;
-    border-radius: 3px;
-    text-align: center;
-    color: #9B9B9B;
-    background: #FFFFFF;
-    line-height: 28px;
-}
-.weui-search-bar__cancel-btn {
-    margin-left: 10px;
-    line-height: 28px;
-    color: #09BB07;
-    white-space: nowrap;
-}
-</style>
 <template>
   <view class="container">
-    <view class="weui-search-bar">
-      <view class="weui-search-bar__form">
-        <view class="weui-search-bar__box">
-          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-          <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" />
-          <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
-            <icon type="clear" size="14"></icon>
-          </view>
-        </view>
-        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
-          <icon class="weui-icon-search" type="search" size="14"></icon>
-          <view class="weui-search-bar__text">搜索</view>
-        </label>
-      </view>
-      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
-    </view>
-    <!-- <view class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
-      <view class="weui-cell__bd">
-        <view>实时搜索文本</view>
-      </view>
-    </view> -->
-    <!--练习册列表 -->
+    <!--习题册区间-->
     <view class="zan-panel">
-      <repeat for="{{ workbookList }}" key="index" index="index" item="item">
-        <view class="zan-card">
-          <view class="zan-card__thumb">
-            <image class="zan-card__img"
-              src="{{ item.img.url }}?imageView2/2/w/225/h/360/format/jpg/q/75" mode="aspectFit" lazy-load='true'>
-            </image>
-          </view>
-          <view class="zan-card__detail zan-row">
-            <view class="zan-card__detail-row">
-              <view class="zan-card__left-col zan-c-gray-darker">{{item.year}}版</view>
+      <scroll-view scroll-y="true" style="height: 1000rpx;background:#fff;" scroll-with-animation="true" enable-back-to-top="true">
+        <repeat for="{{ workbookList }}" key="pindex" index="pindex" item="item">
+          <view class="zan-card">
+            <!--习题册图片-->
+            <view class="zan-card__thumb" @tap="_preview({{ item.img.url }})">
+              <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/180/h/270/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
             </view>
-            <view class="zan-card__detail-row zan-c-black zan-font-20">
-              <view class="zan-card__left-col" style="margin-bottom: 5px;">{{item.name}}</view>
-              <repeat for="{{item.version}}" key="index" index="index" item="version">
-                <view class="zan-card__left-col zan-c-gray zan-font-12" style="margin-bottom: 5px;">{{version}}</view>
-              </repeat>
+            <!--习题册详情-->
+            <view class="zan-card__detail" @tap="_edit({{ pindex}}, {{item.id}})">
+              <view class="zan-card__detail-row">
+                <view class="zan-card__left-col zan-font-14" style="color:#3FC6C6">{{item.year}}版</view>
+              </view>
+              <view class="zan-card__detail-row zan-c-gray-darker">
+                <view class="zan-card__right-col">
+                  <button wx:if="{{ item.status }}" class="zan-btn zan-btn--small zan-btn--plain zan-btn--warn">删除</button>
+                  <button wx:else class="zan-btn zan-btn--small zan-btn--plain zan-btn--primary {{ item.status ? '123':'213' }}">添加</button>
+                </view>
+                <view class="zan-card__left-col zan-font-16" style="margin-bottom: 3px;">{{item.name}}</view>
+                <repeat for="{{item.version}}" key="index" index="index" item="version">
+                  <view class="zan-card__left-col zan-c-gray zan-font-12" style="margin-bottom: 6rpx;">{{version}}</view>
+                </repeat>
+              </view>
             </view>
-            <!-- <view class="zan-col-6" style="display: inline-block;float: left">
-              <button class="zan-btn" @tap="_addWorkbook({{item.id}})">添加</button>
-            </view> -->
           </view>
-        </view>
-      </repeat>
+        </repeat>
+      </scroll-view>
     </view>
+    <!--习题册区间End-->
     <!--进入想要习题册-->
     <view class="zan-row zan-center" style="padding:30rpx 0;">
       <view class="zan-col zan-col-24 zan-font-16 zan-c-gray">没有找到想要的习题册？
@@ -145,6 +50,37 @@ export default class WorkbookAdd extends wepy.page {
     textbookId: ''
   }
 
+  methods = {
+    /** 查看练习册大图 */
+    _preview (url) {
+      wepy.previewImage({current: `${url}-primaryError`, urls: [`${url}-primaryError`]})
+    },
+    /** 练习册增加删除 */
+    async _edit (index, id) {
+      this.workbookList[index].status = await this._setWorkbook(id)
+      this.$apply()
+    }
+  }
+
+  /** 编辑习题册 */
+  _setWorkbook (id) {
+    return new Promise((resolve, reject) => {
+      wepy.request({
+        url: 'https://primary.guinaben.com/workbook/edit',
+        method: 'POST',
+        data: {
+          workbookId: id
+        },
+        success (res) {
+          resolve(res.status)
+        },
+        fail (err) {
+          reject(err)
+        }
+      })
+    })
+  }
+
   // 添加我的练习册
   _getAllWorkbook (id) {
     let self = this
@@ -163,24 +99,6 @@ export default class WorkbookAdd extends wepy.page {
         }
       })
     })
-  }
-
-  methods = {
-    showInput () {
-      this.inputShowed = true
-    },
-    hideInput () {
-      this.inputVal = ''
-      this.inputShowed = false
-    },
-    clearInput () {
-      this.inputVal = ''
-    },
-    async inputTyping (e) {
-      this.inputVal = e.detail.value
-      this.workbookList = await this._getAllWorkbook(this.textbookId)
-      // this.$apply()
-    }
   }
 
   async onLoad (options) {

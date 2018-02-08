@@ -12,22 +12,22 @@
       <view class="zan-panel-title zan-font-bold zan-c-black" style="padding: 10px 15px 0 15px;">我的练习册</view>
       <!--习题册区间-->
       <view class="zan-panel">
-        <scroll-view scroll-y="true" style="height: 70%;background:#fff;" scroll-with-animation="true" enable-back-to-top="true">
+        <scroll-view scroll-y="true" style="height: 700rpx;background:#fff;" scroll-with-animation="true" enable-back-to-top="true">
           <block wx:for="{{ workbookList }}" wx:for-index="pindex" wx:for-item="item" wx:key="pindex">
-            <view class="zan-card">
+            <view class="zan-card" bindtap="_intoChapter" data-wpy_intochapter-a="{{item}}">
               <!--习题册图片-->
               <view class="zan-card__thumb">
-                <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/225/h/360/format/jpg/q/75" mode="aspectFit" lazy-load="true"/>
+                <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/180/h/270/format/jpg/q/75" mode="aspectFit" lazy-load="true"/>
               </view>
               <!--习题册详情-->
-              <view class="zan-card__detail" bindtap="_intoChapter" data-wpy_intochapter-a="{{item}}">
+              <view class="zan-card__detail">
                 <view class="zan-card__detail-row">
                   <view class="zan-card__left-col zan-font-14" style="color:#3FC6C6">{{item.year}}版</view>
                 </view>
                 <view class="zan-card__detail-row zan-c-gray-darker">
-                  <view class="zan-card__left-col zan-font-18" style="margin-bottom: 6px;">{{item.name}}</view>
+                  <view class="zan-card__left-col zan-font-16" style="margin-bottom: 3px;">{{item.name}}</view>
                   <block wx:for="{{item.version}}" wx:for-index="index" wx:for-item="version" wx:key="index">
-                    <view class="zan-card__left-col zan-c-gray zan-font-14" style="margin-bottom: 5px;">{{version}}</view>
+                    <view class="zan-card__left-col zan-c-gray zan-font-12" style="margin-bottom: 6rpx;">{{version}}</view>
                   </block>
                 </view>
               </view>

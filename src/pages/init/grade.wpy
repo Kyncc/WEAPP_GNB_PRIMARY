@@ -85,7 +85,7 @@
         }
         // 获取当前年级的教材
         let textbookId = (wepy.getStorageSync('User').textbook)[Number(grade) - 3].id
-        wepy.navigateTo({ url: `/pages/init/add?grade=${grade}&name=${name}&textbookId=${textbookId}` })
+        wepy.redirectTo({ url: `/pages/init/add?grade=${grade}&name=${name}&textbookId=${textbookId}` })
       }
     }
 
