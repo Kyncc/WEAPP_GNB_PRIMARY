@@ -1,3 +1,9 @@
+<style lang="less" scoped>
+.zan-btn {
+  border-radius: 0 !important;
+}
+</style>
+
 <template>
   <view class="container">
     <!--习题册区间-->

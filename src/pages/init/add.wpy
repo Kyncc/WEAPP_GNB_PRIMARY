@@ -115,7 +115,7 @@
       /**  进入我的资料 */
       _begin () {
         wepy.reLaunch({
-          url: '/pages/my/index'
+          url: '/pages/workbook/index'
         })
       }
     }

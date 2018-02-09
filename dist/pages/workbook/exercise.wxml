@@ -17,7 +17,7 @@
 
     
   <view class="zan-noticebar _db208f5">
-    <view id="{{ $zanNoticebar1$componentId }}__content-wrap" style="height: 18px; overflow: hidden; position: relative;">
+    <view id="{{ $zanNoticebar1$componentId }}__content-wrap" style="height: 20px; overflow: hidden; position: relative;">
       <view animation="{{ $zanNoticebar1$animationData }}" id="{{ $zanNoticebar1$componentId }}__content" style="position: absolute; white-space: nowrap;">
         {{ $zanNoticebar1$text }}
       </view>

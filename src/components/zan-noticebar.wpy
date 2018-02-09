@@ -1,16 +1,17 @@
-<style lang="stylus">
-.zan-noticebar
-  color #f60
-  padding 9px 10px
-  font-size 12px
-  line-height 1.5
-  background-color #fff7cc
+<style lang="less">
+.zan-noticebar{
+  color: #f60;
+  padding: 9px 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: #fff7cc;
+}
 </style>
 <template>
   <view class="zan-noticebar">
     <view
       id="{{ componentId }}__content-wrap"
-      style="height: 18px; overflow: hidden; position: relative;"
+      style="height: 20px; overflow: hidden; position: relative;"
     >
       <view
         animation="{{ animationData }}"

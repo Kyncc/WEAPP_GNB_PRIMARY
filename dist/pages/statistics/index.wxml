@@ -10,9 +10,9 @@
 
     <view class="zan-panel _edf42e2">
       <view class="zan-row zan-cell _edf42e2">
-        <view class="zan-col zan-col-6 zan-col-offset-6 zan-center _edf42e2">记错数</view>
+        <view class="zan-col zan-col-6 zan-col-offset-6 zan-center _edf42e2">记题数</view>
         <view class="zan-col zan-col-6 zan-center _edf42e2">错题数</view>
-        <view class="zan-col zan-col-6 zan-center _edf42e2">正确数</view>
+        <view class="zan-col zan-col-6 zan-center _edf42e2">正确率</view>
       </view>
       <block class="_edf42e2" wx:for="{{statistics}}" wx:for-index="index" wx:for-item="item" wx:key="index">
         <view class="zan-row zan-cell _edf42e2" bindtap="_intoList" data-wpy_intolist-a="{{item}}">

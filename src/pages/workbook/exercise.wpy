@@ -59,6 +59,7 @@ export default class WorkbookExercise extends wepy.page {
   }
 
   data = {
+    name: '',
     longText: '点错题题号完成记错，提交作业查看我的错题',
     charpterId: '',
     exercise: []
@@ -66,7 +67,7 @@ export default class WorkbookExercise extends wepy.page {
 
   methods = {
     /** 上传错题 */
-    _upload () {
+    async _upload () {
       let answerId = []
       let answer = []
       for (let nodes of this.exercise.nodes) {
@@ -75,7 +76,8 @@ export default class WorkbookExercise extends wepy.page {
           answer.push(questions.answer)
         }
       }
-      this._setExerciseResult(answerId, answer, this.charpterId)
+      await this._setExerciseResult(answerId, answer, this.charpterId)
+      wepy.redirectTo({url: `/pages/workbook/error?id=${this.charpterId}&name=${this.name}`})
     },
     /** 记错的切换 */
     _change (pindex, index) {
@@ -116,7 +118,6 @@ export default class WorkbookExercise extends wepy.page {
           answerId: ids
         },
         success (res) {
-          wepy.navigateBack()
           resolve(res)
         },
         fail (err) {
@@ -132,6 +133,7 @@ export default class WorkbookExercise extends wepy.page {
   async onLoad(options) {
     wx.setNavigationBarTitle({ title: options.name })
     this.charpterId = options.id
+    this.name = options.name
     this.exercise = await this._getExercise(options.id)
     this.$apply()
   }

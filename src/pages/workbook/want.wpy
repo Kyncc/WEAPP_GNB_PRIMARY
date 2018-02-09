@@ -51,7 +51,7 @@
     }
 
     data = {
-      imgs: ['http://img.guinaben.com/want2.png', 'http://img.guinaben.com/want1.jpg'],
+      imgs: ['http://img.guinaben.com/workbookPic/1108-cover-725711.jpg', 'http://img.guinaben.com/want1.jpg'],
       longText: '请按示例上传习题册封面和版印次，我们将尽快上架该习题册，请注意查看消息通知~',
       first: [],
       last: []
@@ -61,7 +61,7 @@
       /** 查看大图 */
       _preview (type) {
         if (type === 'first') {
-          wepy.previewImage({current: `http://img.guinaben.com/want2.png`, urls: this.imgs})
+          wepy.previewImage({current: `http://img.guinaben.com/workbookPic/1108-cover-725711.jpg`, urls: this.imgs})
         } else {
           wepy.previewImage({current: `http://img.guinaben.com/want1.jpg`, urls: this.imgs})
         }
@@ -101,7 +101,12 @@
           })
         } else {
           await this._setWant(this.first[0], this.last[0])
-          wepy.navigateBack()
+          wepy.showToast({
+            title: '上传成功',
+            icon: 'success',
+            duration: 2000
+          })
+          setTimeout(() => { wepy.navigateBack() }, 2000)
         }
       }
     }

@@ -13,9 +13,9 @@
     <gnbTextbookSelect :value.sync="grade" :key.sync="textbook" @event.user="textbookChange" :textbook.sync="textBookList"/>
     <view class="zan-panel">
       <view class="zan-row zan-cell">
-        <view class="zan-col zan-col-6 zan-col-offset-6 zan-center">记错数</view>
+        <view class="zan-col zan-col-6 zan-col-offset-6 zan-center">记题数</view>
         <view class="zan-col zan-col-6 zan-center">错题数</view>
-        <view class="zan-col zan-col-6 zan-center">正确数</view>
+        <view class="zan-col zan-col-6 zan-center">正确率</view>
       </view>
       <repeat for="{{statistics}}" key="index" index="index" item="item">
         <view class="zan-row zan-cell" @tap='_intoList({{item}})'>

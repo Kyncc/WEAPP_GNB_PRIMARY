@@ -16,15 +16,21 @@
 }
 .correct_date{
   position:absolute;
-  top: 73%;
+  top: 72%;
   left: 14%;
+}
+.correct_app{
+  position:absolute;
+  top: 72%;
+  left: 71%;
 }
 </style>
 <template>
   <view class="container">
     <view class="correct_name zan-center zan-font-22 zan-font-bold">{{name}}</view>
     <view class="correct_content">{{result.content}}</view>
-    <view class="correct_date zan-center zan-font-12">{{result.date}}</view>
+    <view class="correct_date zan-center zan-font-14">{{result.date}}</view>
+    <view class="correct_app zan-center zan-font-14">归纳本</view>
     <image src="../../common/resources/chapterExerciseCorrect.jpg" style="width:750rpx;height:100vh" mode="aspectFit"/>
   </view>
 </template>
