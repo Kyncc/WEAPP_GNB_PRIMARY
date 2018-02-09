@@ -95,11 +95,12 @@ export default class extends wepy.app {
     // request全局配置
     this.intercept('request', {
       config(params) {
-        let openId = {
-          'openId': wepy.getStorageSync('openId')
+        let header = {
+          'openId': wepy.getStorageSync('openId') || '',
+          'unionid': wepy.getStorageSync('unionid') || ''
         }
         wepy.showNavigationBarLoading()
-        params.header = openId
+        params.header = header
         return params
       },
       success(res) {

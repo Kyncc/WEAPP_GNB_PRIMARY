@@ -100,7 +100,7 @@
             confirmText: '确定'
           })
         } else {
-          // this._setWant(this.first[0], this.last[0])
+          this._setWant(this.first[0], this.last[0])
         }
       }
     }
@@ -121,8 +121,7 @@
             'type': 'wantworkbook'
           },
           success (res) {
-            console.log(res.data)
-            resolve(res.data.url)
+            resolve(JSON.parse(res.data).data.url)
           },
           fail (err) {
             console.log(err)
