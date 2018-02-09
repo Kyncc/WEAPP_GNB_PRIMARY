@@ -15,20 +15,26 @@
 
 <template>
   <view class="container">
-    <view class="zan-row zan-center" style="padding-top:60rpx;position: relative" >
+    <view class="zan-row zan-center" style="padding-top:60rpx;position: relative">
       <navigator url='/pages/my/info' hover-class="none">
-        <image class="zan-col zan-col-24" class="userinfo-avatar" src='{{userInfo.headImg}}' background-size='cover'/>
-        <image wx:if="{{ userInfo.vip != 0 }}" class="userinfo-vip" src='../../common/resources/vip.png' background-size='cover'/>
+        <image class="zan-col zan-col-24" class="userinfo-avatar" src='{{userInfo.headImg}}' mode='scaleToFill'/>
+        <image wx:if="{{ userInfo.vip != 0 }}" class="userinfo-vip" src='../../common/resources/vip.png' mode='scaleToFill'/>
         <text class="zan-col zan-col-24 zan-font-22">{{userInfo.name}}</text>
         <text class="zan-arrow"></text>
       </navigator>
     </view>
     <view class="zan-panel">
       <view class="zan-cell" @tap="_into('/pages/my/pay')">
-        <view class="zan-cell__bd">我的会员</view>
+        <view class="zan-cell__bd">
+          <image src='../../common/resources/icon_vip.png' style="width:20px;height:20px;position:relative;top:5px;margin-right:5px;" mode='scaleToFill'/>
+          <text>我的会员</text>
+        </view>
       </view>
       <view wx:if="userInfo.refund" class="zan-cell" @tap="_refund">
-        <view class="zan-cell__bd">申请退款</view>
+        <view class="zan-cell__bd">
+          <image src='../../common/resources/icon_tuikuan.png' style="width:20px;height:20px;position:relative;top:5px;margin-right:5px;" mode='scaleToFill'/>
+          <text>申请退款</text>
+        </view>
       </view>
     </view>
   </view>
@@ -170,7 +176,6 @@
         this.$apply()
       } catch (err) {
         wepy.hideLoading()
-        console.log(err)
       }
     }
 

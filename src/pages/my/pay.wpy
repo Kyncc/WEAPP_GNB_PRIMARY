@@ -27,11 +27,9 @@ export default class MyPay extends wepy.page {
   config = {
     navigationBarTitleText: '开通VIP'
   }
-  components = {}
-  data = {
-    longText: '首次支付30天内可无条件申请全额退款'
-  }
+
   methods = {
+
   }
 
   /** 购买VIP */
@@ -41,12 +39,10 @@ export default class MyPay extends wepy.page {
       wepy.request({
         url: 'https://wechat.guinaben.com/mini-program/pay',
         data: {
-          body: id,
-          total_fee: '',
-          detail: ''
+          type: id
         },
         success (res) {
-          resolve(res.url)
+          resolve(res)
         },
         fail (err) {
           reject(err)
@@ -58,8 +54,23 @@ export default class MyPay extends wepy.page {
     })
   }
 
-  onLoad() {
-
+  /** 发起支付 */
+  _pay (options) {
+    return new Promise((resolve, reject) => {
+      wepy.requestPayment({
+        timeStamp: options.timeStamp,
+        nonceStr: options.nonceStr,
+        package: options.prepay_id,
+        signType: 'MD5',
+        paySign: options.paySign,
+        success (res) {
+          resolve(res)
+        },
+        fail (err) {
+          reject(err)
+        }
+      })
+    })
   }
 }
 </script>
