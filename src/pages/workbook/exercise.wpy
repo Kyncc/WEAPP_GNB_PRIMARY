@@ -68,16 +68,22 @@ export default class WorkbookExercise extends wepy.page {
   methods = {
     /** 上传错题 */
     async _upload () {
-      let answerId = []
-      let answer = []
+      let answerId = [] // 题目ID数组
+      let answer = [] // 题目答案数组
+      let allCorrect = true // 全部为真的判断
       for (let nodes of this.exercise.nodes) {
         for (let questions of nodes.questions) {
           answerId.push(questions.id)
           answer.push(questions.answer)
+          if (!questions.answer) allCorrect = false
         }
       }
       await this._setExerciseResult(answerId, answer, this.charpterId)
-      wepy.redirectTo({url: `/pages/workbook/error?id=${this.charpterId}&name=${this.name}`})
+      if (allCorrect) {
+        wepy.redirectTo({url: `/pages/workbook/correct?id=${this.charpterId}&name=${this.name}`})
+      } else {
+        wepy.redirectTo({url: `/pages/workbook/error?id=${this.charpterId}&name=${this.name}`})
+      }
     },
     /** 记错的切换 */
     _change (pindex, index) {

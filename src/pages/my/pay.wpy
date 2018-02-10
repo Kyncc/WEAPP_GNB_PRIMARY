@@ -63,7 +63,7 @@ export default class MyPay extends wepy.page {
       wepy.requestPayment({
         timeStamp: options.timeStamp,
         nonceStr: options.nonceStr,
-        package: options.prepay_id,
+        package: options.packAge,
         signType: 'MD5',
         paySign: options.paySign,
         success (res) {

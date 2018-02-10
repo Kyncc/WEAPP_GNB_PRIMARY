@@ -10,7 +10,7 @@
 }
 .correct_content{
   position:absolute;
-  top: 47%;
+  top: 52%;
   left: 8%;
   width:85%;
 }

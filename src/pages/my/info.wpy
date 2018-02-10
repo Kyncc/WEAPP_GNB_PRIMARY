@@ -1,6 +1,12 @@
+<style lang="less" scoped>
+.zan-cell{
+  font-size: 16px;
+}
+</style>
+
 <template>
   <view class="container">
-     <view class="zan-panel" style="margin: 0;">
+     <view class="zan-panel" style="margin: 40rpx 0;">
        <nameField :options="base_name" componentId="nameField"/>
        <sexField :options="base_sex"  componentId="sexField"/>
        <view class="zan-cell">

@@ -2,7 +2,7 @@
   <view class="container _f24d470">
     <!--习题册区间-->
     <view class="zan-panel _f24d470">
-      <scroll-view scroll-y="true" style="height: 1000rpx;background:#fff;" scroll-with-animation="true" enable-back-to-top="true" class="_f24d470">
+      <scroll class="_f24d470">
         <block class="_f24d470" wx:for="{{ workbookList }}" wx:for-index="pindex" wx:for-item="item" wx:key="pindex">
           <view class="zan-card _f24d470">
             <!--习题册图片-->
@@ -27,15 +27,16 @@
             </view>
           </view>
         </block>
-      </scroll-view>
+        <!--进入想要习题册-->
+        <navigator open-type="navigate" url="/pages/workbook/want" hover-class="none" style="background:#F9F9F9" class="_f24d470">
+          <view class="zan-row zan-center _f24d470" style="padding:30rpx 0;">
+            <view class="zan-col zan-col-24 zan-font-14 zan-c-gray _f24d470">没有找到想要的习题册？
+              <text style="color:#FF7043;text-decoration:underline;" class="_f24d470">告诉我们</text>
+            </view>
+          </view>
+        </navigator>
+      </scroll>
     </view>
     <!--习题册区间End-->
-    <!--进入想要习题册-->
-    <navigator open-type="navigate" url="/pages/workbook/want" hover-class="none" class="_f24d470">
-      <view class="zan-row zan-center _f24d470" style="padding:30rpx 0;">
-        <view class="zan-col zan-col-24 zan-font-14 zan-c-gray _f24d470">没有找到想要的习题册？
-          <text style="color:#FF7043;text-decoration:underline;" class="_f24d470">告诉我们</text>
-        </view>
-      </view>
-    </navigator>
+
   </view>

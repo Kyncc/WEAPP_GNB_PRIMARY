@@ -16,6 +16,9 @@
     z-index: 5;
   }
 }
+.zan-panel-title{
+  font-size: 16px;
+}
 .zan-btn--primary{
   background-color: #3fc6c6;
   &::after {
@@ -63,12 +66,12 @@ export default class extends wepy.app {
         pagePath: 'pages/workbook/index',
         iconPath: 'common/resources/statistics.png',
         selectedIconPath: 'common/resources/statistics_select.png',
-        text: '错题本'
+        text: '记错题'
       }, {
         pagePath: 'pages/statistics/index',
         iconPath: 'common/resources/workbook.png',
         selectedIconPath: 'common/resources/workbook_select.png',
-        text: '记错题'
+        text: '错题本'
       }, {
         pagePath: 'pages/my/index',
         iconPath: 'common/resources/user.png',
