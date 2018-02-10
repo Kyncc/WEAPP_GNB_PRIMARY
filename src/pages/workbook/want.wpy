@@ -30,7 +30,7 @@
     <view class="zan-row" style="padding:20px 0">
       <view class="zan-col zan-col-20 zan-col-offset-2 zan-center">
         <button class="zan-btn zan-btn--primary" @tap="_upload">
-          <image style="height:22px;width:22px;position: relative;top:8px;" src="../../common/resources/upload.png"/>上传
+          <image style="height:22px;width:22px;position: relative;top:5px;" src="../../common/resources/upload.png"/>上传
         </button>
       </view>
     </view>

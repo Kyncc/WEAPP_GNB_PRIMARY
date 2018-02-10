@@ -95,6 +95,9 @@
         wepy.request({
           url: 'https://wechat.guinaben.com/mini-program/refund',
           method: 'POST',
+          data: {
+            app: 'primary'
+          },
           success (res) {
             resolve(res)
           },
@@ -123,7 +126,8 @@
         wepy.request({
           url: 'https://wechat.guinaben.com/mini-program/openId',
           data: {
-            code: code
+            code: code,
+            app: 'primary'
           },
           success (res) {
             wepy.setStorageSync('openId', res.openid)

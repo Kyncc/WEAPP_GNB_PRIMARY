@@ -6,15 +6,16 @@
 .btn_exercise{
   background: #EDF9F8;
   color: #3fc6c6;
-  height: 125rpx;
-  width: 125rpx;
-  font-size:30rpx;
+  height: 118rpx;
+  width: 118rpx;
+  font-size:32rpx;
   text-align: center;
-  line-height: 125rpx;
+  line-height: 118rpx;
   display: inline-block;
   border-radius: 50%;
   border: none;
-  margin:10rpx 0 10rpx 20rpx;
+  margin:20rpx 0 20rpx 20rpx;
+  padding:0;
 }
 .is_checked {
   color: #fff;

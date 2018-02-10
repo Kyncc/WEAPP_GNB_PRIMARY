@@ -35,7 +35,7 @@
 
   export default class Statistics extends wepy.page {
     config = {
-      navigationBarTitleText: '记错题'
+      navigationBarTitleText: '错题本'
     }
 
     components = {

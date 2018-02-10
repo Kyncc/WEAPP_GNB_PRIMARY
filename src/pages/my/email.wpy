@@ -50,7 +50,7 @@
       form_email: {
         title: '',
         value: '',
-        placeholder: 'QQ/163/Gmail/企业邮箱等'
+        placeholder: '请输入邮箱'
       }
     }
 

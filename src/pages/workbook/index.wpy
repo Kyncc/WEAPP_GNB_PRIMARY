@@ -43,7 +43,7 @@ import gnbTextbookSelect from '@/components/gnb-textbookSelect'
 
 export default class Statistics extends wepy.page {
   config = {
-    navigationBarTitleText: '错题归纳本小学数学'
+    navigationBarTitleText: '记错题'
   }
 
   components = {
