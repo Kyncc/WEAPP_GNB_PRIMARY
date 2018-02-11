@@ -1,3 +1,2 @@
-@import "./../../npm/wepy-com-toast/toast.wxss";
 @import "./../../components/zan-noticebar.wxss";
 .flex._db208f5{display:flex;flex-wrap:wrap}.btn_exercise._db208f5{background:#EDF9F8;color:#3fc6c6;height:118rpx;width:118rpx;font-size:32rpx;text-align:center;line-height:118rpx;display:inline-block;border-radius:50%;border:none;margin:20rpx 0 20rpx 20rpx;padding:0}.is_checked._db208f5{color:#fff;background:#FF7043}.footer._db208f5{position:fixed;bottom:30rpx;width:100%}

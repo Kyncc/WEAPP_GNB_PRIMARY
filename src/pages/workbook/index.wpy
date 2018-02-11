@@ -31,7 +31,7 @@
         </scroll-view>
       </view>
     </view>
-    <view class="zan-font-14 zan-center" style='padding:20rpx 0;' @tap="_initAdd()">
+    <view class="zan-font-16 zan-center" style='padding:20rpx 0;' @tap="_initAdd()">
       <text class="zan-c-gray-darker">+添加习题册</text>
     </view>
   </view>

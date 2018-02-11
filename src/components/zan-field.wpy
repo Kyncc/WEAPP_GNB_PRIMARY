@@ -37,6 +37,7 @@ export default class zanField extends wepy.component {
   props = {
     options: {
       type: Object,
+      twoWay: true,
       default: {
         right: true,
         error: true,

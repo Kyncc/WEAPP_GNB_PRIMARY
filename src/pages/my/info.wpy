@@ -7,7 +7,7 @@
 <template>
   <view class="container">
      <view class="zan-panel" style="margin: 40rpx 0;">
-       <nameField :options="base_name" componentId="nameField"/>
+       <nameField :options.sync="base_name" componentId="nameField"/>
        <sexField :options="base_sex"  componentId="sexField"/>
        <view class="zan-cell">
         <view class="zan-cell__hd zan-field__title">年级</view>
@@ -15,7 +15,7 @@
           {{gradeList[gradeIndex]}}<text class="zan-arrow"></text>
         </picker>
        </view>
-       <schoolField :options="base_school" componentId="schoolField"/>
+       <schoolField :options.sync="base_school" componentId="schoolField"/>
      </view>
      <view class="zan-row" style="margin-top:20px;">
         <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" @tap='_save'>保存</button>
@@ -27,7 +27,7 @@
   import wepy from 'wepy'
   import zanField from '@/components/zan-field'
 
-  const gradeList = ['三年级', '四年级', '五年级', '六年级']
+  const gradeList = ['三年级', '四年级', '五年级']
 
   export default class MyInfo extends wepy.page {
     config = {
@@ -88,9 +88,7 @@
           icon: 'success',
           duration: 2000,
           success () {
-            wepy.reLaunch({
-              url: '/pages/my/index'
-            })
+            wepy.navigateBack()
           }
         })
       }
@@ -119,6 +117,13 @@
           }
         })
       })
+    }
+
+    onShow () {
+      this.base_name.value = wepy.getStorageSync('User').name
+      this.base_school.value = wepy.getStorageSync('User').school
+      this.gradeIndex = Number(wepy.getStorageSync('User').grade) - 3
+      this.$apply()
     }
   }
 </script>

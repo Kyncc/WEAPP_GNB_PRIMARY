@@ -14,7 +14,7 @@
     <view class="zan-panel-title zan-font-bold zan-c-black" style="margin-top:30px;">题目发送到邮箱，直接打印回家做</view>
     <view class="zan-panel" style="margin: 20px 0;">
       <view class="zan-cell" style="padding:0;position:statics">
-        <zanField1 :options="form_email" componentId="zanField1"></zanField1>
+        <zanField1 :options.sync="form_email" componentId="zanField1"></zanField1>
         <picker @change="bindEmailCodeChange" value="{{emailCodeIndex}}" range="{{emailCodes}}" style="width:35%">
           <view style="width:100%;height:35px;line-height:35px;">{{emailCodes[emailCodeIndex]}}
             <text class="zan-arrow"></text>
@@ -69,11 +69,11 @@
       /** 发送Email */
       async _send() {
         // 如果当前的Email和信息相同则发送，否则更新Email信息在发送
-        if (this.form_email.value !== wepy.getStorageSync('User').email) {
+        let mail = this.form_email.value + this.emailCodes[this.emailCodeIndex]
+        if (mail !== wepy.getStorageSync('User').email) {
           await this._setUserEmail(this.form_email.value + this.emailCodes[this.emailCodeIndex])
         }
         await this._sendEmail(this.id)
-        wepy.navigateBack()
       }
     }
 
@@ -88,7 +88,7 @@
             email: email
           },
           success (res) {
-            wepy.setStorageSync('email', email)
+            wepy.setStorageSync('User', res)
             resolve(res)
           },
           fail (err) {
@@ -111,6 +111,17 @@
             chapterId: id
           },
           success (res) {
+            wepy.showModal({
+              title: '发送成功',
+              content: '已发送至您的邮箱(若未收到，请查看垃圾邮件)',
+              confirmText: '知道了',
+              showCancel: false,
+              success(res) {
+                if (res.confirm) {
+                  wepy.navigateBack()
+                }
+              }
+            })
             resolve(res.url)
           },
           fail (err) {
@@ -125,16 +136,17 @@
 
     onLoad(options) {
       this.id = options.id
+    }
+
+    onShow() {
       let email = wepy.getStorageSync('User').email
-      // 邮箱不为空获取邮箱和邮箱类型
-      if (email.length) {
-        this.form_email.value = email.split('@')[0]
-        let type = `@${email.split('@')[1]}`
-        for (let i = 0; i < emailList.length; i++) {
-          if (type === `@${email.split('@')[1]}`) {
-            this.emailCodeIndex = i
-            break
-          }
+      // 获取邮箱和邮箱类型
+      this.form_email.value = email.split('@')[0]
+      let type = `@${email.split('@')[1]}`
+      for (let i = 0; i < emailList.length; i++) {
+        if (type === emailList[i]) {
+          this.emailCodeIndex = i
+          break
         }
       }
       this.$apply()

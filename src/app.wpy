@@ -25,6 +25,9 @@
     border-color:#3fc6c6;
   }
 }
+.zan-noticebar {
+  font-size: 14px;
+}
 .zan-card__thumb {
 	width: 60px;
   height: 90px;
