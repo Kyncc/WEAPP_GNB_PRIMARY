@@ -45,6 +45,7 @@
 
     data = {
       id: '',
+      type: '',
       emailCodes: emailList,
       emailCodeIndex: 0,
       form_email: {
@@ -73,7 +74,7 @@
         if (mail !== wepy.getStorageSync('User').email) {
           await this._setUserEmail(this.form_email.value + this.emailCodes[this.emailCodeIndex])
         }
-        await this._sendEmail(this.id)
+        await this._sendEmail(this.id, this.type)
       }
     }
 
@@ -102,11 +103,17 @@
     }
 
     /** 发送Email */
-    _sendEmail (id) {
+    _sendEmail (id, type) {
+      let url
+      if (type === 'statistics') {
+        url = 'https://primary.guinaben.com/textbook/statistics/download'
+      } else {
+        url = 'https://primary.guinaben.com/workbook/chapter/errorDownload'
+      }
       wepy.showLoading({title: '请稍候'})
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://primary.guinaben.com/workbook/chapter/errorDownload',
+          url: url,
           data: {
             chapterId: id
           },
@@ -135,7 +142,9 @@
     }
 
     onLoad(options) {
+      this.type = options.type
       this.id = options.id
+      this.$apply()
     }
 
     onShow() {

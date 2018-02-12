@@ -1,27 +1,18 @@
 
-  <view class="container">
-    
-  <scroll-view scroll-y enable-back-to-topx="enable-back-to-topx" style="height: {{$InfiniteScroll$height}}" lower-threshold="{{$InfiniteScroll$scrollDistance}}" bindscrolltolower="$InfiniteScroll$scrolltoupper">
-    
-      <block wx:for="{{error}}" wx:for-index="index" wx:for-item="item" wx:key="index">
-        <view class="zan-panel">
-          <view class="zan-cell" style="padding: 5px 0" bindtap="_preview" data-wpy_preview-a="{{item.errorImg.url}}">
-            <image mode="aspectFit" style="width:100%;height:{{ item.errorImg.height/4 }}px" src="{{item.errorImg.url}}?mageMogr2/auto-orient/thumbnail/750x/format/jpg/interlace/1/blur/1x0/quality/100|imageslim" lazy-load="true"/>
-          </view>
-          <view class="zan-cell zan-font-12" style="padding: 7px 15px">
-            <view class="zan-cell__bd" style="color: #3fc6c6">{{item.workbookName}}</view>
-          </view>
+  <view class="container _ab53dd0">
+    <block class="_ab53dd0" wx:for="{{error}}" wx:for-index="index" wx:for-item="item" wx:key="index">
+      <view class="zan-panel _ab53dd0">
+        <view class="zan-cell _ab53dd0" style="padding: 5px 0" bindtap="_preview" data-wpy_preview-a="{{item.errorImg.url}}">
+          <image mode="aspectFit" style="width:100%;height:{{ item.errorImg.height/4 }}px" src="{{item.errorImg.url}}?mageMogr2/auto-orient/thumbnail/750x/format/jpg/interlace/1/blur/1x0/quality/100|imageslim" lazy-load="true" class="_ab53dd0"/>
         </view>
-      </block>
-    
-    <view class="loading_cell mb30"  wx:if="{{!$InfiniteScroll$isOnPullDownRefresh && $InfiniteScroll$scrollDisabled && !$InfiniteScroll$isNothing}}">
-      <view class="lds-rolling"/>
+        <view class="zan-cell zan-font-12 _ab53dd0" style="padding: 7px 15px">
+          <view class="zan-cell__bd _ab53dd0" style="color: #3fc6c6">{{item.workbookName}}</view>
+        </view>
+      </view>
+    </block>
+    <view class="footer _ab53dd0">
+      <view class="zan-row _ab53dd0">
+        <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--primary _ab53dd0" bindtap="_download">下载{{error.length}}道错题</button>
+      </view>
     </view>
-    <view class="nothing"  wx:if="{{$InfiniteScroll$scrollDisabled && $InfiniteScroll$isNothing}}">
-      <view class="line"/>
-      <text>到底了</text>
-      <view class="line"/>
-    </view>
-  </scroll-view>
-
   </view>

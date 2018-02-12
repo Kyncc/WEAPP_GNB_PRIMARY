@@ -52,7 +52,7 @@
       _download () {
         // 先判断是否会员
         wepy.navigateTo({
-          url: `/pages/my/email?id=${this.id}`
+          url: `/pages/my/email?id=${this.id}&type=workbook`
         })
       }
     }
