@@ -1,16 +1,7 @@
 <style lang="less" scoped>
 .search{
-  background: #fff;
-  position: relative;
-  .search_icon{
-    position: absoult;
-    top:5px;
-    left:0px;
-  }
-  .zan-field {
-    padding:3px 15px;
-    display: inline-block;
-    width: 95%;
+  .zan-cell{
+    padding: 5px 15px;
   }
 }
 </style>
@@ -22,11 +13,12 @@
       <text class="zan-col zan-col-24 zan-font-22 zan-c-black">选择你正在使用的习题册</text>
       <text class="zan-col zan-col-24 zan-font-14 zan-c-gray-darker" style="margin-top: 30rpx;">数学 新人教版 {{gradeName}}</text>
     </view>
-    <view class="search">
-      <!-- <searchBar :options="search" componentId="searchField"/> -->
+    <!--搜索-->
+    <view class="zan-panel search">
+      <searchField :options.sync="base_search" componentId="searchField"/>
     </view>
     <!--习题册区间-->
-    <view class="zan-panel">
+    <view class="zan-panel" style="margin-top: 0;">
       <scroll-view scroll-y="true" style="height: 630rpx;background:#fff;" scroll-with-animation="true" enable-back-to-top="true">
         <repeat for="{{ workbookList }}" key="pindex" index="pindex" item="item">
           <view class="zan-card">
@@ -72,7 +64,7 @@
 
 <script>
   import wepy from 'wepy'
-  // import searchBar from '@/components/gnb-searchBar'
+  import zanField from '@/components/zan-field'
 
   export default class InitAddWorkbook extends wepy.page {
     config = {
@@ -80,25 +72,25 @@
     }
 
     components = {
-      // searchBar: searchBar
+      searchField: zanField
     }
 
     data = {
-      // name: '123',
       gradeName: '',
       textbookId: '',
       workbookList: [],
-      search: {
-        title: '',
+      base_search: {
+        title: '搜索习题册',
         value: '',
-        placeholder: '搜索习题册'
+        placeholder: '请输入练习册名称'
       }
     }
 
     events = {
-      zanFieldChange(e) {
-        // let { componentId, detail } = e
-        // this.$apply()
+      async zanFieldChange(e) {
+        this.base_search.value = e.detail.value
+        this.workbookList = await this._getAllWorkbook(this.textbookId, this.base_search.value)
+        this.$apply()
       }
     }
 
@@ -161,7 +153,7 @@
     async onLoad(options) {
       this.gradeName = options.name
       this.textbookId = options.textbookId
-      this.workbookList = await this._getAllWorkbook(this.textbookId, '')
+      this.workbookList = await this._getAllWorkbook(this.textbookId, this.base_search.value)
       this.$apply()
     }
   }

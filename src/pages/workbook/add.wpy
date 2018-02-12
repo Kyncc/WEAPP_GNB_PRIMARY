@@ -2,12 +2,28 @@
 .zan-btn {
   border-radius: 0 !important;
 }
+.search{
+  position:fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 45px;
+  z-index: 999;
+  margin-top: 0;
+  .zan-cell{
+    padding: 5px 15px;
+  }
+}
 </style>
 
 <template>
   <view class="container">
+    <!--搜索-->
+    <view class="zan-panel search">
+      <searchField :options.sync="base_search" componentId="searchField"/>
+    </view>
     <!--习题册区间-->
-    <view class="zan-panel">
+    <view class="zan-panel" style="margin-top:55px;">
       <scroll>
         <repeat for="{{ workbookList }}" key="pindex" index="pindex" item="item">
           <view class="zan-card">
@@ -23,7 +39,7 @@
               <view class="zan-card__detail-row zan-c-gray-darker">
                 <view class="zan-card__right-col">
                   <button wx:if="{{ item.status }}" class="zan-btn zan-btn--small zan-btn--plain zan-btn--warn">删除</button>
-                  <button wx:else class="zan-btn zan-btn--small zan-btn--plain zan-btn--primary {{ item.status ? '123':'213' }}">添加</button>
+                  <button wx:else class="zan-btn zan-btn--small zan-btn--plain zan-btn--primary">添加</button>
                 </view>
                 <view class="zan-card__left-col zan-font-16" style="margin-bottom: 3px;">{{item.name}}</view>
                 <repeat for="{{item.version}}" key="index" index="index" item="version">
@@ -44,19 +60,36 @@
       </scroll>
     </view>
     <!--习题册区间End-->
-
   </view>
 </template>
 
 <script>
 import wepy from 'wepy'
+import zanField from '@/components/zan-field'
 
 export default class WorkbookAdd extends wepy.page {
+  components = {
+    searchField: zanField
+  }
+
   data = {
     workbookList: [],
     inputShowed: false,
     inputVal: '',
-    textbookId: ''
+    textbookId: '',
+    base_search: {
+      title: '搜索习题册',
+      value: '',
+      placeholder: '请输入练习册名称'
+    }
+  }
+
+  events = {
+    async zanFieldChange(e) {
+      this.base_search.value = e.detail.value
+      this.workbookList = await this._getAllWorkbook(this.textbookId, this.base_search.value)
+      this.$apply()
+    }
   }
 
   methods = {
@@ -91,13 +124,12 @@ export default class WorkbookAdd extends wepy.page {
   }
 
   // 添加我的练习册
-  _getAllWorkbook (id) {
-    let self = this
+  _getAllWorkbook (id, name) {
     return new Promise((resolve, reject) => {
       wepy.request({
         url: 'https://primary.guinaben.com/workbook/all',
         data: {
-          name: self.inputVal,
+          name: name,
           textbookId: id
         },
         success (res) {
@@ -112,7 +144,12 @@ export default class WorkbookAdd extends wepy.page {
 
   async onLoad (options) {
     this.textbookId = options.id
-    this.workbookList = await this._getAllWorkbook(this.textbookId)
+    this.workbookList = await this._getAllWorkbook(this.textbookId, this.base_search.value)
+    this.$apply()
+  }
+
+  onShow () {
+    this.base_search.value = ''
     this.$apply()
   }
 }

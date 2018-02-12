@@ -4,7 +4,7 @@
       <view class="zan-center">
         <image style="height:75px;width:90px;" src="../../common/resources/huangguan.png"/>
       </view>
-      <text class="zan-c-gray-dark zan-font-14">开通VIP即可无限次下载所有错题</text>
+      <text class="zan-c-gray-dark zan-font-16">开通VIP即可无限次下载所有错题</text>
     </view>
     <view class="zan-panel">
       <view class="zan-cell" @tap="_buy(1)">
@@ -30,9 +30,29 @@ export default class MyPay extends wepy.page {
 
   methods = {
     async _buy (id) {
+      // 获取支付CODE
       let options = await this._orderVip(id)
-      this._pay(options)
+      // 发起支付
+      await this._pay(options)
+      // 支付成功后在重新拉取个人信息
+      await this._getUserInfo()
     }
+  }
+
+  /** 获取用户信息 */
+  _getUserInfo () {
+    return new Promise((resolve, reject) => {
+      wepy.request({
+        url: 'https://primary.guinaben.com/member/info',
+        success (res) {
+          wepy.setStorageSync('User', res)
+          resolve(res)
+        },
+        fail (err) {
+          reject(err)
+        }
+      })
+    })
   }
 
   /** 购买VIP */
@@ -49,6 +69,10 @@ export default class MyPay extends wepy.page {
           resolve(res)
         },
         fail (err) {
+          wepy.showToast({
+            title: '获取支付CODE失败',
+            icon: 'none'
+          })
           reject(err)
         },
         complete () {
@@ -68,9 +92,17 @@ export default class MyPay extends wepy.page {
         signType: 'MD5',
         paySign: options.paySign,
         success (res) {
+          wepy.showToast({
+            title: 'VIP开通成功~',
+            icon: 'success'
+          })
           resolve(res)
         },
         fail (err) {
+          wepy.showToast({
+            title: '支付失败',
+            icon: 'none'
+          })
           reject(err)
         }
       })

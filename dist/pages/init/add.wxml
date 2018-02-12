@@ -5,11 +5,18 @@
       <text class="zan-col zan-col-24 zan-font-22 zan-c-black _89da6de">选择你正在使用的习题册</text>
       <text class="zan-col zan-col-24 zan-font-14 zan-c-gray-darker _89da6de" style="margin-top: 30rpx;">数学 新人教版 {{gradeName}}</text>
     </view>
-    <view class="search _89da6de">
-      <!-- <searchBar v-bind:options.once="search" componentId="searchField"/> -->
+    <!--搜索-->
+    <view class="zan-panel search _89da6de">
+      
+  <view class="zan-cell zan-field {{ $searchField$options.error ? 'zan-field--error' : '' }} {{ $searchField$options.mode === 'wrapped' ? 'zan-field--wrapped' : '' }} _89da6de">
+    <view  wx:if="{{ $searchField$options.title }}" class="zan-cell__hd zan-field__title">{{ $searchField$options.title }}</view>
+    <textarea  wx:if="{{ $searchField$options.type === 'textarea' }}" auto-height name="{{ $searchField$options.name || $searchField$componentId || '' }}" value="{{ $searchField$options.value }}" placeholder="{{ $searchField$options.placeholder }}" class="zan-field__input zan-cell__bd {{ $searchField$options.right ? 'zan-field__input--right' : '' }}" placeholder-class="zan-field__placeholder" bindinput="$searchField$handleZanFieldChange" bindfocus="$searchField$handleZanFieldFocus" bindblur="$searchField$handleZanFieldBlur" data-component-id="{{ $searchField$componentId || '' }}"/>
+    <input wx:else disabled="{{ $searchField$options.disabled }}" type="{{ $searchField$options.inputType || 'text' }}" name="{{ $searchField$options.name || $searchField$componentId || '' }}" value="{{ $searchField$options.value }}" placeholder="{{ $searchField$options.placeholder }}" class="zan-field__input zan-cell__bd {{ $searchField$options.right ? 'zan-field__input--right' : '' }}" placeholder-class="zan-field__placeholder" bindinput="$searchField$handleZanFieldChange" bindfocus="$searchField$handleZanFieldFocus" bindblur="$searchField$handleZanFieldBlur" data-component-id="{{ $searchField$componentId || '' }}"/>
+  </view>
+
     </view>
     <!--习题册区间-->
-    <view class="zan-panel _89da6de">
+    <view class="zan-panel _89da6de" style="margin-top: 0;">
       <scroll-view scroll-y="true" style="height: 630rpx;background:#fff;" scroll-with-animation="true" enable-back-to-top="true" class="_89da6de">
         <block class="_89da6de" wx:for="{{ workbookList }}" wx:for-index="pindex" wx:for-item="item" wx:key="pindex">
           <view class="zan-card _89da6de">

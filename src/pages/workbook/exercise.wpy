@@ -42,7 +42,10 @@
       </repeat>
     </view>
     <view class="zan-row footer">
-      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" @tap='_upload'>记完了</button>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" @tap='_upload'>
+        <image style="height:22px;width:22px;position: relative;top:5px;" src="../../common/resources/download.png"/>
+        记完了
+      </button>
     </view>
   </view>
 </template>

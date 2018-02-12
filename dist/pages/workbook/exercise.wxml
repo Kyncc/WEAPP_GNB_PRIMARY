@@ -20,6 +20,9 @@
       </block>
     </view>
     <view class="zan-row footer _db208f5">
-      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary _db208f5" bindtap="_upload">记完了</button>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary _db208f5" bindtap="_upload">
+        <image style="height:22px;width:22px;position: relative;top:5px;" src="../../common/resources/download.png" class="_db208f5"/>
+        记完了
+      </button>
     </view>
   </view>
