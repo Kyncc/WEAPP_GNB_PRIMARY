@@ -36,13 +36,13 @@
         <view class="zan-panel-title zan-font-bold zan-c-black">{{ nodes.name }}</view>
         <view class="zan-cell flex" style="padding:12px 7px">
           <repeat for="{{ nodes.questions }}" key="index" index="index" item="questions">
-            <button class="zan-btn btn_exercise {{questions.answer ? '' : 'is_checked'}}" bindtap="_change({{pindex}}, {{index}})">{{ questions.name }}</button>
+            <button class="zan-btn btn_exercise {{questions.answer ? '' : 'is_checked'}}" @tap="_change({{pindex}}, {{index}})">{{ questions.name }}</button>
           </repeat>
         </view>
       </repeat>
     </view>
     <view class="zan-row footer">
-      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" bindtap='_upload'>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" @tap='_upload'>
         <image style="height:22px;width:22px;position: relative;top:5px;" src="../../common/resources/download.png"/>
         记完了
       </button>

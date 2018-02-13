@@ -2566,10 +2566,6 @@ wepy-async-function@^1.4.4:
     promise-polyfill "^6.0.2"
     regenerator-runtime "^0.10.3"
 
-wepy-com-toast@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/wepy-com-toast/-/wepy-com-toast-1.0.2.tgz#6f49cd67192bdadedac5f8c36f990bddc2f107f9"
-
 wepy-compiler-babel@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/wepy-compiler-babel/-/wepy-compiler-babel-1.5.1.tgz#f9cefb2035c8bafe90bbb922a317775f6c5cb208"
@@ -2597,10 +2593,6 @@ wepy-compiler-stylus@^1.3.10:
 wepy-eslint@^1.5.3:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/wepy-eslint/-/wepy-eslint-1.5.3.tgz#48bd89309611152f1b83747484f4a6494a48b414"
-
-wepy-img-loader@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/wepy-img-loader/-/wepy-img-loader-1.0.1.tgz#8557be791ae16163a26e920ea6de146b8fc145e1"
 
 wepy-redux@^1.5.3:
   version "1.5.3"

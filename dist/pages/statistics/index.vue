@@ -18,7 +18,7 @@
         <view class="zan-col zan-col-6 zan-center">正确率</view>
       </view>
       <repeat for="{{statistics}}" key="index" index="index" item="item">
-        <view class="zan-row zan-cell" bindtap='_intoList({{item}})'>
+        <view class="zan-row zan-cell" @tap='_intoList({{item}})'>
           <view class="zan-col zan-col-6" style="text-indent: 10px">{{item.name}}</view>
           <view class="zan-col zan-col-6 numberColor">{{item.record}}</view>
           <view class="zan-col zan-col-6 numberColor">{{item.error}}</view>

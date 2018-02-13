@@ -7,13 +7,13 @@
       <text class="zan-c-gray-dark zan-font-16">开通VIP即可无限次下载所有错题</text>
     </view>
     <view class="zan-panel">
-      <view class="zan-cell" bindtap="_buy(1)">
+      <view class="zan-cell" @tap="_buy(1)">
         <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥29 </text>/月</view>
       </view>
-      <view class="zan-cell" bindtap="_buy(2)">
+      <view class="zan-cell" @tap="_buy(2)">
         <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥149 </text>/半年</view>
       </view>
-      <view class="zan-cell" bindtap="_buy(3)">
+      <view class="zan-cell" @tap="_buy(3)">
         <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥199 </text>/年</view>
       </view>
     </view>

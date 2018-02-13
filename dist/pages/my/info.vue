@@ -11,14 +11,14 @@
        <sexField :options="base_sex"  componentId="sexField"/>
        <view class="zan-cell">
         <view class="zan-cell__hd zan-field__title">年级</view>
-        <picker class="zan-cell__bd" bindchange="bindGradeChange" value="{{gradeIndex}}" range="{{gradeList}}">
+        <picker class="zan-cell__bd" @change="bindGradeChange" value="{{gradeIndex}}" range="{{gradeList}}">
           {{gradeList[gradeIndex]}}<text class="zan-arrow"></text>
         </picker>
        </view>
        <schoolField :options.sync="base_school" componentId="schoolField"/>
      </view>
      <view class="zan-row" style="margin-top:20px;">
-        <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" bindtap='_save'>保存</button>
+        <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" @tap='_save'>保存</button>
      </view>
   </view>
 </template>

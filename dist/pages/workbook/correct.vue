@@ -1,7 +1,7 @@
 <style lang="less" scoped>
 .container{
   position: relative;
-  color: #c69c6d;
+  color: #658e90;
 }
 .correct_name{
   position:absolute;
@@ -29,16 +29,16 @@
   <view class="container">
     <view class="correct_name zan-center zan-font-22 zan-font-bold">{{name}}</view>
     <view class="correct_content">{{result.content}}</view>
-    <view class="correct_date zan-center zan-font-12">{{result.date}}</view>
+    <view class="correct_date zan-center zan-font-14">{{result.date}}</view>
     <view class="correct_app zan-center zan-font-14">归纳本</view>
-    <image src="../../common/resources/statisticsCorrect.jpg" style="width:750rpx;height:100vh" mode="aspectFit"/>
+    <image src="../../common/resources/chapterExerciseCorrect.jpg" style="width:750rpx;height:100vh" mode="aspectFit"/>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
 
-  export default class StatisticsCorrect extends wepy.page {
+  export default class WorkbookCorrect extends wepy.page {
     data = {
       result: [],
       name: ''
@@ -48,7 +48,7 @@
     _getContent (id) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://primary.guinaben.com/textbook/statistics/correct',
+          url: 'https://primary.guinaben.com/workbook/chapter/correct',
           data: {
             chapterId: id
           },

@@ -1,2 +1,1 @@
-@import "./../../components/gnb-infiniteScroll.wxss";
 .footer._ab53dd0{position:fixed;bottom:0;left:0;width:100%;padding:15px 0;background:#F9F9F9}.footer .zan-btn--primary._ab53dd0{border-radius:30px}

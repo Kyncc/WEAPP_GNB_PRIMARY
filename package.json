@@ -1,6 +1,6 @@
 {
   "name": "gnb_primary_math",
-  "version": "1.2.8",
+  "version": "1.0.0",
   "description": "",
   "main": "dist/app.js",
   "scripts": {
@@ -13,8 +13,6 @@
   "dependencies": {
     "wepy": "^1.6.0",
     "wepy-async-function": "^1.4.4",
-    "wepy-com-toast": "^1.0.2",
-    "wepy-img-loader": "^1.0.1",
     "wepy-redux": "^1.5.3"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 <template>
-  <picker style="margin-top: 0" class="zan-panel" bindchange="bindPickerChange" range="{{ textbook }}" value="{{ value }}" range-key="name">
+  <picker style="margin-top: 0" class="zan-panel" @change="bindPickerChange" range="{{ textbook }}" value="{{ value }}" range-key="name">
     <view class="picker zan-cell">
       {{title}}:　{{textbook[value].name}}
       <view class="zan-arrow"></view>

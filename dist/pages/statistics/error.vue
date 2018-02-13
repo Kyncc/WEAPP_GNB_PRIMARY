@@ -1,12 +1,12 @@
 <style lang="less" scoped>
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+.footer{
+  position:fixed;
+  bottom: 0px;
+  left:0;
+  width:100%;
   padding: 15px 0;
   background: #F9F9F9;
-  .zan-btn--primary {
+  .zan-btn--primary{
     border-radius: 30px;
   }
 }
@@ -16,7 +16,7 @@
   <view class="container">
     <repeat for="{{error}}" key="index" index="index" item="item">
       <view class="zan-panel">
-        <view class="zan-cell" style="padding: 5px 0" bindtap='_preview({{item.errorImg.url}})'>
+        <view class="zan-cell" style="padding: 5px 0" @tap='_preview({{item.errorImg.url}})'>
           <image mode="aspectFit" style="width:100%;height:{{ item.errorImg.height/4 }}px" src="{{item.errorImg.url}}?mageMogr2/auto-orient/thumbnail/750x/format/jpg/interlace/1/blur/1x0/quality/100|imageslim" lazy-load="true"/>
         </view>
         <view class="zan-cell zan-font-12" style="padding: 7px 15px">
@@ -26,7 +26,7 @@
     </repeat>
     <view class="footer">
       <view class="zan-row">
-        <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--primary" bindtap='_download'>下载{{error.length}}道错题</button>
+        <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--primary" @tap='_download'>下载{{error.length}}道错题</button>
       </view>
     </view>
   </view>
@@ -34,6 +34,7 @@
 
 <script>
 import wepy from 'wepy'
+import InfiniteScroll from '@/components/gnb-infiniteScroll'
 
 export default class StatisticsError extends wepy.page {
   data = {
@@ -42,6 +43,10 @@ export default class StatisticsError extends wepy.page {
     id: '',
     scrollDisabled: false,
     isNothing: false
+  }
+
+  components = {
+    InfiniteScroll: InfiniteScroll
   }
 
   methods = {

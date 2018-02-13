@@ -23,11 +23,11 @@
         <repeat for="{{ workbookList }}" key="pindex" index="pindex" item="item">
           <view class="zan-card">
             <!--习题册图片-->
-            <view class="zan-card__thumb" bindtap="_preview({{ item.img.url }})">
+            <view class="zan-card__thumb" @tap="_preview({{ item.img.url }})">
               <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/180/h/270/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
             </view>
             <!--习题册详情-->
-            <view class="zan-card__detail" bindtap="_edit({{ pindex}}, {{item.id}})">
+            <view class="zan-card__detail" @tap="_edit({{ pindex}}, {{item.id}})">
               <view class="zan-card__detail-row">
                 <view class="zan-card__left-col zan-font-14" style="color:#3FC6C6">{{item.year}}版</view>
               </view>
@@ -57,7 +57,7 @@
     </view>
     <!--进入我的-->
     <view class="zan-row">
-      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" bindtap='_begin'>选好了，开始记错</button>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" @tap='_begin'>选好了，开始记错</button>
     </view>
   </view>
 </template>

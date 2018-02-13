@@ -18,9 +18,9 @@
       <text class="zan-col zan-col-24 zan-font-14 zan-c-gray-darker zan-center" style="margin-top: 60rpx;">数学 新人教版</text>
     </view>
     <view class="zan-row" style="margin-top: 30px;">
-      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn" bindtap='_intoAddWorkbook(3)'>三年级</button>
-      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn" bindtap='_intoAddWorkbook(4)'>四年级</button>
-      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn" bindtap='_intoAddWorkbook(5)'>五年级</button>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn" @tap='_intoAddWorkbook(3)'>三年级</button>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn" @tap='_intoAddWorkbook(4)'>四年级</button>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn" @tap='_intoAddWorkbook(5)'>五年级</button>
     </view>
   </view>
 </template>

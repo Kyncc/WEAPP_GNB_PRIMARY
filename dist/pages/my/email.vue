@@ -15,7 +15,7 @@
     <view class="zan-panel" style="margin: 20px 0;">
       <view class="zan-cell" style="padding:0;position:statics">
         <zanField1 :options.sync="form_email" componentId="zanField1"></zanField1>
-        <picker bindchange="bindEmailCodeChange" value="{{emailCodeIndex}}" range="{{emailCodes}}" style="width:35%">
+        <picker @change="bindEmailCodeChange" value="{{emailCodeIndex}}" range="{{emailCodes}}" style="width:35%">
           <view style="width:100%;height:35px;line-height:35px;">{{emailCodes[emailCodeIndex]}}
             <text class="zan-arrow"></text>
           </view>
@@ -23,7 +23,7 @@
       </view>
     </view>
     <view class="zan-row">
-      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" bindtap='_send'>发送</button>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" @tap='_send'>发送</button>
     </view>
   </view>
 </template>

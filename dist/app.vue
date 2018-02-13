@@ -1,4 +1,4 @@
-<style lang='less' src='common/libs/css/zanui.wxss'/>
+<style lang='less' src='common/libs/css/zanui.wxss'></style>
 <style lang="less">
 .container{
   background: #F9F9F9;

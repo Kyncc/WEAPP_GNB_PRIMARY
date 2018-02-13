@@ -20,7 +20,7 @@
           <view class="zan-cell zan-font-12" style="padding: 7px 15px">
             <view class="zan-cell__bd" style="color:#3fc6c6">{{item.name}}</view>
           </view>
-          <view class="zan-cell" style="padding: 5px 0" bindtap='_preview({{item.errorImg.url}})'>
+          <view class="zan-cell" style="padding: 5px 0" @tap='_preview({{item.errorImg.url}})'>
             <image mode="aspectFit" style="width:100%;height:{{ item.errorImg.height/4 }}px" src="{{item.errorImg.url}}?mageMogr2/auto-orient/thumbnail/750x/format/jpg/interlace/1/blur/1x0/quality/100|imageslim" lazy-load="true"/>
           </view>
         </view>
@@ -28,7 +28,7 @@
     </scroll-view>
     <view class="footer">
       <view class="zan-row">
-        <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--primary" bindtap='_download'>下载{{error.length}}道错题</button>
+        <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--primary" @tap='_download'>下载{{error.length}}道错题</button>
       </view>
     </view>
   </view>

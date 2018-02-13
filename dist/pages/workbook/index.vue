@@ -9,7 +9,7 @@
       <view class="zan-panel">
         <scroll-view scroll-y="true" style="height: 780rpx;background:#fff;" scroll-with-animation="true" enable-back-to-top="true">
           <repeat for="{{ workbookList }}" key="pindex" index="pindex" item="item">
-            <view class="zan-card" bindtap="_intoChapter({{item}})">
+            <view class="zan-card" @tap="_intoChapter({{item}})">
               <!--习题册图片-->
               <view class="zan-card__thumb">
                 <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/180/h/270/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
@@ -31,7 +31,7 @@
         </scroll-view>
       </view>
     </view>
-    <view class="zan-font-16 zan-center" style='padding:20rpx 0;' bindtap="_initAdd()">
+    <view class="zan-font-16 zan-center" style='padding:20rpx 0;' @tap="_initAdd()">
       <text class="zan-c-gray-darker">+添加习题册</text>
     </view>
   </view>

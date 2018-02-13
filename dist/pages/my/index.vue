@@ -24,13 +24,13 @@
       </navigator>
     </view>
     <view class="zan-panel">
-      <view class="zan-font-16 zan-cell" bindtap="_into('/pages/my/pay')" style="padding:5px 15px 15px">
+      <view class="zan-font-16 zan-cell" @tap="_into('/pages/my/pay')" style="padding:5px 15px 15px">
         <view class="zan-cell__bd">
           <image src='../../common/resources/icon_vip.png' style="width:28px;height:28px;position:relative;top:8px;margin-right:5px;" mode='scaleToFill'/>
           <text>我的会员</text>
         </view>
       </view>
-      <view wx:if="userInfo.refund" class="zan-font-16 zan-cell" style="padding:5px 15px 15px" bindtap="_refund">
+      <view wx:if="userInfo.refund" class="zan-font-16 zan-cell" style="padding:5px 15px 15px" @tap="_refund">
         <view class="zan-cell__bd">
           <image src='../../common/resources/icon_tuikuan.png' style="width:28px;height:28px;position:relative;top:8px;margin-right:5px;" mode='scaleToFill'/>
           <text>申请退款</text>
