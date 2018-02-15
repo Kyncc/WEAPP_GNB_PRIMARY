@@ -61,7 +61,7 @@ export default class StatisticsError extends wepy.page {
       this.loading = true
       this._getErrorList(this.id, this.offset).then((res) => {
         this.loading = false
-        this.error.push(res.errorList)
+        this.error = this.error.concat(res.errorList)
         this.offset = res.offset
         if (this.offset.length === 0) {
           this.nomore = true
