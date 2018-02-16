@@ -2594,10 +2594,6 @@ wepy-eslint@^1.5.3:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/wepy-eslint/-/wepy-eslint-1.5.3.tgz#48bd89309611152f1b83747484f4a6494a48b414"
 
-wepy-redux@^1.5.3:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/wepy-redux/-/wepy-redux-1.5.3.tgz#cefaa24a841b565d6161fbe21036b5ddd1d15cdd"
-
 wepy@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/wepy/-/wepy-1.6.0.tgz#682bcd91dd2d1b4c4696c5e58447d960e7ea96f4"
