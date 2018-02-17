@@ -8,8 +8,9 @@
 ```
 ├── dist       # Dist Folder
 ├── src         # Code Folder
-  ├── libs      # 第三方组件
-  ├── features    # 功能
+  ├── common      # 公共资源
+  ├── components  # 组件
+  ├── pages       # 页面
     ├── init          # 配置信息
     ├── workbook      # 记错题
     ├── statistics    # 错题本
