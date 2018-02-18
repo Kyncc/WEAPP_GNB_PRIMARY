@@ -1,20 +1,22 @@
 # GNB_PRIMARY_MATH
 > 小学错题归纳本--小程序
-### Main Javascript Framework
+## JS框架
 -	[小程序组件化开发框架-WePY](https://tencent.github.io/wepy/document.html#/)
-### UI Compoents
+
+## 组件
 -	[有赞微信小程序UI库](https://github.com/youzan/zanui-weapp)
-## File Structure Introduction
+
+## 文件夹目录
 ```
-├── dist       # Dist Folder
-├── src         # Code Folder
+├── dist          # 微信调试目录
+├── src           # 代码
   ├── common      # 公共资源
   ├── components  # 组件
   ├── pages       # 页面
     ├── init          # 配置信息
     ├── workbook      # 记错题
     ├── statistics    # 错题本
-    ├── my          # 我的
+    ├── my            # 我的
 ```
 ## Install
 ```
