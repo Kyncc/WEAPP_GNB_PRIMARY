@@ -1,8 +1,0 @@
-
-  <view class="container _2e472de">
-    <view class="correct_name zan-center zan-font-22 zan-font-bold _2e472de">{{name}}</view>
-    <view class="correct_content _2e472de">{{result.content}}</view>
-    <view class="correct_date zan-center zan-font-14 _2e472de">{{result.date}}</view>
-    <view class="correct_app zan-center zan-font-14 _2e472de">归纳本</view>
-    <image src="../../common/resources/chapterExerciseCorrect.jpg" style="width:750rpx;height:100vh" mode="aspectFit" class="_2e472de"/>
-  </view>

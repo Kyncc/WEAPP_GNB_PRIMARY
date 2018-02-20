@@ -1,8 +1,0 @@
-
-  <view class="container _a46defa">
-    <view class="correct_name zan-center zan-font-22 zan-font-bold _a46defa">{{name}}</view>
-    <view class="correct_content _a46defa">{{result.content}}</view>
-    <view class="correct_date zan-center zan-font-12 _a46defa">{{result.date}}</view>
-    <view class="correct_app zan-center zan-font-14 _a46defa">归纳本</view>
-    <image src="../../common/resources/statisticsCorrect.jpg" style="width:750rpx;height:100vh" mode="aspectFit" class="_a46defa"/>
-  </view>
