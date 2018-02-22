@@ -14,7 +14,7 @@
     <view class="zan-panel-title zan-font-bold zan-c-black" style="margin-top:30px;">题目发送到邮箱，直接打印回家做</view>
     <view class="zan-panel" style="margin: 20px 0;">
       <view class="zan-cell" style="padding:0;position:statics">
-        <zanField1 :options.sync="form_email" componentId="zanField1"></zanField1>
+        <zanField1 :options.sync="form_email" componentId="zanField1"/>
         <picker bindchange="bindEmailCodeChange" value="{{emailCodeIndex}}" range="{{emailCodes}}" style="width:35%">
           <view style="width:100%;height:35px;line-height:35px;">{{emailCodes[emailCodeIndex]}}
             <text class="zan-arrow"></text>
@@ -23,7 +23,11 @@
       </view>
     </view>
     <view class="zan-row">
-      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" bindtap='_send'>发送</button>
+      <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary {{emailDisabled ? '' : 'zan-btn--disabled'}}"
+        disabled="{{!emailDisabled}}"
+        bindtap='_send'>
+        发送
+      </button>
     </view>
   </view>
 </template>
@@ -41,6 +45,12 @@
 
     components = {
       zanField1: zanField
+    }
+
+    computed = {
+      emailDisabled () {
+        return Boolean(this.form_email.value)
+      }
     }
 
     data = {

@@ -45,6 +45,7 @@
     </view>
     <view class="zan-row footer">
       <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" bindtap='_upload'>
+        <image mode="aspectFit" style="width:24px;height:24px;top:6px;position:relative;" src="../../common/resources/icon_gou.png"/>
         记完了
       </button>
     </view>

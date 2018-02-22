@@ -6,9 +6,6 @@
   width: 100%;
   padding: 10px 0;
   background: #F9F9F9;
-  .zan-btn--primary {
-    border-radius: 30px;
-  }
 }
 </style>
 
@@ -29,7 +26,10 @@
     </scroll-view>
     <view class="footer">
       <view class="zan-row">
-        <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--primary" bindtap='_download'>下载{{error.length}}道错题</button>
+        <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--primary" bindtap='_download'>
+          <image mode="aspectFit" style="width:24px;height:24px;top:6px;position:relative;" src="../../common/resources/icon_download.png"/>
+          下载{{count}}道错题
+        </button>
       </view>
     </view>
   </view>
@@ -43,6 +43,7 @@ export default class StatisticsError extends wepy.page {
   data = {
     offset: '',
     error: [],
+    count: 0,
     id: '',
     scrollHeight: 500,
     loading: true,
@@ -63,6 +64,7 @@ export default class StatisticsError extends wepy.page {
         this.loading = false
         this.error = this.error.concat(res.errorList)
         this.offset = res.offset
+        this.count = res.number
         if (this.offset.length === 0) {
           this.nomore = true
         }
@@ -125,6 +127,7 @@ export default class StatisticsError extends wepy.page {
       this.loading = false
       this.error = result.errorList
       this.offset = result.offset
+      this.count = result.number
       if (this.offset.length === 0) {
         this.nomore = true
       }

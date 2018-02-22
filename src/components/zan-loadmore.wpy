@@ -98,9 +98,9 @@ $gray-light: #e5e5e5;
 <block>
   <block wx:if="{{nomore}}">
     <view class="zan-loadmore zan-loadmore--nomore">
-      <view class="zan-loadmore__tips">
+       <!--<view class="zan-loadmore__tips">
         <view class="zan-loadmore__dot"></view>
-      </view>
+      </view>-->
     </view>
   </block>
 
