@@ -11,7 +11,7 @@
        <sexField :options="base_sex"  componentId="sexField"/>
        <view class="zan-cell">
         <view class="zan-cell__hd zan-field__title">年级</view>
-        <picker class="zan-cell__bd" bindchange="bindGradeChange" value="{{gradeIndex}}" range="{{gradeList}}">
+        <picker class="zan-cell__bd" style="font-size: 14px;" bindchange="bindGradeChange" value="{{gradeIndex}}" range="{{gradeList}}">
           {{gradeList[gradeIndex]}}<text class="zan-arrow"></text>
         </picker>
        </view>

@@ -78,9 +78,9 @@ export default class WorkbookAdd extends wepy.page {
     inputVal: '',
     textbookId: '',
     base_search: {
-      title: '搜索习题册',
+      title: '',
       value: '',
-      placeholder: '请输入练习册名称'
+      placeholder: '请输入习题册名称'
     }
   }
 
@@ -93,11 +93,11 @@ export default class WorkbookAdd extends wepy.page {
   }
 
   methods = {
-    /** 查看练习册大图 */
+    /** 查看习题册大图 */
     _preview (url) {
       wepy.previewImage({current: `${url}-primaryError`, urls: [`${url}-primaryError`]})
     },
-    /** 练习册增加删除 */
+    /** 习题册增加删除 */
     async _edit (index, id) {
       this.workbookList[index].status = await this._setWorkbook(id)
       this.$apply()
@@ -123,7 +123,7 @@ export default class WorkbookAdd extends wepy.page {
     })
   }
 
-  // 添加我的练习册
+  // 添加我的习题册
   _getAllWorkbook (id, name) {
     return new Promise((resolve, reject) => {
       wepy.request({

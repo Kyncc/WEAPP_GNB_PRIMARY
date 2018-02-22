@@ -4,6 +4,9 @@
     padding: 5px 15px;
   }
 }
+.zan-btn {
+  border-radius:0;
+}
 </style>
 
 <template>
@@ -80,9 +83,9 @@
       textbookId: '',
       workbookList: [],
       base_search: {
-        title: '搜索习题册',
+        title: '',
         value: '',
-        placeholder: '请输入练习册名称'
+        placeholder: '请输入习题册名称'
       }
     }
 
@@ -95,11 +98,11 @@
     }
 
     methods = {
-      /** 查看练习册大图 */
+      /** 查看习题册大图 */
       _preview (url) {
         wepy.previewImage({current: `${url}-primaryError`, urls: [`${url}-primaryError`]})
       },
-      /** 练习册增加删除 */
+      /** 习题册增加删除 */
       async _edit (index, id) {
         this.workbookList[index].status = await this._setWorkbook(id)
         this.$apply()
