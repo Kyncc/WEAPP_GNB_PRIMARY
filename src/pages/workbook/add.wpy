@@ -95,7 +95,7 @@ export default class WorkbookAdd extends wepy.page {
   methods = {
     /** 查看习题册大图 */
     _preview (url) {
-      wepy.previewImage({current: `${url}-primaryError`, urls: [`${url}-primaryError`]})
+      wepy.previewImage({current: `${url}-workbookBig`, urls: [`${url}-workbookBig`]})
     },
     /** 习题册增加删除 */
     async _edit (index, id) {

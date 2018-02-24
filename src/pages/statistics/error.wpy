@@ -79,11 +79,18 @@ export default class StatisticsError extends wepy.page {
     _preview (url) {
       wepy.previewImage({current: `${url}-primaryError`, urls: this.imgs})
     },
+    /** 下载试卷 */
     _download () {
-      // 先判断是否会员
-      wepy.navigateTo({
-        url: `/pages/my/email?id=${this.id}&type=statistics`
-      })
+      // 不是会员跳转到VIP购买, 是跳转到下载
+      if (Number(wepy.getStorageSync('User').vip)) {
+        wepy.navigateTo({
+          url: `/pages/my/email?id=${this.id}&type=workbook`
+        })
+      } else {
+        wepy.navigateTo({
+          url: `/pages/my/vip`
+        })
+      }
     }
   }
 

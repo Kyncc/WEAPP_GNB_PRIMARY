@@ -71,6 +71,7 @@
           await this._setRefund()
           // 重新获得用户信息
           await this._getUserInfo()
+          this.userInfo.refund = wepy.getStorageSync('User').refund
           wepy.hideLoading()
           wepy.showModal({
             title: '申请成功',
