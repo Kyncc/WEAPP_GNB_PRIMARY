@@ -48,7 +48,8 @@
     data = {
       longText: '请按示例上传习题册封面和版印次，我们将尽快上架该习题册，请注意查看消息通知~',
       first: [],
-      last: []
+      last: [],
+      imgs: ['http://img.guinaben.com/workbookPic/1108-cover-725711.jpg', 'http://img.guinaben.com/want1.jpg']
     }
 
     methods = {
@@ -156,10 +157,6 @@
           }
         })
       })
-    }
-
-    onReady () {
-      this.$invoke('zanNoticebar1', 'initZanNoticeBarScroll')
     }
   }
 </script>

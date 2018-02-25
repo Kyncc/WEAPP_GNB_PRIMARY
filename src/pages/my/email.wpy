@@ -1,16 +1,18 @@
-<style lang="less" scoped>
-.zan-arrow {
-  transform:rotate(135deg);
-  border-color:black;
-  margin-top:-5px;
-}
-.zan-field {
-  width:65%;
+<style lang="less">
+.myEmail{
+  .zan-arrow {
+    transform:rotate(135deg);
+    border-color:black;
+    margin-top:-5px;
+  }
+  .zan-field {
+    width:65%;
+  }
 }
 </style>
 
 <template>
-  <view class="container">
+  <view class="container myEmail">
     <view class="zan-panel-title zan-font-bold zan-c-black" style="margin-top:30px;">题目发送到邮箱，直接打印回家做</view>
     <view class="zan-panel" style="margin: 20px 0;">
       <view class="zan-cell" style="padding:0;position:statics">

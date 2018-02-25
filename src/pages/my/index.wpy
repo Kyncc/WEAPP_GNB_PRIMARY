@@ -71,7 +71,9 @@
           await this._setRefund()
           // 重新获得用户信息
           await this._getUserInfo()
+          this.userInfo.vip = wepy.getStorageSync('User').vip
           this.userInfo.refund = wepy.getStorageSync('User').refund
+          this.$apply()
           wepy.hideLoading()
           wepy.showModal({
             title: '申请成功',
@@ -184,7 +186,8 @@
       }
     }
 
-    onShow () {
+    async onShow () {
+      await this._getUserInfo()
       this.userInfo.name = wepy.getStorageSync('User').name
       this.userInfo.headImg = wepy.getStorageSync('User').headImg
       this.userInfo.refund = wepy.getStorageSync('User').refund

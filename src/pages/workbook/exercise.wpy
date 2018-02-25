@@ -1,37 +1,39 @@
-<style lang="less" scoped>
-.flex {
-  display: flex;
-  flex-wrap: wrap;
-}
-.btn_exercise{
-  background: #EDF9F8;
-  color: #3fc6c6;
-  height: 118rpx;
-  width: 118rpx;
-  font-size:32rpx;
-  text-align: center;
-  line-height: 118rpx;
-  display: inline-block;
-  border-radius: 50%;
-  border: none;
-  margin:20rpx 0 20rpx 20rpx;
-  padding:0;
-}
-.is_checked {
-  color: #fff;
-  background: #FF7043;
-}
-.footer{
-  position: fixed;
-  padding:10px;
-  background: #F9F9F9;
-  bottom: 0px;
-  width: 100%;
+<style lang="less">
+.workBookExercise{
+  .flex {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .btn_exercise{
+    background: #EDF9F8;
+    color: #3fc6c6;
+    height: 118rpx;
+    width: 118rpx;
+    font-size:32rpx;
+    text-align: center;
+    line-height: 118rpx;
+    display: inline-block;
+    border-radius: 50%;
+    border: none;
+    margin:20rpx 0 20rpx 20rpx;
+    padding:0;
+  }
+  .is_checked {
+    color: #fff;
+    background: #FF7043;
+  }
+  .footer{
+    position: fixed;
+    padding:10px;
+    background: #F9F9F9;
+    bottom: 0px;
+    width: 100%;
+  }
 }
 </style>
 
 <template>
-  <view class="container">
+  <view class="container workBookExercise">
     <zanNoticebar1 :text="longText" componentId="static1"/>
     <view class="zan-panel" style='margin: 0 0 70px 0;'>
       <repeat for="{{ exercise.nodes }}" key="pindex" index="pindex" item="nodes">

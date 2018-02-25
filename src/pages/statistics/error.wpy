@@ -84,7 +84,7 @@ export default class StatisticsError extends wepy.page {
       // 不是会员跳转到VIP购买, 是跳转到下载
       if (Number(wepy.getStorageSync('User').vip)) {
         wepy.navigateTo({
-          url: `/pages/my/email?id=${this.id}&type=workbook`
+          url: `/pages/my/email?id=${this.id}&type=statistics`
         })
       } else {
         wepy.navigateTo({
