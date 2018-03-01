@@ -105,5 +105,15 @@ export default class Statistics extends wepy.page {
     this.workbookList = await this._getMyWorkbook(this.textbook)
     this.$apply()
   }
+
+  onShareAppMessage (res) {
+    if (res.from === 'button') {
+      console.log(res.target)
+    }
+    return {
+      title: '各位家长，用这个记错题，速度快，用处大',
+      path: '/pages/my/index'
+    }
+  }
 }
 </script>

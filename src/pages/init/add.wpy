@@ -1,16 +1,18 @@
-<style lang="less" scoped>
-.search{
-  .zan-cell{
-    padding: 5px 15px;
+<style lang="less">
+.workbookAdd{
+  .search{
+    .zan-cell{
+      padding: 5px 15px;
+    }
   }
-}
-.zan-btn {
-  border-radius:0;
+  .zan-btn {
+    border-radius:0;
+  }
 }
 </style>
 
 <template>
-  <view class="container">
+  <view class="container workbookAdd">
     <!--标题-->
     <view class="zan-row zan-center" style="margin: 40rpx 0;">
       <text class="zan-col zan-col-24 zan-font-22 zan-c-black">选择你正在使用的习题册</text>
@@ -158,6 +160,16 @@
       this.textbookId = options.textbookId
       this.workbookList = await this._getAllWorkbook(this.textbookId, this.base_search.value)
       this.$apply()
+    }
+
+    onShareAppMessage (res) {
+      if (res.from === 'button') {
+        console.log(res.target)
+      }
+      return {
+        title: '各位家长，用这个记错题，速度快，用处大',
+        path: '/pages/my/index'
+      }
     }
   }
 </script>

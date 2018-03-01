@@ -3,7 +3,7 @@
     <view class="zan-panel zan-center" style="padding:30px 0;margin-top: 0;">
       <view style="padding:5px 0"><text style="color:#3fc6c6">支付提示</text></view>
       <view style="padding:15px 0"><text class="zan-c-black zan-font-30">￥29/月</text></view>
-      <view style="padding:5px 0"><text class="zan-c-gray-dark zan-font-22">30天内无理由全额退款</text></view>
+      <view style="padding:5px 0"><text class="zan-c-gray-dark zan-font-22">首次支付30天内无理由全额退款</text></view>
     </view>
     <view class="footer" style="margin-top: 20px;">
       <view class="zan-row">
