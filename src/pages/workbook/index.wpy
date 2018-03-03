@@ -95,10 +95,12 @@ export default class Statistics extends wepy.page {
   }
 
   onLoad() {
-    this.grade = wepy.getStorageSync('User').grade - 3
     this.textBookList = wepy.getStorageSync('User').textbook
-    this.textbook = this.textBookList[Number(this.grade)].id
-    this.$apply()
+    if (this.textBookList) {
+      this.grade = wepy.getStorageSync('User').grade - 3
+      this.textbook = this.textBookList[Number(this.grade)].id
+      this.$apply()
+    }
   }
 
   async onShow() {

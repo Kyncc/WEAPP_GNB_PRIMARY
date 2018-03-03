@@ -194,7 +194,6 @@
       this.userInfo.vip = wepy.getStorageSync('User').vip
       this.$apply()
     }
-    
     onShareAppMessage (res) {
       if (res.from === 'button') {
         console.log(res.target)

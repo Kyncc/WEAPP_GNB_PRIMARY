@@ -172,7 +172,6 @@
       }
       this.$apply()
     }
-    
     onShareAppMessage (res) {
       if (res.from === 'button') {
         console.log(res.target)
