@@ -1,0 +1,76 @@
+<style lang="less" scoped>
+.container{
+  position: relative;
+  color: #658e90;
+}
+.correct_name{
+  position:absolute;
+  top: 36%;
+  width:100%;
+}
+.correct_content{
+  position:absolute;
+  top: 52%;
+  left: 8%;
+  width:85%;
+}
+.correct_date{
+  position:absolute;
+  top: 72%;
+  left: 14%;
+}
+.correct_app{
+  position:absolute;
+  top: 72%;
+  left: 71%;
+}
+.share_button {
+  position: fixed;
+  background:#4cc0be;
+  color:#fff;
+  font-size: 30rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  width: 120rpx;
+  border-radius: 50%;
+  bottom: 5%;
+  right: 8%;
+  box-shadow: 5rpx 5rpx 14rpx #4cc0be;
+  text-align: center;
+}
+</style>
+<template>
+  <view class="container">
+    <view class="correct_name zan-center zan-font-22 zan-font-bold">{{name}}</view>
+    <view class="correct_content">{{content}}</view>
+    <view class="correct_date zan-center zan-font-14">{{date}}</view>
+    <view class="correct_app zan-center zan-font-14">归纳本</view>
+    <button class="share_button"  bindtap='_back'>返回</button>
+    <image src="../../common/resources/chapterExerciseCorrect.jpg" style="width:750rpx;height:100vh" mode="aspectFit"/>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class WorkbookShare extends wepy.page {
+    data = {
+      content: '',
+      date: '',
+      name: ''
+    }
+
+    methods= {
+      _back () {
+        wepy.redirectTo({ url: `/pages/my/index` })
+      }
+    }
+
+    onLoad(options) {
+      this.date = options.date
+      this.name = options.name
+      this.content = options.content
+      this.$apply()
+    }
+  }
+</script>

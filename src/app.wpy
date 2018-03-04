@@ -55,10 +55,12 @@ export default class extends wepy.app {
       'pages/workbook/want',
       'pages/workbook/error',
       'pages/workbook/correct',
+      'pages/workbook/share',
       'pages/workbook/chapter',
       'pages/workbook/exercise',
       'pages/statistics/index',
       'pages/statistics/error',
+      'pages/statistics/share',
       'pages/statistics/correct'
     ],
     tabBar: {
@@ -107,8 +109,7 @@ export default class extends wepy.app {
     this.intercept('request', {
       config(params) {
         let header = {
-          'openId': wepy.getStorageSync('openId') || '',
-          'unionid': wepy.getStorageSync('unionid') || ''
+          'openId': wepy.getStorageSync('openId') || ''
         }
         wepy.showNavigationBarLoading()
         params.header = header

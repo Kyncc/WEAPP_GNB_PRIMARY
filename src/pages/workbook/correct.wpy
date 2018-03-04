@@ -24,6 +24,20 @@
   top: 72%;
   left: 71%;
 }
+.share_button {
+  position: fixed;
+  background:#4cc0be;
+  color:#fff;
+  font-size: 30rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  width: 120rpx;
+  border-radius: 50%;
+  bottom: 5%;
+  right: 8%;
+  box-shadow: 5rpx 5rpx 14rpx #4cc0be;
+  text-align: center;
+}
 </style>
 <template>
   <view class="container">
@@ -31,6 +45,7 @@
     <view class="correct_content">{{result.content}}</view>
     <view class="correct_date zan-center zan-font-14">{{result.date}}</view>
     <view class="correct_app zan-center zan-font-14">归纳本</view>
+    <button class="share_button" open-type="share">分享</button>
     <image src="../../common/resources/chapterExerciseCorrect.jpg" style="width:750rpx;height:100vh" mode="aspectFit"/>
   </view>
 </template>
@@ -68,13 +83,12 @@
       this.name = wepy.getStorageSync('User').name
       this.$apply()
     }
+
+    /** 分享全局 */
     onShareAppMessage (res) {
-      if (res.from === 'button') {
-        console.log(res.target)
-      }
       return {
         title: '各位家长，用这个记错题，速度快，用处大',
-        path: '/pages/my/index'
+        path: `/pages/workbook/share?content=${this.result.content}&date=${this.result.date}&name=${this.name}`
       }
     }
   }
