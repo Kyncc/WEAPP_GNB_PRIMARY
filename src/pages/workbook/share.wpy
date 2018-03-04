@@ -39,6 +39,7 @@
   text-align: center;
 }
 </style>
+
 <template>
   <view class="container">
     <view class="correct_name zan-center zan-font-22 zan-font-bold">{{name}}</view>
@@ -60,9 +61,9 @@
       name: ''
     }
 
-    methods= {
+    methods = {
       _back () {
-        wepy.redirectTo({ url: `/pages/my/index` })
+        wepy.reLaunch({ url: `/pages/my/index` })
       }
     }
 

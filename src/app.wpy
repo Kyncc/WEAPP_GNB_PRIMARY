@@ -113,10 +113,10 @@ export default class extends wepy.app {
         }
         wepy.showNavigationBarLoading()
         params.header = header
+        console.log(params.data)
         return params
       },
       success(res) {
-        console.log(res)
         let statusCode = res.statusCode.toString()
         let dataCode = res.data.code.toString()
         if (statusCode === '200') {
@@ -133,6 +133,11 @@ export default class extends wepy.app {
             })
             return Promise.reject(new Error('错误的code'))
           }
+        } else if (statusCode === '403') {
+          // 未注册用户
+          wepy.redirectTo({
+            url: '/pages/my/index'
+          })
         }
       },
       fail(error) {

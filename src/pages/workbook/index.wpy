@@ -1,3 +1,18 @@
+<style lang="less">
+.add_button {
+  position: fixed;
+  background:#4cc0be;
+  color:#fff;
+  font-size: 70rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  width: 120rpx;
+  border-radius: 50%;
+  bottom: 5%;
+  right: 5%;
+  text-align: center;
+}
+</style>
 <template>
   <view class="container">
     <gnbTextbookSelect :value.sync="grade" :key.sync="textbook" @event.user="textbookChange" :textbook.sync="textBookList"/>
@@ -31,9 +46,10 @@
         </scroll-view>
       </view>
     </view>
-    <view class="zan-font-16 zan-center" style='padding:20rpx 0;' bindtap="_initAdd()">
+    <button class="add_button" bindtap='_initAdd'>+</button>
+    <!-- <view class="zan-font-16 zan-center" style='padding:20rpx 0;' bindtap="_initAdd()">
       <text class="zan-c-gray-darker">+添加习题册</text>
-    </view>
+    </view> -->
   </view>
 </template>
 
