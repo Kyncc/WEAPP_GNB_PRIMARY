@@ -53,7 +53,7 @@
           },
           success (res) {
             wepy.hideLoading()
-            wepy.setStorageSync('User', res)
+            wepy.setStorageSync('gnb_primary_User', res)
             resolve(res)
           },
           fail (err) {
@@ -69,7 +69,7 @@
         await this._setUserInfo({
           grade: grade,
           encryptedData: this.encryptedData,
-          session_key: wepy.getStorageSync('session_key'),
+          session_key: wepy.getStorageSync('gnb_primary_session_key'),
           iv: this.iv
         })
         let name = ''
@@ -80,7 +80,7 @@
           case '6': { name = '六年级下册'; break }
         }
         // 获取当前年级的教材
-        let textbookId = (wepy.getStorageSync('User').textbook)[Number(grade) - 3].id
+        let textbookId = (wepy.getStorageSync('gnb_primary_User').textbook)[Number(grade) - 3].id
         wepy.redirectTo({ url: `/pages/init/add?grade=${grade}&name=${name}&textbookId=${textbookId}` })
       }
     }

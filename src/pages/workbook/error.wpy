@@ -51,7 +51,7 @@
       },
       _download () {
         // 不是会员跳转到VIP购买, 是跳转到下载
-        if (Number(wepy.getStorageSync('User').vip)) {
+        if (Number(wepy.getStorageSync('gnb_primary_User').vip)) {
           wepy.navigateTo({
             url: `/pages/my/email?id=${this.id}&type=workbook`
           })

@@ -83,7 +83,7 @@
       async _send() {
         // 如果当前的Email和信息相同则发送，否则更新Email信息在发送
         let mail = this.form_email.value + this.emailCodes[this.emailCodeIndex]
-        if (mail !== wepy.getStorageSync('User').email) {
+        if (mail !== wepy.getStorageSync('gnb_primary_User').email) {
           await this._setUserEmail(this.form_email.value + this.emailCodes[this.emailCodeIndex])
         }
         await this._sendEmail(this.id, this.type)
@@ -101,7 +101,7 @@
             email: email
           },
           success (res) {
-            wepy.setStorageSync('User', res)
+            wepy.setStorageSync('gnb_primary_User', res)
             resolve(res)
           },
           fail (err) {
@@ -160,7 +160,7 @@
     }
 
     onShow() {
-      let email = wepy.getStorageSync('User').email
+      let email = wepy.getStorageSync('gnb_primary_User').email
       // 获取邮箱和邮箱类型
       this.form_email.value = email.split('@')[0]
       let type = `@${email.split('@')[1]}`

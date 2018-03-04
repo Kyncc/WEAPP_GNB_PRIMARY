@@ -1,11 +1,21 @@
-<style lang="less">
+<style lang="less" scoped>
+.workbookIndex{
+  .header{
+    height:40px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+}
 .add_button {
   position: fixed;
   background:#4cc0be;
   color:#fff;
   font-size: 70rpx;
   height: 120rpx;
-  line-height: 120rpx;
+  line-height: 110rpx;
   width: 120rpx;
   border-radius: 50%;
   bottom: 5%;
@@ -14,15 +24,12 @@
 }
 </style>
 <template>
-  <view class="container">
-    <gnbTextbookSelect :value.sync="grade" :key.sync="textbook" @event.user="textbookChange" :textbook.sync="textBookList"/>
+  <view class="container workbookIndex">
+    <gnbTextbookSelect class="header" :value.sync="grade" :key.sync="textbook" @event.user="textbookChange" :textbook.sync="textBookList"/>
     <view>
-      <view class="zan-row" style="padding: 10px 0 0;">
-        <text class="zan-panel-title zan-font-bold zan-c-black">我的习题册</text>
-      </view>
       <!--习题册区间-->
-      <view class="zan-panel">
-        <scroll-view scroll-y="true" style="height: 780rpx;background:#fff;" scroll-with-animation="true" enable-back-to-top="true">
+      <view class="zan-panel" style='margin-top: 38px;'>
+        <scroll>
           <repeat for="{{ workbookList }}" key="pindex" index="pindex" item="item">
             <view class="zan-card" bindtap="_intoChapter({{item}})">
               <!--习题册图片-->
@@ -43,7 +50,7 @@
               </view>
             </view>
           </repeat>
-        </scroll-view>
+        </scroll>
       </view>
     </view>
     <button class="add_button" bindtap='_initAdd'>+</button>
@@ -111,9 +118,9 @@ export default class Statistics extends wepy.page {
   }
 
   onLoad() {
-    this.textBookList = wepy.getStorageSync('User').textbook
+    this.textBookList = wepy.getStorageSync('gnb_primary_User').textbook
     if (this.textBookList) {
-      this.grade = wepy.getStorageSync('User').grade - 3
+      this.grade = wepy.getStorageSync('gnb_primary_User').grade - 3
       this.textbook = this.textBookList[Number(this.grade)].id
       this.$apply()
     }

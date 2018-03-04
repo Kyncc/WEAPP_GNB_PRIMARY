@@ -41,21 +41,21 @@
     }
 
     data = {
-      gradeIndex: Number(wepy.getStorageSync('User').grade) - 3,
+      gradeIndex: Number(wepy.getStorageSync('gnb_primary_User').grade) - 3,
       gradeList: gradeList,
       base_school: {
         title: '学校',
-        value: wepy.getStorageSync('User').school,
+        value: wepy.getStorageSync('gnb_primary_User').school,
         placeholder: '请输入您的学校名称'
       },
       base_name: {
         title: '姓名',
-        value: wepy.getStorageSync('User').name,
+        value: wepy.getStorageSync('gnb_primary_User').name,
         placeholder: '请输入您的姓名'
       },
       base_sex: {
         title: '性别',
-        value: (Number(wepy.getStorageSync('User').sex) === 1 ? '男' : '女'),
+        value: (Number(wepy.getStorageSync('gnb_primary_User').sex) === 1 ? '男' : '女'),
         disabled: true
       }
     }
@@ -108,7 +108,7 @@
           },
           success (res) {
             wepy.hideLoading()
-            wepy.setStorageSync('User', res)
+            wepy.setStorageSync('gnb_primary_User', res)
             resolve(res)
           },
           fail (err) {
@@ -120,9 +120,9 @@
     }
 
     onShow () {
-      this.base_name.value = wepy.getStorageSync('User').name
-      this.base_school.value = wepy.getStorageSync('User').school
-      this.gradeIndex = Number(wepy.getStorageSync('User').grade) - 3
+      this.base_name.value = wepy.getStorageSync('gnb_primary_User').name
+      this.base_school.value = wepy.getStorageSync('gnb_primary_User').school
+      this.gradeIndex = Number(wepy.getStorageSync('gnb_primary_User').grade) - 3
       this.$apply()
     }
 

@@ -116,7 +116,7 @@
           name: 'file',
           header: {
             'Content-Type': 'multipart/form-data',
-            'openId': wepy.getStorageSync('openId')
+            'openId': wepy.getStorageSync('gnb_primary_openId')
           },
           formData: {
             'type': 'wantworkbook'

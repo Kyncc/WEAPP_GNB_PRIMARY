@@ -94,7 +94,7 @@
         wepy.request({
           url: 'https://primary.guinaben.com/member/info',
           success (res) {
-            wepy.setStorageSync('User', res)
+            wepy.setStorageSync('gnb_primary_User', res)
             resolve(res)
           },
           fail (err) {
