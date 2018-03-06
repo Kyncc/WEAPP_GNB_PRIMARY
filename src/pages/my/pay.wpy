@@ -14,7 +14,7 @@
         <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥149 </text>/半年</view>
       </view>
       <view class="zan-cell" bindtap="_buy(3)">
-        <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥199 </text>/年</view>
+        <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥269 </text>/年</view>
       </view>
     </view>
   </view>
@@ -115,6 +115,7 @@ export default class MyPay extends wepy.page {
     }
     return {
       title: '各位家长，用这个记错题，速度快，用处大',
+      imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
       path: '/pages/my/index'
     }
   }

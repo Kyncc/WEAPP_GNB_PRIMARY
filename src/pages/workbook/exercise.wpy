@@ -155,6 +155,7 @@ export default class WorkbookExercise extends wepy.page {
     }
     return {
       title: '各位家长，用这个记错题，速度快，用处大',
+      imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
       path: '/pages/my/index'
     }
   }
