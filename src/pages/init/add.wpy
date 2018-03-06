@@ -38,7 +38,7 @@
               </view>
               <view class="zan-card__detail-row zan-c-gray-darker">
                 <view class="zan-card__right-col">
-                  <button wx:if="{{ item.status }}" class="zan-btn zan-btn--small zan-btn--plain zan-btn--warn">删除</button>
+                  <button wx:if="{{ item.status }}" class="zan-btn zan-btn--small zan-btn--plain zan-btn--warn">取消</button>
                   <button wx:else class="zan-btn zan-btn--small zan-btn--plain zan-btn--primary">添加</button>
                 </view>
                 <view class="zan-card__left-col zan-font-16" style="margin-bottom: 3px;">{{item.name}}</view>
@@ -104,7 +104,7 @@
       _preview (url) {
         wepy.previewImage({current: `${url}-workbookBig`, urls: [`${url}-workbookBig`]})
       },
-      /** 习题册增加删除 */
+      /** 习题册增加取消 */
       async _edit (index, id) {
         this.workbookList[index].status = await this._setWorkbook(id)
         this.$apply()
