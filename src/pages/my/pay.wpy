@@ -8,7 +8,7 @@
     </view>
     <view class="zan-panel">
       <view class="zan-cell" bindtap="_buy(1)">
-        <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥29 </text>/月</view>
+        <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥9.9 </text>/月</view>
       </view>
       <view class="zan-cell" bindtap="_buy(2)">
         <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥149 </text>/半年</view>
