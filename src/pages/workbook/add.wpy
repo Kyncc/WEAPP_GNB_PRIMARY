@@ -34,14 +34,23 @@
               <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/180/h/270/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
             </view>
             <!--习题册详情-->
-            <view class="zan-card__detail" bindtap="_edit({{ pindex}}, {{item.id}})">
+            <view class="zan-card__detail" >
               <view class="zan-card__detail-row">
                 <view class="zan-card__left-col zan-font-14" style="color:#3FC6C6">{{item.year}}版</view>
               </view>
               <view class="zan-card__detail-row zan-c-gray-darker">
-                <view class="zan-card__right-col">
-                  <button wx:if="{{ item.status }}" class="zan-btn zan-btn--small zan-btn--plain zan-btn--warn">取消</button>
-                  <button wx:else class="zan-btn zan-btn--small zan-btn--plain zan-btn--primary">添加</button>
+                <!--取消-->
+                <view class="zan-card__right-col" wx:if="{{ item.status }}">
+                  <view><button class="zan-btn zan-btn--small zan-btn--plain zan-btn--warn" bindtap="_edit({{ pindex}}, {{item.id}})">　取消　</button></view>
+                  <view style="margin-top:12rpx">
+                    <button bindtap="_intoChapter({{item}})" class="zan-btn zan-btn--small zan-btn--plain" style="background:#FF7043;color:#FFF;">
+                      我要记错
+                    </button>
+                  </view>
+                </view>
+                <!--添加-->
+                <view class="zan-card__right-col" wx:else>
+                  <button class="zan-btn zan-btn--small zan-btn--plain zan-btn--primary" bindtap="_edit({{ pindex}}, {{item.id}})">　添加　</button>
                 </view>
                 <view class="zan-card__left-col zan-font-16" style="margin-bottom: 3px;">{{item.name}}</view>
                 <repeat for="{{item.version}}" key="index" index="index" item="version">
@@ -103,6 +112,12 @@ export default class WorkbookAdd extends wepy.page {
     async _edit (index, id) {
       this.workbookList[index].status = await this._setWorkbook(id)
       this.$apply()
+    },
+    /** 进入章节 */
+    _intoChapter (item) {
+      wepy.navigateTo({
+        url: `/pages/workbook/chapter?name=${item.name}&id=${item.id}`
+      })
     }
   }
 

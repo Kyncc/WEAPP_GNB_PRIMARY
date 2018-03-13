@@ -58,6 +58,8 @@ export default class extends wepy.app {
       'pages/workbook/share',
       'pages/workbook/chapter',
       'pages/workbook/exercise',
+      'pages/paper/index',
+      'pages/paper/filter',
       'pages/statistics/index',
       'pages/statistics/error',
       'pages/statistics/share',
@@ -79,6 +81,11 @@ export default class extends wepy.app {
         selectedIconPath: 'common/resources/workbook_select.png',
         text: '错题本'
       }, {
+        pagePath: 'pages/paper/index',
+        iconPath: 'common/resources/paper.png',
+        selectedIconPath: 'common/resources/paper_select.png',
+        text: '资源'
+      }, {
         pagePath: 'pages/my/index',
         iconPath: 'common/resources/user.png',
         selectedIconPath: 'common/resources/user_select.png',
@@ -98,7 +105,13 @@ export default class extends wepy.app {
   }
 
   globalData = {
-    system: {}
+    system: {},
+    paperFilter: {
+      tag: 'hot',
+      type: '0',
+      grade: '3',
+      year: '0'
+    }
   }
 
   constructor () {

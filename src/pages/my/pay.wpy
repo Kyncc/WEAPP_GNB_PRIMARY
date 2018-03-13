@@ -8,7 +8,13 @@
     </view>
     <view class="zan-panel">
       <view class="zan-cell" bindtap="_buy(1)">
-        <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥9.9 </text>/月</view>
+        <view class="zan-cell__bd zan-font-16">
+          <text class="zan-font-30">￥9.9 </text>/月
+          <text class="zan-c-gray-dark" style="text-decoration:line-through">￥29</text>
+        </view>
+        <view class="zan-cell__ft">
+          <button class="zan-btn zan-btn--small" style="background:#ff7042;color:#fff;">限时优惠</button>
+        </view>
       </view>
       <view class="zan-cell" bindtap="_buy(2)">
         <view class="zan-cell__bd zan-font-16"><text class="zan-font-30">￥149 </text>/半年</view>
