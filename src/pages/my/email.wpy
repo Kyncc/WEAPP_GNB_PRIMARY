@@ -133,7 +133,7 @@
         wepy.request({
           url: url,
           data: {
-            chapterId: id
+            ...options
           },
           success (res) {
             wepy.showModal({

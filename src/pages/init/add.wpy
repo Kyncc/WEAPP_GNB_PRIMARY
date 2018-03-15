@@ -5,25 +5,36 @@
       padding: 5px 15px;
     }
   }
+  .header{
+    height:120px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: #fff;
+  }
   .zan-btn {
-    border-radius:0;
+    border-radius:2px;
   }
 }
 </style>
 
 <template>
   <view class="container workbookAdd">
-    <!--标题-->
-    <view class="zan-row zan-center" style="margin: 40rpx 0;">
-      <text class="zan-col zan-col-24 zan-font-22 zan-c-black">选择你正在使用的习题册</text>
-      <text class="zan-col zan-col-24 zan-font-14 zan-c-gray-darker" style="margin-top: 30rpx;">数学 新人教版 {{gradeName}}</text>
-    </view>
-    <!--搜索-->
-    <view class="zan-panel search">
-      <searchField :options.sync="base_search" componentId="searchField"/>
+    <view class="header">
+      <!--标题-->
+      <view class="zan-row zan-center" style="margin: 20px 0;">
+        <text class="zan-col zan-col-24 zan-font-22 zan-c-black">选择你正在使用的习题册</text>
+        <text class="zan-col zan-col-24 zan-font-14 zan-c-gray-darker" style="margin-top: 30rpx;">数学 新人教版 {{gradeName}}</text>
+      </view>
+      <!--搜索-->
+      <view class="zan-panel search">
+        <searchField :options.sync="base_search" componentId="searchField"/>
+      </view>
     </view>
     <!--习题册区间-->
-    <view class="zan-panel" style="margin-top: 0;">
+    <view class="zan-panel" style="margin-top: 150px;">
       <scroll>
         <repeat for="{{ workbookList }}" key="pindex" index="pindex" item="item">
           <view class="zan-card">
@@ -32,23 +43,23 @@
               <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/180/h/270/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
             </view>
             <!--习题册详情-->
-            <view class="zan-card__detail" >
+            <view class="zan-card__detail">
               <view class="zan-card__detail-row">
                 <view class="zan-card__left-col zan-font-14" style="color:#3FC6C6">{{item.year}}版</view>
               </view>
               <view class="zan-card__detail-row zan-c-gray-darker">
                 <!--取消-->
                 <view class="zan-card__right-col" wx:if="{{ item.status }}">
-                  <view><button class="zan-btn zan-btn--small zan-btn--plain zan-btn--warn" bindtap="_edit({{ pindex}}, {{item.id}})">　取消　</button></view>
+                  <view>
+                    <image src="../../common/resources/workbook_cancel.png" bindtap="_edit({{ pindex}}, {{item.id}})" mode="aspectFit" style="width: 75px;height:30px;"/>
+                  </view>
                   <view style="margin-top:12rpx">
-                    <button bindtap="_intoChapter({{item}})" class="zan-btn zan-btn--small zan-btn--plain" style="background:#FF7043;color:#FFF;">
-                      我要记错
-                    </button>
+                    <image src="../../common/resources/workbook_ksjc.png" bindtap="_intoChapter({{item}})" mode="aspectFit" style="width: 75px;height:30px;"/>
                   </view>
                 </view>
                 <!--添加-->
                 <view class="zan-card__right-col" wx:else>
-                  <button class="zan-btn zan-btn--small zan-btn--plain zan-btn--primary" bindtap="_edit({{ pindex}}, {{item.id}})">　添加　</button>
+                  <image src="../../common/resources/workbook_add.png" bindtap="_edit({{ pindex}}, {{item.id}})" mode="aspectFit" style="width: 75px;height:30px;"/>
                 </view>
                 <view class="zan-card__left-col zan-font-16" style="margin-bottom: 3px;">{{item.name}}</view>
                 <repeat for="{{item.version}}" key="index" index="index" item="version">
@@ -64,7 +75,7 @@
             <text style="color:#FF7043;text-decoration:underline;">告诉我们</text>
           </view>
         </navigator>
-      <scroll>
+      </scroll>
     </view>
   </view>
 </template>
@@ -108,20 +119,14 @@
       },
       /** 进入章节 */
       _intoChapter (item) {
-        wepy.navigateTo({
-          url: `/pages/workbook/chapter?name=${item.name}&id=${item.id}`
+        wx.reLaunch({
+          url: `/pages/my/index?from=init&name=${item.name}&id=${item.id}`
         })
       },
       /** 习题册增加取消 */
       async _edit (index, id) {
         this.workbookList[index].status = await this._setWorkbook(id)
         this.$apply()
-      },
-      /**  进入我的资料 */
-      _begin () {
-        wepy.reLaunch({
-          url: '/pages/my/index'
-        })
       }
     }
 
