@@ -1,6 +1,3 @@
-<style lang="less" scoped>
-</style>
-
 <template>
   <view class="container">
     <view class="zan-center" style="margin-top: 100px;">
