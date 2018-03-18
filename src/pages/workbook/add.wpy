@@ -61,15 +61,15 @@
             </view>
           </view>
         </repeat>
-        <!--进入想要习题册-->
-        <navigator open-type="navigate" url="/pages/workbook/want" hover-class="none" style="background:#F9F9F9">
-          <view class="zan-col zan-col-24 zan-font-14 zan-c-gray zan-center" style="padding: 10px 0;">没有找到想要的习题册？
-            <text style="color:#FF7043;text-decoration:underline;">告诉我们</text>
-          </view>
-        </navigator>
       </scroll>
-    </view>
     <!--习题册区间End-->
+    </view>
+    <!--进入想要习题册-->
+    <navigator open-type="navigate" url="/pages/workbook/want" hover-class="none" style="background:#F9F9F9">
+      <view class="zan-col zan-col-24 zan-font-14 zan-c-gray zan-center" style="padding: 10px 0;">没有找到想要的习题册？
+        <text style="color:#FF7043;text-decoration:underline;">告诉我们</text>
+      </view>
+    </navigator>
   </view>
 </template>
 
