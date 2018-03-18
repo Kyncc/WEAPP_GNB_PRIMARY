@@ -36,6 +36,12 @@
           <text>申请退款</text>
         </view>
       </view>
+      <view class="zan-font-16 zan-cell" bindtap="_open" style="padding:5px 15px 15px">
+        <view class="zan-cell__bd">
+          <image src='../../common/resources/icon_weapp.png' style="width:28px;height:28px;position:relative;top:8px;margin-right:5px;" mode='scaleToFill'/>
+          <text>错题归纳本中学小程序</text>
+        </view>
+      </view>
     </view>
   </view>
 </template>
@@ -61,6 +67,12 @@
       _into (url) {
         wx.navigateTo({
           url: url
+        })
+      },
+      // 打开小程序
+      _open () {
+        wx.navigateToMiniProgram({
+          appId: 'wx2a3d7e73ca459b21'
         })
       },
       // 发起退款
@@ -162,7 +174,7 @@
       })
     }
 
-    async onLoad() {
+    async onLoad(options) {
       try {
         /**
          * 1 获取是否存有openId 如果没有代表为登录过
@@ -180,7 +192,14 @@
         this.userInfo.refund = wepy.getStorageSync('gnb_primary_User').refund
         this.userInfo.vip = wepy.getStorageSync('gnb_primary_User').vip
         wepy.hideLoading()
-        wepy.switchTab({ url: `/pages/workbook/index` })
+        // 对新建用户的进入练习册处理
+        if (options.from === 'init') {
+          wepy.navigateTo({
+            url: `/pages/workbook/chapter?name=${options.name}&id=${options.id}`
+          })
+        } else {
+          wepy.switchTab({ url: `/pages/workbook/index` })
+        }
         this.$apply()
       } catch (err) {
         wepy.hideLoading()

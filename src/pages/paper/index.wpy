@@ -1,0 +1,165 @@
+<style lang="less">
+.paperIndex{
+  .header{
+    padding:3px 0;
+    height:40px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 2;
+  }
+  .zan-btn {
+    border-radius:5%;
+  }
+}
+</style>
+
+<template>
+  <view class="container paperIndex">
+    <view class="zan-row zan-cell header">
+      <view class="zan-col zan-col-12">
+        <button class="zan-col-offset-1 zan-btn zan-btn--small {{options.tag === 'hot' ? 'zan-btn--primary':''}}" bindtap='_select(hot)'>精品</button>
+        <button class="zan-col-offset-1 zan-btn zan-btn--small {{options.tag === 'new' ? 'zan-btn--primary':''}}" bindtap='_select(new)'>时间</button>
+      </view>
+      <navigator open-type="navigateTo" url="/pages/paper/filter" hover-class="none"
+        class="zan-col zan-col-offset-5 zan-col-6 zan-right" style="color: #3fc6c6">
+        筛选
+      </navigator>
+    </view>
+    <scroll-view scroll-y style="height: {{scrollHeight}}px;margin-top: 45px;" lower-threshold="200" bindscrolltolower="_loadMore">
+      <repeat for="{{list}}" key="index" index="index" item="item">
+        <view class="zan-panel" style="margin-top: 5px;" bindtap='_download({{item}})'>
+          <view class="zan-cell" style="padding: 7px 15px">
+            <text wx:if="{{item.isGood}}" style="color: #fff;margin-right: 5px;padding:3px;background: #f6ac0b;border-radius: 5px;">精</text>
+            <text>{{item.name}}</text>
+          </view>
+          <view class="zan-cell" style="padding: 7px 15px">
+            <view class="zan-cell__bd zan-row zan-c-gray zan-font-12">
+              <view class="zan-col zan-col-9">更新：{{item.time}}</view>
+              <view class="zan-col zan-col-9">下载：{{item.downloadNumber}}</view>
+            </view>
+          </view>
+        </view>
+      </repeat>
+      <zanLoadmore1 :loading.sync="loading" :nomore.sync="nomore"/>
+    </scroll-view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import zanLoadMore from '@/components/zan-loadmore'
+  
+  export default class PaperIndex extends wepy.page {
+    config = {
+      navigationBarTitleText: '试卷下载'
+    }
+
+    data = {
+      list: [],
+      offset: '',
+      scrollHeight: '',
+      options: {
+        tag: 'hot',
+        type: '0',
+        grade: '3',
+        year: '0'
+      },
+      loading: true,
+      nomore: false
+    }
+
+    components = {
+      zanLoadmore1: zanLoadMore
+    }
+
+    methods = {
+      /** 进入下载 */
+      _download (item) {
+        // 不是会员跳转到VIP购买, 是跳转到下载
+        if (Number(wepy.getStorageSync('gnb_primary_User').vip)) {
+          wepy.navigateTo({url: `/pages/my/email?id=${item.id}&type=paper`})
+        } else {
+          wepy.navigateTo({url: `/pages/my/vip`})
+        }
+      },
+      /** 选择标签 */
+      _select (value) {
+        this.$parent.globalData.paperFilter.tag = value
+        this.options.tag = value
+        this._getList()
+      },
+      /** 加载更多 */
+      _loadMore () {
+        // 无更多数据或者正在加载则返回
+        if (this.loading || this.nomore) return
+        this.loading = true
+        this._getPaperList(this.offset, this.options).then((res) => {
+          this.loading = false
+          this.list = this.list.concat(res.list)
+          this.offset = res.offset
+          this.$apply()
+        }).catch(() => {
+          this.nomore = true
+          this.loading = false
+          this.$apply()
+        })
+      }
+    }
+    /** 试卷下载 */
+    _getPaperList (offset, options) {
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://primary.guinaben.com/resource',
+          data: {
+            offset: offset,
+            options: {
+              ...options
+            }
+          },
+          success (res) { resolve(res) },
+          fail (err) { reject(err) }
+        })
+      })
+    }
+
+    async _getList () {
+      this.list = []
+      this.offset = ''
+      try {
+        let result = await this._getPaperList(this.offset, this.options)
+        this.loading = false
+        this.list = result.list
+        this.offset = result.offset
+        if (this.offset.length === 0) {
+          this.nomore = true
+        }
+        this.$apply()
+      } catch (err) {
+        this.loading = false
+        this.nomore = true
+        this.$apply()
+      }
+    }
+
+    onLoad() {
+      this.scrollHeight = this.$parent.globalData.system.windowHeight - 30
+    }
+
+    onShow() {
+      this.options.type = this.$parent.globalData.paperFilter.type
+      this.options.grade = this.$parent.globalData.paperFilter.grade
+      this.options.year = this.$parent.globalData.paperFilter.year
+      this._getList()
+    }
+
+    onShareAppMessage (res) {
+      return {
+        title: '各位家长，用这个记错题，速度快，用处大',
+        path: '/pages/my/index'
+      }
+    }
+  }
+</script>

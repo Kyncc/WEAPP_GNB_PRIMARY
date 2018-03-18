@@ -1,0 +1,56 @@
+<style lang="less" scoped>
+.InitEntry{
+  background: #fffaf4;
+  .zan-btn{
+    background: #f0e7dc;
+    color: #000;
+  }
+  .footer{
+    position: fixed;
+    width: 100%;
+    bottom: 30px;
+  }
+}
+</style>
+
+<template>
+  <view class="container InitEntry">
+    <view class="zan-row zan-center" style="margin-top: 155rpx;">
+      <image mode="aspectFit" style="width:448rpx;height:265rpx" src="../../common/resources/entry_header.jpg"/>
+    </view>
+    <view class="zan-row zan-center" style="margin-top: 105rpx;">
+      <button class="zan-col zan-col-14 zan-col-offset-5 zan-btn zan-font-18" bindtap='_intoPrimary()'>   小  学   </button>
+      <button style="margin-top: 45rpx;"  class="zan-col zan-col-14 zan-col-offset-5 zan-btn zan-font-18" bindtap='_intoMiddle()'>   初  中   </button>
+    </view>
+    <view class="footer zan-font-14 zan-center">
+      <view class="zan-center">
+        <image mode="aspectFit" style="width:80rpx;height:80rpx;padding:10px;" src="http://img.guinaben.com/guinaicon.png?imageView2/2/w/100/h/100/q/100|imageslim"/>
+      </view>
+      <text class="zan-font-bold">提分从记录错题开始</text>
+    </view>
+      
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class InitEntry extends wepy.page {
+    config = {
+      navigationBarTitleText: '错题归纳本'
+    }
+
+    methods = {
+      // 进入初中
+      _intoMiddle () {
+        wx.navigateToMiniProgram({
+          appId: 'wx2a3d7e73ca459b21'
+        })
+      },
+      // 进入小学
+      _intoPrimary () {
+        wepy.reLaunch({ url: `/pages/my/index` })
+      }
+    }
+  }
+</script>
