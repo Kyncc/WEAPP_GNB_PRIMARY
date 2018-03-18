@@ -20,8 +20,8 @@
   <view class="container paperIndex">
     <view class="zan-row zan-cell header">
       <view class="zan-col zan-col-12">
-        <button class="zan-col-offset-1 zan-btn zan-btn--small {{options.tag === 'new' ? 'zan-btn--primary':''}}" bindtap='_select(new)'>时间</button>
         <button class="zan-col-offset-1 zan-btn zan-btn--small {{options.tag === 'hot' ? 'zan-btn--primary':''}}" bindtap='_select(hot)'>精品</button>
+        <button class="zan-col-offset-1 zan-btn zan-btn--small {{options.tag === 'new' ? 'zan-btn--primary':''}}" bindtap='_select(new)'>时间</button>
       </view>
       <navigator open-type="navigateTo" url="/pages/paper/filter" hover-class="none"
         class="zan-col zan-col-offset-5 zan-col-6 zan-right" style="color: #3fc6c6">

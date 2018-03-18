@@ -43,15 +43,15 @@
                 <!--取消-->
                 <view class="zan-card__right-col" wx:if="{{ item.status }}">
                   <view>
-                    <image src="../../common/resources/workbook_cancel.png" bindtap="_edit({{ pindex}}, {{item.id}})" mode="aspectFit" style="width: 75px;height:30px;"/>
+                    <image src="../../common/resources/workbook_cancel.png" bindtap="_edit({{ pindex}}, {{item.id}})" mode="aspectFit" style="width: 70px;height:26px;"/>
                   </view>
-                  <view style="margin-top:12rpx">
-                    <image src="../../common/resources/workbook_ksjc.png" bindtap="_intoChapter({{item}})" mode="aspectFit" style="width: 75px;height:30px;"/>
+                  <view style="margin-top:14rpx">
+                    <image src="../../common/resources/workbook_ksjc.png" bindtap="_intoChapter({{item}})" mode="aspectFit" style="width: 70px;height:26px;"/>
                   </view>
                 </view>
                 <!--添加-->
                 <view class="zan-card__right-col" wx:else>
-                  <image src="../../common/resources/workbook_add.png" bindtap="_edit({{ pindex}}, {{item.id}})" mode="aspectFit" style="width: 75px;height:30px;"/>
+                  <image src="../../common/resources/workbook_add.png" bindtap="_edit({{ pindex}}, {{item.id}})" mode="aspectFit" style="width: 70px;height:26px;"/>
                 </view>
                 <view class="zan-card__left-col zan-font-16" style="margin-bottom: 3px;">{{item.name}}</view>
                 <repeat for="{{item.version}}" key="index" index="index" item="version">
@@ -63,10 +63,8 @@
         </repeat>
         <!--进入想要习题册-->
         <navigator open-type="navigate" url="/pages/workbook/want" hover-class="none" style="background:#F9F9F9">
-          <view class="zan-row zan-center" style="padding:30rpx 0;">
-            <view class="zan-col zan-col-24 zan-font-14 zan-c-gray">没有找到想要的习题册？
-              <text style="color:#FF7043;text-decoration:underline;">告诉我们</text>
-            </view>
+          <view class="zan-col zan-col-24 zan-font-14 zan-c-gray zan-center" style="padding: 10px 0;">没有找到想要的习题册？
+            <text style="color:#FF7043;text-decoration:underline;">告诉我们</text>
           </view>
         </navigator>
       </scroll>
