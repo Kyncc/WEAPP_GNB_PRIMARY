@@ -19,8 +19,8 @@
           </view>
           <view class="zan-cell zan-font-12" style="padding: 7px 15px">
             <view class="zan-cell__bd zan-row">
-              <view class="zan-col zan-col-8 zan-c-gray">{{item.workbookName}}</view>
-              <view class="zan-col zan-col-8 zan-c-gray">下载：{{item.downNum}}</view>
+              <view class="zan-col zan-col-8 zan-font--primary">{{item.workbookName}}</view>
+              <view class="zan-col zan-col-8 zan-font--primary">下载：{{item.downNum}}</view>
             </view>
           </view>
         </view>

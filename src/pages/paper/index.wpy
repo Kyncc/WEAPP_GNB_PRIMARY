@@ -36,9 +36,9 @@
             <text>{{item.name}}</text>
           </view>
           <view class="zan-cell" style="padding: 7px 15px">
-            <view class="zan-cell__bd zan-row zan-c-gray zan-font-12">
-              <view class="zan-col zan-col-9">更新：{{item.time}}</view>
-              <view class="zan-col zan-col-9">下载：{{item.downloadNumber}}</view>
+            <view class="zan-cell__bd zan-row zan-c-gray zan-font-12 ">
+              <view class="zan-col zan-col-9 zan-font--primary">更新：{{item.time}}</view>
+              <view class="zan-col zan-col-9 zan-font--primary">下载：{{item.downloadNumber}}</view>
             </view>
           </view>
         </view>
