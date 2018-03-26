@@ -9,11 +9,13 @@
           <block wx:else>
             <view class="zan-font-16 zan-cell {{ item.isUsed ? 'zan-c-black' : 'zan-c-gray-dark' }}" bindtap="_intoExercise({{ item }})">
               <view class="zan-cell__bd">　{{item.name}}</view>
+              <view wx:if="item.isUsed" class="zan-cell__ft">{{item.scale}}</view>
             </view>
           </block>
           <repeat for="{{ item.b }}" key="index" index="index" item="itemB">
             <view class="zan-font-16 zan-cell {{ itemB.isUsed ? 'zan-c-black' : 'zan-c-gray-dark' }}" bindtap="_intoExercise({{itemB}})">
               <view class="zan-cell__bd">　{{itemB.name}}</view>
+              <view wx:if="{{ itemB.isUsed }}" class="zan-cell__ft">{{itemB.scale}}</view>
             </view>
           </repeat>
         </view>

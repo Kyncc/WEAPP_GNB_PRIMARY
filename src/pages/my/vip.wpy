@@ -1,9 +1,20 @@
+<style lang="less">
+.myVip {
+  .del{
+    margin-left: 15px;
+    text-decoration:line-through
+  }
+}
+</style>
+
 <template>
-  <view class="container">
+  <view class="container myVip">
     <view class="zan-panel zan-center" style="padding:30px 0;margin-top: 0;">
       <view style="padding:5px 0"><text style="color:#3fc6c6">支付提示</text></view>
-      <view style="padding:15px 0"><text class="zan-c-black zan-font-30">￥9.9/月</text></view>
-      <view style="padding:5px 0"><text class="zan-c-gray-dark zan-font-22">首次支付30天内无理由全额退款</text></view>
+      <view style="padding:15px 0">
+        <text class="zan-c-black zan-font-30">￥0.99/天</text>
+        <text class="zan-c-gray zan-font-14 del">￥5.9</text>
+      </view>
     </view>
     <view class="footer" style="margin-top: 20px;">
       <view class="zan-row">
@@ -41,7 +52,7 @@
         wepy.request({
           url: 'https://wechat.guinaben.com/mini-program/pay',
           data: {
-            goodType: 1,
+            goodType: 7,
             app: 'primary'
           },
           success (res) {

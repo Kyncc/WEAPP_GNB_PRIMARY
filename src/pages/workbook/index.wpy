@@ -39,13 +39,11 @@
               <!--习题册详情-->
               <view class="zan-card__detail">
                 <view class="zan-card__detail-row">
-                  <view class="zan-card__left-col zan-font-14" style="color:#3FC6C6">{{item.year}}版</view>
+                  <view class="zan-card__left-col zan-c-gray zan-font-14" style="color:#3FC6C6;margin: 8rpx 0 12rpx;">{{item.year}}版</view>
                 </view>
                 <view class="zan-card__detail-row zan-c-gray-darker">
-                  <view class="zan-card__left-col zan-font-16" style="margin-bottom: 3px;">{{item.name}}</view>
-                  <repeat for="{{item.version}}" key="index" index="index" item="version">
-                    <view class="zan-card__left-col zan-c-gray zan-font-12" style="margin-bottom: 6rpx;">{{version}}</view>
-                  </repeat>
+                  <view class="zan-card__left-col zan-font-16" style="margin-bottom: 10rpx;">{{item.name}}</view>
+                  <view class="zan-card__left-col zan-font-14" style="color:#3FC6C6;margin-bottom: 10rpx;">{{item.number}}人正在使用</view>
                 </view>
               </view>
             </view>

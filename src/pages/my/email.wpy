@@ -136,21 +136,29 @@
             ...options
           },
           success (res) {
-            wepy.showModal({
-              title: '发送成功',
-              content: '已发送至您的邮箱(若未收到，请查看垃圾邮件)',
-              confirmText: '知道了',
-              showCancel: false,
-              success(res) {
-                if (res.confirm) {
-                  wepy.navigateBack()
+            if (res.hasOwnProperty('url')) {
+              wepy.showModal({
+                title: '发送成功',
+                content: '已发送至您的邮箱(若未收到，请查看垃圾邮件)',
+                confirmText: '知道了',
+                showCancel: false,
+                success(result) {
+                  if (result.confirm) {
+                    wepy.navigateBack()
+                  }
                 }
-              }
-            })
-            resolve(res.url)
+              })
+            } else {
+              wepy.showModal({
+                title: '提示',
+                content: '亲，超出任务了，明天再来吧！',
+                confirmText: '知道了',
+                showCancel: false
+              })
+            }
           },
           fail (err) {
-            reject(err)
+            console.log(err)
           },
           complete () {
             wepy.hideLoading()
