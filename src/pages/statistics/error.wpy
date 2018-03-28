@@ -31,7 +31,7 @@
       <view class="zan-row">
         <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--primary" bindtap='_download'>
           <image mode="aspectFit" style="width:24px;height:24px;top:6px;position:relative;" src="../../common/resources/icon_download.png"/>
-          下载{{count}}道错题
+          下载
         </button>
       </view>
     </view>
@@ -82,18 +82,12 @@ export default class StatisticsError extends wepy.page {
     _preview (url) {
       wepy.previewImage({current: `${url}-primaryError`, urls: this.imgs})
     },
-    /** 下载试卷 */
+    /** 下载错题 */
     _download () {
-      // 不是会员跳转到VIP购买, 是跳转到下载
-      if (Number(wepy.getStorageSync('gnb_primary_User').vip)) {
-        wepy.navigateTo({
-          url: `/pages/my/email?id=${this.id}&type=statistics`
-        })
-      } else {
-        wepy.navigateTo({
-          url: `/pages/my/vip`
-        })
-      }
+      // 跳转到筛选
+      wepy.navigateTo({
+        url: `/pages/statistics/select?id=${this.id}`
+      })
     }
   }
 

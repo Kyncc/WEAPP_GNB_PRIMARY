@@ -66,6 +66,7 @@ export default class extends wepy.app {
       'pages/paper/index',
       'pages/paper/filter',
       'pages/statistics/index',
+      'pages/statistics/select',
       'pages/statistics/error',
       'pages/statistics/share',
       'pages/statistics/correct'
@@ -111,12 +112,15 @@ export default class extends wepy.app {
 
   globalData = {
     system: {},
+    // 下载试卷选择
     paperFilter: {
       tag: 'hot',
       type: '0',
       grade: '3',
       year: '0'
-    }
+    },
+    // 错题本下载选择
+    statisticsSelect: ["1"]
   }
 
   constructor () {
