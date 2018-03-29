@@ -17,10 +17,23 @@
           <view class="zan-cell" style="padding: 5px 0" bindtap='_preview({{item.errorImg.url}})'>
             <image mode="aspectFit" style="width:100%;height:{{ item.errorImg.height/4 }}px" src="{{item.errorImg.url}}?mageMogr2/auto-orient/thumbnail/750x/format/jpg/interlace/1/blur/1x0/quality/100|imageslim" lazy-load="true"/>
           </view>
-          <view class="zan-cell zan-font-12" style="padding: 7px 15px">
+          <view class="zan-cell zan-font-12" style="padding: 7px 15px;height:30px;line-height: 30px;">
             <view class="zan-cell__bd zan-row">
-              <view class="zan-col zan-col-8 zan-font--primary">{{item.workbookName}}</view>
-              <view class="zan-col zan-col-8 zan-font--primary">下载：{{item.downNum}}</view>
+              <!--练习册名称点击出次数-->
+              <view class="zan-col zan-col-8 {{item.count === 0 ? 'zan-font--orange' : 'zan-font--primary'}}">
+                {{item.workbookName}}
+              </view>
+              <view class="zan-col zan-col-12 zan-font--primary">下载：{{item.downNum}}</view>
+              <!--订正的操作-->
+              <view class="zan-col zan-col-4">
+                <picker bindchange="_reviseChange" data-current="{{index}}" value="{{revise.index}}" range="{{revise.array}}" range-key="name">
+                  <button class="zan-btn zan-btn--small {{item.revise === 'null' ? 'zan-btn--disabled' : ''}}">
+                    <text wx:if="{{item.revise === 'null'}}">订正</text>
+                    <text wx:elif="{{item.revise === 'true'}}">搞对了</text>
+                    <text wx:else="{{item.revise === 'false'}}">又错了</text>
+                  </button>
+                </picker>
+              </view>
             </view>
           </view>
         </view>
@@ -44,6 +57,19 @@ import zanLoadMore from '@/components/zan-loadmore'
 
 export default class StatisticsError extends wepy.page {
   data = {
+    revise: {
+      index: 0,
+      array: [
+        {
+          id: 0,
+          name: '搞对了'
+        },
+        {
+          id: 1,
+          name: '又错了'
+        }
+      ]
+    },
     offset: '',
     error: [],
     count: 0,
@@ -58,6 +84,13 @@ export default class StatisticsError extends wepy.page {
   }
 
   methods = {
+    /** 更改订正状态 */
+    async _reviseChange (e) {
+      let index = e.target.dataset.current
+      let status = Boolean(Number(e.detail.value)).toString()
+      let result = await this._setRevise(this.id, this.error[index], status)
+      console.log(result)
+    },
     /** 加载更多 */
     _loadMore () {
       // 无更多数据或者正在加载则返回
@@ -110,6 +143,27 @@ export default class StatisticsError extends wepy.page {
         data: {
           chapterId: id,
           offset: offset
+        },
+        success (res) {
+          resolve(res)
+        },
+        fail (err) {
+          reject(err)
+        }
+      })
+    })
+  }
+
+  /** 设置错题订正状态 */
+  _setRevise (chapterId, item, status) {
+    return new Promise((resolve, reject) => {
+      wepy.request({
+        url: 'https://primary.guinaben.com/textbook/statistics/revise',
+        method: 'POST',
+        data: {
+          chapterId: chapterId,
+          id: item.id,
+          status: status
         },
         success (res) {
           resolve(res)

@@ -82,7 +82,7 @@
           url: 'https://primary.guinaben.com/textbook/statistics/downloadNum',
           data: {
             chapterId: id,
-            type: type
+            type: type.toString()
           },
           success (res) {
             resolve(res)
