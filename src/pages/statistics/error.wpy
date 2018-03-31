@@ -20,17 +20,17 @@
           <view class="zan-cell zan-font-12" style="padding: 7px 15px;height:30px;line-height: 30px;">
             <view class="zan-cell__bd zan-row">
               <!--练习册名称点击出次数-->
-              <view class="zan-col zan-col-8 {{item.count === 0 ? 'zan-font--orange' : 'zan-font--primary'}}">
+              <view class="zan-col zan-col-8 {{item.count ? 'zan-font--orange' : 'zan-font--primary'}}" bindtap='_count({{item.count}})'>
                 {{item.workbookName}}
               </view>
-              <view class="zan-col zan-col-12 zan-font--primary">下载：{{item.downNum}}</view>
+              <view class="zan-col zan-col-10 zan-font--primary">下载：{{item.downNum}}</view>
               <!--订正的操作-->
-              <view class="zan-col zan-col-4">
-                <picker bindchange="_reviseChange" data-current="{{index}}" value="{{revise.index}}" range="{{revise.array}}" range-key="name">
+              <view class="zan-col zan-col-6">
+                <picker bindchange="_reviseChange" data-current="{{index}}" value="{{item.revise === 'true' ? 1 : 0}}" range="{{revise.array}}" range-key="name">
                   <button class="zan-btn zan-btn--small {{item.revise === 'null' ? 'zan-btn--disabled' : ''}}">
-                    <text wx:if="{{item.revise === 'null'}}">订正</text>
-                    <text wx:elif="{{item.revise === 'true'}}">搞对了</text>
-                    <text wx:else="{{item.revise === 'false'}}">又错了</text>
+                    <text wx:if="{{item.revise === 'null'}}">订　正</text>
+                    <text class="zan-font--primary" wx:elif="{{item.revise === 'true'}}">✔搞对了</text>
+                    <text class="zan-font--orange" wx:else="{{item.revise === 'false'}}">✖又错了</text>
                   </button>
                 </picker>
               </view>
@@ -58,15 +58,14 @@ import zanLoadMore from '@/components/zan-loadmore'
 export default class StatisticsError extends wepy.page {
   data = {
     revise: {
-      index: 0,
       array: [
         {
           id: 0,
-          name: '搞对了'
+          name: '又错了'
         },
         {
           id: 1,
-          name: '又错了'
+          name: '搞对了'
         }
       ]
     },
@@ -84,12 +83,27 @@ export default class StatisticsError extends wepy.page {
   }
 
   methods = {
+    /** 显示错误次数 */
+    _count (count) {
+      if (Number(count)) {
+        wepy.showToast({
+          title: `该题目订正${count}次`,
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    },
     /** 更改订正状态 */
     async _reviseChange (e) {
-      let index = e.target.dataset.current
+      console.log(e.target.val)
+      console.log(e.target.dataset.current)
+      let index = e.target.dataset.current  // 获取当前索引
       let status = Boolean(Number(e.detail.value)).toString()
-      let result = await this._setRevise(this.id, this.error[index], status)
-      console.log(result)
+      this._setRevise(this.id, this.error[index], status).then((res) => {
+        this.error[index].count = res.count
+        this.error[index].revise = res.status
+        this.$apply()
+      })
     },
     /** 加载更多 */
     _loadMore () {
@@ -156,6 +170,7 @@ export default class StatisticsError extends wepy.page {
 
   /** 设置错题订正状态 */
   _setRevise (chapterId, item, status) {
+    wx.showLoading({title: '提交中'})
     return new Promise((resolve, reject) => {
       wepy.request({
         url: 'https://primary.guinaben.com/textbook/statistics/revise',
@@ -166,9 +181,11 @@ export default class StatisticsError extends wepy.page {
           status: status
         },
         success (res) {
+          wepy.hideLoading()
           resolve(res)
         },
         fail (err) {
+          wepy.hideLoading()
           reject(err)
         }
       })
