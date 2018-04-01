@@ -1,16 +1,21 @@
 <style lang="less" scoped>
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 10px 0;
-  background: #F9F9F9;
+.statisticsError{
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    background: #F9F9F9;
+  }
+  .zan-btn {
+    border-radius:0;
+  }
 }
 </style>
 
 <template>
-  <view class="container">
+  <view class="container statisticsError">
     <scroll-view scroll-y style="height: {{scrollHeight}}px;padding-bottom: 40px;" lower-threshold="200" bindscrolltolower="_loadMore">
       <repeat for="{{error}}" key="index" index="index" item="item">
         <view class="zan-panel">
@@ -23,9 +28,9 @@
               <view class="zan-col zan-col-8 {{item.count ? 'zan-font--orange' : 'zan-font--primary'}}" bindtap='_count({{item.count}})'>
                 {{item.workbookName}}
               </view>
-              <view class="zan-col zan-col-10 zan-font--primary">下载：{{item.downNum}}</view>
+              <view class="zan-col zan-col-9 zan-font--primary">下载：{{item.downNum}}</view>
               <!--订正的操作-->
-              <view class="zan-col zan-col-6">
+              <view class="zan-col zan-col-7">
                 <picker bindchange="_reviseChange" data-current="{{index}}" value="{{item.revise === 'true' ? 1 : 0}}" range="{{revise.array}}" range-key="name">
                   <button class="zan-btn zan-btn--small {{item.revise === 'null' ? 'zan-btn--disabled' : ''}}">
                     <text wx:if="{{item.revise === 'null'}}">订　正</text>

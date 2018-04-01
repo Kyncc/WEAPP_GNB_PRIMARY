@@ -120,7 +120,10 @@
       let options = {}
       if (type === 'statistics') {
         url = 'https://primary.guinaben.com/textbook/statistics/download'
-        options = {chapterId: id}
+        options = {
+          chapterId: id,
+          type: this.$parent.globalData.statisticsSelect.toString()
+        }
       } else if (type === 'workbook') {
         url = 'https://primary.guinaben.com/workbook/chapter/errorDownload'
         options = {chapterId: id}

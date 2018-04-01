@@ -27,16 +27,16 @@
   <view class="container workbookIndex">
     <gnbTextbookSelect class="header" :value.sync="grade" :key.sync="textbook" @event.user="textbookChange" :textbook.sync="textBookList"/>
     <view>
-      <!--习题册区间-->
+      <!--练习册区间-->
       <view class="zan-panel" style='margin-top: 38px;'>
         <scroll>
           <repeat for="{{ workbookList }}" key="pindex" index="pindex" item="item">
             <view class="zan-card" bindtap="_intoChapter({{item}})">
-              <!--习题册图片-->
+              <!--练习册图片-->
               <view class="zan-card__thumb">
                 <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/180/h/270/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
               </view>
-              <!--习题册详情-->
+              <!--练习册详情-->
               <view class="zan-card__detail">
                 <view class="zan-card__detail-row">
                   <view class="zan-card__left-col zan-c-gray zan-font-14" style="color:#3FC6C6;margin: 8rpx 0 12rpx;">{{item.year}}版</view>
@@ -53,7 +53,7 @@
     </view>
     <button class="add_button" bindtap='_initAdd'>+</button>
     <!-- <view class="zan-font-16 zan-center" style='padding:20rpx 0;' bindtap="_initAdd()">
-      <text class="zan-c-gray-darker">+添加习题册</text>
+      <text class="zan-c-gray-darker">+添加练习册</text>
     </view> -->
   </view>
 </template>
@@ -90,14 +90,14 @@ export default class Statistics extends wepy.page {
         url: `/pages/workbook/chapter?name=${item.name}&id=${item.id}`
       })
     },
-    /** 增加习题册 */
+    /** 增加练习册 */
     _initAdd () {
       wepy.navigateTo({
         url: `/pages/workbook/add?id=${this.textbook}`
       })
     }
   }
-  // 获取我的习题册
+  // 获取我的练习册
   _getMyWorkbook (id) {
     return new Promise((resolve, reject) => {
       wepy.request({

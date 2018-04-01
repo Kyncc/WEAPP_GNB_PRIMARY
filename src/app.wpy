@@ -19,9 +19,6 @@
 .zan-panel-title{
   font-size: 16px;
 }
-.zan-font--primary{
-  color: #3fc6c6;
-}
 .zan-font--orange{
   color: #FDCA3A;
 }
@@ -123,7 +120,7 @@ export default class extends wepy.app {
       year: '0'
     },
     // 错题本下载选择
-    statisticsSelect: ["1"]
+    statisticsSelect: ['1']
   }
 
   constructor () {
