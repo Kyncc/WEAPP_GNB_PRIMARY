@@ -1,4 +1,7 @@
 <style lang="less" scoped>
+.zan-btn {
+  border-radius:0;
+}
 .footer{
   position:fixed;
   bottom: 0px;
@@ -6,6 +9,9 @@
   width:100%;
   padding: 15px 0;
   background: #F9F9F9;
+  .zan-btn {
+    border-radius:5px;
+  }
 }
 </style>
 

@@ -20,7 +20,10 @@
   font-size: 16px;
 }
 .zan-font--orange{
-  color: #FDCA3A;
+  color: #f85;
+}
+.zan-font--primary{
+  color: #3fc6c6;
 }
 .zan-btn--primary{
   background-color: #3fc6c6;

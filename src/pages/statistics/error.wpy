@@ -1,5 +1,8 @@
 <style lang="less" scoped>
 .statisticsError{
+  .zan-btn {
+    border-radius:0;
+  }
   .footer {
     position: fixed;
     bottom: 0;
@@ -7,9 +10,9 @@
     width: 100%;
     padding: 10px 0;
     background: #F9F9F9;
-  }
-  .zan-btn {
-    border-radius:0;
+    .zan-btn {
+      border-radius:5px;
+    }
   }
 }
 </style>
@@ -32,11 +35,9 @@
               <!--订正的操作-->
               <view class="zan-col zan-col-7">
                 <picker bindchange="_reviseChange" data-current="{{index}}" value="{{item.revise === 'true' ? 1 : 0}}" range="{{revise.array}}" range-key="name">
-                  <button class="zan-btn zan-btn--small {{item.revise === 'null' ? 'zan-btn--disabled' : ''}}">
-                    <text wx:if="{{item.revise === 'null'}}">订　正</text>
-                    <text class="zan-font--primary" wx:elif="{{item.revise === 'true'}}">✔搞对了</text>
-                    <text class="zan-font--orange" wx:else="{{item.revise === 'false'}}">✖又错了</text>
-                  </button>
+                  <button wx:if="{{item.revise === 'null'}}" class="zan-btn zan-btn--small zan-btn--disabled">订　正</button>
+                  <button wx:elif="{{item.revise === 'true'}}" class="zan-btn zan-btn--small zan-btn--plain zan-btn--primary">搞对了</button>
+                  <button wx:else="{{item.revise === 'false'}}" class="zan-btn zan-btn--small zan-btn--plain zan-btn--warn">又错了</button>
                 </picker>
               </view>
             </view>

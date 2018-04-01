@@ -8,6 +8,9 @@
   .zan-field {
     width:65%;
   }
+  .zan-btn {
+    border-radius:0;
+  }
 }
 </style>
 
@@ -26,7 +29,7 @@
     </view>
     <view class="zan-row">
       <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary {{emailDisabled ? '' : 'zan-btn--disabled'}}"
-        disabled="{{!emailDisabled}}"
+        disabled="{{!emailDisabled}}" style="border-radius: 5px;"
         bindtap='_send'>
         发送
       </button>
