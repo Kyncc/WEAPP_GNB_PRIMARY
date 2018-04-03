@@ -39,7 +39,7 @@
       <view class="zan-font-16 zan-cell" bindtap="_open" style="padding:5px 15px 15px">
         <view class="zan-cell__bd">
           <image src='../../common/resources/icon_weapp.png' style="width:28px;height:28px;position:relative;top:8px;margin-right:5px;" mode='scaleToFill'/>
-          <text>错题归纳本中学小程序</text>
+          <text>到初中逛逛</text>
         </view>
       </view>
     </view>

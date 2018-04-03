@@ -40,7 +40,14 @@
        * 2. isUsed 为true  isAllCorrect 进入全对页面 否则 进入记错题页面
        */
       _intoExercise(item) {
-        if (item.isUsed) {
+        if (!item.isFinish) {
+          wepy.showModal({
+            title: '提示',
+            content: '您已超过国家规定教学的进度',
+            showCancel: false,
+            confirmText: '确定'
+          })
+        } else if (item.isUsed) {
           item.isAllCorrect
             ? wepy.navigateTo({url: `/pages/workbook/correct?id=${item.id}&name=${item.name}`})
             : wepy.navigateTo({url: `/pages/workbook/error?id=${item.id}&name=${item.name}`})

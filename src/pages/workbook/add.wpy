@@ -25,16 +25,16 @@
     <view class="zan-panel search">
       <searchField :options.sync="base_search" componentId="searchField"/>
     </view>
-    <!--习题册区间-->
+    <!--练习册区间-->
     <view class="zan-panel" style="margin-top:55px;">
       <scroll>
         <repeat for="{{ workbookList }}" key="pindex" index="pindex" item="item">
           <view class="zan-card">
-            <!--习题册图片-->
+            <!--练习册图片-->
             <view class="zan-card__thumb" bindtap="_preview({{ item.img.url }})">
               <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/180/h/270/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
             </view>
-            <!--习题册详情-->
+            <!--练习册详情-->
             <view class="zan-card__detail" >
               <view class="zan-card__detail-row">
                 <view class="zan-card__left-col zan-font-14" style="color:#3FC6C6">{{item.year}}版</view>
@@ -62,11 +62,11 @@
           </view>
         </repeat>
       </scroll>
-    <!--习题册区间End-->
+    <!--练习册区间End-->
     </view>
-    <!--进入想要习题册-->
+    <!--进入想要练习册-->
     <navigator open-type="navigate" url="/pages/workbook/want" hover-class="none" style="background:#F9F9F9">
-      <view class="zan-col zan-col-24 zan-font-14 zan-c-gray zan-center" style="padding: 10px 0;">没有找到想要的习题册？
+      <view class="zan-col zan-col-24 zan-font-14 zan-c-gray zan-center" style="padding: 10px 0;">没有找到想要的练习册？
         <text style="color:#FF7043;text-decoration:underline;">告诉我们</text>
       </view>
     </navigator>
@@ -90,7 +90,7 @@ export default class WorkbookAdd extends wepy.page {
     base_search: {
       title: '',
       value: '',
-      placeholder: '请输入习题册名称'
+      placeholder: '请输入练习册名称'
     }
   }
 
@@ -103,11 +103,11 @@ export default class WorkbookAdd extends wepy.page {
   }
 
   methods = {
-    /** 查看习题册大图 */
+    /** 查看练习册大图 */
     _preview (url) {
       wepy.previewImage({current: `${url}-workbookBig`, urls: [`${url}-workbookBig`]})
     },
-    /** 习题册增加取消 */
+    /** 练习册增加取消 */
     async _edit (index, id) {
       this.workbookList[index].status = await this._setWorkbook(id)
       this.$apply()
@@ -120,7 +120,7 @@ export default class WorkbookAdd extends wepy.page {
     }
   }
 
-  /** 编辑习题册 */
+  /** 编辑练习册 */
   _setWorkbook (id) {
     return new Promise((resolve, reject) => {
       wepy.request({
@@ -139,7 +139,7 @@ export default class WorkbookAdd extends wepy.page {
     })
   }
 
-  // 添加我的习题册
+  // 添加我的练习册
   _getAllWorkbook (id, name) {
     return new Promise((resolve, reject) => {
       wepy.request({

@@ -1,26 +1,45 @@
 <style lang="less" scoped>
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 10px 0;
-  background: #F9F9F9;
+.statisticsError{
+  .zan-btn {
+    border-radius:0;
+  }
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    background: #F9F9F9;
+    .zan-btn {
+      border-radius:5px;
+    }
+  }
 }
 </style>
 
 <template>
-  <view class="container">
+  <view class="container statisticsError">
     <scroll-view scroll-y style="height: {{scrollHeight}}px;padding-bottom: 40px;" lower-threshold="200" bindscrolltolower="_loadMore">
       <repeat for="{{error}}" key="index" index="index" item="item">
         <view class="zan-panel">
           <view class="zan-cell" style="padding: 5px 0" bindtap='_preview({{item.errorImg.url}})'>
             <image mode="aspectFit" style="width:100%;height:{{ item.errorImg.height/4 }}px" src="{{item.errorImg.url}}?mageMogr2/auto-orient/thumbnail/750x/format/jpg/interlace/1/blur/1x0/quality/100|imageslim" lazy-load="true"/>
           </view>
-          <view class="zan-cell zan-font-12" style="padding: 7px 15px">
+          <view class="zan-cell zan-font-12" style="padding: 7px 15px;height:30px;line-height: 30px;">
             <view class="zan-cell__bd zan-row">
-              <view class="zan-col zan-col-8 zan-font--primary">{{item.workbookName}}</view>
-              <view class="zan-col zan-col-8 zan-font--primary">下载：{{item.downNum}}</view>
+              <!--练习册名称点击出次数-->
+              <view class="zan-col zan-col-8 {{item.count ? 'zan-font--orange' : 'zan-font--primary'}}" bindtap='_count({{item.count}})'>
+                {{item.workbookName}}
+              </view>
+              <view class="zan-col zan-col-9 zan-font--primary">下载：{{item.downNum}}</view>
+              <!--订正的操作-->
+              <view class="zan-col zan-col-7">
+                <picker bindchange="_reviseChange" data-current="{{index}}" value="{{item.revise === 'true' ? 1 : 0}}" range="{{revise.array}}" range-key="name">
+                  <button wx:if="{{item.revise === 'null'}}" class="zan-btn zan-btn--small zan-btn--disabled">订　正</button>
+                  <button wx:elif="{{item.revise === 'true'}}" class="zan-btn zan-btn--small zan-btn--plain zan-btn--primary">搞对了</button>
+                  <button wx:else="{{item.revise === 'false'}}" class="zan-btn zan-btn--small zan-btn--plain zan-btn--warn">又错了</button>
+                </picker>
+              </view>
             </view>
           </view>
         </view>
@@ -31,7 +50,7 @@
       <view class="zan-row">
         <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--primary" bindtap='_download'>
           <image mode="aspectFit" style="width:24px;height:24px;top:6px;position:relative;" src="../../common/resources/icon_download.png"/>
-          下载{{count}}道错题
+          下载
         </button>
       </view>
     </view>
@@ -44,6 +63,18 @@ import zanLoadMore from '@/components/zan-loadmore'
 
 export default class StatisticsError extends wepy.page {
   data = {
+    revise: {
+      array: [
+        {
+          id: 0,
+          name: '又错了'
+        },
+        {
+          id: 1,
+          name: '搞对了'
+        }
+      ]
+    },
     offset: '',
     error: [],
     count: 0,
@@ -58,6 +89,28 @@ export default class StatisticsError extends wepy.page {
   }
 
   methods = {
+    /** 显示错误次数 */
+    _count (count) {
+      if (Number(count)) {
+        wepy.showToast({
+          title: `该题目订正${count}次`,
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    },
+    /** 更改订正状态 */
+    async _reviseChange (e) {
+      console.log(e.target.val)
+      console.log(e.target.dataset.current)
+      let index = e.target.dataset.current  // 获取当前索引
+      let status = Boolean(Number(e.detail.value)).toString()
+      this._setRevise(this.id, this.error[index], status).then((res) => {
+        this.error[index].count = res.count
+        this.error[index].revise = res.status
+        this.$apply()
+      })
+    },
     /** 加载更多 */
     _loadMore () {
       // 无更多数据或者正在加载则返回
@@ -82,18 +135,12 @@ export default class StatisticsError extends wepy.page {
     _preview (url) {
       wepy.previewImage({current: `${url}-primaryError`, urls: this.imgs})
     },
-    /** 下载试卷 */
+    /** 下载错题 */
     _download () {
-      // 不是会员跳转到VIP购买, 是跳转到下载
-      if (Number(wepy.getStorageSync('gnb_primary_User').vip)) {
-        wepy.navigateTo({
-          url: `/pages/my/email?id=${this.id}&type=statistics`
-        })
-      } else {
-        wepy.navigateTo({
-          url: `/pages/my/vip`
-        })
-      }
+      // 跳转到筛选
+      wepy.navigateTo({
+        url: `/pages/statistics/select?id=${this.id}`
+      })
     }
   }
 
@@ -121,6 +168,30 @@ export default class StatisticsError extends wepy.page {
           resolve(res)
         },
         fail (err) {
+          reject(err)
+        }
+      })
+    })
+  }
+
+  /** 设置错题订正状态 */
+  _setRevise (chapterId, item, status) {
+    wx.showLoading({title: '提交中'})
+    return new Promise((resolve, reject) => {
+      wepy.request({
+        url: 'https://primary.guinaben.com/textbook/statistics/revise',
+        method: 'POST',
+        data: {
+          chapterId: chapterId,
+          id: item.id,
+          status: status
+        },
+        success (res) {
+          wepy.hideLoading()
+          resolve(res)
+        },
+        fail (err) {
+          wepy.hideLoading()
           reject(err)
         }
       })

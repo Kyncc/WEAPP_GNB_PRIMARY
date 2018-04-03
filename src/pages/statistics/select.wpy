@@ -1,0 +1,123 @@
+<style lang="less" scoped>
+.statisticsSelect{
+  .zan-panel{
+    padding: 0;
+    margin-top: 0;
+  }
+  .zan-row{padding: 5px 0;}
+  .zan-btn{border-radius:5px;}
+  .footer{
+    margin-top: 10px;
+    .zan-btn{border-radius:5px;}
+  }
+}
+</style>
+
+<template>
+  <view class="container statisticsSelect">
+    <checkbox-group class="zan-panel" bindchange="_checkboxChange">
+      <label class="zan-cell" wx:for="{{items}}" wx:key="{{item.name}}">
+        <text class="zan-col-18">{{item.value}}</text>
+        <checkbox class="zan-col-2 zan-col-offset-4" value="{{item.name}}" checked="{{item.checked}}"/>
+      </label>
+    </checkbox-group>
+    <view class="footer zan-row">
+      <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--middle {{!downloadDisabled ? 'zan-btn--disabled' : 'zan-btn--primary'}}" 
+        bindtap='_download' disabled="{{!downloadDisabled}}">
+        <image mode="aspectFit" style="width:24px;height:24px;top:6px;position:relative;" src="../../common/resources/icon_download.png"/>
+        下载
+      </button>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class statisticsSelect extends wepy.page {
+    config = {
+      navigationBarTitleText: '选择下载'
+    }
+    data = {
+      type: [],
+      chapterId: '',
+      downloadDisabled: false,
+      items: [
+        {name: '1', value: '重复错题', checked: false},
+        {name: '2', value: '单次错题', checked: false},
+        {name: '3', value: '已订正错题', checked: false}
+      ]
+    }
+    watch = {
+      type (value) {
+        this.downloadDisabled = Boolean(value.length)
+      }
+    }
+    methods = {
+      /** 筛选项选择 */
+      _checkboxChange (e) {
+        this.type = this.$parent.globalData.statisticsSelect = e.detail.value
+      },
+      /** 下载试卷 */
+      async _download () {
+        /** 如果下载题目数量为0，则提示重选
+        *   非VIP进入购买,VIP进入邮箱发送
+        */
+        this._getListCount(this.chapterId, this.type).then((res) => {
+          if (!Number(res.count)) {
+            wepy.showModal({
+              title: '提示',
+              content: '您的选择为空，请重新选题',
+              confirmText: '知道了',
+              showCancel: false
+            })
+          } else if (Number(wepy.getStorageSync('gnb_primary_User').vip)) {
+            wepy.navigateTo({ url: `/pages/my/email?id=${this.chapterId}&type=statistics` })
+          } else {
+            wepy.navigateTo({ url: `/pages/my/vip` })
+          }
+        })
+      }
+    }
+    /** 获取错题数据 */
+    _getListCount (id, type) {
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://primary.guinaben.com/textbook/statistics/downloadNum',
+          data: {
+            chapterId: id,
+            type: type.toString()
+          },
+          success (res) {
+            resolve(res)
+          },
+          fail (err) {
+            reject(err)
+          }
+        })
+      })
+    }
+
+    onShow() {
+      this.type = this.$parent.globalData.statisticsSelect
+      // 全局选择
+      this.$parent.globalData.statisticsSelect.forEach((item, index) => {
+        console.log(this.items[index].name === item)
+        if (this.items[index].name === item) {
+          this.items[index].checked = 'true'
+        }
+      })
+    }
+
+    onLoad (options) {
+      this.chapterId = options.id
+    }
+
+    onShareAppMessage (res) {
+      return {
+        title: '各位家长，用这个记错题，速度快，用处大',
+        path: '/pages/my/index'
+      }
+    }
+  }
+</script>

@@ -1,4 +1,7 @@
 <style lang="less" scoped>
+.zan-btn {
+  border-radius:0;
+}
 .footer{
   position:fixed;
   bottom: 0px;
@@ -6,6 +9,9 @@
   width:100%;
   padding: 15px 0;
   background: #F9F9F9;
+  .zan-btn {
+    border-radius:5px;
+  }
 }
 </style>
 
@@ -14,11 +20,14 @@
     <scroll-view scroll-y="true" style="height: 100%;padding-bottom:70px;" scroll-with-animation="true" enable-back-to-top="true">
       <repeat for="{{error}}" key="index" index="index" item="item">
         <view class="zan-panel">
-          <view class="zan-cell zan-font-12" style="padding: 7px 15px">
-            <view class="zan-cell__bd" style="color:#3fc6c6">{{item.name}}</view>
-          </view>
           <view class="zan-cell" style="padding: 5px 0" bindtap='_preview({{item.errorImg.url}})'>
             <image mode="aspectFit" style="width:100%;height:{{ item.errorImg.height/4 }}px" src="{{item.errorImg.url}}?mageMogr2/auto-orient/thumbnail/750x/format/jpg/interlace/1/blur/1x0/quality/100|imageslim" lazy-load="true"/>
+          </view>
+          <view class="zan-cell zan-font-12" style="padding: 10px 15px">
+            <view class="zan-cell__bd zan-row" style="color:#3fc6c6">
+              <view class="zan-col zan-col-10">{{item.name}}</view>
+              <view class="zan-col zan-col-10">下载次数：{{item.downNum}}</view>
+            </view>
           </view>
         </view>
       </repeat>
