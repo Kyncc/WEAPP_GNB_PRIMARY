@@ -44,7 +44,10 @@
           </view>
         </view>
       </repeat>
-      <zanLoadmore1 :loading.sync="loading" :nomore.sync="nomore"/>
+      <view wx:if="{{count === 0}}" class="zan-font-16 zan-center" style="padding: 20px 0;">
+        <p>全部订正完成！</p>
+      </view>
+      <zanLoadmore1 :loading.sync="loading" :nomore.sync="nomore" wx:if="{{count !== 0}}"/>
     </scroll-view>
     <view class="footer">
       <view class="zan-row">
