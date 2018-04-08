@@ -67,7 +67,10 @@ export default class extends wepy.app {
       'pages/workbook/chapter',
       'pages/workbook/exercise',
       'pages/paper/index',
-      'pages/paper/filter',
+      'pages/paper/chengPin',
+      'pages/paper/fenCeng',
+      'pages/paper/zhuanTi',
+      'pages/paper/chengPinFilter',
       'pages/statistics/index',
       'pages/statistics/select',
       'pages/statistics/error',
@@ -116,10 +119,9 @@ export default class extends wepy.app {
   globalData = {
     system: {},
     // 下载试卷选择
-    paperFilter: {
+    paperChengPinFilter: {
       tag: 'hot',
       type: '0',
-      grade: '3',
       year: '0'
     },
     // 错题本下载选择

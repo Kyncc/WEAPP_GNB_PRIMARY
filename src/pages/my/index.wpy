@@ -1,20 +1,29 @@
 <style lang="less">
-.userinfo-avatar {
-  width: 160rpx;
-  height: 160rpx;
-  border-radius: 50%;
-}
-.userinfo-vip{
-  width: 60rpx;
-  height: 60rpx;
-  position: absolute;
-  top: 160rpx;
-  left: 415rpx;
+.myIndex{
+  position: relative;
+  .footer{
+    position: absolute;
+    top: 90%;
+    width: 100%;
+    color: #3FC6C6;
+  }
+  .userinfo-avatar{
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 50%;
+  }
+  .userinfo-vip{
+    width: 60rpx;
+    height: 60rpx;
+    position: absolute;
+    top: 160rpx;
+    left: 415rpx;
+  }
 }
 </style>
 
 <template>
-  <view class="container">
+  <view class="container myIndex">
     <view class="zan-row zan-center" style="padding-top:60rpx;position: relative">
       <navigator url='/pages/my/info' hover-class="none">
         <image class="zan-col zan-col-24" class="userinfo-avatar" src='{{userInfo.headImg}}' mode='scaleToFill'/>
@@ -30,18 +39,18 @@
           <text>我的会员</text>
         </view>
       </view>
-      <!-- <view wx:if="{{userInfo.refund}}" class="zan-font-16 zan-cell" style="padding:5px 15px 15px" bindtap="_refund">
-        <view class="zan-cell__bd">
-          <image src='../../common/resources/icon_tuikuan.png' style="width:28px;height:28px;position:relative;top:8px;margin-right:5px;" mode='scaleToFill'/>
-          <text>申请退款</text>
-        </view>
-      </view> -->
       <view class="zan-font-16 zan-cell" bindtap="_open" style="padding:5px 15px 15px">
         <view class="zan-cell__bd">
           <image src='../../common/resources/icon_weapp.png' style="width:28px;height:28px;position:relative;top:8px;margin-right:5px;" mode='scaleToFill'/>
           <text>到初中逛逛</text>
         </view>
       </view>
+    </view>
+    <view class="zan-center footer" bindtap="_copy">
+      <p class="zan-font-14">
+        <image src='../../common/resources/icon_right.png' style="width:23px;height:23px;" mode='scaleToFill'/>
+        有问题？搜公众号guinaben3456(点我复制)
+      </p>
     </view>
   </view>
 </template>
@@ -64,6 +73,18 @@
     }
 
     methods = {
+      // 复制公众号码
+      _copy () {
+        wepy.setClipboardData({
+          data: 'guinaben3456',
+          success: function(res) {
+            wepy.showToast({
+              title: '复制成功!',
+              icon: 'none'
+            })
+          }
+        })
+      },
       _into (url) {
         wx.navigateTo({
           url: url

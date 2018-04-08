@@ -1,123 +1,167 @@
 <style lang="less">
-.paperIndex{
-  .header{
-    padding:3px 0;
-    height:40px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: #fff;
-    z-index: 2;
+.paperIndex {
+  .card{
+    margin:15rpx;
   }
-  .zan-btn {
-    border-radius:5px;
+  .card__new{
+    image{
+      width:39rpx;
+      height:52rpx;
+    }
+    right:3%;
+    top:-5%;
+    position: absolute;
+  }
+  .zan-card__thumb{
+    margin:0 30rpx 0 20rpx;
   }
 }
 </style>
 
 <template>
   <view class="container paperIndex">
-    <view class="zan-row zan-cell header">
-      <view class="zan-col zan-col-12">
-        <button class="zan-col-offset-1 zan-btn zan-btn--small {{options.tag === 'hot' ? 'zan-btn--primary':''}}" bindtap='_select(hot)'>精品</button>
-        <button class="zan-col-offset-1 zan-btn zan-btn--small {{options.tag === 'new' ? 'zan-btn--primary':''}}" bindtap='_select(new)'>时间</button>
-      </view>
-      <navigator open-type="navigateTo" url="/pages/paper/filter" hover-class="none"
-        class="zan-col zan-col-offset-5 zan-col-6 zan-right" style="color: #3fc6c6">
-        筛选
-      </navigator>
-    </view>
-    <scroll-view scroll-y style="height: {{scrollHeight}}px;margin-top: 45px;" lower-threshold="200" bindscrolltolower="_loadMore">
-      <repeat for="{{list}}" key="index" index="index" item="item">
-        <view class="zan-panel" style="margin-top: 5px;" bindtap='_download({{item}})'>
-          <view class="zan-cell" style="padding: 7px 15px">
-            <text wx:if="{{item.isGood}}" style="color: #fff;margin-right: 5px;padding:3px;background: #f6ac0b;border-radius: 5px;">精</text>
-            <text>{{item.name}}</text>
+    <gnbTextbookSelect :value.sync="grade" :key.sync="textbook" @event.user="textbookChange" :textbook.sync="textBookList"/>
+    <!--分层练习-->
+    <view class="zan-panel card" bindtap="_intoPage(fenCeng)">
+      <view class="zan-card">
+        <view class="zan-card__thumb">
+          <image class="zan-card__img" src="../../common/resources/paper_fenceng.png" mode="aspectFit"/>
+        </view>
+        <view class="zan-card__detail">
+          <view class="card__new" wx:if="{{ list.layer.new }}">
+            <image src="../../common/resources/icon_new.png" mode="aspectFit"/>
           </view>
-          <view class="zan-cell" style="padding: 7px 15px">
-            <view class="zan-cell__bd zan-row zan-c-gray zan-font-12 ">
-              <view class="zan-col zan-col-9 zan-font--primary">更新：{{item.time}}</view>
-              <view class="zan-col zan-col-9 zan-font--primary">下载：{{item.downloadNumber}}</view>
-            </view>
+          <view class="zan-card__detail-row">
+            <view class="zan-card__left-col zan-font-16" style="margin: 30rpx 0 10rpx;font-weight:bold;">分层练习</view>
+          </view>
+          <view class="zan-card__detail-row zan-c-gray-darker">
+            <view class="zan-card__left-col zan-font-12" style="margin-bottom: 10rpx;">分出层次，逐步提升</view>
+            <view class="zan-card__left-col zan-font-12" style="color:#3FC6C6;margin-bottom: 10rpx;">今日更新 {{list.layer.new}} · 今日下载 {{list.layer.total}}</view>
           </view>
         </view>
-      </repeat>
-      <zanLoadmore1 :loading.sync="loading" :nomore.sync="nomore"/>
-    </scroll-view>
+      </view>
+    </view>
+    <!--成品试卷-->
+    <view class="zan-panel card" bindtap="_intoPage(chengPin)">
+      <view class="zan-card">
+        <view class="zan-card__thumb" >
+          <image class="zan-card__img" src="../../common/resources/paper_chengpin.png" mode="aspectFit"/>
+        </view>
+        <view class="zan-card__detail">
+          <view class="card__new" wx:if="{{list.finished.new}}">
+            <image src="../../common/resources/icon_new.png" mode="aspectFit"/>
+          </view>
+          <view class="zan-card__detail-row">
+            <view class="zan-card__left-col zan-font-16" style="margin: 30rpx 0 10rpx;font-weight:bold;">成品试卷</view>
+          </view>
+          <view class="zan-card__detail-row zan-c-gray-darker">
+            <view class="zan-card__left-col zan-font-12" style="margin-bottom: 10rpx;">海量试卷任你下</view>
+            <view class="zan-card__left-col zan-font-12" style="color:#3FC6C6;margin-bottom: 10rpx;">今日更新 {{list.finished.new}} · 今日下载 {{list.finished.total}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--专题汇编-->
+    <view class="zan-panel card" bindtap="_intoPage(zhuanTi)">
+      <view class="zan-card">
+        <view class="zan-card__thumb">
+          <image class="zan-card__img" src="../../common/resources/paper_zhuanti.png" mode="aspectFit"/>
+        </view>
+        <view class="zan-card__detail">
+          <view class="card__new" wx:if="{{list.special.new}}">
+            <image src="../../common/resources/icon_new.png" mode="aspectFit"/>
+          </view>
+          <view class="zan-card__detail-row">
+            <view class="zan-card__left-col zan-font-16" style="margin: 30rpx 0 10rpx;font-weight:bold;">成品试卷</view>
+          </view>
+          <view class="zan-card__detail-row zan-c-gray-darker">
+            <view class="zan-card__left-col zan-font-12" style="margin-bottom: 10rpx;">专项练习，各个击破</view>
+            <view class="zan-card__left-col zan-font-12" style="color:#3FC6C6;margin-bottom: 10rpx;">今日更新 {{list.special.new}} · 今日下载 {{list.special.total}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--记错题-->
+    <view class="zan-panel card" bindtap="_intoPage(jiLu)">
+      <view class="zan-card">
+        <view class="zan-card__thumb">
+          <image class="zan-card__img" src="../../common/resources/paper_jilu.png" mode="aspectFit"/>
+        </view>
+        <view class="zan-card__detail">
+          <view class="card__new" wx:if="{{list.revise.new}}">
+            <image src="../../common/resources/icon_new.png" mode="aspectFit"/>
+          </view>
+          <view class="zan-card__detail-row">
+            <view class="zan-card__left-col zan-font-16" style="margin: 30rpx 0 10rpx;font-weight:bold;">记错题</view>
+          </view>
+          <view class="zan-card__detail-row zan-c-gray-darker">
+            <view class="zan-card__left-col zan-font-12" style="margin-bottom: 10rpx;">下载过的试卷都在这里</view>
+            <view class="zan-card__left-col zan-font-12" style="color:#3FC6C6;margin-bottom: 10rpx;">今日更新 {{list.revise.new}} · 今日下载 {{list.revise.total}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
 <script>
   import wepy from 'wepy'
-  import zanLoadMore from '@/components/zan-loadmore'
+  import gnbTextbookSelect from '@/components/gnb-textbookSelect'
   
   export default class PaperIndex extends wepy.page {
     config = {
-      navigationBarTitleText: '试卷下载'
+      navigationBarTitleText: '资源'
     }
 
     data = {
-      list: [],
-      offset: '',
-      scrollHeight: '',
-      options: {
-        tag: 'hot',
-        type: '0',
-        grade: '3',
-        year: '0'
-      },
-      loading: true,
-      nomore: false
+      textBookList: [],
+      textbook: '',
+      grade: '',
+      list: {
+        layer: {
+          new: 0,
+          total: 0
+        },
+        special: {
+          new: 0,
+          total: 0
+        },
+        finished: {
+          new: 0,
+          total: 0
+        },
+        revise: {
+          new: 0,
+          total: 0
+        }
+      }
     }
 
     components = {
-      zanLoadmore1: zanLoadMore
+      gnbTextbookSelect: gnbTextbookSelect
     }
 
     methods = {
-      /** 进入下载 */
-      _download (item) {
-        // 不是会员跳转到VIP购买, 是跳转到下载
-        if (Number(wepy.getStorageSync('gnb_primary_User').vip)) {
-          wepy.navigateTo({url: `/pages/my/email?id=${item.id}&type=paper`})
-        } else {
-          wepy.navigateTo({url: `/pages/my/vip`})
+      _intoPage (value) {
+        wepy.navigateTo({url: `/pages/paper/${value}?textbookId=${this.textbook}`})
+      },
+
+      async textbookChange (id) {
+        try {
+          this.list = await this._getPaper(id)
+          this.$apply()
+        } catch (error) {
+          console.log(error)
         }
-      },
-      /** 选择标签 */
-      _select (value) {
-        this.$parent.globalData.paperFilter.tag = value
-        this.options.tag = value
-        this._getList()
-      },
-      /** 加载更多 */
-      _loadMore () {
-        // 无更多数据或者正在加载则返回
-        if (this.loading || this.nomore) return
-        this.loading = true
-        this._getPaperList(this.offset, this.options).then((res) => {
-          this.loading = false
-          this.list = this.list.concat(res.list)
-          this.offset = res.offset
-          this.$apply()
-        }).catch(() => {
-          this.nomore = true
-          this.loading = false
-          this.$apply()
-        })
       }
     }
-    /** 试卷下载 */
-    _getPaperList (offset, options) {
+
+    _getPaper (id) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://primary.guinaben.com/resource',
+          url: 'https://primary.guinaben.com/v2/resource',
           data: {
-            offset: offset,
-            options: {
-              ...options
-            }
+            grade: id
           },
           success (res) { resolve(res) },
           fail (err) { reject(err) }
@@ -125,34 +169,16 @@
       })
     }
 
-    async _getList () {
-      this.list = []
-      this.offset = ''
-      try {
-        let result = await this._getPaperList(this.offset, this.options)
-        this.loading = false
-        this.list = result.list
-        this.offset = result.offset
-        if (this.offset.length === 0) {
-          this.nomore = true
-        }
-        this.$apply()
-      } catch (err) {
-        this.loading = false
-        this.nomore = true
-        this.$apply()
-      }
-    }
-
     onLoad() {
-      this.scrollHeight = this.$parent.globalData.system.windowHeight - 30
+      this.grade = wepy.getStorageSync('gnb_primary_User').grade - 3
+      this.textBookList = wepy.getStorageSync('gnb_primary_User').textbook
+      this.textbook = this.textBookList[Number(this.grade)].id
+      this.$apply()
     }
 
-    onShow() {
-      this.options.type = this.$parent.globalData.paperFilter.type
-      this.options.grade = this.$parent.globalData.paperFilter.grade
-      this.options.year = this.$parent.globalData.paperFilter.year
-      this._getList()
+    async onShow() {
+      // this.list = await this._getPaper(this.textbook)
+      this.$apply()
     }
 
     onShareAppMessage (res) {
