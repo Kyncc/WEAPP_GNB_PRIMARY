@@ -1,0 +1,88 @@
+<style lang="less" scoped>
+.paperFilter{
+  .zan-panel{
+    padding: 10px 0;
+    margin-top: 0;
+  }
+  .zan-row{
+    padding: 5px 0;
+  }
+  .zan-btn {
+    border-radius:5px;
+  }
+}
+</style>
+
+<template>
+  <view class="container paperFilter">
+    <view class="zan-panel">
+      <view class="zan-row">
+        <view class="zan-col zan-col-offset-1 zan-col-3 zan-font-14" bindtap="_select(1)">年级</view>
+        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{grade === '3' ? 'zan-btn--primary':''}}" bindtap='_select(grade, 3)'>三年级</button>
+        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{grade === '4' ? 'zan-btn--primary':''}}" bindtap='_select(grade, 4)'>四年级</button>
+        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{grade === '5' ? 'zan-btn--primary':''}}" bindtap='_select(grade, 5)'>四年级</button>
+      </view>
+      <view class="zan-row">
+        <view class="zan-col zan-col-offset-1 zan-col-3 zan-font-14">年份</view>
+        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{year === '0' ? 'zan-btn--primary':''}}" bindtap='_select(year, 0)'>不限</button>
+        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{year === '2018' ? 'zan-btn--primary':''}}" bindtap='_select(year, 2018)'>2018</button>
+        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{year === '2017' ? 'zan-btn--primary':''}}" bindtap='_select(year, 2017)'>2017</button>
+      </view>
+      <view class="zan-row">
+        <button class="zan-col-offset-5 zan-col-5 zan-btn zan-btn--small {{year === '2016' ? 'zan-btn--primary':''}}" bindtap='_select(year, 2016)'>2016</button>
+        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{year === '-1' ? 'zan-btn--primary':''}}" bindtap='_select(year, -1)'>更早</button>
+      </view>
+      <view class="zan-row">
+        <view class="zan-col zan-col-offset-1 zan-col-3 zan-font-14">类型</view>
+        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{type === '0' ? 'zan-btn--primary':''}}" bindtap='_select(type, 0)'>不限</button>
+        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{type === '1' ? 'zan-btn--primary':''}}" bindtap='_select(type, 1)'>期中</button>
+        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{type === '2' ? 'zan-btn--primary':''}}" bindtap='_select(type, 2)'>期末</button>
+      </view>
+      <view class="zan-row">
+        <button class="zan-col-offset-5 zan-col-5 zan-btn zan-btn--small {{type === '3' ? 'zan-btn--primary':''}}" bindtap='_select(type, 3)'>同步</button>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class PaperFilter extends wepy.page {
+    config = {
+      navigationBarTitleText: '筛选'
+    }
+
+    data = {
+      grade: wepy.getStorageSync('gnb_primary_User').grade,
+      year: '0',
+      type: '0'
+    }
+
+    methods = {
+      /** 筛选项选择 */
+      _select (tag, value) {
+        if (tag === 'grade') this.grade = value
+        else if (tag === 'year') this.year = value
+        else this.type = value
+        this.$parent.globalData.paperFilter.type = this.type
+        this.$parent.globalData.paperFilter.year = this.year
+        this.$parent.globalData.paperFilter.grade = this.grade
+      }
+    }
+
+    onShow() {
+      // 初始化筛选值赋值
+      this.type = this.$parent.globalData.paperFilter.type
+      this.year = this.$parent.globalData.paperFilter.year
+      this.grade = this.$parent.globalData.paperFilter.grade
+    }
+
+    onShareAppMessage (res) {
+      return {
+        title: '各位家长，用这个记错题，速度快，用处大',
+        path: '/pages/my/index'
+      }
+    }
+  }
+</script>

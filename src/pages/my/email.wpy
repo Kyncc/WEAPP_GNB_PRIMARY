@@ -131,8 +131,11 @@
         url = 'https://primary.guinaben.com/workbook/chapter/errorDownload'
         options = {chapterId: id}
       } else {
-        url = 'https://primary.guinaben.com/resource/download'
-        options = {id: id}
+        url = 'https://primary.guinaben.com/resource/download/new/'
+        options = {
+          id: id,
+          type: this.tag
+        }
       }
       wepy.showLoading({title: '请稍候'})
       return new Promise((resolve, reject) => {
