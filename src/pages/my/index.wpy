@@ -67,8 +67,7 @@
       userInfo: {
         name: '',
         headImg: '',
-        vip: '',
-        refund: false
+        vip: ''
       }
     }
 
@@ -95,53 +94,7 @@
         wx.navigateToMiniProgram({
           appId: 'wx2a3d7e73ca459b21'
         })
-      },
-      // 发起退款
-      async _refund () {
-        try {
-          wepy.showLoading({title: '请稍候'})
-          // 发起退款接口
-          await this._setRefund()
-          // 重新获得用户信息
-          await this._getUserInfo()
-          this.userInfo.vip = wepy.getStorageSync('gnb_primary_User').vip
-          this.userInfo.refund = wepy.getStorageSync('gnb_primary_User').refund
-          this.$apply()
-          wepy.hideLoading()
-          wepy.showModal({
-            title: '申请成功',
-            content: '我们将在24小时内完成退款',
-            confirmText: '知道了',
-            showCancel: false
-          })
-        } catch (err) {
-          console.log(err)
-          wepy.hideLoading()
-          wepy.showToast({
-            title: '出错了请稍后重试',
-            icon: 'none'
-          })
-        }
       }
-    }
-
-    /** 发起退款 */
-    _setRefund () {
-      return new Promise((resolve, reject) => {
-        wepy.request({
-          url: 'https://wechat.guinaben.com/mini-program/refund',
-          method: 'POST',
-          data: {
-            app: 'primary'
-          },
-          success (res) {
-            resolve(res)
-          },
-          fail (err) {
-            reject(err)
-          }
-        })
-      })
     }
 
     /** 微信服务器获取CODE */
@@ -179,21 +132,6 @@
       })
     }
 
-    /** 获取用户信息 */
-    _getUserInfo () {
-      return new Promise((resolve, reject) => {
-        wepy.request({
-          url: 'https://primary.guinaben.com/member/info',
-          success (res) {
-            wepy.setStorageSync('gnb_primary_User', res)
-            resolve(res)
-          },
-          fail (err) {
-            reject(err)
-          }
-        })
-      })
-    }
 
     async onLoad(options) {
       try {
@@ -207,20 +145,7 @@
           let code = await this._login()
           await this._getOpenId(code)
         }
-        await this._getUserInfo()
-        this.userInfo.name = wepy.getStorageSync('gnb_primary_User').name
-        this.userInfo.headImg = wepy.getStorageSync('gnb_primary_User').headImg
-        this.userInfo.refund = wepy.getStorageSync('gnb_primary_User').refund
-        this.userInfo.vip = wepy.getStorageSync('gnb_primary_User').vip
         wepy.hideLoading()
-        // 对新建用户的进入练习册处理
-        if (options.from === 'init') {
-          wepy.navigateTo({
-            url: `/pages/workbook/chapter?name=${options.name}&id=${options.id}`
-          })
-        } else {
-          wepy.switchTab({ url: `/pages/workbook/index` })
-        }
         this.$apply()
       } catch (err) {
         wepy.hideLoading()
@@ -228,10 +153,8 @@
     }
 
     async onShow () {
-      await this._getUserInfo()
       this.userInfo.name = wepy.getStorageSync('gnb_primary_User').name
       this.userInfo.headImg = wepy.getStorageSync('gnb_primary_User').headImg
-      this.userInfo.refund = wepy.getStorageSync('gnb_primary_User').refund
       this.userInfo.vip = wepy.getStorageSync('gnb_primary_User').vip
       this.$apply()
     }
