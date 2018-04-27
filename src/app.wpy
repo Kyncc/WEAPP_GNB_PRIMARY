@@ -49,14 +49,14 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/my/index',
+      'pages/workbook/index',
       'pages/init/entry',
       'pages/init/twice',
       'pages/my/info',
+      'pages/my/index',
       'pages/my/pay',
       'pages/my/vip',
       'pages/my/email',
-      'pages/workbook/index',
       'pages/workbook/add',
       'pages/workbook/want',
       'pages/workbook/error',
