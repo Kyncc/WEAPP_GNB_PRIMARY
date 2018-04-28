@@ -162,7 +162,7 @@
     _getPaper (id) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://primary.guinaben.com/resource/main',
+          url: 'https://primary.guinaben.com/v2/resource/main',
           data: {
             textbookId: id
           },

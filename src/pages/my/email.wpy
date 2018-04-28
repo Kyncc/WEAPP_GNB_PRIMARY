@@ -29,6 +29,7 @@
     </view>
     <view class="zan-row">
       <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary {{emailDisabled ? '' : 'zan-btn--disabled'}}"
+        open-type="getUserInfo" bindgetuserinfo="bindUser"
         disabled="{{!emailDisabled}}" style="border-radius: 5px;"
         bindtap='_send'>
         发送
@@ -79,6 +80,10 @@
     }
 
     methods = {
+      /** 绑定用户 */
+      bindUser (res) {
+        console.log(res)
+      },
       bindEmailCodeChange (e) {
         this.emailCodeIndex = e.detail.value
       },

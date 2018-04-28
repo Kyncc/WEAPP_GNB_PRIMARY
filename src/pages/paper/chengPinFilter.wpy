@@ -59,15 +59,15 @@
         if (tag === 'grade') this.grade = value
         else if (tag === 'year') this.year = value
         else this.type = value
-        this.$parent.globalData.paperChengpinFilter.type = this.type
-        this.$parent.globalData.paperChengpinFilter.year = this.year
+        this.$parent.globalData.paperChengPinFilter.type = this.type
+        this.$parent.globalData.paperChengPinFilter.year = this.year
       }
     }
 
     onShow() {
       // 初始化筛选值赋值
-      this.type = this.$parent.globalData.paperChengpinFilter.type
-      this.year = this.$parent.globalData.paperChengpinFilter.year
+      this.type = this.$parent.globalData.paperChengPinFilter.type
+      this.year = this.$parent.globalData.paperChengPinFilter.year
     }
 
     onShareAppMessage (res) {
