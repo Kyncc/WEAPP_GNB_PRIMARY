@@ -46,12 +46,12 @@
         </view>
       </view>
     </view>
-    <view class="zan-center footer" bindtap="_copy">
+    <!-- <view class="zan-center footer" bindtap="_copy">
       <p class="zan-font-14">
         <image src='../../common/resources/icon_right.png' style="width:23px;height:23px;" mode='scaleToFill'/>
         有问题？搜公众号guinaben3456(点我复制)
       </p>
-    </view>
+    </view> -->
   </view>
 </template>
 
@@ -97,67 +97,13 @@
       }
     }
 
-    /** 微信服务器获取CODE */
-    _login () {
-      return new Promise((resolve, reject) => {
-        wepy.login({
-          success (res) {
-            console.log(res.code)
-            resolve(res.code)
-          }
-        })
-      })
-    }
-
-    /** 通过code获取OPENID */
-    _getOpenId (code) {
-      wepy.clearStorageSync()
-      return new Promise((resolve, reject) => {
-        wepy.request({
-          url: 'https://wechat.guinaben.com/mini-program/openId',
-          data: {
-            code: code,
-            app: 'primary'
-          },
-          success (res) {
-            wepy.setStorageSync('gnb_primary_openId', res.openid)
-            console.log(res.session_key)
-            wepy.setStorageSync('gnb_primary_session_key', res.session_key)
-            resolve(res)
-          },
-          fail (err) {
-            reject(err)
-          }
-        })
-      })
-    }
-
-
-    async onLoad(options) {
-      try {
-        /**
-         * 1 获取是否存有openId 如果没有代表为登录过
-         * 2 获取openId
-         * 3 在通过openId获得用户信息
-         */
-        wepy.showLoading({title: '请稍候'})
-        if (wepy.getStorageSync('gnb_primary_openId').length === 0) {
-          let code = await this._login()
-          await this._getOpenId(code)
-        }
-        wepy.hideLoading()
-        this.$apply()
-      } catch (err) {
-        wepy.hideLoading()
-      }
-    }
-
     async onShow () {
       this.userInfo.name = wepy.getStorageSync('gnb_primary_User').name
       this.userInfo.headImg = wepy.getStorageSync('gnb_primary_User').headImg
       this.userInfo.vip = wepy.getStorageSync('gnb_primary_User').vip
       this.$apply()
     }
+
     onShareAppMessage (res) {
       if (res.from === 'button') {
         console.log(res.target)

@@ -126,36 +126,10 @@ export default class extends wepy.app {
     statisticsSelect: ['1']
   }
 
-  /** 获取uuid */
-  uuid(len, radix) {
-    let chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('')
-    let uuid = []
-    let i
-    radix = radix || chars.length
-    if (len) {
-      for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random() * radix]
-    } else {
-      let r
-      uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-'
-      uuid[14] = '4'
-      for (i = 0; i < 36; i++) {
-        if (!uuid[i]) {
-          r = 0 | Math.random() * 16
-          uuid[i] = chars[(i === 19) ? (r & 0x3) | 0x8 : r]
-        }
-      }
-    }
-    return uuid.join('')
-  }
-
   constructor () {
     super()
     // 修复并发
     this.use('requestfix')
-    // 未生成openId则生成
-    if (wx.getStorageSync('gnb_primary_openId').length === 0) {
-      wx.setStorageSync('gnb_primary_openId', this.uuid(16))
-    }
     // 接口请求配置
     this.intercept('request', {
       config(params) {

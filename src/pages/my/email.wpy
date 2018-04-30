@@ -29,9 +29,9 @@
     </view>
     <view class="zan-row">
       <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary {{emailDisabled ? '' : 'zan-btn--disabled'}}"
-        open-type="getUserInfo" bindgetuserinfo="bindUser"
+        open-type="getUserInfo" bindgetuserinfo="_send"
         disabled="{{!emailDisabled}}" style="border-radius: 5px;"
-        bindtap='_send'>
+      >
         发送
       </button>
     </view>
@@ -80,15 +80,14 @@
     }
 
     methods = {
-      /** 绑定用户 */
-      bindUser (res) {
-        console.log(res)
-      },
       bindEmailCodeChange (e) {
         this.emailCodeIndex = e.detail.value
       },
       /** 发送Email */
-      async _send() {
+      async _send(res) {
+        if (!wepy.getStorageSync('gnb_primary_User').bind) {
+          await this._bindUser(res.detail)
+        }
         // 如果当前的Email和信息相同则发送，否则更新Email信息在发送
         let mail = this.form_email.value + this.emailCodes[this.emailCodeIndex]
         if (mail !== wepy.getStorageSync('gnb_primary_User').email) {
@@ -97,7 +96,30 @@
         await this._sendEmail(this.id, this.type)
       }
     }
-
+    /** 绑定用户 */
+    _bindUser (user) {
+      wepy.showLoading({title: '请稍候'})
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://primary.guinaben.com/v2/member/infoInit',
+          method: 'POST',
+          data: {
+            encryptedData: user.encryptedData,
+            session_key: wepy.getStorageSync('gnb_primary_session_key'),
+            iv: user.iv
+          },
+          success (res) {
+            wepy.hideLoading()
+            wepy.setStorageSync('gnb_primary_User', res)
+            resolve(res)
+          },
+          fail (err) {
+            wepy.hideLoading()
+            reject(err)
+          }
+        })
+      })
+    }
     /** 设置用户信息 */
     _setUserEmail (email) {
       wepy.showLoading({title: '提交中'})

@@ -94,9 +94,42 @@ export default class Statistics extends wepy.page {
       wepy.navigateTo({
         url: `/pages/workbook/add?id=${this.textbook}`
       })
-    }                                                                 
+    }
   }
 
+  /** 微信服务器获取CODE */
+  _login () {
+    return new Promise((resolve, reject) => {
+      wepy.login({
+        success (res) {
+          console.log(res.code)
+          resolve(res.code)
+        }
+      })
+    })
+  }
+
+  /** 通过code获取OPENID */
+  _getOpenId (code) {
+    wepy.clearStorageSync()
+    return new Promise((resolve, reject) => {
+      wepy.request({
+        url: 'https://wechat.guinaben.com/mini-program/openId',
+        data: {
+          code: code,
+          app: 'primary'
+        },
+        success (res) {
+          wepy.setStorageSync('gnb_primary_openId', res.openid)
+          wepy.setStorageSync('gnb_primary_session_key', res.session_key)
+          resolve(res)
+        },
+        fail (err) {
+          reject(err)
+        }
+      })
+    })
+  }
   /** 获取我的练习册 */
   _getMyWorkbook (id) {
     return new Promise((resolve, reject) => {
@@ -152,14 +185,29 @@ export default class Statistics extends wepy.page {
       })
     })
   }
-
   async onShow() {
-    let userInfo = await this._getUserInfo()
-    wepy.setStorageSync('gnb_primary_User', userInfo)
-    this.textBookList = wepy.getStorageSync('gnb_primary_User').textbook
-    this.textbook = wepy.getStorageSync('gnb_primary_User').textbookId
-    this.workbookList = await this._getMyWorkbook(this.textbook)
-    this.$apply()
+    try {
+      /**
+        * 1 获取是否存有openId 如果没有代表为登录过
+        * 2 获取openId
+        * 3 在通过openId获得用户信息
+        */
+      wepy.showLoading({title: '请稍候'})
+      if (wepy.getStorageSync('gnb_primary_openId').length === 0) {
+        let code = await this._login()
+        await this._getOpenId(code)
+      }
+      let userInfo = await this._getUserInfo()
+      wepy.setStorageSync('gnb_primary_User', userInfo)
+      this.textBookList = wepy.getStorageSync('gnb_primary_User').textbook
+      this.textbook = wepy.getStorageSync('gnb_primary_User').textbookId
+      this.workbookList = await this._getMyWorkbook(this.textbook)
+      this.$apply()
+      wepy.hideLoading()
+      this.$apply()
+    } catch (err) {
+      wepy.hideLoading()
+    }
   }
 
   onShareAppMessage (res) {
