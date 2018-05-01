@@ -51,7 +51,7 @@ export default class MyPay extends wepy.page {
   _getUserInfo () {
     return new Promise((resolve, reject) => {
       wepy.request({
-        url: 'https://primary.guinaben.com/member/info',
+        url: 'https://primary.guinaben.com/v2/member/info',
         success (res) {
           wepy.setStorageSync('gnb_primary_User', res)
           resolve(res)

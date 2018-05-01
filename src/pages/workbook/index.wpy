@@ -134,7 +134,7 @@ export default class Statistics extends wepy.page {
   _getMyWorkbook (id) {
     return new Promise((resolve, reject) => {
       wepy.request({
-        url: 'https://primary.guinaben.com/workbook',
+        url: 'https://primary.guinaben.com/v2/workbook',
         data: {
           textbookId: id
         },
@@ -192,7 +192,6 @@ export default class Statistics extends wepy.page {
         * 2 获取openId
         * 3 在通过openId获得用户信息
         */
-      wepy.showLoading({title: '请稍候'})
       if (wepy.getStorageSync('gnb_primary_openId').length === 0) {
         let code = await this._login()
         await this._getOpenId(code)
@@ -202,8 +201,6 @@ export default class Statistics extends wepy.page {
       this.textBookList = wepy.getStorageSync('gnb_primary_User').textbook
       this.textbook = wepy.getStorageSync('gnb_primary_User').textbookId
       this.workbookList = await this._getMyWorkbook(this.textbook)
-      this.$apply()
-      wepy.hideLoading()
       this.$apply()
     } catch (err) {
       wepy.hideLoading()

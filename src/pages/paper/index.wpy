@@ -44,7 +44,7 @@
         </view>
       </view>
     </view>
-    <!--专题汇编-->
+    <!--专题汇编
     <view class="zan-panel card" bindtap="_intoPage(zhuanTi)">
       <view class="zan-card">
         <view class="zan-card__thumb">
@@ -63,7 +63,7 @@
           </view>
         </view>
       </view>
-    </view>
+    </view>-->
     <!--分层练习
     <view class="zan-panel card" bindtap="_intoPage(fenCeng)">
       <view class="zan-card">
@@ -119,7 +119,6 @@
     data = {
       textBookList: [],
       textbook: '',
-      grade: '',
       list: {
         layer: {
           new: 0,
@@ -146,11 +145,13 @@
 
     methods = {
       _intoPage (value) {
-        wepy.navigateTo({url: `/pages/paper/${value}?textbookId=${this.textbook}`})
+        wepy.navigateTo({url: `/pages/paper/${value}?textbookId=${wepy.getStorageSync('gnb_primary_User').textbookId}`})
       },
 
       async textbookChange (id) {
         try {
+          let userinfo = await this._setUserInfo(id)
+          wepy.setStorageSync('gnb_primary_User', userinfo)
           this.list = await this._getPaper(id)
           this.$apply()
         } catch (error) {
