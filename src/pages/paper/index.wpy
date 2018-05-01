@@ -28,7 +28,7 @@
     <view class="zan-panel card" bindtap="_intoPage(chengPin)">
       <view class="zan-card">
         <view class="zan-card__thumb" >
-          <image class="zan-card__img" src="../../common/resources/paper_chenping.png" mode="aspectFit"/>
+          <image class="zan-card__img" src="../../common/resources/paper_chengpin.png" mode="aspectFit"/>
         </view>
         <view class="zan-card__detail">
           <view class="card__new" wx:if="{{list.finished.new}}">
