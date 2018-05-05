@@ -10,7 +10,7 @@
        <nameField :options.sync="base_name" componentId="nameField"/>
        <!-- <sexField :options="base_sex"  componentId="sexField"/> -->
        <view class="zan-cell">
-        <view class="zan-cell__hd zan-field__title">年级</view>
+        <view class="zan-cell__hd zan-field__title" style="font-size: 16px;">年级</view>
         <picker disabled="true" class="zan-cell__bd" style="font-size: 14px;" bindchange="bindGradeChange" value="{{gradeIndex}}" range="{{gradeList}}">
           {{gradeList[gradeIndex]}}
         </picker>

@@ -26,7 +26,7 @@
           <view class="zan-cell zan-font-12" style="padding: 10px 15px">
             <view class="zan-cell__bd zan-row" style="color:#3fc6c6">
               <view class="zan-col zan-col-10">{{item.name}}</view>
-              <view class="zan-col zan-col-10">下载次数：{{item.downNum}}</view>
+              <view class="zan-col zan-col-10">下载：{{item.downNum}}</view>
             </view>
           </view>
         </view>

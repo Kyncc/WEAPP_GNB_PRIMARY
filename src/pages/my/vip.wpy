@@ -18,7 +18,7 @@
     </view>
     <view class="footer" style="margin-top: 20px;">
       <view class="zan-row">
-        <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--primary" bindtap='_buy'>点我支付</button>
+        <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--primary" bindtap='_buy'> 去支付</button>
       </view>
     </view>
   </view>
