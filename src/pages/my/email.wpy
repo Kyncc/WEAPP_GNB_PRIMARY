@@ -62,6 +62,7 @@
     data = {
       id: '',
       type: '',
+      tag: '',
       emailCodes: emailList,
       emailCodeIndex: 0,
       form_email: {
@@ -167,7 +168,7 @@
         url = 'https://primary.guinaben.com/v2/resource/download/new/'
         options = {
           id: id,
-          type: 2
+          type: this.tag
         }
       }
       wepy.showLoading({title: '请稍候'})
@@ -212,6 +213,7 @@
     onLoad(options) {
       this.type = options.type
       this.id = options.id
+      this.tag = options.tag
       this.$apply()
     }
 
