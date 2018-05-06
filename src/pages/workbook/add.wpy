@@ -79,7 +79,7 @@ import zanField from '@/components/zan-field'
 
 export default class WorkbookAdd extends wepy.page {
   config = {
-    navigationBarTitleText: '习题册管理'
+    navigationBarTitleText: '练习册管理'
   }
   
   components = {

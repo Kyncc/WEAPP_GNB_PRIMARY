@@ -20,10 +20,6 @@ export default class gnbWookbookSelect extends wepy.component {
       type: String,
       twoWay: true
     },
-    title: {
-      type: String,
-      default: '人教版'
-    },
     textbook: {
       type: Array,
       default: [],
