@@ -148,7 +148,10 @@ export default class extends wepy.app {
           if (dataCode === '200') {
             return res.data.data
           } else if (dataCode === '401') {
-            // 没有uuid
+            // 没有openid
+            wepy.redirectTo({
+              url: '/pages/workbook/index'
+            })
           } else {
             wepy.showToast({
               title: res.data.msg,
@@ -156,6 +159,11 @@ export default class extends wepy.app {
             })
             return Promise.reject(new Error('错误的code'))
           }
+        } else if (statusCode === '403') {
+          // openid为空
+          wepy.redirectTo({
+            url: '/pages/my/index'
+          })
         }
       },
       fail(error) {
