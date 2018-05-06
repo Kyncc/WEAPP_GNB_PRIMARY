@@ -81,7 +81,7 @@
     onShareAppMessage (res) {
       return {
         title: '各位家长，用这个记错题，速度快，用处大',
-        path: '/pages/my/index'
+        path: '/pages/workbook/index'
       }
     }
   }
