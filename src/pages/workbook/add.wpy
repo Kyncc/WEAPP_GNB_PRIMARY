@@ -78,6 +78,10 @@ import wepy from 'wepy'
 import zanField from '@/components/zan-field'
 
 export default class WorkbookAdd extends wepy.page {
+  config = {
+    navigationBarTitleText: '习题册管理'
+  }
+  
   components = {
     searchField: zanField
   }
