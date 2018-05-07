@@ -64,12 +64,12 @@
       </scroll>
     <!--练习册区间End-->
     </view>
-    <!--进入想要练习册-->
+    <!--进入想要练习册
     <navigator open-type="navigate" url="/pages/workbook/want" hover-class="none" style="background:#F9F9F9">
       <view class="zan-col zan-col-24 zan-font-14 zan-c-gray zan-center" style="padding: 10px 0;">没有找到想要的练习册？
         <text style="color:#FF7043;text-decoration:underline;">告诉我们</text>
       </view>
-    </navigator>
+    </navigator>-->
   </view>
 </template>
 
@@ -78,6 +78,10 @@ import wepy from 'wepy'
 import zanField from '@/components/zan-field'
 
 export default class WorkbookAdd extends wepy.page {
+  config = {
+    navigationBarTitleText: '练习册管理'
+  }
+
   components = {
     searchField: zanField
   }
@@ -124,7 +128,7 @@ export default class WorkbookAdd extends wepy.page {
   _setWorkbook (id) {
     return new Promise((resolve, reject) => {
       wepy.request({
-        url: 'https://primary.guinaben.com/workbook/edit',
+        url: 'https://primary.guinaben.com/v2/workbook/edit',
         method: 'POST',
         data: {
           workbookId: id
@@ -143,7 +147,7 @@ export default class WorkbookAdd extends wepy.page {
   _getAllWorkbook (id, name) {
     return new Promise((resolve, reject) => {
       wepy.request({
-        url: 'https://primary.guinaben.com/workbook/all',
+        url: 'https://primary.guinaben.com/v2/workbook/all',
         data: {
           name: name,
           textbookId: id
@@ -176,7 +180,7 @@ export default class WorkbookAdd extends wepy.page {
     return {
       title: '各位家长，用这个记错题，速度快，用处大',
       imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
-      path: '/pages/my/index'
+      path: '/pages/workbook/index'
     }
   }
 }

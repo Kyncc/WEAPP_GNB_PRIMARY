@@ -49,17 +49,15 @@ import 'wepy-async-function'
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/my/index',
-      'pages/init/add',
+      'pages/workbook/index',
       'pages/init/entry',
-      'pages/init/grade',
       'pages/init/twice',
       'pages/my/info',
+      'pages/my/index',
       'pages/my/pay',
       'pages/my/vip',
       'pages/my/email',
       'pages/workbook/add',
-      'pages/workbook/index',
       'pages/workbook/want',
       'pages/workbook/error',
       'pages/workbook/correct',
@@ -67,7 +65,10 @@ export default class extends wepy.app {
       'pages/workbook/chapter',
       'pages/workbook/exercise',
       'pages/paper/index',
-      'pages/paper/filter',
+      'pages/paper/chengPin',
+      'pages/paper/fenCeng',
+      'pages/paper/zhuanTi',
+      'pages/paper/chengPinFilter',
       'pages/statistics/index',
       'pages/statistics/select',
       'pages/statistics/error',
@@ -116,21 +117,20 @@ export default class extends wepy.app {
   globalData = {
     system: {},
     // 下载试卷选择
-    paperFilter: {
+    paperChengPinFilter: {
       tag: 'hot',
       type: '0',
-      grade: '3',
       year: '0'
     },
     // 错题本下载选择
-    statisticsSelect: ['1']
+    statisticsSelect: ['2']
   }
 
   constructor () {
     super()
     // 修复并发
     this.use('requestfix')
-    // request全局配置
+    // 接口请求配置
     this.intercept('request', {
       config(params) {
         let header = {
@@ -148,8 +148,9 @@ export default class extends wepy.app {
           if (dataCode === '200') {
             return res.data.data
           } else if (dataCode === '401') {
+            // 没有openid
             wepy.redirectTo({
-              url: '/pages/init/grade'
+              url: '/pages/workbook/index'
             })
           } else {
             wepy.showToast({
@@ -159,7 +160,7 @@ export default class extends wepy.app {
             return Promise.reject(new Error('错误的code'))
           }
         } else if (statusCode === '403') {
-          // 未注册用户
+          // openid为空
           wepy.redirectTo({
             url: '/pages/my/index'
           })

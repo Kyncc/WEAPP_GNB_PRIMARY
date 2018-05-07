@@ -26,7 +26,7 @@
           <view class="zan-cell zan-font-12" style="padding: 10px 15px">
             <view class="zan-cell__bd zan-row" style="color:#3fc6c6">
               <view class="zan-col zan-col-10">{{item.name}}</view>
-              <view class="zan-col zan-col-10">下载次数：{{item.downNum}}</view>
+              <view class="zan-col zan-col-10">下载：{{item.downNum}}</view>
             </view>
           </view>
         </view>
@@ -87,7 +87,7 @@
     _getChapter (id) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://primary.guinaben.com/workbook/chapter/error',
+          url: 'https://primary.guinaben.com/v2/workbook/chapter/error',
           data: {
             chapterId: id
           },
@@ -115,7 +115,7 @@
       return {
         title: '各位家长，用这个记错题，速度快，用处大',
         imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
-        path: '/pages/my/index'
+        path: '/pages/workbook/index'
       }
     }
   }

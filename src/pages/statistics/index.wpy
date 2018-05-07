@@ -10,7 +10,7 @@
 
 <template>
   <view class="container">
-    <gnbTextbookSelect :value.sync="grade" :key.sync="textbook" @event.user="textbookChange" :textbook.sync="textBookList"/>
+    <gnbTextbookSelect :value.sync="textbook" @event.user="textbookChange" :textbook.sync="textBookList"/>
     <view class="zan-panel">
       <view class="zan-row zan-cell">
         <view class="zan-col zan-col-6 zan-col-offset-6 zan-center">记题数</view>
@@ -45,7 +45,6 @@
     data = {
       textBookList: [],
       textbook: '',
-      grade: '',
       statistics: []
     }
 
@@ -64,15 +63,16 @@
         }
       },
       async textbookChange (id) {
+        let userinfo = await this._setUserInfo(id)
+        wepy.setStorageSync('gnb_primary_User', userinfo)
         this.statistics = await this._getStatistics(id)
         this.$apply()
       }
     }
-
     _getStatistics (id) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://primary.guinaben.com/textbook/statistics',
+          url: 'https://primary.guinaben.com/v2/textbook/statistics',
           data: {
             textbookId: id
           },
@@ -81,15 +81,30 @@
         })
       })
     }
-
-    onLoad() {
-      this.grade = wepy.getStorageSync('gnb_primary_User').grade - 3
-      this.textBookList = wepy.getStorageSync('gnb_primary_User').textbook
-      this.textbook = this.textBookList[Number(this.grade)].id
-      this.$apply()
+        /** 更改用户信息 */
+    _setUserInfo (id) {
+      wepy.showLoading({title: '请稍候'})
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://primary.guinaben.com/v2/member/infoEdit',
+          method: 'POST',
+          data: {
+            textbookId: id
+          },
+          success (res) {
+            wepy.hideLoading()
+            resolve(res)
+          },
+          fail (err) {
+            wepy.hideLoading()
+            reject(err)
+          }
+        })
+      })
     }
-
     async onShow() {
+      this.textBookList = wepy.getStorageSync('gnb_primary_User').textbook
+      this.textbook = wepy.getStorageSync('gnb_primary_User').textbookId
       this.statistics = await this._getStatistics(this.textbook)
       this.$apply()
     }
@@ -101,7 +116,7 @@
       return {
         title: '各位家长，用这个记错题，速度快，用处大',
         imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
-        path: '/pages/my/index'
+        path: '/pages/workbook/index'
       }
     }
   }

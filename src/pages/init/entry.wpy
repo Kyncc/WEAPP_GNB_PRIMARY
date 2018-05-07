@@ -1,34 +1,31 @@
-<style lang="less" scoped>
+<style lang="less">
 .InitEntry{
-  background: #fffaf4;
-  .zan-btn{
-    background: #f0e7dc;
-    color: #000;
+  .footer_btn__primary{
+    opacity: 0;
+    position: absolute;
+    bottom: 55rpx;
+    width: 230rpx;
+    height:80rpx;
+    left: 110rpx;
   }
-  .footer{
-    position: fixed;
-    width: 100%;
-    bottom: 30px;
+  .footer_btn__middle{
+    opacity: 0;
+    position: absolute;
+    bottom: 55rpx;
+    width: 230rpx;
+    height:80rpx;
+    right:110rpx;
   }
 }
 </style>
 
 <template>
-  <view class="container InitEntry">
-    <view class="zan-row zan-center" style="margin-top: 155rpx;">
-      <image mode="aspectFit" style="width:448rpx;height:265rpx" src="../../common/resources/entry_header.jpg"/>
+  <view class="container InitEntry" style="position:relative">
+    <view class="zan-row zan-center">
+      <image class="zan-row zan-center" mode="scaleToFill" src="../../common/resources/entry1.jpg" style="width:750rpx;height:1334rpx;"/>
+      <button class="footer_btn__primary" bindtap='_intoPrimary()'></button>
+      <button class="footer_btn__middle" bindtap='_intoMiddle()'></button>
     </view>
-    <view class="zan-row zan-center" style="margin-top: 105rpx;">
-      <button class="zan-col zan-col-14 zan-col-offset-5 zan-btn zan-font-18" bindtap='_intoPrimary()'>   小  学   </button>
-      <button style="margin-top: 45rpx;"  class="zan-col zan-col-14 zan-col-offset-5 zan-btn zan-font-18" bindtap='_intoMiddle()'>   初  中   </button>
-    </view>
-    <view class="footer zan-font-14 zan-center">
-      <view class="zan-center">
-        <image mode="aspectFit" style="width:80rpx;height:80rpx;padding:10px;" src="http://img.guinaben.com/guinaicon.png?imageView2/2/w/100/h/100/q/100|imageslim"/>
-      </view>
-      <text class="zan-font-bold">提分从记录错题开始</text>
-    </view>
-      
   </view>
 </template>
 
@@ -49,7 +46,7 @@
       },
       // 进入小学
       _intoPrimary () {
-        wepy.reLaunch({ url: `/pages/my/index` })
+        wepy.reLaunch({ url: `/pages/workbook/index` })
       }
     }
   }

@@ -44,7 +44,10 @@
           </view>
         </view>
       </repeat>
-      <zanLoadmore1 :loading.sync="loading" :nomore.sync="nomore"/>
+      <view wx:if="{{count === 0}}" class="zan-font-16 zan-center" style="padding: 20px 0;">
+        <p>全部订正完成！</p>
+      </view>
+      <zanLoadmore1 :loading.sync="loading" :nomore.sync="nomore" wx:if="{{count !== 0}}"/>
     </scroll-view>
     <view class="footer">
       <view class="zan-row">
@@ -159,7 +162,7 @@ export default class StatisticsError extends wepy.page {
   _getErrorList (id, offset) {
     return new Promise((resolve, reject) => {
       wepy.request({
-        url: 'https://primary.guinaben.com/textbook/statistics/error',
+        url: 'https://primary.guinaben.com/v2/textbook/statistics/error',
         data: {
           chapterId: id,
           offset: offset
@@ -179,7 +182,7 @@ export default class StatisticsError extends wepy.page {
     wx.showLoading({title: '提交中'})
     return new Promise((resolve, reject) => {
       wepy.request({
-        url: 'https://primary.guinaben.com/textbook/statistics/revise',
+        url: 'https://primary.guinaben.com/v2/textbook/statistics/revise',
         method: 'POST',
         data: {
           chapterId: chapterId,
@@ -227,7 +230,7 @@ export default class StatisticsError extends wepy.page {
     return {
       title: '各位家长，用这个记错题，速度快，用处大',
       imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
-      path: '/pages/my/index'
+      path: '/pages/workbook/index'
     }
   }
 }

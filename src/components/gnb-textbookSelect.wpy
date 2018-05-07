@@ -1,7 +1,7 @@
 <template>
   <picker style="margin-top: 0" class="zan-panel" bindchange="bindPickerChange" range="{{ textbook }}" value="{{ value }}" range-key="name">
     <view class="picker zan-cell">
-      {{title}}:　{{textbook[value].name}}
+      人教版:　{{name}}
       <view class="zan-arrow"></view>
     </view>
   </picker>
@@ -20,22 +20,34 @@ export default class gnbWookbookSelect extends wepy.component {
       type: String,
       twoWay: true
     },
-    title: {
-      type: String,
-      default: '当前选择'
-    },
     textbook: {
       type: Array,
       default: [],
       twoWay: true
     }
   }
+  data = {
+    name: ''
+  }
   methods = {
     bindPickerChange (e) {
       this.value = e.detail.value
       this.key = this.textbook[e.detail.value].id
+      this.name = this.textbook[e.detail.value].name
       this.$emit('event', this.key)
       this.$apply()
+    }
+  }
+  watch = {
+    value () {
+      for (let i = 0; i < this.textbook.length; i++) {
+        if (this.textbook[i].id === this.value) {
+          this.key = this.textbook[i].id
+          this.name = this.textbook[i].name
+          this.$apply()
+          return
+        }
+      }
     }
   }
 }

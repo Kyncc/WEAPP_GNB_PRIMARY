@@ -18,7 +18,7 @@
     </view>
     <view class="footer" style="margin-top: 20px;">
       <view class="zan-row">
-        <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--primary" bindtap='_buy'>点我支付</button>
+        <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--primary" bindtap='_buy'> 去支付</button>
       </view>
     </view>
   </view>
@@ -103,7 +103,7 @@
     _getUserInfo () {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://primary.guinaben.com/member/info',
+          url: 'https://primary.guinaben.com/v2/member/info',
           success (res) {
             wepy.setStorageSync('gnb_primary_User', res)
             resolve(res)

@@ -1,0 +1,184 @@
+<style lang="less">
+.paperZhuanTi{
+  .header{
+    padding:3px 0;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+  .zan-btn {
+    border-radius:5px;
+  }
+}
+</style>
+
+<template>
+  <view class="container paperZhuanTi">
+    <view class="header">
+      <view class="zan-row">  
+        <gnbChapterSelect :value.sync="chapterIndex" :key.sync="chapterId" @event.user="chapterChange" :chapter.sync="chapterList"/>
+      </view>
+      <view class="zan-row" style="padding:5px 0;">
+        <button class="zan-col-offset-1 zan-col-4 zan-btn zan-btn--small {{tag === '真题' ? 'zan-btn--primary':''}}" bindtap='_select(真题)'>真题</button>
+        <button class="zan-col-offset-1 zan-col-4 zan-btn zan-btn--small {{tag === '计算' ? 'zan-btn--primary':''}}" bindtap='_select(计算)'>计算</button>
+        <button class="zan-col-offset-1 zan-col-4 zan-btn zan-btn--small {{tag === '证明' ? 'zan-btn--primary':''}}" bindtap='_select(证明)'>证明</button>
+      </view>
+    </view>
+    <scroll-view scroll-y style="height: {{scrollHeight}}px;margin-top: 90px;" lower-threshold="200" bindscrolltolower="_loadMore">
+      <repeat for="{{list}}" key="index" index="index" item="item">
+        <view class="zan-panel" style="margin-top: 5px;" bindtap='_download({{item}})'>
+          <view class="zan-cell" style="padding: 7px 15px">
+            <text wx:if="{{item.isGood}}" style="color: #fff;margin-right: 5px;padding:3px;background: #f6ac0b;border-radius: 5px;">精</text>
+            <text>{{item.name}}</text>
+          </view>
+          <view class="zan-cell" style="padding: 7px 15px">
+            <view class="zan-cell__bd zan-row zan-c-gray zan-font-12 ">
+              <view class="zan-col zan-col-9 zan-font--primary">更新：{{item.time}}</view>
+              <view class="zan-col zan-col-9 zan-font--primary">下载：{{item.downloadNumber}}</view>
+            </view>
+          </view>
+        </view>
+      </repeat>
+      <zanLoadmore1 :loading.sync="loading" :nomore.sync="nomore"/>
+    </scroll-view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import zanLoadMore from '@/components/zan-loadmore'
+  import gnbChapterSelect from '@/components/gnb-chapterSelect'
+  
+  export default class PaperZhuanTi extends wepy.page {
+    config = {
+      navigationBarTitleText: '专题汇编'
+    }
+
+    data = {
+      list: [],
+      offset: '',
+      scrollHeight: '',
+      chapterList: [],
+      chapterIndex: 0,
+      chapterId: '0',
+      tag: '真题',
+      loading: true,
+      nomore: false
+    }
+
+    components = {
+      zanLoadmore1: zanLoadMore,
+      gnbChapterSelect: gnbChapterSelect
+    }
+
+    methods = {
+      /** 选择标签 */
+      _select (value) {
+        this.tag = value
+        this.offset = ''
+        this.$apply()
+        this._getList()
+      },
+      /** 进入下载 */
+      _download (item) {
+        // 不是会员跳转到VIP购买, 是跳转到下载
+        if (Number(wepy.getStorageSync('gnb_primary_User').vip)) {
+          wepy.navigateTo({url: `/pages/my/email?id=${item.id}&type=paper&tag=7`})
+        } else {
+          wepy.navigateTo({url: `/pages/my/vip`})
+        }
+      },
+      /** 章节名称切换 */
+      async chapterChange (id) {
+        try {
+          this.offset = ''
+          this._getList()
+        } catch (error) {
+          console.log(error)
+        }
+      },
+      /** 加载更多 */
+      _loadMore () {
+        // 无更多数据或者正在加载则返回
+        if (this.loading || this.nomore) return
+        this.loading = true
+        this._getPaperList(this.offset, {tag: this.tag, chapterId: this.chapterId}).then((res) => {
+          this.loading = false
+          this.list = this.list.concat(res.list)
+          this.offset = res.offset
+          this.$apply()
+        }).catch(() => {
+          this.nomore = true
+          this.loading = false
+          this.$apply()
+        })
+      }
+    }
+
+    /** 获取试卷列表 */
+    _getPaperList (offset, options) {
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://primary.guinaben.com/v2/resource/special',
+          data: {
+            offset: offset,
+            options: {
+              ...options
+            }
+          },
+          success (res) { resolve(res) },
+          fail (err) { reject(err) }
+        })
+      })
+    }
+    /** 获取章节 */
+    _getChapterList (id) {
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://primary.guinaben.com/v2/textbook/chapter',
+          data: {
+            textbookId: id
+          },
+          success (res) { resolve(res) },
+          fail (err) { reject(err) }
+        })
+      })
+    }
+    /** 获取页面数据的整体流程 */
+    async _getList () {
+      this.list = []
+      this.offset = ''
+      try {
+        let result = await this._getPaperList(this.offset, {tag: this.tag, chapterId: this.chapterId})
+        this.loading = false
+        this.list = result.list
+        this.offset = result.offset
+        if (this.offset.length === 0) {
+          this.nomore = true
+        }
+        this.$apply()
+      } catch (err) {
+        this.loading = false
+        this.nomore = true
+        this.$apply()
+      }
+    }
+
+    async onLoad(options) {
+      this.chapterList = await this._getChapterList(options.textbookId)
+      this.chapterId = this.chapterList[0].chapterId
+      this._getList()
+      this.scrollHeight = this.$parent.globalData.system.windowHeight - 80
+    }
+
+    onShareAppMessage (res) {
+      return {
+        title: '各位家长，用这个记错题，速度快，用处大',
+        path: '/pages/workbook/index'
+      }
+    }
+  }
+</script>

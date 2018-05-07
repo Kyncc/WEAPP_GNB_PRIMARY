@@ -111,7 +111,7 @@
       wepy.showLoading({title: '请稍候'})
       return new Promise((resolve, reject) => {
         wepy.uploadFile({
-          url: 'https://primary.guinaben.com/upload/img',
+          url: 'https://primary.guinaben.com/v2/upload/img',
           filePath: file,
           name: 'file',
           header: {
@@ -142,7 +142,7 @@
       return {
         title: '各位家长，用这个记错题，速度快，用处大',
         imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
-        path: '/pages/my/index'
+        path: '/pages/workbook/index'
       }
     }
 
@@ -151,7 +151,7 @@
       wepy.showLoading({title: '请稍候'})
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://primary.guinaben.com/workbook/want',
+          url: 'https://primary.guinaben.com/v2/workbook/want',
           method: 'POST',
           data: {
             first: first,
