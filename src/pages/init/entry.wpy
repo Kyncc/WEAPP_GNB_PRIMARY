@@ -40,13 +40,13 @@
     methods = {
       // 进入初中
       _intoMiddle () {
-        wepy.reLaunch({ url: `/pages/my/index` })
-      },
-      // 进入小学
-      _intoPrimary () {
         wx.navigateToMiniProgram({
           appId: 'wx2a3d7e73ca459b21'
         })
+      },
+      // 进入小学
+      _intoPrimary () {
+        wepy.reLaunch({ url: `/pages/workbook/index` })
       }
     }
   }
