@@ -159,7 +159,7 @@
         url = 'https://primary.guinaben.com/v2/textbook/statistics/download'
         options = {
           chapterId: id,
-          type: this.$parent.globalData.statisticsSelect[0]
+          type: this.$parent.globalData.statisticsSelect.toString()
         }
       } else if (type === 'workbook') {
         url = 'https://primary.guinaben.com/v2/workbook/chapter/errorDownload'
