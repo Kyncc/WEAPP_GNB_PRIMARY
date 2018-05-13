@@ -1,19 +1,19 @@
 <style lang="less">
 .MyClasses{
-  
+  padding: 10px 0;
 }
 </style>
 
 <template>
   <view class="container MyClasses">
-    <text class="zan-c-gray zan-font-14" style="padding: 30rpx;">请填写学校编码，等待老师为你分配班级</text>
+    <text class="zan-c-gray zan-font-14">　请填写学校编码，等待老师为你分配班级</text>
     <view class="zan-panel">
       <view class="zan-row">
         <view class="zan-col zan-col-15 zan-col-offset-1">
           <codeField  :options.sync="code" componentId="codeField"/>
         </view>
         <view class="zan-col zan-col-6 zan-col-offset-2">
-          <button open-type="getUserInfo" bindgetuserinfo="_save" class="zan-btn zan-btn--primary" size="mini" style="height:30px;margin-top:6px;">确定</button>
+          <button open-type="getUserInfo" bindgetuserinfo="_save" class="zan-btn zan-btn--primary" size="mini" style="height:30px;margin-top:16rpx;">确定</button>
         </view>
       </view>
     </view>

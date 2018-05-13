@@ -21,12 +21,6 @@ module.exports = {
     less: {
       compress: true
     },
-    stylus: {
-      compress: true
-    },
-    sass: {
-      outputStyle: 'compressed'
-    },
     babel: {
       sourceMap: true,
       presets: [
