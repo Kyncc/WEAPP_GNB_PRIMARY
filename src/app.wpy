@@ -53,6 +53,7 @@ export default class extends wepy.app {
       'pages/init/entry',
       'pages/init/twice',
       'pages/my/info',
+      'pages/my/classes',
       'pages/my/index',
       'pages/my/pay',
       'pages/my/vip',
@@ -136,7 +137,7 @@ export default class extends wepy.app {
         let header = {
           'openId': wepy.getStorageSync('gnb_primary_openId') || ''
         }
-        wepy.showNavigationBarLoading()
+        // wepy.showNavigationBarLoading()
         params.header = header
         console.log(params.data)
         return params

@@ -32,7 +32,7 @@
           <view class="zan-card">
             <!--练习册图片-->
             <view class="zan-card__thumb" bindtap="_preview({{ item.img.url }})">
-              <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/180/h/270/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
+              <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/120/h/180/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
             </view>
             <!--练习册详情-->
             <view class="zan-card__detail" >

@@ -34,7 +34,7 @@
             <view class="zan-card" bindtap="_intoChapter({{item}})">
               <!--练习册图片-->
               <view class="zan-card__thumb">
-                <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/180/h/270/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
+                <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/120/h/180/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
               </view>
               <!--练习册详情-->
               <view class="zan-card__detail">
@@ -92,7 +92,7 @@ export default class Statistics extends wepy.page {
     /** 增加练习册 */
     _initAdd () {
       wepy.navigateTo({
-        url: `/pages/workbook/add?id=${this.textbook}`
+        url: `/pages/workbook/add?id=${wepy.getStorageSync('gnb_primary_User').textbookId}`
       })
     }
   }
