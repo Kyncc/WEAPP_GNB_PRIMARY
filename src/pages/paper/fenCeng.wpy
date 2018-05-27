@@ -126,7 +126,7 @@
     _getPaperList (offset, options) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://primary.guinaben.com/v2/resource/layer',
+          url: 'https://small.guinaben.com/v2/resource/layer',
           data: {
             offset: offset,
             options: {
@@ -142,7 +142,7 @@
     _getChapterList (id) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://primary.guinaben.com/v2/textbook/chapter',
+          url: 'https://small.guinaben.com/v2/textbook/chapter',
           data: {
             textbookId: id
           },

@@ -128,7 +128,7 @@ export default class WorkbookAdd extends wepy.page {
   _setWorkbook (id) {
     return new Promise((resolve, reject) => {
       wepy.request({
-        url: 'https://primary.guinaben.com/v2/workbook/edit',
+        url: 'https://small.guinaben.com/v2/workbook/edit',
         method: 'POST',
         data: {
           workbookId: id
@@ -147,7 +147,7 @@ export default class WorkbookAdd extends wepy.page {
   _getAllWorkbook (id, name) {
     return new Promise((resolve, reject) => {
       wepy.request({
-        url: 'https://primary.guinaben.com/v2/workbook/all',
+        url: 'https://small.guinaben.com/v2/workbook/all',
         data: {
           name: name,
           textbookId: id

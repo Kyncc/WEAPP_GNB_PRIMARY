@@ -22,7 +22,7 @@
       </label>
     </checkbox-group>
     <view class="footer zan-row">
-      <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--middle {{!downloadDisabled ? 'zan-btn--disabled' : 'zan-btn--primary'}}" 
+      <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--middle {{!downloadDisabled ? 'zan-btn--disabled' : 'zan-btn--primary'}}"
         bindtap='_download' disabled="{{!downloadDisabled}}">
         <image mode="aspectFit" style="width:24px;height:24px;top:6px;position:relative;" src="../../common/resources/icon_download.png"/>
         下载
@@ -83,7 +83,7 @@
     _getListCount (id, type) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://primary.guinaben.com/v2/textbook/statistics/downloadNum',
+          url: 'https://small.guinaben.com/v2/textbook/statistics/downloadNum',
           data: {
             chapterId: id,
             type: type.toString()

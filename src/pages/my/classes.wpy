@@ -85,7 +85,7 @@
     _getClasses () {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://primary.guinaben.com/v2/member/school',
+          url: 'https://small.guinaben.com/v2/member/school',
           data: {
           },
           success (res) { resolve(res) },
@@ -98,7 +98,7 @@
     _bindClass (code) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://primary.guinaben.com/v2/member/addSchool',
+          url: 'https://small.guinaben.com/v2/member/addSchool',
           method: 'POST',
           data: {
             code: code
@@ -117,7 +117,7 @@
     _bindUser (user) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://primary.guinaben.com/v2/member/infoInit',
+          url: 'https://small.guinaben.com/v2/member/infoInit',
           method: 'POST',
           data: {
             encryptedData: user.encryptedData,
