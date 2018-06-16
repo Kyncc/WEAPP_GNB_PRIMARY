@@ -81,9 +81,9 @@
         })
       })
     }
-        /** 更改用户信息 */
+    /** 更改用户信息 */
     _setUserInfo (id) {
-      wepy.showLoading({title: '请稍候'})
+      // wepy.showLoading({title: '请稍候'})
       return new Promise((resolve, reject) => {
         wepy.request({
           url: 'https://small.guinaben.com/v2/member/infoEdit',
@@ -92,11 +92,11 @@
             textbookId: id
           },
           success (res) {
-            wepy.hideLoading()
+            // wepy.hideLoading()
             resolve(res)
           },
           fail (err) {
-            wepy.hideLoading()
+            // wepy.hideLoading()
             reject(err)
           }
         })
