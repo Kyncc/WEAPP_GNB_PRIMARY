@@ -1,5 +1,5 @@
 <style lang='less' src='common/libs/css/zanui.wxss'/>
-<style lang='less'>
+<style lang="less">
 .container{
   background: #F9F9F9;
   overflow: hidden;
@@ -19,11 +19,11 @@
 .zan-panel-title{
   font-size: 16px;
 }
-.zan-font--orange{
-  color: #f85;
-}
 .zan-font--primary{
   color: #3fc6c6;
+}
+.zan-font--orange{
+  color: #f85;
 }
 .zan-btn--primary{
   background-color: #3fc6c6;
@@ -51,12 +51,12 @@ export default class extends wepy.app {
     pages: [
       'pages/workbook/index',
       'pages/init/entry',
-      'pages/init/twice',
-      'pages/my/info',
-      'pages/my/classes',
+      'pages/camera/index',
       'pages/my/index',
-      'pages/my/pay',
       'pages/my/vip',
+      'pages/my/classes',
+      'pages/my/info',
+      'pages/my/pay',
       'pages/my/email',
       'pages/workbook/add',
       'pages/workbook/want',
@@ -65,14 +65,14 @@ export default class extends wepy.app {
       'pages/workbook/share',
       'pages/workbook/chapter',
       'pages/workbook/exercise',
-      'pages/paper/index',
-      'pages/paper/chengPin',
-      'pages/paper/fenCeng',
-      'pages/paper/zhuanTi',
-      'pages/paper/chengPinFilter',
+      'pages/resource/index',
+      'pages/resource/chengPin',
+      'pages/resource/fenCeng',
+      'pages/resource/zhuanTi',
+      'pages/resource/chengPinFilter',
       'pages/statistics/index',
-      'pages/statistics/select',
       'pages/statistics/error',
+      'pages/statistics/select',
       'pages/statistics/share',
       'pages/statistics/correct'
     ],
@@ -92,9 +92,9 @@ export default class extends wepy.app {
         selectedIconPath: 'common/resources/workbook_select.png',
         text: '错题本'
       }, {
-        pagePath: 'pages/paper/index',
-        iconPath: 'common/resources/paper.png',
-        selectedIconPath: 'common/resources/paper_select.png',
+        pagePath: 'pages/resource/index',
+        iconPath: 'common/resources/resource.png',
+        selectedIconPath: 'common/resources/resource_select.png',
         text: '资源'
       }, {
         pagePath: 'pages/my/index',
@@ -106,24 +106,22 @@ export default class extends wepy.app {
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#FBFBFB',
-      navigationBarTitleText: '错题归纳本小学数学',
+      navigationBarTitleText: '错题归纳本小学',
       navigationBarTextStyle: 'black'
     },
     networkTimeout: {
-      request: 8000,
-      downloadFile: 8000
+      request: 6000,
+      downloadFile: 6000
     }
   }
 
   globalData = {
     system: {},
-    // 下载试卷选择
-    paperChengPinFilter: {
+    resourceChengpinFilter: {
       tag: 'hot',
       type: '0',
       year: '0'
     },
-    // 错题本下载选择
     statisticsSelect: ['2']
   }
 
@@ -131,7 +129,7 @@ export default class extends wepy.app {
     super()
     // 修复并发
     this.use('requestfix')
-    // 接口请求配置
+    // request全局配置
     this.intercept('request', {
       config(params) {
         let header = {
@@ -140,10 +138,10 @@ export default class extends wepy.app {
         }
         // wepy.showNavigationBarLoading()
         params.header = header
-        console.log(params.data)
         return params
       },
       success(res) {
+        console.log(res)
         let statusCode = res.statusCode.toString()
         let dataCode = res.data.code.toString()
         if (statusCode === '200') {

@@ -6,15 +6,8 @@
 
 <template>
   <view class="container">
-     <view class="zan-panel" style="margin: 40rpx 0;">
+     <view class="zan-panel" style="margin: 0 0 40rpx 0;">
        <nameField :options.sync="base_name" componentId="nameField"/>
-       <!-- <sexField :options="base_sex"  componentId="sexField"/> -->
-       <view class="zan-cell">
-        <view class="zan-cell__hd zan-field__title" style="font-size: 16px;">年级</view>
-        <picker disabled="true" class="zan-cell__bd" style="font-size: 14px;" bindchange="bindGradeChange" value="{{gradeIndex}}" range="{{gradeList}}">
-          {{gradeList[gradeIndex]}}
-        </picker>
-       </view>
        <schoolField :options.sync="base_school" componentId="schoolField"/>
      </view>
      <view class="zan-row" style="margin-top:20px;">
@@ -27,8 +20,6 @@
   import wepy from 'wepy'
   import zanField from '@/components/zan-field'
 
-  const gradeList = ['三年级', '四年级', '五年级']
-
   export default class MyInfo extends wepy.page {
     config = {
       navigationBarTitleText: '个人资料'
@@ -36,27 +27,19 @@
 
     components = {
       nameField: zanField,
-      sexField: zanField,
       schoolField: zanField
     }
 
     data = {
-      gradeIndex: Number(wepy.getStorageSync('gnb_primary_User').grade) - 3,
-      gradeList: gradeList,
       base_school: {
         title: '学校',
-        value: wepy.getStorageSync('gnb_primary_User').school,
+        value: wepy.getStorageSync('gnb_primary_user').school,
         placeholder: '请输入您的学校名称'
       },
       base_name: {
         title: '姓名',
-        value: wepy.getStorageSync('gnb_primary_User').name,
+        value: wepy.getStorageSync('gnb_primary_user').name,
         placeholder: '请输入您的姓名'
-      },
-      base_sex: {
-        title: '性别',
-        value: (Number(wepy.getStorageSync('gnb_primary_User').sex) === 1 ? '男' : '女'),
-        disabled: true
       }
     }
 
@@ -73,12 +56,8 @@
     }
 
     methods = {
-      bindGradeChange (e) {
-        this.gradeIndex = e.detail.value
-      },
       async _save () {
         let user = {
-          grade: Number(this.gradeIndex) + 3,
           name: this.base_name.value,
           school: this.base_school.value
         }
@@ -99,16 +78,15 @@
       wepy.showLoading({title: '请稍候'})
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://small.guinaben.com/v2/member/infoEdit',
+          url: 'https://api.guinaben.com/member/info',
           method: 'POST',
           data: {
-            grade: user.grade,
             name: user.name,
             school: user.school
           },
           success (res) {
             wepy.hideLoading()
-            wepy.setStorageSync('gnb_primary_User', res)
+            wepy.setStorageSync('gnb_primary_user', res)
             resolve(res)
           },
           fail (err) {
@@ -119,19 +97,9 @@
       })
     }
 
-    onShow () {
-      this.base_name.value = wepy.getStorageSync('gnb_primary_User').name
-      this.base_school.value = wepy.getStorageSync('gnb_primary_User').school
-      this.gradeIndex = Number(wepy.getStorageSync('gnb_primary_User').grade) - 3
-      this.$apply()
-    }
-
     onShareAppMessage (res) {
-      if (res.from === 'button') {
-        console.log(res.target)
-      }
       return {
-        title: '各位家长，用这个记错题，速度快，用处大',
+        title: '各位家长：这样记错题，速度快、好处多',
         imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
         path: '/pages/workbook/index'
       }

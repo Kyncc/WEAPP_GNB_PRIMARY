@@ -7,7 +7,7 @@
     width: 100%;
     color: #3FC6C6;
   }
-  .userinfo-avatar{
+  .userinfo-avatar {
     width: 160rpx;
     height: 160rpx;
     border-radius: 50%;
@@ -45,19 +45,7 @@
           <text>我的班级</text>
         </view>
       </view>
-      <view class="zan-font-16 zan-cell" bindtap="_open" style="padding:5px 15px 15px">
-        <view class="zan-cell__bd">
-          <image src='../../common/resources/icon_weapp.png' style="width:28px;height:28px;position:relative;top:8px;margin-right:5px;" mode='scaleToFill'/>
-          <text>到初中逛逛</text>
-        </view>
-      </view>
     </view>
-    <!-- <view class="zan-center footer" bindtap="_copy">
-      <p class="zan-font-14">
-        <image src='../../common/resources/icon_right.png' style="width:23px;height:23px;" mode='scaleToFill'/>
-        有问题？搜公众号guinaben3456(点我复制)
-      </p>
-    </view> -->
     <!-- <view class="zan-center footer" bindtap="_copy">
       <p class="zan-font-14">
         <image src='../../common/resources/icon_right.png' style="width:23px;height:23px;" mode='scaleToFill'/>
@@ -88,7 +76,7 @@
       _copy () {
         wepy.setClipboardData({
           data: 'guinaben3456',
-          success: function(res) {
+          success (res) {
             wepy.showToast({
               title: '复制成功!',
               icon: 'none'
@@ -104,26 +92,23 @@
       // 打开小程序
       _open () {
         wx.navigateToMiniProgram({
-          appId: 'wx2a3d7e73ca459b21'
+          appId: 'wx4e089964d6aefc57'
         })
       }
     }
 
     async onShow () {
-      this.userInfo.name = wepy.getStorageSync('gnb_primary_User').name
-      this.userInfo.headImg = wepy.getStorageSync('gnb_primary_User').headImg
-      this.userInfo.vip = wepy.getStorageSync('gnb_primary_User').vip
+      this.userInfo.name = wepy.getStorageSync('gnb_primary_user').name
+      this.userInfo.headImg = wepy.getStorageSync('gnb_primary_user').headImg
+      this.userInfo.vip = wepy.getStorageSync('gnb_primary_user').vip
       this.$apply()
     }
 
     onShareAppMessage (res) {
-      if (res.from === 'button') {
-        console.log(res.target)
-      }
       return {
-        title: '各位家长，用这个记错题，速度快，用处大',
+        title: '各位家长：这样记错题，速度快、好处多',
         imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
-        path: '/pages/init/entry'
+        path: '/pages/workbook/index'
       }
     }
   }

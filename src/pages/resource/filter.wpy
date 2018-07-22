@@ -1,5 +1,5 @@
 <style lang="less" scoped>
-.paperChengpinFilter{
+.resourceFilter{
   .zan-panel{
     padding: 10px 0;
     margin-top: 0;
@@ -14,8 +14,13 @@
 </style>
 
 <template>
-  <view class="container paperChengpinFilter">
+  <view class="container resourceFilter">
     <view class="zan-panel">
+      <view class="zan-row">
+        <view class="zan-col zan-col-offset-1 zan-col-3 zan-font-14" bindtap="_select(1)">年级</view>
+        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{grade === '7' ? 'zan-btn--primary':''}}" bindtap='_select(grade, 7)'>七年级</button>
+        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{grade === '8' ? 'zan-btn--primary':''}}" bindtap='_select(grade, 8)'>八年级</button>
+      </view>
       <view class="zan-row">
         <view class="zan-col zan-col-offset-1 zan-col-3 zan-font-14">年份</view>
         <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{year === '0' ? 'zan-btn--primary':''}}" bindtap='_select(year, 0)'>不限</button>
@@ -42,13 +47,13 @@
 <script>
   import wepy from 'wepy'
 
-  export default class PaperChengpinFilter extends wepy.page {
+  export default class ResourceFilter extends wepy.page {
     config = {
       navigationBarTitleText: '筛选'
     }
 
     data = {
-      grade: wepy.getStorageSync('gnb_primary_User').grade,
+      grade: wepy.getStorageSync('gnb_primary_user').grade,
       year: '0',
       type: '0'
     }
@@ -59,20 +64,23 @@
         if (tag === 'grade') this.grade = value
         else if (tag === 'year') this.year = value
         else this.type = value
-        this.$parent.globalData.paperChengPinFilter.type = this.type
-        this.$parent.globalData.paperChengPinFilter.year = this.year
+        this.$parent.globalData.resourceFilter.type = this.type
+        this.$parent.globalData.resourceFilter.year = this.year
+        this.$parent.globalData.resourceFilter.grade = this.grade
       }
     }
 
     onShow() {
       // 初始化筛选值赋值
-      this.type = this.$parent.globalData.paperChengPinFilter.type
-      this.year = this.$parent.globalData.paperChengPinFilter.year
+      this.type = this.$parent.globalData.resourceFilter.type
+      this.year = this.$parent.globalData.resourceFilter.year
+      this.grade = this.$parent.globalData.resourceFilter.grade
     }
 
     onShareAppMessage (res) {
       return {
-        title: '各位家长，用这个记错题，速度快，用处大',
+        title: '各位家长：这样记错题，速度快、好处多',
+        imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
         path: '/pages/workbook/index'
       }
     }

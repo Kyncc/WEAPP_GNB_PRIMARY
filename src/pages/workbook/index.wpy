@@ -1,63 +1,58 @@
-<style lang="less" scoped>
-.workbookIndex{
-  .header{
-    height:40px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 2;
-  }
-}
-.add_button {
-  position: fixed;
-  background:#4cc0be;
-  color:#fff;
-  font-size: 70rpx;
-  height: 120rpx;
-  line-height: 110rpx;
-  width: 120rpx;
-  border-radius: 50%;
-  bottom: 5%;
-  right: 5%;
-  text-align: center;
-}
-</style>
 <template>
   <view class="container workbookIndex">
-    <gnbTextbookSelect class="header" :value.sync="textbook" @event.user="textbookChange" :textbook.sync="textBookList"/>
-    <view>
-      <!--练习册区间-->
-      <view class="zan-panel" style='margin-top: 38px;'>
-        <scroll>
-          <repeat for="{{ workbookList }}" key="pindex" index="pindex" item="item">
-            <view class="zan-card" bindtap="_intoChapter({{item}})">
-              <!--练习册图片-->
-              <view class="zan-card__thumb">
-                <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/120/h/180/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
-              </view>
-              <!--练习册详情-->
-              <view class="zan-card__detail">
-                <view class="zan-card__detail-row">
-                  <view class="zan-card__left-col zan-c-gray zan-font-14" style="color:#3FC6C6;margin: 8rpx 0 12rpx;">{{item.year}}版</view>
-                </view>
-                <view class="zan-card__detail-row zan-c-gray-darker">
-                  <view class="zan-card__left-col zan-font-16" style="margin-bottom: 10rpx;">{{item.name}}</view>
-                  <view class="zan-card__left-col zan-font-14" style="color:#3FC6C6;margin-bottom: 10rpx;">{{item.number}}人正在使用</view>
-                </view>
-              </view>
-            </view>
-          </repeat>
-        </scroll>
+    <!--科目教材切换-->
+    <view class="header zan-row zan-font-14">
+      <view class="zan-col zan-col-12">
+        <gnbSubjectSelect :subject.sync="subject" :list.sync="subjectList" @event.user="subjectChange"/>
+      </view>
+      <view class="zan-col zan-col-12">
+        <gnbTextbookSelect :textbook.sync="textbook" :list.sync="textBookList" @event.user="textbookChange"/>
       </view>
     </view>
-    <button class="add_button" bindtap='_initAdd'>+</button>
+    <!--练习册区间-->
+    <view class="zan-panel" style='margin-top: 40px;'>
+      <scroll>
+        <repeat for="{{ workbookList }}" key="pindex" index="pindex" item="item">
+          <view class="zan-card" bindtap="_intoChapter({{item}})">
+            <!--练习册图片-->
+            <view class="zan-card__thumb">
+              <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/120/h/180/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
+            </view>
+            <!--练习册详情-->
+            <view class="zan-card__detail">
+              <view class="zan-card__detail-row">
+                <view class="zan-card__left-col zan-c-gray zan-font-14" style="color:#3FC6C6;margin: 8rpx 0 12rpx;">{{item.year}}版</view>
+              </view>
+              <view class="zan-card__detail-row zan-c-gray-darker">
+                <view class="zan-card__left-col zan-font-16" style="margin-bottom: 10rpx;">{{item.name}}</view>
+                <view class="zan-card__left-col zan-font-14" style="color:#3FC6C6;margin-bottom: 10rpx;">{{item.number}}人正在使用</view>
+              </view>
+            </view>
+          </view>
+        </repeat>
+        <view class="zan-card" bindtap="_initCamera()">
+          <view class="zan-card__thumb">
+            <image class="zan-card__img" src="../../common/resources/camera.png" mode="aspectFit" lazy-load='true'/>
+          </view>
+          <view class="zan-card__detail">
+            <view class="zan-card__detail-row">
+              <view class="zan-card__left-col zan-font-16" style="margin: 36rpx 0 12rpx;">拍错题</view>
+            </view>
+            <view class="zan-card__detail-row zan-c-gray-darker">
+              <view class="zan-card__left-col zan-font-14" style="margin-bottom: 10rpx;">我是文案</view>
+            </view>
+          </view>
+        </view>
+      </scroll>
+    </view>
+    <image class="add_button" bindtap='_initAdd' src='../../common/resources/add.png' mode='scaleToFill'/>
   </view>
 </template>
 
 <script>
 import wepy from 'wepy'
 import gnbTextbookSelect from '@/components/gnb-textbookSelect'
+import gnbSubjectSelect from '@/components/gnb-subjectSelect'
 
 export default class Statistics extends wepy.page {
   config = {
@@ -65,22 +60,36 @@ export default class Statistics extends wepy.page {
   }
 
   components = {
-    gnbTextbookSelect: gnbTextbookSelect
+    gnbTextbookSelect: gnbTextbookSelect,
+    gnbSubjectSelect: gnbSubjectSelect
   }
 
   data = {
-    textBookList: [],
-    textbook: '',
-    workbookList: []
+    textbook: '',     // 当前选中教材
+    textBookList: [], // 教材列表
+    subject: '',      // 当前选中科目
+    subjectList: [],  // 科目列表
+    workbookList: []  // 练习册列表
   }
 
   methods = {
+    /** 科目切换 */
+    async subjectChange (subject) {
+      let userinfo = await this._setUserInfoSubject(subject)
+      wepy.setStorageSync('gnb_primary_user', userinfo)
+      this.subject = subject
+      this.subjectList = wepy.getStorageSync('gnb_primary_user').subject
+      this.textbook = wepy.getStorageSync('gnb_primary_user').current.textbookId
+      this.textBookList = wepy.getStorageSync('gnb_primary_user').textbook[this.subject]
+      this.workbookList = await this._getMyWorkbook()
+      this.$apply()
+    },
     /** 教材切换 */
     async textbookChange (id) {
-      // 更改用户练习册
-      let userinfo = await this._setUserInfo(id)
-      wepy.setStorageSync('gnb_primary_User', userinfo)
-      this.workbookList = await this._getMyWorkbook(id)
+      let userinfo = await this._setUserInfoTextbook(id, this.subject)
+      wepy.setStorageSync('gnb_primary_user', userinfo)
+      this.textbook = id
+      this.workbookList = await this._getMyWorkbook()
       this.$apply()
     },
     /** 进入章节 */
@@ -92,7 +101,13 @@ export default class Statistics extends wepy.page {
     /** 增加练习册 */
     _initAdd () {
       wepy.navigateTo({
-        url: `/pages/workbook/add?id=${wepy.getStorageSync('gnb_primary_User').textbookId}`
+        url: `/pages/workbook/add?id=${this.textbook}&subject=${this.subject}`
+      })
+    },
+    /** 进入拍错题 */
+    _initCamera () {
+      wepy.navigateTo({
+        url: `/pages/camera/index?id=${this.textbook}`
       })
     }
   }
@@ -131,13 +146,10 @@ export default class Statistics extends wepy.page {
     })
   }
   /** 获取我的练习册 */
-  _getMyWorkbook (id) {
+  _getMyWorkbook () {
     return new Promise((resolve, reject) => {
       wepy.request({
-        url: 'https://small.guinaben.com/v2/workbook',
-        data: {
-          textbookId: id
-        },
+        url: 'https://api.guinaben.com/workbook',
         success (res) {
           resolve(res)
         },
@@ -152,9 +164,9 @@ export default class Statistics extends wepy.page {
   _getUserInfo () {
     return new Promise((resolve, reject) => {
       wepy.request({
-        url: 'https://small.guinaben.com/v2/member/info',
+        url: 'https://api.guinaben.com/member/info',
         success (res) {
-          wepy.setStorageSync('gnb_primary_User', res)
+          wepy.setStorageSync('gnb_primary_user', res)
           resolve(res)
         },
         fail (err) {
@@ -164,15 +176,17 @@ export default class Statistics extends wepy.page {
     })
   }
 
-  /** 更改用户信息 */
-  _setUserInfo (id) {
+  /** 更改用户教材信息 */
+  _setUserInfoTextbook (id, subject) {
     wepy.showLoading({title: '请稍候'})
     return new Promise((resolve, reject) => {
       wepy.request({
-        url: 'https://small.guinaben.com/v2/member/infoEdit',
+        url: 'https://api.guinaben.com/member/info',
         method: 'POST',
         data: {
-          textbookId: id
+          textbook: {
+            [subject]: id
+          }
         },
         success (res) {
           wepy.hideLoading()
@@ -185,6 +199,29 @@ export default class Statistics extends wepy.page {
       })
     })
   }
+
+  /** 更改用户科目信息 */
+  _setUserInfoSubject (subject) {
+    wepy.showLoading({title: '请稍候'})
+    return new Promise((resolve, reject) => {
+      wepy.request({
+        url: 'https://api.guinaben.com/member/info',
+        method: 'POST',
+        data: {
+          subject: subject
+        },
+        success (res) {
+          wepy.hideLoading()
+          resolve(res)
+        },
+        fail (err) {
+          wepy.hideLoading()
+          reject(err)
+        }
+      })
+    })
+  }
+
   async onShow() {
     try {
       /**
@@ -197,10 +234,14 @@ export default class Statistics extends wepy.page {
         await this._getOpenId(code)
       }
       let userInfo = await this._getUserInfo()
-      wepy.setStorageSync('gnb_primary_User', userInfo)
-      this.textBookList = wepy.getStorageSync('gnb_primary_User').textbook
-      this.textbook = wepy.getStorageSync('gnb_primary_User').textbookId
-      this.workbookList = await this._getMyWorkbook(this.textbook)
+      wepy.setStorageSync('gnb_primary_user', userInfo)
+      // 当前学科
+      this.subject = wepy.getStorageSync('gnb_primary_user').current.subjectId
+      this.subjectList = wepy.getStorageSync('gnb_primary_user').subject
+      this.textbook = wepy.getStorageSync('gnb_primary_user').current.textbookId
+      this.textBookList = wepy.getStorageSync('gnb_primary_user').textbook[this.subject]
+      this.$apply()
+      this.workbookList = await this._getMyWorkbook()
       this.$apply()
     } catch (err) {
       wepy.hideLoading()
@@ -208,9 +249,6 @@ export default class Statistics extends wepy.page {
   }
 
   onShareAppMessage (res) {
-    if (res.from === 'button') {
-      console.log(res.target)
-    }
     return {
       title: '各位家长，用这个记错题，速度快，用处大',
       imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
@@ -219,3 +257,24 @@ export default class Statistics extends wepy.page {
   }
 }
 </script>
+<style lang="less" scoped>
+.workbookIndex {
+  .header{
+    height:25px;
+    padding: 10px 0 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: #F9F9F9;
+  }
+}
+.add_button {
+  position: fixed;
+  height: 100rpx;
+  width: 100rpx;
+  bottom: 5%;
+  right: 5%;
+}
+</style>

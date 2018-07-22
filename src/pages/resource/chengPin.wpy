@@ -1,12 +1,13 @@
 <style lang="less">
-.paperZhuanTi{
+.resourceChengpin{
   .header{
     padding:3px 0;
-    height: 80px;
+    height:40px;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
+    background: #fff;
     z-index: 2;
   }
   .zan-btn {
@@ -16,18 +17,18 @@
 </style>
 
 <template>
-  <view class="container paperZhuanTi">
-    <view class="header">
-      <view class="zan-row">  
-        <gnbChapterSelect :value.sync="chapterIndex" :key.sync="chapterId" @event.user="chapterChange" :chapter.sync="chapterList"/>
+  <view class="container resourceChengpin">
+    <view class="zan-row zan-cell header">
+      <view class="zan-col zan-col-12">
+        <button class="zan-col-offset-1 zan-btn zan-btn--small {{options.tag === 'hot' ? 'zan-btn--primary':''}}" bindtap='_select(hot)'>精品</button>
+        <button class="zan-col-offset-1 zan-btn zan-btn--small {{options.tag === 'new' ? 'zan-btn--primary':''}}" bindtap='_select(new)'>时间</button>
       </view>
-      <view class="zan-row" style="padding:5px 0;">
-        <button class="zan-col-offset-1 zan-col-4 zan-btn zan-btn--small {{tag === '真题' ? 'zan-btn--primary':''}}" bindtap='_select(真题)'>真题</button>
-        <button class="zan-col-offset-1 zan-col-4 zan-btn zan-btn--small {{tag === '计算' ? 'zan-btn--primary':''}}" bindtap='_select(计算)'>计算</button>
-        <button class="zan-col-offset-1 zan-col-4 zan-btn zan-btn--small {{tag === '证明' ? 'zan-btn--primary':''}}" bindtap='_select(证明)'>证明</button>
-      </view>
+      <navigator open-type="navigateTo" url="/pages/resource/chengPinFilter" hover-class="none"
+        class="zan-col zan-col-offset-5 zan-col-6 zan-right" style="color: #3fc6c6">
+        筛选
+      </navigator>
     </view>
-    <scroll-view scroll-y style="height: {{scrollHeight}}px;margin-top: 90px;" lower-threshold="200" bindscrolltolower="_loadMore">
+    <scroll-view scroll-y style="height: {{scrollHeight}}px;margin-top: 45px;" lower-threshold="200" bindscrolltolower="_loadMore">
       <repeat for="{{list}}" key="index" index="index" item="item">
         <view class="zan-panel" style="margin-top: 5px;" bindtap='_download({{item}})'>
           <view class="zan-cell" style="padding: 7px 15px">
@@ -50,62 +51,52 @@
 <script>
   import wepy from 'wepy'
   import zanLoadMore from '@/components/zan-loadmore'
-  import gnbChapterSelect from '@/components/gnb-chapterSelect'
   
-  export default class PaperZhuanTi extends wepy.page {
+  export default class resourceChengpin extends wepy.page {
     config = {
-      navigationBarTitleText: '专题汇编'
+      navigationBarTitleText: '成品试卷'
     }
 
     data = {
       list: [],
       offset: '',
       scrollHeight: '',
-      chapterList: [],
-      chapterIndex: 0,
-      chapterId: '0',
-      tag: '真题',
+      options: {
+        tag: 'hot',
+        type: '0',
+        textbookId: '',
+        year: '0'
+      },
       loading: true,
       nomore: false
     }
 
     components = {
-      zanLoadmore1: zanLoadMore,
-      gnbChapterSelect: gnbChapterSelect
+      zanLoadmore1: zanLoadMore
     }
 
     methods = {
-      /** 选择标签 */
-      _select (value) {
-        this.tag = value
-        this.offset = ''
-        this.$apply()
-        this._getList()
-      },
       /** 进入下载 */
       _download (item) {
         // 不是会员跳转到VIP购买, 是跳转到下载
-        if (Number(wepy.getStorageSync('gnb_primary_User').vip)) {
-          wepy.navigateTo({url: `/pages/my/email?id=${item.id}&type=paper&tag=7`})
+        if (Number(wepy.getStorageSync('gnb_primary_user').vip)) {
+          wepy.navigateTo({url: `/pages/my/email?id=${item.id}&type=resource&tag=2`})
         } else {
           wepy.navigateTo({url: `/pages/my/vip`})
         }
       },
-      /** 章节名称切换 */
-      async chapterChange (id) {
-        try {
-          this.offset = ''
-          this._getList()
-        } catch (error) {
-          console.log(error)
-        }
+      /** 选择标签 */
+      _select (value) {
+        this.$parent.globalData.resourceChengpinFilter.tag = value
+        this.options.tag = value
+        this._getList()
       },
       /** 加载更多 */
       _loadMore () {
         // 无更多数据或者正在加载则返回
         if (this.loading || this.nomore) return
         this.loading = true
-        this._getPaperList(this.offset, {tag: this.tag, chapterId: this.chapterId}).then((res) => {
+        this._getResourceList(this.offset, this.options).then((res) => {
           this.loading = false
           this.list = this.list.concat(res.list)
           this.offset = res.offset
@@ -117,12 +108,11 @@
         })
       }
     }
-
-    /** 获取试卷列表 */
-    _getPaperList (offset, options) {
+    /** 试卷下载 */
+    _getResourceList (offset, options) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://small.guinaben.com/v2/resource/special',
+          url: 'https://api.guinaben.com/resource/finished',
           data: {
             offset: offset,
             options: {
@@ -134,25 +124,13 @@
         })
       })
     }
-    /** 获取章节 */
-    _getChapterList (id) {
-      return new Promise((resolve, reject) => {
-        wepy.request({
-          url: 'https://small.guinaben.com/v2/textbook/chapter',
-          data: {
-            textbookId: id
-          },
-          success (res) { resolve(res) },
-          fail (err) { reject(err) }
-        })
-      })
-    }
-    /** 获取页面数据的整体流程 */
+
     async _getList () {
       this.list = []
       this.offset = ''
+      this.nomore = false
       try {
-        let result = await this._getPaperList(this.offset, {tag: this.tag, chapterId: this.chapterId})
+        let result = await this._getResourceList(this.offset, this.options)
         this.loading = false
         this.list = result.list
         this.offset = result.offset
@@ -167,16 +145,23 @@
       }
     }
 
-    async onLoad(options) {
-      this.chapterList = await this._getChapterList(options.textbookId)
-      this.chapterId = this.chapterList[0].chapterId
+    onLoad(options) {
+      this.options.textbookId = options.textbookId
+      this.scrollHeight = this.$parent.globalData.system.windowHeight - 40
+      this.$apply()
+    }
+
+    onShow() {
+      this.options.type = this.$parent.globalData.resourceChengpinFilter.type
+      this.options.year = this.$parent.globalData.resourceChengpinFilter.year
       this._getList()
-      this.scrollHeight = this.$parent.globalData.system.windowHeight - 80
+      this.$apply()
     }
 
     onShareAppMessage (res) {
       return {
-        title: '各位家长，用这个记错题，速度快，用处大',
+        title: '各位家长：这样记错题，速度快、好处多',
+        imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
         path: '/pages/workbook/index'
       }
     }

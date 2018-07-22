@@ -29,9 +29,9 @@
   background:#eac363;
   color:#fff;
   font-size: 30rpx;
-  height: 120rpx;
-  line-height: 120rpx;
-  width: 120rpx;
+  height: 130rpx;
+  line-height: 130rpx;
+  width: 130rpx;
   border-radius: 50%;
   bottom: 5%;
   right: 8%;
@@ -45,7 +45,7 @@
     <view class="correct_content">{{content}}</view>
     <view class="correct_date zan-center zan-font-12">{{date}}</view>
     <view class="correct_app zan-center zan-font-14">归纳本</view>
-    <button class="share_button" bindtap='_back'>返回</button>
+    <button class="share_button" bindtap='_back()'>返回</button>
     <image src="../../common/resources/statisticsCorrect.jpg" style="width:750rpx;height:100vh" mode="aspectFit"/>
   </view>
 </template>

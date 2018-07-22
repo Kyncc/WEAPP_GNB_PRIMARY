@@ -7,22 +7,23 @@
       <text class="zan-c-gray-dark zan-font-16">开通VIP，错题、试卷任你下</text>
     </view>
     <view class="zan-panel">
-      <view class="zan-cell" bindtap="_buy(1)">
+      <view class="zan-cell" bindtap="_buy(9)">
         <view class="zan-cell__bd zan-font-16">
-          <text class="zan-font-30">￥9.9</text>　/月
-          <text class="zan-c-gray-dark" style="text-decoration:line-through;padding-left: 20px;">￥29 </text>
+          <text class="zan-font-30">￥9.9 </text>/月
+          <text class="zan-c-gray-dark" style="text-decoration:line-through;padding-left: 20px;">￥29</text>
         </view>
-        <!-- <view class="zan-cell__ft">　
-          <button class="zan-btn zan-btn--small" style="background:#ff7042;color:#fff;">限时优惠</button>
-        </view> -->
       </view>
-      <view class="zan-cell" bindtap="_buy(2)">
-        <text class="zan-font-30">￥39</text>　/半年
-        <text class="zan-c-gray-dark" style="text-decoration:line-through;padding-left: 20px;">￥149 </text>
+      <view class="zan-cell" bindtap="_buy(10)">
+        <view class="zan-cell__bd zan-font-16">
+          <text class="zan-font-30">￥39 </text>/半年
+          <text class="zan-c-gray-dark" style="text-decoration:line-through;padding-left: 20px;">￥149</text>
+        </view>
       </view>
-      <view class="zan-cell" bindtap="_buy(3)">
-        <text class="zan-font-30">￥59</text>　/年
-        <text class="zan-c-gray-dark" style="text-decoration:line-through;padding-left: 20px;">￥269 </text>
+      <view class="zan-cell" bindtap="_buy(11)">
+        <view class="zan-cell__bd zan-font-16">
+          <text class="zan-font-30">￥59 </text>/年
+          <text class="zan-c-gray-dark" style="text-decoration:line-through;padding-left: 20px;">￥269</text>
+        </view>
       </view>
     </view>
   </view>
@@ -51,9 +52,9 @@ export default class MyPay extends wepy.page {
   _getUserInfo () {
     return new Promise((resolve, reject) => {
       wepy.request({
-        url: 'https://small.guinaben.com/v2/member/info',
+        url: 'https://api.guinaben.com/member/info',
         success (res) {
-          wepy.setStorageSync('gnb_primary_User', res)
+          wepy.setStorageSync('gnb_primary_user', res)
           resolve(res)
         },
         fail (err) {
@@ -122,7 +123,7 @@ export default class MyPay extends wepy.page {
       console.log(res.target)
     }
     return {
-      title: '各位家长，用这个记错题，速度快，用处大',
+      title: '各位家长：这样记错题，速度快、好处多',
       imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
       path: '/pages/workbook/index'
     }

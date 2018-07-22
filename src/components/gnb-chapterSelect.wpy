@@ -34,8 +34,8 @@ export default class gnbChapterSelect extends wepy.component {
     bindPickerChange (e) {
       this.value = e.detail.value
       this.key = this.chapter[e.detail.value].chapterId
-      this.$emit('event', this.key)
       this.$apply()
+      this.$emit('event', this.key)
     }
   }
 }

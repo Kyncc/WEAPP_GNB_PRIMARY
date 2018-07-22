@@ -60,7 +60,7 @@
       },
       _download () {
         // 不是会员跳转到VIP购买, 是跳转到下载
-        if (Number(wepy.getStorageSync('gnb_primary_User').vip)) {
+        if (Number(wepy.getStorageSync('gnb_primary_user').vip)) {
           wepy.navigateTo({
             url: `/pages/my/email?id=${this.id}&type=workbook`
           })
@@ -87,7 +87,7 @@
     _getChapter (id) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://small.guinaben.com/v2/workbook/chapter/error',
+          url: 'https://api.guinaben.com/workbook/chapter/error',
           data: {
             chapterId: id
           },
@@ -109,11 +109,8 @@
     }
 
     onShareAppMessage (res) {
-      if (res.from === 'button') {
-        console.log(res.target)
-      }
       return {
-        title: '各位家长，用这个记错题，速度快，用处大',
+        title: '各位家长：这样记错题，速度快、好处多',
         imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
         path: '/pages/workbook/index'
       }

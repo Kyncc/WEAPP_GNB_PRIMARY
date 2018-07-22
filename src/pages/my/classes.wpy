@@ -1,5 +1,5 @@
 <style lang="less">
-.MyClasses{
+.MyClasses {
   padding: 10px 0;
   .zan-field__input {
     position: relative;
@@ -35,7 +35,7 @@
 <script>
   import wepy from 'wepy'
   import zanField from '@/components/zan-field'
-  
+
   export default class MyClasses extends wepy.page {
     config = {
       navigationBarTitleText: '我的班级'
@@ -72,7 +72,7 @@
           return
         }
         // 第一次上传个人信息
-        if (!wepy.getStorageSync('gnb_primary_User').bind) {
+        if (!wepy.getStorageSync('gnb_primary_user').bind) {
           await this._bindUser(res.detail)
         }
         await this._bindClass(this.code.value)
@@ -81,11 +81,33 @@
       }
     }
 
+    /** 绑定用户 */
+    _bindUser (user) {
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://api.guinaben.com/member/bind',
+          method: 'POST',
+          data: {
+            encryptedData: user.encryptedData,
+            session_key: wepy.getStorageSync('gnb_primary_session_key'),
+            iv: user.iv
+          },
+          success (res) {
+            wepy.setStorageSync('gnb_primary_user', res)
+            resolve(res)
+          },
+          fail (err) {
+            reject(err)
+          }
+        })
+      })
+    }
+
     /** 获取班级列表 */
     _getClasses () {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://small.guinaben.com/v2/member/school',
+          url: 'https://api.guinaben.com/school',
           data: {
           },
           success (res) { resolve(res) },
@@ -98,34 +120,12 @@
     _bindClass (code) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://small.guinaben.com/v2/member/addSchool',
+          url: 'https://api.guinaben.com/member/addSchool',
           method: 'POST',
           data: {
             code: code
           },
           success (res) {
-            resolve(res)
-          },
-          fail (err) {
-            reject(err)
-          }
-        })
-      })
-    }
-
-    /** 绑定用户 */
-    _bindUser (user) {
-      return new Promise((resolve, reject) => {
-        wepy.request({
-          url: 'https://small.guinaben.com/v2/member/infoInit',
-          method: 'POST',
-          data: {
-            encryptedData: user.encryptedData,
-            session_key: wepy.getStorageSync('gnb_primary_session_key'),
-            iv: user.iv
-          },
-          success (res) {
-            wepy.setStorageSync('gnb_primary_User', res)
             resolve(res)
           },
           fail (err) {
@@ -141,9 +141,6 @@
     }
 
     onShareAppMessage (res) {
-      if (res.from === 'button') {
-        console.log(res.target)
-      }
       return {
         title: '各位家长：这样记错题，速度快、好处多',
         imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',

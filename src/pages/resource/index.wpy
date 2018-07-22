@@ -1,0 +1,254 @@
+<style lang="less">
+.resourceIndex {
+  .header{
+    padding:10px 0 0;
+    height: 25px;
+  }
+  .card{
+    margin:15rpx;
+  }
+  .card__new{
+    image{
+      width:39rpx;
+      height:52rpx;
+    }
+    right:3%;
+    top:-5%;
+    position: absolute;
+  }
+  .zan-card__left-col{
+    margin-right:50px;
+  }
+  .zan-card__thumb{
+    margin:0 30rpx 0 20rpx;
+  }
+}
+</style>
+
+<template>
+  <view class="container resourceIndex">
+    <view class="header zan-row zan-font-14">
+      <view class="zan-col zan-col-12">
+        <gnbSubjectSelect :subject.sync="subject" :list.sync="subjectList" @event.user="subjectChange"/>
+      </view>
+      <view class="zan-col zan-col-12">
+        <gnbTextbookSelect :textbook.sync="textbook" :list.sync="textBookList" @event.user="textbookChange"/>
+      </view>
+    </view>
+    <!--成品试卷-->
+    <view wx:if="{{ resource.finished.state }}" class="zan-panel card" bindtap="_intoPage(chengPin)" >
+      <view class="zan-card">
+        <view class="zan-card__thumb" >
+          <image class="zan-card__img" src="../../common/resources/resource_chenping.png" mode="aspectFit"/>
+        </view>
+        <view class="zan-card__detail">
+          <view class="card__new" wx:if="{{resource.finished.new}}">
+            <image src="../../common/resources/icon_new.png" mode="aspectFit"/>
+          </view>
+          <view class="zan-card__detail-row">
+            <view class="zan-card__left-col zan-font-16" style="margin: 30rpx 0 10rpx;font-weight:bold;">成品试卷</view>
+          </view>
+          <view class="zan-card__detail-row zan-c-gray-darker">
+            <view class="zan-card__left-col zan-font-12" style="margin-bottom: 10rpx;">海量试卷任你下</view>
+            <view class="zan-card__left-col zan-font-12" style="color:#3FC6C6;margin-bottom: 10rpx;">今日更新 {{resource.finished.new}} · 今日下载 {{resource.finished.total}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--专题汇编-->
+    <view wx:if="{{ resource.special.state }}" class="zan-panel card" bindtap="_intoPage(zhuanTi)">
+      <view class="zan-card">
+        <view class="zan-card__thumb">
+          <image class="zan-card__img" src="../../common/resources/resource_zhuanti.png" mode="aspectFit"/>
+        </view>
+        <view class="zan-card__detail">
+          <view class="card__new" wx:if="{{resource.special.new}}">
+            <image src="../../common/resources/icon_new.png" mode="aspectFit"/>
+          </view>
+          <view class="zan-card__detail-row">
+            <view class="zan-card__left-col zan-font-16" style="margin: 30rpx 0 10rpx;font-weight:bold;">专题汇编</view>
+          </view>
+          <view class="zan-card__detail-row zan-c-gray-darker">
+            <view class="zan-card__left-col zan-font-12" style="margin-bottom: 10rpx;">有的放矢，高效刷题</view>
+            <view class="zan-card__left-col zan-font-12" style="color:#3FC6C6;margin-bottom: 10rpx;">今日更新 {{resource.special.new}} · 今日下载 {{resource.special.total}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--分层练习-->
+    <view wx:if="{{ resource.layer.state }}" class="zan-panel card" bindtap="_intoPage(fenCeng)">
+      <view class="zan-card">
+        <view class="zan-card__thumb">
+          <image class="zan-card__img" src="../../common/resources/resource_fenceng.png" mode="aspectFit"/>
+        </view>
+        <view class="zan-card__detail">
+          <view class="card__new" wx:if="{{ resource.layer.new }}">
+            <image src="../../common/resources/icon_new.png" mode="aspectFit"/>
+          </view>
+          <view class="zan-card__detail-row">
+            <view class="zan-card__left-col zan-font-16" style="margin: 30rpx 0 10rpx;font-weight:bold;">分层练习</view>
+          </view>
+          <view class="zan-card__detail-row zan-c-gray-darker">
+            <view class="zan-card__left-col zan-font-12" style="margin-bottom: 10rpx;">分出层次，逐步提升</view>
+            <view class="zan-card__left-col zan-font-12" style="color:#3FC6C6;margin-bottom: 10rpx;">今日更新 {{resource.layer.new}} · 今日下载 {{resource.layer.total}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--记错题-->
+    <view wx:if="{{  resource.revise.state }}" class="zan-panel card" bindtap="_intoPage(jiLu)">
+      <view class="zan-card">
+        <view class="zan-card__thumb">
+          <image class="zan-card__img" src="../../common/resources/resource_jilu.png" mode="aspectFit"/>
+        </view>
+        <view class="zan-card__detail">
+          <view class="card__new" wx:if="{{resource.revise.new}}">
+            <image src="../../common/resources/icon_new.png" mode="aspectFit"/>
+          </view>
+          <view class="zan-card__detail-row">
+            <view class="zan-card__left-col zan-font-16" style="margin: 30rpx 0 10rpx;font-weight:bold;">记错题</view>
+          </view>
+          <view class="zan-card__detail-row zan-c-gray-darker">
+            <view class="zan-card__left-col zan-font-12" style="margin-bottom: 10rpx;">下载过的试卷都在这里</view>
+            <view class="zan-card__left-col zan-font-12" style="color:#3FC6C6;margin-bottom: 10rpx;">今日更新 {{resource.revise.new}} · 今日下载 {{resource.revise.total}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import gnbTextbookSelect from '@/components/gnb-textbookSelect'
+  import gnbSubjectSelect from '@/components/gnb-subjectSelect'
+
+  export default class ResourceIndex extends wepy.page {
+    config = {
+      navigationBarTitleText: '资源'
+    }
+
+    data = {
+      subject: '',
+      subjectList: [],
+      textBookList: [],
+      textbook: '',
+      resource: {}
+    }
+
+    components = {
+      gnbTextbookSelect: gnbTextbookSelect,
+      gnbSubjectSelect: gnbSubjectSelect
+    }
+
+    methods = {
+      _intoPage (value) {
+        wepy.navigateTo({url: `/pages/resource/${value}?textbookId=${this.textbook}`})
+      },
+      /** 教材切换 */
+      async textbookChange (id) {
+        try {
+          let userinfo = await this._setUserInfoOtherTextbook(id, this.subject)
+          wepy.setStorageSync('gnb_primary_user', userinfo)
+          this.textbook = wepy.getStorageSync('gnb_primary_user').current.otherTextBookId
+          this.textBookList = wepy.getStorageSync('gnb_primary_user').otherTextBook[this.subject]
+          this.resource = await this._getResource(this.textbook)
+          this.$apply()
+        } catch (error) {
+          console.log(error)
+        }
+      },
+      /** 科目切换 */
+      async subjectChange (subject) {
+        try {
+          let userinfo = await this._setUserInfoSubject(subject)
+          wepy.setStorageSync('gnb_primary_user', userinfo)
+          this.subject = subject
+          this.subjectList = wepy.getStorageSync('gnb_primary_user').subject
+          this.textbook = wepy.getStorageSync('gnb_primary_user').current.otherTextBookId
+          this.textBookList = wepy.getStorageSync('gnb_primary_user').otherTextBook[this.subject]
+          this.resource = await this._getResource(this.textbook)
+          this.$apply()
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
+
+    _getResource (id) {
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://api.guinaben.com/resource',
+          data: {
+            textbookId: id
+          },
+          success (res) { resolve(res) },
+          fail (err) { reject(err) }
+        })
+      })
+    }
+
+    /** 更改用户教材信息 */
+    _setUserInfoOtherTextbook (id, subject) {
+      wepy.showLoading({title: '请稍候'})
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://api.guinaben.com/member/info',
+          method: 'POST',
+          data: {
+            otherTextBook: {
+              [subject]: id
+            }
+          },
+          success (res) {
+            wepy.hideLoading()
+            resolve(res)
+          },
+          fail (err) {
+            wepy.hideLoading()
+            reject(err)
+          }
+        })
+      })
+    }
+
+    /** 更改用户科目信息 */
+    _setUserInfoSubject (subject) {
+      wepy.showLoading({title: '请稍候'})
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://api.guinaben.com/member/info',
+          method: 'POST',
+          data: {
+            subject: subject
+          },
+          success (res) {
+            wepy.hideLoading()
+            resolve(res)
+          },
+          fail (err) {
+            wepy.hideLoading()
+            reject(err)
+          }
+        })
+      })
+    }
+
+    async onShow() {
+      this.subject = wepy.getStorageSync('gnb_primary_user').current.subjectId
+      this.subjectList = wepy.getStorageSync('gnb_primary_user').subject
+      this.textbook = wepy.getStorageSync('gnb_primary_user').current.otherTextBookId
+      this.textBookList = wepy.getStorageSync('gnb_primary_user').otherTextBook[this.subject]
+      this.resource = await this._getResource(this.textbook)
+      this.$apply()
+    }
+
+    onShareAppMessage (res) {
+      return {
+        title: '各位家长：这样记错题，速度快、好处多',
+        imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
+        path: '/pages/workbook/index'
+      }
+    }
+  }
+</script>

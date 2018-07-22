@@ -1,16 +1,13 @@
-<style lang="less">
-.numberColor{
-  color: #FDCA3A;
-  text-align:center;
-}
-.zan-panel .zan-row:nth-child(even){
-  background-color: #EDF9F8;
-}
-</style>
-
 <template>
-  <view class="container">
-    <gnbTextbookSelect :value.sync="textbook" @event.user="textbookChange" :textbook.sync="textBookList"/>
+  <view class="container StatisticsIndex">
+     <view class="header zan-row zan-font-14">
+      <view class="zan-col zan-col-12">
+        <gnbSubjectSelect :subject.sync="subject" :list.sync="subjectList" @event.user="subjectChange"/>
+      </view>
+      <view class="zan-col zan-col-12">
+        <gnbTextbookSelect :textbook.sync="textbook" :list.sync="textBookList" @event.user="textbookChange"/>
+      </view>
+    </view>
     <view class="zan-panel">
       <view class="zan-row zan-cell">
         <view class="zan-col zan-col-6 zan-col-offset-6 zan-center">记题数</view>
@@ -32,6 +29,7 @@
 <script>
   import wepy from 'wepy'
   import gnbTextbookSelect from '@/components/gnb-textbookSelect'
+  import gnbSubjectSelect from '@/components/gnb-subjectSelect'
 
   export default class Statistics extends wepy.page {
     config = {
@@ -39,12 +37,15 @@
     }
 
     components = {
-      gnbTextbookSelect: gnbTextbookSelect
+      gnbTextbookSelect: gnbTextbookSelect,
+      gnbSubjectSelect: gnbSubjectSelect
     }
 
     data = {
-      textBookList: [],
-      textbook: '',
+      textbook: '',     // 当前选中教材
+      textBookList: [], // 教材列表
+      subject: '',      // 当前选中科目
+      subjectList: [],  // 科目列表
       statistics: []
     }
 
@@ -62,17 +63,84 @@
           })
         }
       },
+      /** 教材切换 */
       async textbookChange (id) {
-        let userinfo = await this._setUserInfo(id)
-        wepy.setStorageSync('gnb_primary_User', userinfo)
-        this.statistics = await this._getStatistics(id)
-        this.$apply()
+        try {
+          let userinfo = await this._setUserInfoTextbook(id, this.subject)
+          wepy.setStorageSync('gnb_primary_user', userinfo)
+          this.statistics = await this._getStatistics()
+          this.$apply()
+        } catch (error) {
+          console.log(error)
+        }
+      },
+      /** 科目切换 */
+      async subjectChange (subject) {
+        try {
+          let userinfo = await this._setUserInfoSubject(subject)
+          wepy.setStorageSync('gnb_primary_user', userinfo)
+          this.subject = subject
+          this.subjectList = wepy.getStorageSync('gnb_primary_user').subject
+          this.textbook = wepy.getStorageSync('gnb_primary_user').current.textbookId
+          this.textBookList = wepy.getStorageSync('gnb_primary_user').textbook[this.subject]
+          this.statistics = await this._getStatistics(this.textbook)
+          this.$apply()
+        } catch (error) {
+          console.log(error)
+        }
       }
     }
+
+    /** 更改用户教材信息 */
+    _setUserInfoTextbook (id, subject) {
+      wepy.showLoading({title: '请稍候'})
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://api.guinaben.com/member/info',
+          method: 'POST',
+          data: {
+            textbook: {
+              [subject]: id
+            }
+          },
+          success (res) {
+            wepy.hideLoading()
+            resolve(res)
+          },
+          fail (err) {
+            wepy.hideLoading()
+            reject(err)
+          }
+        })
+      })
+    }
+
+    /** 更改用户科目信息 */
+    _setUserInfoSubject (subject) {
+      wepy.showLoading({title: '请稍候'})
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://api.guinaben.com/member/info',
+          method: 'POST',
+          data: {
+            subject: subject
+          },
+          success (res) {
+            wepy.hideLoading()
+            resolve(res)
+          },
+          fail (err) {
+            wepy.hideLoading()
+            reject(err)
+          }
+        })
+      })
+    }
+
     _getStatistics (id) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://small.guinaben.com/v2/textbook/statistics',
+          url: 'https://api.guinaben.com/textbook/statistics',
           data: {
             textbookId: id
           },
@@ -81,43 +149,37 @@
         })
       })
     }
-    /** 更改用户信息 */
-    _setUserInfo (id) {
-      // wepy.showLoading({title: '请稍候'})
-      return new Promise((resolve, reject) => {
-        wepy.request({
-          url: 'https://small.guinaben.com/v2/member/infoEdit',
-          method: 'POST',
-          data: {
-            textbookId: id
-          },
-          success (res) {
-            // wepy.hideLoading()
-            resolve(res)
-          },
-          fail (err) {
-            // wepy.hideLoading()
-            reject(err)
-          }
-        })
-      })
-    }
+
     async onShow() {
-      this.textBookList = wepy.getStorageSync('gnb_primary_User').textbook
-      this.textbook = wepy.getStorageSync('gnb_primary_User').textbookId
+      this.subject = wepy.getStorageSync('gnb_primary_user').current.subjectId
+      this.subjectList = wepy.getStorageSync('gnb_primary_user').subject
+      this.textbook = wepy.getStorageSync('gnb_primary_user').current.textbookId
+      this.textBookList = wepy.getStorageSync('gnb_primary_user').textbook[this.subject]
       this.statistics = await this._getStatistics(this.textbook)
       this.$apply()
     }
 
     onShareAppMessage (res) {
-      if (res.from === 'button') {
-        console.log(res.target)
-      }
       return {
-        title: '各位家长，用这个记错题，速度快，用处大',
+        title: '各位家长：这样记错题，速度快、好处多',
         imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
         path: '/pages/workbook/index'
       }
     }
   }
 </script>
+<style lang="less">
+.StatisticsIndex{
+  .header{
+    height: 20px;
+    padding-top: 10px;
+  }
+}
+.numberColor{
+  color: #FDCA3A;
+  text-align:center;
+}
+.zan-panel .zan-row:nth-child(even){
+  background-color: #EDF9F8;
+}
+</style>

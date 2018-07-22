@@ -1,5 +1,5 @@
 <template>
-  <picker class="picker zan-c-gray-darker" bindchange="bindPickerChange" range="{{ list }}" value="{{ index }}" range-key="name">
+  <picker sclass="picker zan-c-gray-darker" bindchange="bindPickerChange" range="{{ list }}" value="{{ index }}" range-key="name">
     <view class="picker zan-c-gray-darker">
       {{list[index].name}}
       <view class="zan-arrow"></view>
@@ -10,9 +10,9 @@
 <script>
 import wepy from 'wepy'
 
-export default class gnbTextbookSelect extends wepy.component {
+export default class gnbSubjectSelect extends wepy.component {
   props = {
-    textbook: {
+    subject: {
       type: String,
       twoWay: true
     },
@@ -26,7 +26,7 @@ export default class gnbTextbookSelect extends wepy.component {
     index: 0
   }
   watch = {
-    textbook (val) {
+    subject (val) {
       if (this.list.length) {
         this.list.forEach((item, index) => {
           if (item.id.toString() === val.toString()) {
@@ -39,7 +39,7 @@ export default class gnbTextbookSelect extends wepy.component {
     },
     list (val) {
       this.list.forEach((item, index) => {
-        if (item.id.toString() === this.textbook.toString()) {
+        if (item.id.toString() === this.subject.toString()) {
           this.index = index
           this.$apply()
           return {}
@@ -50,20 +50,19 @@ export default class gnbTextbookSelect extends wepy.component {
   methods = {
     bindPickerChange (e) {
       this.index = e.detail.value
-      this.textbook = this.list[this.index].id
+      this.subject = this.list[this.index].id
       this.$emit('event', this.list[this.index].id)
       this.$apply()
     }
   }
 }
 </script>
-
 <style lang="less">
 .picker{
   text-align: center;
   .zan-arrow{
+    position: static;
     rotate: 90deg;
-    margin-top: -10rpx;
   }
 }
 </style>

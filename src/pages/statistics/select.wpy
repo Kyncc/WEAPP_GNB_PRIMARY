@@ -1,13 +1,13 @@
-<style lang="less" scoped>
+<style lang="less">
 .statisticsSelect{
   .zan-panel{
     padding: 0;
     margin-top: 0;
   }
   .zan-row{padding: 5px 0;}
-  .zan-btn{border-radius:5px;}
+  .zan-btn{border-radius:0;}
+  .footer{margin-top: 10px;}
   .footer{
-    margin-top: 10px;
     .zan-btn{border-radius:5px;}
   }
 }
@@ -22,7 +22,7 @@
       </label>
     </checkbox-group>
     <view class="footer zan-row">
-      <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--middle {{!downloadDisabled ? 'zan-btn--disabled' : 'zan-btn--primary'}}"
+      <button class="zan-col zan-col-16 zan-col-offset-4 zan-btn zan-btn--middle {{!downloadDisabled ? 'zan-btn--disabled' : 'zan-btn--primary'}}" 
         bindtap='_download' disabled="{{!downloadDisabled}}">
         <image mode="aspectFit" style="width:24px;height:24px;top:6px;position:relative;" src="../../common/resources/icon_download.png"/>
         下载
@@ -61,7 +61,7 @@
       /** 下载试卷 */
       async _download () {
         /** 如果下载题目数量为0，则提示重选
-        *   非VIP进入购买,VIP进入邮箱发送
+        *  非VIP进入购买,VIP进入邮箱发送
         */
         this._getListCount(this.chapterId, this.type).then((res) => {
           if (!Number(res.count)) {
@@ -71,7 +71,7 @@
               confirmText: '知道了',
               showCancel: false
             })
-          } else if (Number(wepy.getStorageSync('gnb_primary_User').vip)) {
+          } else if (Number(wepy.getStorageSync('gnb_primary_user').vip)) {
             wepy.navigateTo({ url: `/pages/my/email?id=${this.chapterId}&type=statistics` })
           } else {
             wepy.navigateTo({ url: `/pages/my/vip` })
@@ -83,7 +83,7 @@
     _getListCount (id, type) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://small.guinaben.com/v2/textbook/statistics/downloadNum',
+          url: 'https://api.guinaben.com/textbook/statistics/downloadNum',
           data: {
             chapterId: id,
             type: type.toString()
@@ -115,7 +115,7 @@
 
     onShareAppMessage (res) {
       return {
-        title: '各位家长，用这个记错题，速度快，用处大',
+        title: '各位家长：这样记错题，速度快、好处多',
         path: '/pages/workbook/index'
       }
     }

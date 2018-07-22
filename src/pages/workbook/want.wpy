@@ -111,7 +111,7 @@
       wepy.showLoading({title: '请稍候'})
       return new Promise((resolve, reject) => {
         wepy.uploadFile({
-          url: 'https://small.guinaben.com/v2/upload/img',
+          url: 'https://api.guinaben.com/upload/img',
           filePath: file,
           name: 'file',
           header: {
@@ -135,23 +135,12 @@
       })
     }
 
-    onShareAppMessage (res) {
-      if (res.from === 'button') {
-        console.log(res.target)
-      }
-      return {
-        title: '各位家长，用这个记错题，速度快，用处大',
-        imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
-        path: '/pages/workbook/index'
-      }
-    }
-
     /** 获取章节数据 */
     _setWant (first, last) {
       wepy.showLoading({title: '请稍候'})
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://small.guinaben.com/v2/workbook/want',
+          url: 'https://api.guinaben.com/workbook/want',
           method: 'POST',
           data: {
             first: first,
@@ -168,6 +157,17 @@
           }
         })
       })
+    }
+
+    onShareAppMessage (res) {
+      if (res.from === 'button') {
+        console.log(res.target)
+      }
+      return {
+        title: '各位家长：这样记错题，速度快、好处多',
+        imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
+        path: '/pages/workbook/index'
+      }
     }
   }
 </script>

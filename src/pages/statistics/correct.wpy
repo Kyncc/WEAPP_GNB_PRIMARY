@@ -29,9 +29,9 @@
   background:#eac363;
   color:#fff;
   font-size: 30rpx;
-  height: 120rpx;
-  line-height: 120rpx;
-  width: 120rpx;
+  height: 130rpx;
+  line-height: 130rpx;
+  width: 130rpx;
   border-radius: 50%;
   bottom: 5%;
   right: 8%;
@@ -63,7 +63,7 @@
     _getContent (id) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://small.guinaben.com/v2/textbook/statistics/correct',
+          url: 'https://api.guinaben.com/textbook/statistics/correct',
           data: {
             chapterId: id
           },
@@ -80,14 +80,14 @@
     async onLoad(options) {
       wx.setNavigationBarTitle({title: options.name})
       this.result = await this._getContent(options.id)
-      this.name = wepy.getStorageSync('gnb_primary_User').name
+      this.name = wepy.getStorageSync('gnb_primary_user').name
       this.$apply()
     }
 
     /** 分享全局 */
     onShareAppMessage (res) {
       return {
-        title: '各位家长，用这个记错题，速度快，用处大',
+        title: '各位家长：这样记错题，速度快、好处多',
         path: `/pages/statistics/share?content=${this.result.content}&date=${this.result.date}&name=${this.name}`
       }
     }

@@ -1,19 +1,23 @@
 <style lang="less">
 .workbookAdd{
-  .zan-btn{
-    border-radius:2px;
-    overflow:hidden;
+  .zan-btn {
+    border-radius:0;
   }
   .search{
+    .header{
+      height: 20px;
+      padding: 10px 0;
+    }
     position:fixed;
     top:0;
     left: 0;
     width: 100%;
-    height: 45px;
+    height: 80px;
     z-index: 999;
     margin-top: 0;
-    .zan-cell{
-      padding: 5px 15px;
+    background: #f9f9f9;
+    .zan-panel{
+      margin-top: 0;
     }
   }
 }
@@ -22,11 +26,24 @@
 <template>
   <view class="container workbookAdd">
     <!--搜索-->
-    <view class="zan-panel search">
-      <searchField :options.sync="base_search" componentId="searchField"/>
+    <view class="search">
+      <view class="header zan-row zan-font-14">
+        <view class="zan-col zan-col-8">
+          <gnbSubjectSelect :subject.sync="subject" :list.sync="subjectList" @event.user="subjectChange"/>
+        </view>
+         <view class="zan-col zan-col-8">
+          <gnbVersionSelect :version.sync="version" :list.sync="versionList" @event.user="versionChange"/>
+        </view>
+        <view class="zan-col zan-col-8">
+          <gnbTextbookSelect :textbook.sync="textbook" :list.sync="textBookList" @event.user="textbookChange"/>
+        </view>
+      </view>
+      <view class="zan-row zan-panel">
+        <searchField :options.sync="base_search" componentId="searchField"/>
+      </view>
     </view>
     <!--练习册区间-->
-    <view class="zan-panel" style="margin-top:55px;">
+    <view class="zan-panel" style="margin-top:91px;">
       <scroll>
         <repeat for="{{ workbookList }}" key="pindex" index="pindex" item="item">
           <view class="zan-card">
@@ -35,23 +52,20 @@
               <image class="zan-card__img" src="{{ item.img.url }}?imageView2/2/w/120/h/180/format/jpg/q/75" mode="aspectFit" lazy-load='true'/>
             </view>
             <!--练习册详情-->
-            <view class="zan-card__detail" >
+            <view class="zan-card__detail">
               <view class="zan-card__detail-row">
                 <view class="zan-card__left-col zan-font-14" style="color:#3FC6C6">{{item.year}}版</view>
               </view>
               <view class="zan-card__detail-row zan-c-gray-darker">
                 <!--取消-->
-                <view class="zan-card__right-col" wx:if="{{ item.status }}">
+                <view class="zan-card__right-col" wx:if="{{ !item.status }}">
                   <view>
-                    <image src="../../common/resources/workbook_cancel.png" bindtap="_edit({{ pindex}}, {{item.id}})" mode="aspectFit" style="width: 70px;height:26px;"/>
-                  </view>
-                  <view style="margin-top:14rpx">
-                    <image src="../../common/resources/workbook_ksjc.png" bindtap="_intoChapter({{item}})" mode="aspectFit" style="width: 70px;height:26px;"/>
+                    <image src="../../common/resources/workbook_cancel.png" bindtap="_edit({{ pindex}}, {{item.id}})" mode="aspectFit" style="width: 24px;height:24px;"/>
                   </view>
                 </view>
                 <!--添加-->
                 <view class="zan-card__right-col" wx:else>
-                  <image src="../../common/resources/workbook_add.png" bindtap="_edit({{ pindex}}, {{item.id}})" mode="aspectFit" style="width: 70px;height:26px;"/>
+                  <image src="../../common/resources/workbook_add.png" bindtap="_edit({{ pindex}}, {{item.id}})" mode="aspectFit" style="width: 24px;height:24px;"/>
                 </view>
                 <view class="zan-card__left-col zan-font-16" style="margin-bottom: 3px;">{{item.name}}</view>
                 <repeat for="{{item.version}}" key="index" index="index" item="version">
@@ -62,20 +76,16 @@
           </view>
         </repeat>
       </scroll>
-    <!--练习册区间End-->
     </view>
-    <!--进入想要练习册
-    <navigator open-type="navigate" url="/pages/workbook/want" hover-class="none" style="background:#F9F9F9">
-      <view class="zan-col zan-col-24 zan-font-14 zan-c-gray zan-center" style="padding: 10px 0;">没有找到想要的练习册？
-        <text style="color:#FF7043;text-decoration:underline;">告诉我们</text>
-      </view>
-    </navigator>-->
   </view>
 </template>
 
 <script>
 import wepy from 'wepy'
 import zanField from '@/components/zan-field'
+import gnbTextbookSelect from '@/components/gnb-textbookSelect'
+import gnbSubjectSelect from '@/components/gnb-subjectSelect'
+import gnbVersionSelect from '@/components/gnb-versionSelect'
 
 export default class WorkbookAdd extends wepy.page {
   config = {
@@ -83,25 +93,30 @@ export default class WorkbookAdd extends wepy.page {
   }
 
   components = {
-    searchField: zanField
+    searchField: zanField,
+    gnbTextbookSelect: gnbTextbookSelect,
+    gnbVersionSelect: gnbVersionSelect,
+    gnbSubjectSelect: gnbSubjectSelect
   }
 
   data = {
-    workbookList: [],
-    inputShowed: false,
-    inputVal: '',
-    textbookId: '',
     base_search: {
-      title: '',
       value: '',
       placeholder: '请输入练习册名称'
-    }
+    },
+    textbook: '',     // 当前选中教材
+    textBookList: [], // 教材列表
+    subject: '',      // 当前选中科目
+    subjectList: [],  // 科目列表
+    version: '',      // 当前版本
+    versionList: [],  // 版本列表
+    workbookList: []
   }
 
   events = {
     async zanFieldChange(e) {
       this.base_search.value = e.detail.value
-      this.workbookList = await this._getAllWorkbook(this.textbookId, this.base_search.value)
+      this.workbookList = await this._getAllWorkbook(this.textbook, this.base_search.value)
       this.$apply()
     }
   }
@@ -121,14 +136,116 @@ export default class WorkbookAdd extends wepy.page {
       wepy.navigateTo({
         url: `/pages/workbook/chapter?name=${item.name}&id=${item.id}`
       })
+    },
+    /** 科目切换 */
+    async subjectChange (subject) {
+      let userinfo = await this._setUserInfoSubject(subject)
+      wepy.setStorageSync('gnb_primary_user', userinfo)
+      this.subject = subject
+      this.textbook = wepy.getStorageSync('gnb_primary_user').current.textbookId
+      this.textBookList = wepy.getStorageSync('gnb_primary_user').textbook[this.subject]
+      this.version = wepy.getStorageSync('gnb_primary_user').current.versionId
+      this.versionList = wepy.getStorageSync('gnb_primary_user').version
+      this.workbookList = await this._getAllWorkbook(this.textbook, this.base_search.value)
+      this.$apply()
+    },
+    /** 版本切换 */
+    async versionChange (version) {
+      let userinfo = await this._setUserInfoVersion(version, this.subject)
+      wepy.setStorageSync('gnb_primary_user', userinfo)
+      this.version = version
+      this.versionList = wepy.getStorageSync('gnb_primary_user').version
+      this.textbook = wepy.getStorageSync('gnb_primary_user').current.textbookId
+      this.textBookList = wepy.getStorageSync('gnb_primary_user').textbook[this.subject]
+      this.workbookList = await this._getAllWorkbook(this.textbook, this.base_search.value)
+      this.$apply()
+    },
+    /** 教材切换 */
+    async textbookChange (textbook) {
+      let userinfo = await this._setUserInfoTextbook(textbook, this.subject)
+      wepy.setStorageSync('gnb_primary_user', userinfo)
+      this.textbook = textbook
+      this.workbookList = await this._getAllWorkbook(this.textbook, this.base_search.value)
+      this.$apply()
     }
+  }
+
+  /** 更改用户教材信息 */
+  _setUserInfoTextbook (id, subject) {
+    wepy.showLoading({title: '请稍候'})
+    return new Promise((resolve, reject) => {
+      wepy.request({
+        url: 'https://api.guinaben.com/member/info',
+        method: 'POST',
+        data: {
+          textbook: {
+            [subject]: id
+          }
+        },
+        success (res) {
+          wepy.hideLoading()
+          resolve(res)
+        },
+        fail (err) {
+          wepy.hideLoading()
+          reject(err)
+        }
+      })
+    })
+  }
+
+  /** 更改用户科目信息 */
+  _setUserInfoSubject (subject) {
+    wepy.showLoading({title: '请稍候'})
+    return new Promise((resolve, reject) => {
+      wepy.request({
+        url: 'https://api.guinaben.com/member/info',
+        method: 'POST',
+        data: {
+          subject: subject
+        },
+        success (res) {
+          wepy.hideLoading()
+          resolve(res)
+        },
+        fail (err) {
+          wepy.hideLoading()
+          reject(err)
+        }
+      })
+    })
+  }
+
+  /** 更改用户版本信息 */
+  _setUserInfoVersion (id, version) {
+    wepy.showLoading({title: '请稍候'})
+    return new Promise((resolve, reject) => {
+      wepy.request({
+        url: 'https://api.guinaben.com/member/info',
+        method: 'POST',
+        data: {
+          version: {
+            [version]: id
+          }
+        },
+        success (res) {
+          wepy.hideLoading()
+          resolve(res)
+        },
+        fail (err) {
+          wepy.hideLoading()
+          reject(err)
+        }
+      })
+    })
   }
 
   /** 编辑练习册 */
   _setWorkbook (id) {
+    wepy.showNavigationBarLoading()
     return new Promise((resolve, reject) => {
       wepy.request({
-        url: 'https://small.guinaben.com/v2/workbook/edit',
+        url: 'https://api.guinaben.com/workbook',
         method: 'POST',
         data: {
           workbookId: id
@@ -138,16 +255,19 @@ export default class WorkbookAdd extends wepy.page {
         },
         fail (err) {
           reject(err)
+        },
+        complete() {
+          wepy.hideNavigationBarLoading()
         }
       })
     })
   }
 
-  // 添加我的练习册
+  /**  添加我的练习册 */
   _getAllWorkbook (id, name) {
     return new Promise((resolve, reject) => {
       wepy.request({
-        url: 'https://small.guinaben.com/v2/workbook/all',
+        url: 'https://api.guinaben.com/workbook/all',
         data: {
           name: name,
           textbookId: id
@@ -162,23 +282,26 @@ export default class WorkbookAdd extends wepy.page {
     })
   }
 
-  async onLoad (options) {
-    this.textbookId = options.id
-    this.workbookList = await this._getAllWorkbook(this.textbookId, this.base_search.value)
-    this.$apply()
-  }
-
-  onShow () {
+  async onShow () {
     this.base_search.value = ''
+    this.subject = wepy.getStorageSync('gnb_primary_user').current.subjectId
+    this.subjectList = wepy.getStorageSync('gnb_primary_user').subject
+    this.textbook = wepy.getStorageSync('gnb_primary_user').current.textbookId
+    this.textBookList = wepy.getStorageSync('gnb_primary_user').textbook[this.subject]
+    this.version = wepy.getStorageSync('gnb_primary_user').current.versionId
+    this.versionList = wepy.getStorageSync('gnb_primary_user').version
     this.$apply()
+    try {
+      this.workbookList = await this._getAllWorkbook(this.textbook, this.base_search.value)
+      this.$apply()
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   onShareAppMessage (res) {
-    if (res.from === 'button') {
-      console.log(res.target)
-    }
     return {
-      title: '各位家长，用这个记错题，速度快，用处大',
+      title: '各位家长：这样记错题，速度快、好处多',
       imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
       path: '/pages/workbook/index'
     }

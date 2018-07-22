@@ -10,9 +10,9 @@
 <script>
 import wepy from 'wepy'
 
-export default class gnbTextbookSelect extends wepy.component {
+export default class gnbVersionSelect extends wepy.component {
   props = {
-    textbook: {
+    version: {
       type: String,
       twoWay: true
     },
@@ -26,10 +26,10 @@ export default class gnbTextbookSelect extends wepy.component {
     index: 0
   }
   watch = {
-    textbook (val) {
+    version (val) {
       if (this.list.length) {
         this.list.forEach((item, index) => {
-          if (item.id.toString() === val.toString()) {
+          if (String(item.id) === String(val)) {
             this.index = index
             this.$apply()
             return {}
@@ -39,7 +39,7 @@ export default class gnbTextbookSelect extends wepy.component {
     },
     list (val) {
       this.list.forEach((item, index) => {
-        if (item.id.toString() === this.textbook.toString()) {
+        if (String(item.id) === String(this.version)) {
           this.index = index
           this.$apply()
           return {}
@@ -50,7 +50,7 @@ export default class gnbTextbookSelect extends wepy.component {
   methods = {
     bindPickerChange (e) {
       this.index = e.detail.value
-      this.textbook = this.list[this.index].id
+      this.version = this.list[this.index].id
       this.$emit('event', this.list[this.index].id)
       this.$apply()
     }
@@ -62,8 +62,8 @@ export default class gnbTextbookSelect extends wepy.component {
 .picker{
   text-align: center;
   .zan-arrow{
+    position: static;
     rotate: 90deg;
-    margin-top: -10rpx;
   }
 }
 </style>
