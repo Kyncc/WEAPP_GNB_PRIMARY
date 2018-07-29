@@ -10,7 +10,6 @@
 
 <template>
   <view class="container MyClasses">
-    <text class="zan-font-14">　请填写学校编码，等待老师为你分配班级</text>
     <view class="zan-panel">
       <view class="zan-row">
         <view class="zan-col zan-col-15 zan-col-offset-1">
@@ -21,9 +20,10 @@
         </view>
       </view>
     </view>
+    <!-- <text class="zan-font-14 zan-c-primary" style="margin-top: 10px;">　我的班级</text> -->
     <repeat for="{{classes}}" key="index" index="index" item="school">
       <view class="zan-panel">
-        <view class="zan-cell">{{school.name}}</view>
+        <view class="zan-cell" style="color: #3fc6c6">{{school.name}}</view>
         <repeat for="{{school.classes}}" key="pindex" index="pindex" item="class">
           <view class="zan-cell">{{class.name}}</view>
         </repeat>
@@ -49,7 +49,7 @@
       code: {
         title: '',
         value: '',
-        placeholder: '请输入学校编码'
+        placeholder: '请输入班级编码'
       },
       classes: []
     }
@@ -76,7 +76,12 @@
           await this._bindUser(res.detail)
         }
         await this._bindClass(this.code.value)
-        this.classes = await this._getClasses()
+        wepy.showToast({
+          title: '请等待审核',
+          icon: 'success',
+          duration: 1000
+        })
+        this.classes = await this._getMyClasses()
         this.$apply()
       }
     }
@@ -104,12 +109,10 @@
     }
 
     /** 获取班级列表 */
-    _getClasses () {
+    _getMyClasses () {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://api.guinaben.com/school',
-          data: {
-          },
+          url: 'https://api.guinaben.com/class/my',
           success (res) { resolve(res) },
           fail (err) { reject(err) }
         })
@@ -120,7 +123,7 @@
     _bindClass (code) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://api.guinaben.com/member/addSchool',
+          url: 'https://api.guinaben.com/class/add',
           method: 'POST',
           data: {
             code: code
@@ -136,7 +139,8 @@
     }
 
     async onShow () {
-      this.classes = await this._getClasses()
+      this.code.value = ''
+      this.classes = await this._getMyClasses()
       this.$apply()
     }
 

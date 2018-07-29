@@ -25,12 +25,12 @@
 <template>
   <view class="container myIndex">
     <view class="zan-row zan-center" style="padding-top:60rpx;position: relative">
-      <navigator url='/pages/my/info' hover-class="none">
-        <image class="userinfo-avatar" src='{{userInfo.headImg}}' mode='scaleToFill'/>
-        <image wx:if="{{ userInfo.vip != 0 }}" class="userinfo-vip" src='../../common/resources/VIP1.png' mode='scaleToFill'/>
-        <text class="zan-col zan-col-24 zan-font-22">{{userInfo.name}}</text>
-        <text class="zan-arrow"></text>
-      </navigator>
+      <!-- <navigator url='/pages/my/info' hover-class="none"> -->
+      <image class="userinfo-avatar" src='{{userInfo.headImg}}' mode='scaleToFill'/>
+      <image wx:if="{{ userInfo.vip != 0 }}" class="userinfo-vip" src='../../common/resources/VIP1.png' mode='scaleToFill'/>
+      <text class="zan-col zan-col-24 zan-font-22">{{userInfo.name}}</text>
+      <!-- <text class="zan-arrow"></text> -->
+      <!-- </navigator> -->
     </view>
     <view class="zan-panel">
       <view class="zan-font-16 zan-cell" bindtap="_into('/pages/my/pay')" style="padding:5px 15px 15px">
