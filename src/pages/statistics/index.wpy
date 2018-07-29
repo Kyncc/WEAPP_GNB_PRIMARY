@@ -68,7 +68,8 @@
         try {
           let userinfo = await this._setUserInfoTextbook(id, this.subject)
           wepy.setStorageSync('gnb_primary_user', userinfo)
-          this.statistics = await this._getStatistics()
+          this.textbook = wepy.getStorageSync('gnb_primary_user').current.textbookId
+          this.statistics = await this._getStatistics(this.textbook)
           this.$apply()
         } catch (error) {
           console.log(error)

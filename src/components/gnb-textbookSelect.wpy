@@ -1,6 +1,6 @@
 <template>
   <picker class="picker zan-c-gray-darker" bindchange="bindPickerChange" range="{{ list }}" value="{{ index }}" range-key="name">
-    <view class="picker zan-c-gray-darker">
+    <view class="picker zan-c-gray-darker zan-ellipsis">
       {{list[index].name}}
       <view class="zan-arrow"></view>
     </view>
