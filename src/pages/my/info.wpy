@@ -8,7 +8,7 @@
   <view class="container">
      <view class="zan-panel" style="margin: 0 0 40rpx 0;">
        <nameField :options.sync="base_name" componentId="nameField"/>
-       <schoolField :options.sync="base_school" componentId="schoolField"/>
+       <!-- <schoolField :options.sync="base_school" componentId="schoolField"/> -->
      </view>
      <view class="zan-row" style="margin-top:20px;">
         <button class="zan-col zan-col-18 zan-col-offset-3 zan-btn zan-btn--primary" bindtap='_save'>保存</button>

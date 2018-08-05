@@ -119,8 +119,8 @@ export default class extends wepy.app {
     system: {},
     resourceChengpinFilter: {
       tag: 'hot',
-      type: '0',
-      year: '0'
+      type: 0,
+      year: 0
     },
     statisticsSelect: ['2']
   }
@@ -136,7 +136,7 @@ export default class extends wepy.app {
           'openId': wepy.getStorageSync('gnb_primary_openId') || '',
           'periodId': '1'
         }
-        // wepy.showNavigationBarLoading()
+        wepy.showNavigationBarLoading()
         params.header = header
         return params
       },

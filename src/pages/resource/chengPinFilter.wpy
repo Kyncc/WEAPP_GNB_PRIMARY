@@ -1,11 +1,8 @@
 <style lang="less" scoped>
 .resourceChengpinFilter{
   .zan-panel{
-    padding: 10px 0;
+    padding: 0 0 20rpx;
     margin-top: 0;
-  }
-  .zan-row{
-    padding: 5px 0;
   }
   .zan-btn {
     border-radius:5px;
@@ -16,24 +13,17 @@
 <template>
   <view class="container resourceChengpinFilter">
     <view class="zan-panel">
+      <view class="zan-row zan-font-14 zan-font--primary" style="padding:10px;">年份</view>
       <view class="zan-row">
-        <view class="zan-col zan-col-offset-1 zan-col-3 zan-font-14">年份</view>
-        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{year === '0' ? 'zan-btn--primary':''}}" bindtap='_select(year, 0)'>不限</button>
-        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{year === '2018' ? 'zan-btn--primary':''}}" bindtap='_select(year, 2018)'>2018</button>
-        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{year === '2017' ? 'zan-btn--primary':''}}" bindtap='_select(year, 2017)'>2017</button>
+        <repeat for="{{filterList.year}}" key="index" index="index" item="item">
+          <button class="zan-col-offset-1 zan-col-4 zan-btn zan-btn--small {{item.id === year ? 'zan-btn--primary':''}}" bindtap='_select(year, {{item.id}})' style="margin-bottom: 20rpx">{{item.name}}</button>
+        </repeat>
       </view>
+      <view class="zan-row zan-font-14 zan-font--primary" style="padding:10px;">类型</view>
       <view class="zan-row">
-        <button class="zan-col-offset-5 zan-col-5 zan-btn zan-btn--small {{year === '2016' ? 'zan-btn--primary':''}}" bindtap='_select(year, 2016)'>2016</button>
-        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{year === '-1' ? 'zan-btn--primary':''}}" bindtap='_select(year, -1)'>更早</button>
-      </view>
-      <view class="zan-row">
-        <view class="zan-col zan-col-offset-1 zan-col-3 zan-font-14">类型</view>
-        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{type === '0' ? 'zan-btn--primary':''}}" bindtap='_select(type, 0)'>不限</button>
-        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{type === '1' ? 'zan-btn--primary':''}}" bindtap='_select(type, 1)'>期中</button>
-        <button class="zan-col-offset-1 zan-col-5 zan-btn zan-btn--small {{type === '2' ? 'zan-btn--primary':''}}" bindtap='_select(type, 2)'>期末</button>
-      </view>
-      <view class="zan-row">
-        <button class="zan-col-offset-5 zan-col-5 zan-btn zan-btn--small {{type === '3' ? 'zan-btn--primary':''}}" bindtap='_select(type, 3)'>同步</button>
+        <repeat for="{{filterList.type}}" key="index" index="index" item="item">
+          <button class="zan-col-offset-1 zan-col-4 zan-btn zan-btn--small {{item.id === type ? 'zan-btn--primary':''}}" bindtap='_select(type, {{item.id}})'>{{item.name}}</button>
+        </repeat>
       </view>
     </view>
   </view>
@@ -48,9 +38,10 @@
     }
 
     data = {
-      grade: wepy.getStorageSync('gnb_primary_user').grade,
-      year: '0',
-      type: '0'
+      grade: wepy.getStorageSync('gnb_mprimary_user').grade,
+      year: 0,
+      type: 0,
+      filterList: {}
     }
 
     methods = {
@@ -63,11 +54,26 @@
         this.$parent.globalData.resourceChengpinFilter.year = this.year
       }
     }
+    /** 获取筛选条件 */
+    _getResourceFilter () {
+      return new Promise((resolve, reject) => {
+        wepy.request({
+          url: 'https://api.guinaben.com/resource/paper/filter',
+          data: {
+            type: 'chengpin'
+          },
+          success (res) { resolve(res) },
+          fail (err) { reject(err) }
+        })
+      })
+    }
 
-    onShow() {
+    async onShow() {
       // 初始化筛选值赋值
+      this.filterList = await this._getResourceFilter()
       this.type = this.$parent.globalData.resourceChengpinFilter.type
       this.year = this.$parent.globalData.resourceChengpinFilter.year
+      this.$apply()
     }
 
     onShareAppMessage (res) {
