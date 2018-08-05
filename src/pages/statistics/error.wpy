@@ -22,6 +22,9 @@
     <scroll-view scroll-y style="height: {{scrollHeight}}px;padding-bottom: 40px;" lower-threshold="200" bindscrolltolower="_loadMore">
       <repeat for="{{error}}" key="index" index="index" item="item">
         <view class="zan-panel">
+          <view class="zan-cell zan-font-12 zan-c-gray-darker" style="padding: 7px;height:30px;line-height: 30px;">
+            {{item.workbookName}}
+          </view>
           <view class="zan-cell" style="padding: 5px 0" bindtap='_preview({{item.errorImg.url}})'>
             <image mode="aspectFit" style="width:100%;height:{{ item.errorImg.height/4 }}px" src="{{item.errorImg.url}}?mageMogr2/auto-orient/thumbnail/750x/format/jpg/interlace/1/blur/1x0/quality/100|imageslim" lazy-load="true"/>
           </view>
@@ -29,7 +32,7 @@
             <view class="zan-cell__bd zan-row">
               <!--练习册名称点击出次数-->
               <view class="zan-col zan-col-13 {{item.count ? 'zan-font--orange' : 'zan-font--primary'}}" bindtap='_count({{item.count}})'>
-                {{item.workbookName}}
+                {{item.name}}
               </view>
               <view class="zan-col zan-col-5 zan-font--primary {{item.name ? '' : 'zan-col-offset-8'}}">下载：{{item.downNum}}</view>
               <!--订正的操作-->
