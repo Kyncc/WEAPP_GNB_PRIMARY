@@ -35,7 +35,7 @@
         <gnbTextbookSelect :textbook.sync="textbook" :list.sync="textBookList" @event.user="textbookChange"/>
       </view>
     </view>
-    <!--成品试卷-->
+    <!--找试卷-->
     <view wx:if="{{ resource.finished.state }}" class="zan-panel card" bindtap="_intoPage(chengPin)" >
       <view class="zan-card">
         <view class="zan-card__thumb" >
@@ -46,7 +46,7 @@
             <image src="../../common/resources/icon_new.png" mode="aspectFit"/>
           </view>
           <view class="zan-card__detail-row">
-            <view class="zan-card__left-col zan-font-16" style="margin: 30rpx 0 10rpx;font-weight:bold;">成品试卷</view>
+            <view class="zan-card__left-col zan-font-16" style="margin: 30rpx 0 10rpx;font-weight:bold;">找试卷</view>
           </view>
           <view class="zan-card__detail-row zan-c-gray-darker">
             <view class="zan-card__left-col zan-font-12" style="margin-bottom: 10rpx;">海量试卷任你下</view>

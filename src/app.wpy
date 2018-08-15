@@ -54,6 +54,7 @@ export default class extends wepy.app {
       'pages/camera/index',
       'pages/my/index',
       'pages/my/vip',
+      'pages/my/contact',
       'pages/my/classes',
       'pages/my/info',
       'pages/my/pay',

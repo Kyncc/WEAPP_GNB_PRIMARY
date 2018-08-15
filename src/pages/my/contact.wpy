@@ -1,0 +1,91 @@
+<template>
+  <view class="myContact">
+    <view class="zan-panel" style="margin-top:0px">
+      <view class="zan-font-16 zan-cell" bindtap="_tel">
+        <view class="zan-row zan-cell__bd">
+          <view class="zan-col zan-col-22" style="padding:20rpx 0">
+            <view style="color: #555" >客服电话</view>
+            <view style="padding:10rpx 0 0;" class="zan-font-14 zan-c-gray-darker">17316279044</view>
+          </view>
+          <view class="zan-col zan-col-2">
+            <image src='../../common/resources/icon_contact_tel.png' style="width:56rpx;height:56rpx;margin-top:40rpx;" mode='scaleToFill'/>
+          </view>
+        </view>
+      </view>
+      <view class="zan-font-16 zan-cell" bindtap="_copyWechat">
+        <view class="zan-row zan-cell__bd">
+          <view class="zan-col zan-col-22" style="padding:20rpx 0">
+            <view style="color: #555">客服微信</view>
+            <view style="padding:10rpx 0 0;" class="zan-font-14 zan-c-gray-darker">微信号：guinaben01</view>
+          </view>
+          <view class="zan-col zan-col-2">
+            <image src='../../common/resources/icon_contact_wechat.png' style="width:56rpx;height:56rpx;margin-top:40rpx;" mode='scaleToFill'/>
+          </view>
+        </view>
+      </view>
+      <view class="zan-font-16 zan-cell" bindtap="_copyGzh">
+        <view class="zan-row zan-cell__bd">
+          <view class="zan-col zan-col-22" style="padding:20rpx 0">
+            <view style="color: #555">公众号</view>
+            <view style="padding:10rpx 0 0;" class="zan-font-14 zan-c-gray-darker">公众号：guinaben3456</view>
+          </view>
+          <view class="zan-col zan-col-2">
+            <image src='../../common/resources/icon_contact_gzh.png' style="width:56rpx;height:56rpx;margin-top:40rpx;" mode='scaleToFill'/>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class UserContact extends wepy.page {
+    config = {
+      navigationBarTitleText: '联系我们'
+    }
+
+    data = {}
+
+    methods = {
+      _tel () {
+        wepy.makePhoneCall({
+          phoneNumber: '17316279044'
+        })
+      },
+      // 复制客服微信号
+      _copyWechat () {
+        wepy.setClipboardData({
+          data: 'guinaben01',
+          success (res) {
+            wepy.showToast({
+              title: '复制客服微信成功!',
+              icon: 'none'
+            })
+          }
+        })
+      },
+      // 复制公众号码
+      _copyGzh () {
+        wepy.setClipboardData({
+          data: 'guinaben3456',
+          success (res) {
+            wepy.showToast({
+              title: '复制公众号码成功!',
+              icon: 'none'
+            })
+          }
+        })
+      }
+    }
+
+    onShareAppMessage (res) {
+      return {
+        title: '各位家长：这样记错题，速度快、好处多',
+        imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/75|imageslim',
+        path: '/pages/workbook/index'
+      }
+    }
+  }
+</script>

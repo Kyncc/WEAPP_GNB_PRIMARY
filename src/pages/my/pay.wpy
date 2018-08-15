@@ -1,28 +1,29 @@
 <template>
-  <view class="container">
+  <view class="MyPay">
     <view class="zan-center" style="padding:30px 0;">
       <view class="zan-center">
         <image style="height:75px;width:90px;" src="../../common/resources/huangguan.png"/>
       </view>
-      <text class="zan-c-gray-dark zan-font-16">开通VIP，错题、试卷任你下</text>
+      <view class="zan-c-gray-dark zan-font-16" wx:if="vip">我的会员剩余天数：<text style="color:#FDCA3A">{{surplus}}</text>天</view>
+      <view class="zan-c-gray-dark zan-font-16" wx:else>我的会员，错题、试卷任你下</view>
     </view>
     <view class="zan-panel">
-      <view class="zan-cell" bindtap="_buy(9)">
+      <view class="zan-cell" bindtap="_buy(1)">
         <view class="zan-cell__bd zan-font-16">
-          <text class="zan-font-30">￥9.9 </text>/月
-          <text class="zan-c-gray-dark" style="text-decoration:line-through;padding-left: 20px;">￥29</text>
+          <text class="zan-font-30">￥59 </text>/月
+          <!-- <text class="zan-c-gray-dark" style="text-decoration:line-through;padding-left: 20px;">￥29</text> -->
         </view>
       </view>
-      <view class="zan-cell" bindtap="_buy(10)">
+      <view class="zan-cell" bindtap="_buy(2)">
         <view class="zan-cell__bd zan-font-16">
-          <text class="zan-font-30">￥39 </text>/半年
-          <text class="zan-c-gray-dark" style="text-decoration:line-through;padding-left: 20px;">￥149</text>
+          <text class="zan-font-30">￥139 </text>/半年
+          <!-- <text class="zan-c-gray-dark" style="text-decoration:line-through;padding-left: 20px;">￥149</text> -->
         </view>
       </view>
-      <view class="zan-cell" bindtap="_buy(11)">
+      <view class="zan-cell" bindtap="_buy(3)">
         <view class="zan-cell__bd zan-font-16">
-          <text class="zan-font-30">￥59 </text>/年
-          <text class="zan-c-gray-dark" style="text-decoration:line-through;padding-left: 20px;">￥269</text>
+          <text class="zan-font-30">￥199 </text>/年
+          <!-- <text class="zan-c-gray-dark" style="text-decoration:line-through;padding-left: 20px;">￥269</text> -->
         </view>
       </view>
     </view>
@@ -34,7 +35,12 @@ import wepy from 'wepy'
 
 export default class MyPay extends wepy.page {
   config = {
-    navigationBarTitleText: '开通VIP'
+    navigationBarTitleText: '我的会员'
+  }
+
+  data = {
+    vip: '',
+    surplus: ''
   }
 
   methods = {
@@ -116,6 +122,12 @@ export default class MyPay extends wepy.page {
         }
       })
     })
+  }
+
+  async onShow () {
+    this.vip = wepy.getStorageSync('gnb_primary_user').vip
+    this.surplus = wepy.getStorageSync('gnb_primary_user').surplus
+    this.$apply()
   }
 
   onShareAppMessage (res) {

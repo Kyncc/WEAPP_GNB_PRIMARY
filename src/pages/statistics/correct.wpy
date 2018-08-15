@@ -45,7 +45,7 @@
     <view class="correct_content">{{result.content}}</view>
     <view class="correct_date zan-center zan-font-12">{{result.date}}</view>
     <view class="correct_app zan-center zan-font-14">归纳本</view>
-    <button class="share_button" open-type="share">分享</button>
+    <button class="share_button" open-type="share">炫耀</button>
     <image src="../../common/resources/statisticsCorrect.jpg" style="width:750rpx;height:100vh" mode="aspectFit"/>
   </view>
 </template>

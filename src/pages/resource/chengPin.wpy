@@ -54,7 +54,7 @@
   
   export default class resourceChengpin extends wepy.page {
     config = {
-      navigationBarTitleText: '成品试卷'
+      navigationBarTitleText: '找试卷'
     }
 
     data = {

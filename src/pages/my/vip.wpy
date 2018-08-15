@@ -12,8 +12,8 @@
     <view class="zan-panel zan-center" style="padding:30px 0;margin-top: 0;">
       <view style="padding:5px 0"><text style="color:#3fc6c6">支付提示</text></view>
       <view style="padding:15px 0">
-        <text class="zan-c-black zan-font-30">￥0.99/天</text>
-        <text class="zan-c-gray zan-font-14 del">￥5.9</text>
+        <text class="zan-c-black zan-font-30">￥5.9/天</text>
+        <!-- <text class="zan-c-gray zan-font-14 del">￥5.9</text> -->
       </view>
     </view>
     <view class="footer" style="margin-top: 20px;">
@@ -52,7 +52,7 @@
         wepy.request({
           url: 'https://wechat.guinaben.com/mini-program/pay',
           data: {
-            goodType: 12,
+            goodType: 7,
             app: 'primary'
           },
           success (res) {

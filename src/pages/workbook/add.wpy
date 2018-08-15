@@ -20,6 +20,11 @@
       margin-top: 0;
     }
   }
+  .no-data{
+    padding: 20px 0;
+    text-align: center;
+    font-size: 14px;
+  }
 }
 </style>
 
@@ -76,6 +81,9 @@
           </view>
         </repeat>
       </scroll>
+      <view class="no-data" wx:if="{{ loading && (workbookList.length === 0)}}">
+        暂无练习册,若有需要请联系公众号guinaben3456
+      </view>
     </view>
   </view>
 </template>
@@ -104,6 +112,7 @@ export default class WorkbookAdd extends wepy.page {
       value: '',
       placeholder: '请输入练习册名称'
     },
+    loading: true,
     textbook: '',     // 当前选中教材
     textBookList: [], // 教材列表
     subject: '',      // 当前选中科目
@@ -265,6 +274,7 @@ export default class WorkbookAdd extends wepy.page {
 
   /**  添加我的练习册 */
   _getAllWorkbook (id, name) {
+    this.loading = true
     return new Promise((resolve, reject) => {
       wepy.request({
         url: 'https://api.guinaben.com/workbook/all',
@@ -273,6 +283,7 @@ export default class WorkbookAdd extends wepy.page {
           textbookId: id
         },
         success (res) {
+          this.loading = false
           resolve(res)
         },
         fail (err) {

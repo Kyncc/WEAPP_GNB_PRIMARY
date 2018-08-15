@@ -1,5 +1,5 @@
 <template>
-  <view class="container">
+  <view class="container CameraIndex">
     <!--上传照片-->
     <view style="padding:15px;margin-top:0;">
       <view class="zan-row" style="padding:10px 0;">
@@ -11,7 +11,7 @@
     </view>
     <!--章节列表-->
     <view class="zan-row zan-font-14" style="padding: 7px">选择章节</view>
-    <view class="zan-panel" style="margin: 0">
+    <view class="zan-panel" style="margin: 0 0 30px;">
       <repeat for="{{chapterList}}" key="index" index="index" item="item">
         <view class="zan-row zan-cell" bindtap="_selectChapter({{index}})">
           <view class="zan-col zan-col-22" style="text-indent: 10px">{{item.name}}</view>
@@ -23,7 +23,7 @@
       </repeat>
     </view>
     <!--提交-->
-    <view class="zan-row" style="padding:20px 0">
+    <view class="zan-row footer" style="padding:20px 0">
       <view class="zan-col zan-col-20 zan-col-offset-2 zan-center">
         <button class="zan-btn zan-btn--primary" bindtap="_upload">
           <image style="height:22px;width:22px;position: relative;top:5px;" src="../../common/resources/icon_gou.png"/>提交
@@ -184,3 +184,15 @@
     }
   }
 </script>
+<style lang="less" scoped>
+.CameraIndex{
+  .footer{
+    position:fixed;
+    bottom: 0px;
+    left:0;
+    width:100%;
+    padding: 15px 0;
+    background: #F9F9F9;
+  }
+}
+</style>
