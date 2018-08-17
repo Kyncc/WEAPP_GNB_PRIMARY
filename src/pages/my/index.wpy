@@ -51,6 +51,12 @@
           <text>联系我们</text>
         </view>
       </view>
+      <view class="zan-font-16 zan-cell" bindtap="_into('/pages/my/join')" style="padding:5px 15px 15px">
+        <view class="zan-cell__bd">
+          <image src='../../common/resources/icon_user_jm.png' style="width:28px;height:28px;position:relative;top:8px;margin-right:5px;" mode='scaleToFill'/>
+          <text>加盟</text>
+        </view>
+      </view>
     </view>
     <!-- <view class="zan-center footer" bindtap="_copy">
       <p class="zan-font-14">

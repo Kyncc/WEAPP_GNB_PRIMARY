@@ -1,0 +1,54 @@
+<template>
+  <view class="container userJoin">
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_01.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_02.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_03.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_04.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_05.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_06.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_07.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_08.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_09.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_10.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_11.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_12.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_13.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_14.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_15.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_16.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_17.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_18.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_19.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_20.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_21.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_22.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_23.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit' style="margin-top: -1px;"/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_24.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+    <image class="img" lazy-load src='http://img.guinaben.com/shoujiban_25.png?imageView2/0/format/jpg/q/85|imageslim' mode='aspectFit'/>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  export default class Join extends wepy.page {
+    config = {
+      navigationBarTitleText: '加盟'
+    }
+
+    onShareAppMessage (res) {
+      return {
+        title: '各位家长：这样记错题，速度快、好处多',
+        imageUrl: 'http://img.guinaben.com/gnb_miniprogram_share.jpg?imageView2/0/q/85|imageslim',
+        path: '/pages/workbook/index'
+      }
+    }
+  }
+</script>
+<style lang="less">
+.userJoin {
+  .img{
+    width: 750rpx;
+    height: 500rpx;
+    float: left;
+  }
+}
+</style>
