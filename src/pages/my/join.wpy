@@ -31,7 +31,7 @@
   import wepy from 'wepy'
   export default class Join extends wepy.page {
     config = {
-      navigationBarTitleText: '加盟'
+      navigationBarTitleText: '加盟代理'
     }
 
     onShareAppMessage (res) {
