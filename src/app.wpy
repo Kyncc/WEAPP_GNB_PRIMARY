@@ -41,6 +41,16 @@
 .zan-card__detail {
 	margin-left: 70px;
 }
+.zan-triangle{
+  display: inline-block;
+  position: relative;
+  height: 0;
+  width: 0;
+  top: 4px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
 </style>
 <script>
 import wepy from 'wepy'
@@ -56,6 +66,7 @@ export default class extends wepy.app {
       'pages/my/vip',
       'pages/my/contact',
       'pages/my/classes',
+      'pages/my/join',
       'pages/my/info',
       'pages/my/pay',
       'pages/my/email',
