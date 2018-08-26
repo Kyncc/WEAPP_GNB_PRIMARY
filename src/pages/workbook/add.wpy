@@ -64,9 +64,9 @@
             <!--练习册详情-->
             <view class="zan-card__detail">
               <view class="zan-card__detail-row" style="padding-top: 10rpx;">
-                <button wx:if="{{item.isfree}}" class="zan-btn zan-btn--primary zan-btn--mini">免费</button>
+                <button wx:if="{{item.isfree}}" class="zan-btn zan-btn--primary zan-btn--mini zan-font-14">免费</button>
                 <button wx:else class="zan-btn zan-btn--warn zan-btn--mini">定制</button>
-                <view class="zan-card__left-col zan-font-14" style="color:#3FC6C6">{{item.year}}版</view>
+                <view class="zan-card__left-col zan-font-14" style="color:#3FC6C6;margin-top: 3px;">{{item.year}}版</view>
               </view>
               <view class="zan-card__detail-row zan-c-gray-darker">
                 <!--取消-->

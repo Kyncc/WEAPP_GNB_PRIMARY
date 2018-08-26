@@ -90,12 +90,10 @@
     _bindUser (user) {
       return new Promise((resolve, reject) => {
         wepy.request({
-          url: 'https://api.guinaben.com/member/bind',
+          url: 'https://api.guinaben.com/v2/member/bind',
           method: 'POST',
           data: {
-            encryptedData: user.encryptedData,
-            session_key: wepy.getStorageSync('gnb_primary_session_key'),
-            iv: user.iv
+            userInfo: user.userInfo
           },
           success (res) {
             wepy.setStorageSync('gnb_primary_user', res)
