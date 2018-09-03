@@ -16,6 +16,7 @@
     z-index: 5;
   }
 }
+
 .zan-panel-title{
   font-size: 16px;
 }
@@ -29,6 +30,12 @@
   background-color: #3fc6c6;
   &::after {
     border-color:#3fc6c6;
+  }
+}
+.zan-btn--grey{
+  background-color: #555;
+  &::after {
+    border-color:#555;
   }
 }
 .zan-noticebar {
