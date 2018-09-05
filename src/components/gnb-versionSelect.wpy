@@ -2,7 +2,7 @@
   <picker class="picker zan-c-gray-darker" bindchange="bindPickerChange" range="{{ list }}" value="{{ index }}" range-key="name">
     <view class="picker zan-c-gray-darker">
       <span class="zan-ellipsis" style="max-width: 220rpx;display: inline-block">{{list[index].name}}</span>
-      <view class="zan-arrow"></view>
+      <view class="zan-triangle" style="top:0px;right:-5px"></view>
     </view>
   </picker>
 </template>
@@ -61,9 +61,5 @@ export default class gnbVersionSelect extends wepy.component {
 <style lang="less">
 .picker{
   text-align: center;
-  .zan-arrow{
-    position: static;
-    rotate: 90deg;
-  }
 }
 </style>

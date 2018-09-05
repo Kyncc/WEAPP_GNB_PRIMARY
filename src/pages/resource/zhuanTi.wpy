@@ -31,7 +31,7 @@
         <view class="zan-panel" style="margin-top: 5px;" bindtap='_download({{item}})'>
           <view class="zan-cell" style="padding: 7px 15px">
             <text wx:if="{{item.isGood}}" style="color: #fff;margin-right: 5px;padding:3px;background: #f6ac0b;border-radius: 5px;">精</text>
-            <text>{{item.name}}</text>
+            <text>{{ item.name }}</text>
           </view>
           <view class="zan-cell" style="padding: 7px 15px">
             <view class="zan-cell__bd zan-row zan-c-gray zan-font-12">
@@ -50,7 +50,7 @@
   import wepy from 'wepy'
   import zanLoadMore from '@/components/zan-loadmore'
   import gnbChapterSelect from '@/components/gnb-chapterSelect'
-  
+
   export default class ResourceZhuanTi extends wepy.page {
     config = {
       navigationBarTitleText: '专题汇编'

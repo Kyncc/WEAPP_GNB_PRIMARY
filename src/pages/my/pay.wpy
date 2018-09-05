@@ -4,8 +4,13 @@
       <view class="zan-center">
         <image style="height:75px;width:90px;" src="../../common/resources/huangguan.png"/>
       </view>
+<<<<<<< HEAD
       <view class="zan-c-gray-dark zan-font-16" wx:if="{{ vip === '0' }}" >我的会员，错题、试卷任你下</view>
       <view class="zan-c-gray-dark zan-font-16" wx:else>我的会员剩余天数：<text style="color:#FDCA3A">{{surplus}}</text>天</view>
+=======
+      <view class="zan-c-gray-dark zan-font-16" wx:if="{{ vip > 0 }}">我的会员剩余天数：<text style="color:#FDCA3A">{{surplus}}</text>天</view>
+      <view class="zan-c-gray-dark zan-font-16" wx:else>我的会员，错题、试卷任你下</view>
+>>>>>>> dev
     </view>
     <view class="zan-panel">
       <view class="zan-cell" bindtap="_buy(1)">
