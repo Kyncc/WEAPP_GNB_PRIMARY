@@ -59,7 +59,7 @@
     methods = {
       /** 查看大图 */
       _preview (url) {
-        wepy.previewImage({current: `${url}-primaryError`, urls: [`${url}-primaryError`]})
+        wepy.previewImage({ current: `${url}-primaryError`, urls: [`${url}-primaryError`] })
       },
       _download () {
         // 不是会员跳转到VIP购买, 是跳转到下载
@@ -94,7 +94,7 @@
     }
 
     async onLoad(options) {
-      wx.setNavigationBarTitle({title: options.name})
+      wx.setNavigationBarTitle({ title: options.name })
       this.id = options.id
       this.error = await this._getChapter(this.id)
       this.$apply()

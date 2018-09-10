@@ -18,6 +18,7 @@
   ├── components  # 组件
   ├── pages       # 页面
     ├── init          # 配置信息
+    ├── camera        # 拍错题
     ├── workbook      # 记错题
     ├── papaer        # 资源
     ├── statistics    # 错题本

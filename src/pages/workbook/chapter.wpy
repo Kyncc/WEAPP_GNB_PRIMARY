@@ -49,10 +49,10 @@
           })
         } else if (item.isUsed) {
           item.isAllCorrect
-            ? wepy.navigateTo({url: `/pages/workbook/correct?id=${item.id}&name=${item.name}`})
-            : wepy.navigateTo({url: `/pages/workbook/error?id=${item.id}&name=${item.name}`})
+            ? wepy.navigateTo({ url: `/pages/workbook/correct?id=${item.id}&name=${item.name}` })
+            : wepy.navigateTo({ url: `/pages/workbook/error?id=${item.id}&name=${item.name}` })
         } else {
-          wepy.navigateTo({url: `/pages/workbook/exercise?id=${item.id}&name=${item.name}`})
+          wepy.navigateTo({ url: `/pages/workbook/exercise?id=${item.id}&name=${item.name}` })
         }
       }
     }
@@ -76,7 +76,7 @@
     }
 
     async onLoad(options) {
-      wx.setNavigationBarTitle({title: options.name})
+      wx.setNavigationBarTitle({ title: options.name })
       this.id = options.id
       this.$apply()
     }

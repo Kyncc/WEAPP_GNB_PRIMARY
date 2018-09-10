@@ -78,7 +78,7 @@
     }
 
     async onLoad(options) {
-      wx.setNavigationBarTitle({title: options.name})
+      wx.setNavigationBarTitle({ title: options.name })
       this.result = await this._getContent(options.id)
       this.name = wepy.getStorageSync('gnb_primary_user').name
       this.$apply()

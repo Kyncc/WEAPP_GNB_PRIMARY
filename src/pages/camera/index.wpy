@@ -117,7 +117,7 @@
     }
     /** 上传图片 */
     _uploadFile (file) {
-      wepy.showLoading({title: '请稍候'})
+      wepy.showLoading({ title: '请稍候' })
       return new Promise((resolve, reject) => {
         wepy.uploadFile({
           url: 'https://api.guinaben.com/upload/img',
@@ -146,7 +146,7 @@
     }
     /** 上传错题 */
     _uploadWrong (url, id) {
-      wepy.showLoading({title: '请稍候'})
+      wepy.showLoading({ title: '请稍候' })
       return new Promise((resolve, reject) => {
         wepy.request({
           url: 'https://api.guinaben.com/camera/upload',
