@@ -56,9 +56,9 @@
       /** 查看大图 */
       _preview (type) {
         if (type === 'first') {
-          wepy.previewImage({current: `http://img.guinaben.com/workbookPic/1108-cover-725711.jpg`, urls: this.imgs})
+          wepy.previewImage({ current: `http://img.guinaben.com/workbookPic/1108-cover-725711.jpg`, urls: this.imgs })
         } else {
-          wepy.previewImage({current: `http://img.guinaben.com/want1.jpg`, urls: this.imgs})
+          wepy.previewImage({ current: `http://img.guinaben.com/want1.jpg`, urls: this.imgs })
         }
       },
       // 点击选择按钮
@@ -108,7 +108,7 @@
 
     /** 上传练习册封面 */
     _uploadFile (file) {
-      wepy.showLoading({title: '请稍候'})
+      wepy.showLoading({ title: '请稍候' })
       return new Promise((resolve, reject) => {
         wepy.uploadFile({
           url: 'https://api.guinaben.com/upload/img',
@@ -137,7 +137,7 @@
 
     /** 获取章节数据 */
     _setWant (first, last) {
-      wepy.showLoading({title: '请稍候'})
+      wepy.showLoading({ title: '请稍候' })
       return new Promise((resolve, reject) => {
         wepy.request({
           url: 'https://api.guinaben.com/workbook/want',

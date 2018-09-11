@@ -85,9 +85,9 @@
       _download (item) {
         // 不是会员跳转到VIP购买, 是跳转到下载
         if (Number(wepy.getStorageSync('gnb_primary_user').vip)) {
-          wepy.navigateTo({url: `/pages/my/email?id=${item.id}&type=resource&tag=7`})
+          wepy.navigateTo({ url: `/pages/my/email?id=${item.id}&type=resource&tag=7` })
         } else {
-          wepy.navigateTo({url: `/pages/my/vip`})
+          wepy.navigateTo({ url: `/pages/my/vip` })
         }
       },
       /** 章节名称切换 */
@@ -99,7 +99,7 @@
         // 无更多数据或者正在加载则返回
         if (this.loading || this.nomore) return
         this.loading = true
-        this._getResourceList(this.offset, {tag: this.tag, chapterId: this.chapterId}).then((res) => {
+        this._getResourceList(this.offset, { tag: this.tag, chapterId: this.chapterId }).then((res) => {
           this.loading = false
           this.list = this.list.concat(res.list)
           this.offset = res.offset
@@ -150,7 +150,7 @@
       this.offset = ''
       this.nomore = false
       try {
-        let result = await this._getResourceList(this.offset, {tag: this.tag, chapterId: this.chapterId})
+        let result = await this._getResourceList(this.offset, { tag: this.tag, chapterId: this.chapterId })
         this.loading = false
         this.list = result.list
         this.offset = result.offset

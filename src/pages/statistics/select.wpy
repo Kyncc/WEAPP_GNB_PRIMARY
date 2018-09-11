@@ -43,9 +43,9 @@
       chapterId: '',
       downloadDisabled: false,
       items: [
-        {name: '2', value: '单次错题', checked: false},
-        {name: '1', value: '重复错题', checked: false},
-        {name: '3', value: '已订正错题', checked: false}
+        { name: '2', value: '单次错题', checked: false },
+        { name: '1', value: '重复错题', checked: false },
+        { name: '3', value: '已订正错题', checked: false }
       ]
     }
     watch = {

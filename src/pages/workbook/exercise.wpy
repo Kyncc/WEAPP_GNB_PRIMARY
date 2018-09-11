@@ -73,8 +73,8 @@ export default class WorkbookExercise extends wepy.page {
   methods = {
     /** 上传错题 */
     async _upload () {
-      let answerId = []     // 题目ID数组
-      let answer = []       // 题目答案数组
+      let answerId = [] // 题目ID数组
+      let answer = [] // 题目答案数组
       let allCorrect = true // 全部为真的判断
       for (let nodes of this.exercise.nodes) {
         for (let questions of nodes.questions) {
@@ -85,9 +85,9 @@ export default class WorkbookExercise extends wepy.page {
       }
       await this._setExerciseResult(answerId, answer, this.charpterId)
       if (allCorrect) {
-        wepy.redirectTo({url: `/pages/workbook/correct?id=${this.charpterId}&name=${this.name}`})
+        wepy.redirectTo({ url: `/pages/workbook/correct?id=${this.charpterId}&name=${this.name}` })
       } else {
-        wepy.redirectTo({url: `/pages/workbook/error?id=${this.charpterId}&name=${this.name}`})
+        wepy.redirectTo({ url: `/pages/workbook/error?id=${this.charpterId}&name=${this.name}` })
       }
     },
     /** 记错的切换 */
@@ -118,7 +118,7 @@ export default class WorkbookExercise extends wepy.page {
 
   /** 设置练习结果 */
   _setExerciseResult (ids, answers, chapterId) {
-    wepy.showLoading({title: '提交中'})
+    wepy.showLoading({ title: '提交中' })
     return new Promise((resolve, reject) => {
       wepy.request({
         url: 'https://api.guinaben.com/workbook/chapter/setExercise',

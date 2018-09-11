@@ -1,37 +1,43 @@
 {
-  "name": "gnb_primary_math",
-  "version": "1.0.0",
+  "name": "gnb_primary",
+  "version": "3.5.0",
   "description": "",
   "main": "dist/app.js",
   "scripts": {
     "dev": "wepy build --watch",
     "build": "cross-env NODE_ENV=production wepy build --no-cache",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --ext .js,.wpy src --fix"
   },
   "author": "Hope",
   "license": "MIT",
   "dependencies": {
-    "wepy": "^1.7.1",
-    "wepy-async-function": "^1.4.4",
-    "wepy-compiler-sass": "^1.3.12"
+    "wepy": "^1.7.0",
+    "wepy-async-function": "^1.4.6"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.1",
+    "babel-eslint": "^9.0.0",
     "babel-plugin-syntax-export-extensions": "^6.13.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "cross-env": "^5.1.3",
-    "eslint": "^3.18.0",
-    "eslint-config-standard": "^7.1.0",
-    "eslint-friendly-formatter": "^2.0.7",
-    "eslint-plugin-html": "^2.0.1",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^2.0.1",
-    "wepy-compiler-babel": "^1.5.1",
-    "wepy-compiler-less": "^1.3.10",
-    "wepy-eslint": "^1.5.3"
+    "babel-preset-env": "^1.7.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.5.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-plugin-html": "^4.0.5",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "wepy-compiler-babel": "^1.5.3",
+    "wepy-compiler-less": "^1.3.12",
+    "wepy-compiler-sass": "^1.3.12",
+    "wepy-compiler-stylus": "^1.3.12",
+    "wepy-eslint": "^1.5.4",
+    "wepy-plugin-imagemin": "^1.5.3",
+    "wepy-plugin-uglifyjs": "^1.3.7"
   }
 }

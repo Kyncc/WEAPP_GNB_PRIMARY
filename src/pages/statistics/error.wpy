@@ -109,7 +109,7 @@ export default class StatisticsError extends wepy.page {
     async _reviseChange (e) {
       console.log(e.target.val)
       console.log(e.target.dataset.current)
-      let index = e.target.dataset.current  // 获取当前索引
+      let index = e.target.dataset.current // 获取当前索引
       let status = Boolean(Number(e.detail.value)).toString()
       this._setRevise(this.id, this.error[index], status).then((res) => {
         this.error[index].count = res.count
@@ -139,7 +139,7 @@ export default class StatisticsError extends wepy.page {
     },
     /** 查看大图 */
     _preview (url) {
-      wepy.previewImage({current: `${url}-primaryError`, urls: this.imgs})
+      wepy.previewImage({ current: `${url}-primaryError`, urls: this.imgs })
     },
     /** 下载错题 */
     _download () {
@@ -182,7 +182,7 @@ export default class StatisticsError extends wepy.page {
 
   /** 设置错题订正状态 */
   _setRevise (chapterId, item, status) {
-    wx.showLoading({title: '提交中'})
+    wx.showLoading({ title: '提交中' })
     return new Promise((resolve, reject) => {
       wepy.request({
         url: 'https://api.guinaben.com/textbook/statistics/revise',
@@ -206,7 +206,7 @@ export default class StatisticsError extends wepy.page {
 
   async onLoad(options) {
     this.scrollHeight = this.$parent.globalData.system.windowHeight - 30
-    wx.setNavigationBarTitle({title: options.name})
+    wx.setNavigationBarTitle({ title: options.name })
     // 开始加载数据
     try {
       this.id = options.id

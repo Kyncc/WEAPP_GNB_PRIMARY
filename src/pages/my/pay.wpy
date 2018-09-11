@@ -77,7 +77,7 @@ export default class MyPay extends wepy.page {
 
   /** 购买VIP */
   _orderVip (id) {
-    wepy.showLoading({title: '请稍候'})
+    wepy.showLoading({ title: '请稍候' })
     return new Promise((resolve, reject) => {
       wepy.request({
         url: 'https://wechat.guinaben.com/mini-program/pay',
